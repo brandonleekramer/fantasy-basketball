@@ -1,0 +1,122 @@
+---
+title: "Examaning Value in NBA Fantasy Basketball Contracts"
+author: Brandon L. Kramer 
+output: html_notebook
+---
+
+I have a vice... I love fantasy basketball. Over the past couple of years, I have only been playing in one league with some friends of mine, but now have expanded to five different leagues, including an "all-star" league where members of the league draft their team from the broader pool of NBA players based on existing contracts. Since seemingly everyone else in the league has done something like this before and I have not, I decided to take an analytics-based approach to drafting my new team while also aggregating a broader database of all the contracts across my five leagues. I then want to cross reference the "value" of existing contracts against the performance of all NBA players in 2018 as well as the various projections that are released by fantasy basketball sites like Yahoo, ESPN, Hashtag Basketball and FB Ninja. From there, I also decided that I would run overall team projections of each league to see whether I stand a chance of winning the league or whether I should take an alternative strategy to build assets for the future (e.g. tanking to maximize the value of my own draft picks next season).      
+
+```{r pull packages and all sheets}
+#install.packages("tidyverse")
+rm(list = ls())
+for (pkg in c("googlesheets", "tidyverse")) {library(pkg, character.only = TRUE)}
+(my_sheets <- gs_ls())
+```
+
+```{r contract data from all leagues, echo=FALSE}
+botb_contracts <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=2095258080") %>% gs_read(ws = "botb_contracts") 
+botb_contracts$player <- botb_contracts$player %>% 
+  str_replace_all(c('C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J' = 'TJ', 'D.J.' = 'DJ',
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince'))
+legacy_contracts <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=0") %>% gs_read(ws = "legacy_contracts") 
+legacy_contracts$player <- legacy_contracts$player %>% 
+  str_replace_all(c('C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J' = 'TJ', 'D.J.' = 'DJ',
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince'))
+franchise_contracts <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=1961950332") %>% gs_read(ws = "franchise_contracts") 
+franchise_contracts$player <- franchise_contracts$player %>% 
+  str_replace_all(c('C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J' = 'TJ', 'D.J.' = 'DJ',
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince'))
+
+```
+
+```{r pull 2018 bball reference data}
+bballref18 <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=58340951") %>% gs_read(ws = "bballref18") 
+
+bballref18$player <- bballref18$player %>% 
+  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
+                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ',
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince',
+                    'Jaren Jackson' = 'Jaren Jackson Jr.','Kelly Oubre' = 'Kelly Oubre Jr.', 
+                    'Marvin Bagley' = 'Marvin Bagley III', 'Otto Porter' = 'Otto Porter Jr.', 
+                    'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
+                    'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schröder' = 'Dennis Schroder', 
+                    'Tim Hardaway' = 'Tim Hardaway Jr.'))
+
+hastag_alt_proj <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=2083425618") %>% gs_read(ws = "2019_hashtag_alt_proj") 
+
+hastag_alt_proj$player <- hastag_alt_proj$player %>% 
+  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
+                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ',
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince',
+                    'Jaren Jackson' = 'Jaren Jackson Jr.','Kelly Oubre' = 'Kelly Oubre Jr.', 
+                    'Marvin Bagley' = 'Marvin Bagley III', 'Otto Porter' = 'Otto Porter Jr.', 
+                    'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
+                    'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schröder' = 'Dennis Schroder', 
+                    'Tim Hardaway' = 'Tim Hardaway Jr.'))
+
+hastag_proj <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=665288709") %>% gs_read(ws = "2019_hashtag_proj") 
+
+hastag_proj$player <- hastag_proj$player %>% 
+  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
+                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ',
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince',
+                    'Jaren Jackson' = 'Jaren Jackson Jr.','Kelly Oubre' = 'Kelly Oubre Jr.', 
+                    'Marvin Bagley' = 'Marvin Bagley III', 'Otto Porter' = 'Otto Porter Jr.', 
+                    'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
+                    'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schröder' = 'Dennis Schroder', 
+                    'Tim Hardaway' = 'Tim Hardaway Jr.'))
+
+# need to rename variables to standardize across datasets 
+
+combined_data <- contract_data %>% 
+  full_join(bballref18, by = "player") %>% select(-NBA_ID) %>% 
+  full_join(hastag_alt_proj, by = "player") %>% 
+  full_join(hastag_proj, by = "player") 
+```
+
+```{r creating points leagues projections}
+bbr_data <- combined_data %>% 
+  rename(pts = "PTS", dreb = "DRB", orb = "ORB",
+         ast = "AST", stl = "STL", blk = "BLK",
+         tov = "TOV", threes = "3P", fga = "FGA",
+         fgm = "FG", ftm = "FT",  fta = "FTA") %>%
+  mutate(legacy_fpts = pts + (dreb*1.5) + (orb*2) + (ast*2) + (stl*2.5) + (blk*2.5) +
+         (tov*-1) + threes + (fga*-0.5) + (fgm*0.5) + ftm + (fta*-1)) %>%
+  mutate(franchise_fpts = pts + (dreb*1.5) + (orb*2) + (ast*2) + (stl*2.5) + (blk*2.5) +
+         (tov*-1) + threes + (fga*-0.5) + (fgm*0.5) + ftm + (fta*-1)) %>% 
+  mutate(gsd2_fpts = pts + dreb + (orb*1.25) + (ast*1.5) + (stl*1.5) + (blk*2) +
+         (tov*-1)+threes+(fga*-0.5)+(fgm*0.5)+(ftm*0.5)+(fta*-0.75)) %>%
+  mutate(botb_fpts = pts + dreb + (orb*1.25) + (ast*1.5) + (stl*1.5) + (blk*2) +
+         (tov*-1)+threes+(fga*-0.5)+(fgm*0.5)+(ftm*0.5)+(fta*-0.75)) 
+
+```
+
+```{r}
+bbr_data %>% 
+  mutate(botb_value = botb_fpts / spottrac_2019) %>% 
+  filter(G > 50) %>% 
+  filter(botb_fpts > 28) %>% 
+  arrange(-botb_value)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
