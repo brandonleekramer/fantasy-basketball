@@ -4,14 +4,14 @@ author: Brandon L. Kramer
 output: html_notebook
 ---
 
-I have a vice... I love fantasy basketball. Over the past couple of years, I have only been playing in one league with some friends of mine, but now have expanded to five different leagues, including an "all-star" league where members of the league draft their team from the broader pool of NBA players based on existing contracts. Since seemingly everyone else in the league has done something like this before and I have not, I decided to take an analytics-based approach to drafting my new team while also aggregating a broader database of all the contracts across my five leagues. I then want to cross reference the "value" of existing contracts against the performance of all NBA players in 2018 as well as the various projections that are released by fantasy basketball sites like Yahoo, ESPN, Hashtag Basketball and FB Ninja. From there, I also decided that I would run overall team projections of each league to see whether I stand a chance of winning the league or whether I should take an alternative strategy to build assets for the future (e.g. tanking to maximize the value of my own draft picks next season).      
-
 ```{r pull packages and all sheets}
 #install.packages("tidyverse")
 rm(list = ls())
 for (pkg in c("googlesheets", "tidyverse")) {library(pkg, character.only = TRUE)}
 (my_sheets <- gs_ls())
 ```
+
+First, I am pulling contract data from three of my current leagues using the googlesheets package. I still have to aggregate another of these leagues and the fourth one is a categories-based league with no contract data. I am also standardizing some of the names to help with binding the data later down the road. 
 
 ```{r contract data from all leagues, echo=FALSE}
 botb_contracts <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=2095258080") %>% gs_read(ws = "botb_contracts") 
@@ -28,6 +28,8 @@ franchise_contracts$player <- franchise_contracts$player %>%
                     'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince'))
 
 ```
+
+Next, I am pulling data collected from www.basketball-reference.com for the 2018 NBA season that provides a basis for how players performed last year. I am also pulling performance projections from hashtagbasketball.com and a database that one of my fantasy friends shared with me as well. I then bind these data sources together, renaming the various columns in order to distinguish them for models and rankings later on. 
 
 ```{r pull 2018 bball reference data}
 bballref18 <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=58340951") %>% gs_read(ws = "bballref18") 
@@ -76,6 +78,8 @@ combined_data <- contract_data %>%
   full_join(hastag_alt_proj, by = "player") %>% 
   full_join(hastag_proj, by = "player") 
 ```
+
+Here, I am using tidyverse to mutate past performance and 2019 projections into the customized scoring systems used for each of the leagues. Two of my leagues share one system, two of my other leagues share another system, and my cats league uses a standard system. While I have decided to punt some categories, I will take that issue on in a subsequent chunk.  
 
 ```{r creating points leagues projections}
 bbr_data <- combined_data %>% 
