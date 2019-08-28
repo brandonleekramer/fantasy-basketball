@@ -1,7 +1,8 @@
 ---
-title: "Examaning Value in NBA Fantasy Contracts"
-author: Brandon L. Kramer 
-output: html_notebook
+title: "NBA Fantasy Team Projections"
+author: "Brandon L. Kramer"
+date: "8/27/2019"
+output: html_document
 ---
 
 First, I am pulling data collected from www.basketball-reference.com for the 2018 NBA season that provides a basis for how players performed last year. I am also pulling performance projections from hashtagbasketball.com and a database that one of my fantasy friends shared with me as well. I then bind these data sources together, renaming the various columns in order to distinguish them for models and rankings later on. 
@@ -164,97 +165,6 @@ select_data <- combined_data %>%
          fr_team, fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, fr_rfa, fr_gleague, fr_intl)
 
 ```
-
-## Best of the Best Contract Value 
-
-```{r bballref evaluations in botb}
-select_data %>% 
-  mutate(bbr_botb_value_19 = bbr_botb_fpts / spottrac_2019) %>% 
-  mutate(bbr_botb_value_20 = bbr_botb_fpts / spottrac_2020) %>%
-  mutate(bbr_botb_value_21 = bbr_botb_fpts / spottrac_2021) %>%
-  filter(bbr_gms > 50) %>% 
-  filter(bbr_botb_fpts > 24) %>% 
-  #filter(age < 25) %>% 
-  arrange(-bbr_botb_value_19) %>% 
-  select(player, age, bbr_botb_fpts, bbr_botb_value_19, bbr_botb_value_20, bbr_botb_value_21, spottrac_2019, spottrac_2020, spottrac_2021, spottrac_rfa)
-```
-
-```{r hashtag_alt evaluations in botb}
-select_data %>% 
-  mutate(hta_botb_value_19 = hta_botb_fpts / spottrac_2019) %>% 
-  mutate(hta_botb_value_20 = hta_botb_fpts / spottrac_2020) %>%
-  mutate(hta_botb_value_21 = hta_botb_fpts / spottrac_2021) %>%
-  #filter(hta_gms > 50) %>% 
-  filter(hta_botb_fpts > 24) %>% 
-  #filter(age < 25) %>% 
-  arrange(-hta_botb_value_19) %>% 
-  select(player, age, hta_botb_fpts, hta_botb_value_19, hta_botb_value_20, hta_botb_value_21, spottrac_2019, spottrac_2020, spottrac_2021, spottrac_rfa)
-```
-
-```{r hashtag evaluations in botb}
-select_data %>% 
-  mutate(ht_botb_value_19 = ht_botb_fpts / spottrac_2019) %>% 
-  mutate(ht_botb_value_20 = ht_botb_fpts / spottrac_2020) %>%
-  mutate(ht_botb_value_21 = ht_botb_fpts / spottrac_2021) %>%
-  #filter(ht_gms > 50) %>% 
-  filter(ht_botb_fpts > 24) %>% 
-  #filter(age < 25) %>% 
-  arrange(-ht_botb_value_19) %>% 
-  select(player, age, ht_botb_fpts, ht_botb_value_19, ht_botb_value_20, ht_botb_value_21, spottrac_2019, spottrac_2020, spottrac_2021, spottrac_rfa)
-```
-
-## Legacy Dynasty Contract Value  
-
-```{r bballref evaluations in ld}
-select_data %>% 
-  mutate(bbr_ld_value_19 = bbr_ld_fpts / ld_2019) %>% 
-  mutate(bbr_ld_value_20 = bbr_ld_fpts / ld_2020) %>%
-  mutate(bbr_ld_value_21 = bbr_ld_fpts / ld_2021) %>%
-  #filter(bbr_gms > 50) %>%
-  filter(bbr_ld_fpts > 26) %>% 
-  #filter(age < 25) %>% 
-  arrange(-bbr_ld_value_19) %>% 
-  select(player, age, bbr_ld_fpts, bbr_ld_value_19, bbr_ld_value_20, bbr_ld_value_21, ld_2019, ld_2020, ld_2021, ld_rfa, ld_gleague, ld_intl)
-```
-
-```{r hashtag_alt evaluations in ld}
-select_data %>% 
-  mutate(hta_ld_value_19 = hta_ld_fpts / ld_2019) %>% 
-  mutate(hta_ld_value_20 = hta_ld_fpts / ld_2020) %>%
-  mutate(hta_ld_value_21 = hta_ld_fpts / ld_2021) %>%
-  filter(hta_ld_fpts > 24) %>% 
-  #filter(age < 25) %>% 
-  arrange(-hta_ld_value_19) %>% 
-  select(player, age, hta_ld_fpts, hta_ld_value_19, hta_ld_value_20, hta_ld_value_21, ld_2019, ld_2020, ld_2021, ld_rfa, ld_gleague, ld_intl)
-```
-
-```{r hashtag evaluations in ld}
-select_data %>% 
-  mutate(ht_ld_value_19 = ht_ld_fpts / ld_2019) %>% 
-  mutate(ht_ld_value_20 = ht_ld_fpts / ld_2020) %>%
-  mutate(ht_ld_value_21 = ht_ld_fpts / ld_2021) %>%
-  #filter(ht_ld_fpts > 30) %>% 
-  #filter(age < 25) %>% 
-  arrange(-ht_ld_value_19) %>% 
-  select(player, age, ht_ld_fpts, ht_ld_value_19, ht_ld_value_20, ht_ld_value_21, ld_2019, ld_2020, ld_2021, ld_rfa, ld_gleague, ld_intl)
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
