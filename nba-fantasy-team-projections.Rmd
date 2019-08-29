@@ -1,16 +1,17 @@
 ---
 title: "NBA Fantasy Team Projections"
 author: "Brandon L. Kramer"
-date: "8/27/2019"
 output: html_document
 ---
 
+## Data Preparation 
+
 First, I am pulling data collected from www.basketball-reference.com for the 2018 NBA season that provides a basis for how players performed last year. I am also pulling performance projections from hashtagbasketball.com and a database that one of my fantasy friends shared with me as well. I then bind these data sources together, renaming the various columns in order to distinguish them for models and rankings later on. 
 
-```{r pull packages and all sheets}
-#install.packages("tidyverse"); install.packages("googlesheets")
+```{r pull packages and projection data}
+#install.packages("tidyverse"); install.packages("googlesheets"); install.packages("teamcolors")
 rm(list = ls())
-for (pkg in c("googlesheets", "tidyverse")) {library(pkg, character.only = TRUE)}
+for (pkg in c("googlesheets", "tidyverse", "teamcolors")) {library(pkg, character.only = TRUE)}
 (my_sheets <- gs_ls())
 
 bballref18 <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=58340951") %>% 
@@ -76,16 +77,16 @@ hashalt19 <- hashalt19 %>%
 combined_data <- combined_data %>% 
   full_join(hashalt19, by = "player")
 
-hastag19 <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=665288709") %>% gs_read(ws = "2019_hashtag_proj") 
+hashtag19 <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=665288709") %>% gs_read(ws = "2019_hashtag_proj") 
 
-hastag19$player <- hastag19$player %>% 
+hashtag19$player <- hashtag19$player %>% 
   str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
                     'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
                     'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ',
                     'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", "Demarre" = "DeMarre",
                     'Dennis Schröder' = 'Dennis Schroder'))
 
-hastag19 <- hastag19 %>% 
+hashtag19 <- hashtag19 %>% 
   rename(ht_pts = "PTS", ht_dreb = "DREB", ht_orb = "OREB", ht_ast = "AST", ht_stl = "STL", ht_blk = "BLK",
          ht_tov = "TO", ht_threes = "THREES", ht_fga = "FGA", ht_fgm = "FGM", ht_ftm = "FTM",  
          ht_fta = "FTA", ht_mpg = "MPG", ht_gms = "GP", ht_fgp = "FG%", ht_ftp = "FT%") %>%
@@ -101,8 +102,10 @@ hastag19 <- hastag19 %>%
          ht_pts, ht_dreb, ht_orb, ht_ast, ht_stl, ht_blk, ht_tov, ht_threes, ht_fga, ht_fgm, ht_fgp, ht_ftm, ht_fta, ht_ftp)
 
 combined_data <- combined_data %>% 
-  full_join(hastag19, by = "player")
+  full_join(hashtag19, by = "player")
+```
 
+```{r contract data}
 # contract data 
 
 spottrac_contracts <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=2095258080") %>% gs_read(ws = "botb_contracts") 
@@ -154,7 +157,7 @@ combined_data <- combined_data %>%
 
 ```
 
-```{r}
+```{r select_data}
 select_data <- combined_data %>% 
   select(player, age,
          bbr_ld_fpts, bbr_fr_fpts, bbr_gsd2_fpts, bbr_botb_fpts, bbr_gms, bbr_mpg,
@@ -163,8 +166,200 @@ select_data <- combined_data %>%
          botb_team, spottrac_2019,	spottrac_2020, spottrac_2021, spottrac_2022, spottrac_2023, spottrac_rfa, 
          ld_team, ld_2019, ld_2020, ld_2021, ld_2022, ld_2023, ld_2024, ld_rfa, ld_gleague, ld_intl,
          fr_team, fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, fr_rfa, fr_gleague, fr_intl)
-
+rm(bballref18, hashtag19, hashalt19, legacy_contracts, franchise_contracts, the_invitational, spottrac_contracts, my_sheets)
 ```
+
+# Team Projections 
+
+## Legacy Dynasty
+
+```{r ld 2018 bbr projections, fig.width=11, fig.height=6}
+ld_temp_1 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>% 
+  group_by(ld_team) %>% summarize(avg_fppg = mean(bbr_ld_fpts, na.rm = TRUE))  
+ld_temp_2 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>% 
+  group_by(ld_team) %>% summarize(ld_players = n())
+ld_bbr_team_projections <- full_join(ld_temp_1, ld_temp_2, by = "ld_team") %>% 
+  mutate(team_total = avg_fppg * ld_players) %>% 
+  arrange(-team_total); rm(ld_temp_1, ld_temp_2)
+ld_bbr_team_projections
+ggplot(data=ld_bbr_team_projections, aes(x=reorder(ld_team, -team_total), y=team_total, fill=ld_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  labs(title = "Legacy Dynasty Rankings (Based on 2018 Stats)", fill = "LD Team Name") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")) 
+```
+
+```{r ld 2019 hta projections, fig.width=11, fig.height=6}
+ld_temp_1 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>% 
+  group_by(ld_team) %>% summarize(avg_fppg = mean(hta_ld_fpts, na.rm = TRUE))  
+ld_temp_2 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>% 
+  group_by(ld_team) %>% summarize(ld_players = n())
+ld_hta_team_projections <- full_join(ld_temp_1, ld_temp_2, by = "ld_team") %>% 
+  mutate(team_total = avg_fppg * ld_players) %>% 
+  arrange(-team_total); rm(ld_temp_1, ld_temp_2)
+ld_hta_team_projections
+ggplot(data=ld_hta_team_projections, aes(x=reorder(ld_team, -team_total), y=team_total, fill=ld_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  labs(title = "Legacy Dynasty Rankings (Based on 2019 Hashtag Alternative Projections)", fill = "LD Team Name") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")) 
+```
+
+```{r ld 2019 ht projections, fig.width=11, fig.height=6}
+ld_temp_1 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>%  
+  group_by(ld_team) %>% summarize(avg_fppg = mean(ht_ld_fpts, na.rm = TRUE))  
+ld_temp_2 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>% 
+  group_by(ld_team) %>% summarize(ld_players = n())
+ld_ht_team_projections <- full_join(ld_temp_1, ld_temp_2, by = "ld_team") %>% 
+  mutate(team_total = avg_fppg * ld_players) %>% 
+  arrange(-team_total); rm(ld_temp_1, ld_temp_2)
+ld_ht_team_projections
+ggplot(data=ld_ht_team_projections, aes(x=reorder(ld_team, -team_total), y=team_total, fill=ld_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  labs(title = "Legacy Dynasty Rankings (Based on 2019 Hashtag Projections)", fill = "LD Team Name") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")) 
+```
+
+```{r looking at specific team's players projections}
+select_data %>% 
+  filter(ld_team == "MIN") %>% 
+  select(player, age, ld_team, bbr_ld_fpts, hta_ld_fpts, ht_ld_fpts, 
+         ld_2019, ld_2020, ld_2021, ld_2022, ld_2023, ld_2024, ld_rfa, ld_gleague, ld_intl)
+```
+
+## Franchise NBA 
+
+```{r fr 2018 bbr projections, fig.width=11, fig.height=6}
+fr_temp_1 <- select_data %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(fr_team) %>% summarize(avg_fppg = mean(bbr_fr_fpts, na.rm = TRUE))  
+fr_temp_2 <- select_data %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(fr_team) %>% summarize(fr_players = n())
+fr_bbr_team_projections <- full_join(fr_temp_1, fr_temp_2, by = "fr_team") %>% 
+  mutate(team_total = avg_fppg * fr_players) %>% 
+  arrange(-team_total); rm(fr_temp_1, fr_temp_2)
+fr_bbr_team_projections
+ggplot(data=fr_bbr_team_projections, aes(x=reorder(fr_team, -team_total), y=team_total, fill=fr_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  labs(title = "Franchise NBA Rankings (Based on 2018 Stats)", fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")) 
+```
+
+```{r fr 2019 hta projections, fig.width=11, fig.height=6}
+fr_temp_1 <- select_data %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(fr_team) %>% summarize(avg_fppg = mean(hta_fr_fpts, na.rm = TRUE))  
+fr_temp_2 <- select_data %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(fr_team) %>% summarize(fr_players = n())
+fr_hta_team_projections <- full_join(fr_temp_1, fr_temp_2, by = "fr_team") %>% 
+  mutate(team_total = avg_fppg * fr_players) %>% 
+  arrange(-team_total); rm(fr_temp_1, fr_temp_2)
+fr_hta_team_projections
+ggplot(data=fr_hta_team_projections, aes(x=reorder(fr_team, -team_total), y=team_total, fill=fr_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  labs(title = "Franchise NBA Rankings (Based on 2019 Hashtag Alternative Projections)", fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")) 
+```
+
+```{r fr 2019 ht projections, fig.width=11, fig.height=6}
+fr_temp_1 <- select_data %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>%  
+  group_by(fr_team) %>% summarize(avg_fppg = mean(ht_fr_fpts, na.rm = TRUE))  
+fr_temp_2 <- select_data %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(fr_team) %>% summarize(fr_players = n())
+fr_ht_team_projections <- full_join(fr_temp_1, fr_temp_2, by = "fr_team") %>% 
+  mutate(team_total = avg_fppg * fr_players) %>% 
+  arrange(-team_total); rm(fr_temp_1, fr_temp_2)
+fr_ht_team_projections
+ggplot(data=fr_ht_team_projections, aes(x=reorder(fr_team, -team_total), y=team_total, fill=fr_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  labs(title = "Franchise NBA Rankings (Based on 2019 Hashtag Projections)", fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")) 
+```
+
+```{r looking at specific team's players projections}
+select_data %>% 
+  filter(fr_team == "CLE") %>% 
+  select(player, age, fr_team, bbr_fr_fpts, hta_fr_fpts, ht_fr_fpts, 
+         fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, fr_rfa, fr_gleague, fr_intl)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+colors_tidy <-
+  teamcolors::teamcolors %>%
+  tidyr::gather(ord, hex, -name, -league)
+colors_tidy %>% filter(league == "nba")
+```
+
+
+
+
+
+
+
 
 
 
