@@ -1,0 +1,340 @@
+---
+title: "Examaning Value in NBA Fantasy Contracts"
+author: "Brandon L. Kramer"
+output: html_notebook
+---
+
+## Data Preparation 
+
+First, I am pulling data collected from www.basketball-reference.com for the 2018 NBA season that provides a basis for how players performed last year. I am also pulling performance projections from hashtagbasketball.com and a database that one of my fantasy friends shared with me as well. I then bind these data sources together, renaming the various columns in order to distinguish them for models and rankings later on. 
+
+```{r pull packages and projection data}
+#install.packages("tidyverse"); install.packages("googlesheets")
+rm(list = ls())
+for (pkg in c("googlesheets", "tidyverse")) {library(pkg, character.only = TRUE)}
+(my_sheets <- gs_ls())
+
+bballref18 <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=58340951") %>% 
+  gs_read(ws = "bballref18") 
+
+bballref18$player <- bballref18$player %>% 
+  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e', 'ić' = 'ic',
+                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z', 'Élie' = 'Elie',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ', 'Dončić' = 'Doncic',
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", "Demarre" = "DeMarre",
+                    'Jaren Jackson' = 'Jaren Jackson Jr.','Kelly Oubre' = 'Kelly Oubre Jr.', 
+                    'Marvin Bagley' = 'Marvin Bagley III', 'Otto Porter' = 'Otto Porter Jr.', 
+                    'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
+                    'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schröder' = 'Dennis Schroder', 
+                    'Tim Hardaway' = 'Tim Hardaway Jr.'))
+
+combined_data <- bballref18 %>% 
+  rename(bbr_pts = "PTS", bbr_dreb = "DRB", bbr_orb = "ORB",
+         bbr_ast = "AST", bbr_stl = "STL", bbr_blk = "BLK",
+         bbr_tov = "TOV", bbr_threes = "3P", bbr_fga = "FGA",
+         bbr_fgm = "FG", bbr_ftm = "FT",  bbr_fta = "FTA", bbr_gms = "G", bbr_mpg = "MP", age = "Age") %>%
+  mutate(bbr_ld_fpts = bbr_pts + (bbr_dreb*1.5) + (bbr_orb*2) + (bbr_ast*2) + (bbr_stl*2.5) + (bbr_blk*2.5) +
+         (bbr_tov*-1) + bbr_threes + (bbr_fga*-0.5) + (bbr_fgm*0.5) + bbr_ftm + (bbr_fta*-1)) %>%
+  mutate(bbr_fr_fpts = bbr_pts + (bbr_dreb*1.5) + (bbr_orb*2) + (bbr_ast*2) + (bbr_stl*2.5) + (bbr_blk*2.5) +
+         (bbr_tov*-1) + bbr_threes + (bbr_fga*-0.5) + (bbr_fgm*0.5) + bbr_ftm + (bbr_fta*-1)) %>% 
+  mutate(bbr_gsd2_fpts = bbr_pts + bbr_dreb + (bbr_orb*1.25) + (bbr_ast*1.5) + (bbr_stl*1.5) + (bbr_blk*2) +
+         (bbr_tov*-1)+bbr_threes+(bbr_fga*-0.5)+(bbr_fgm*0.5)+(bbr_ftm*0.5)+(bbr_fta*-0.75)) %>%
+  mutate(bbr_botb_fpts = bbr_pts + bbr_dreb + (bbr_orb*1.25) + (bbr_ast*1.5) + (bbr_stl*1.5) + (bbr_blk*2) +
+         (bbr_tov*-1)+bbr_threes+(bbr_fga*-0.5)+(bbr_fgm*0.5)+(bbr_ftm*0.5)+(bbr_fta*-0.75)) %>% 
+  select(player, age, bbr_ld_fpts, bbr_fr_fpts, bbr_gsd2_fpts, bbr_botb_fpts, bbr_gms, bbr_mpg,
+         bbr_pts, bbr_dreb, bbr_orb, bbr_ast, bbr_stl, bbr_blk, bbr_tov, bbr_threes, bbr_fga, bbr_fgm, bbr_ftm, bbr_fta)
+
+hashalt19 <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=2083425618") %>% gs_read(ws = "2019_hashtag_alt_proj") 
+
+hashalt19$player <- hashalt19$player %>% 
+  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
+                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ',
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", "Demarre" = "DeMarre",
+                    'Jaren Jackson' = 'Jaren Jackson Jr.','Kelly Oubre' = 'Kelly Oubre Jr.', 
+                    'Marvin Bagley' = 'Marvin Bagley III', 'Otto Porter' = 'Otto Porter Jr.', 
+                    'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
+                    'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schröder' = 'Dennis Schroder', 
+                    'Tim Hardaway' = 'Tim Hardaway Jr.'))
+
+hashalt19 <- hashalt19 %>% 
+  rename(hta_pts = "PTS", hta_treb = "REB", hta_ast = "AST", hta_stl = "STL", hta_blk = "BLK",
+         hta_tov = "TOV", hta_threes = "THREES", hta_fga = "FGA",hta_fgm = "FGM", hta_ftm = "FTM",  
+         hta_fta = "FTA", hta_mpg = "MPG", hta_ftp = "FT", hta_gms = "Gs") %>%
+  mutate(hta_dreb = hta_treb*0.78) %>% 
+  mutate(hta_orb = hta_treb*0.22) %>% 
+  mutate(hta_ld_fpts = hta_pts + (hta_dreb*1.5) + (hta_orb*2) + (hta_ast*2) + (hta_stl*2.5) + (hta_blk*2.5) +
+         (hta_tov*-1) + hta_threes + (hta_fga*-0.5) + (hta_fgm*0.5) + hta_ftm + (hta_fta*-1)) %>%
+  mutate(hta_fr_fpts = hta_pts + (hta_dreb*1.5) + (hta_orb*2) + (hta_ast*2) + (hta_stl*2.5) + (hta_blk*2.5) +
+         (hta_tov*-1) + hta_threes + (hta_fga*-0.5) + (hta_fgm*0.5) + hta_ftm + (hta_fta*-1)) %>% 
+  mutate(hta_gsd2_fpts = hta_pts + hta_dreb + (hta_orb*1.25) + (hta_ast*1.5) + (hta_stl*1.5) + (hta_blk*2) +
+         (hta_tov*-1)+hta_threes+(hta_fga*-0.5)+(hta_fgm*0.5)+(hta_ftm*0.5)+(hta_fta*-0.75)) %>%
+  mutate(hta_botb_fpts = hta_pts + hta_dreb + (hta_orb*1.25) + (hta_ast*1.5) + (hta_stl*1.5) + (hta_blk*2) +
+         (hta_tov*-1)+hta_threes+(hta_fga*-0.5)+(hta_fgm*0.5)+(hta_ftm*0.5)+(hta_fta*-0.75)) %>% 
+  select(player, hta_ld_fpts, hta_fr_fpts, hta_gsd2_fpts, hta_botb_fpts, hta_gms, hta_mpg, 
+         hta_pts, hta_dreb, hta_orb, hta_ast, hta_stl, hta_blk, hta_tov, hta_threes, hta_fga, hta_fgm, hta_ftm, hta_fta, hta_ftp)
+  
+combined_data <- combined_data %>% 
+  full_join(hashalt19, by = "player")
+
+hashtag19 <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=665288709") %>% gs_read(ws = "2019_hashtag_proj") 
+
+hashtag19$player <- hashtag19$player %>% 
+  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
+                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ',
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", "Demarre" = "DeMarre",
+                    'Dennis Schröder' = 'Dennis Schroder'))
+
+hashtag19 <- hashtag19 %>% 
+  rename(ht_pts = "PTS", ht_dreb = "DREB", ht_orb = "OREB", ht_ast = "AST", ht_stl = "STL", ht_blk = "BLK",
+         ht_tov = "TO", ht_threes = "THREES", ht_fga = "FGA", ht_fgm = "FGM", ht_ftm = "FTM",  
+         ht_fta = "FTA", ht_mpg = "MPG", ht_gms = "GP", ht_fgp = "FG%", ht_ftp = "FT%") %>%
+  mutate(ht_ld_fpts = ht_pts + (ht_dreb*1.5) + (ht_orb*2) + (ht_ast*2) + (ht_stl*2.5) + (ht_blk*2.5) +
+         (ht_tov*-1) + ht_threes + (ht_fga*-0.5) + (ht_fgm*0.5) + ht_ftm + (ht_fta*-1)) %>%
+  mutate(ht_fr_fpts = ht_pts + (ht_dreb*1.5) + (ht_orb*2) + (ht_ast*2) + (ht_stl*2.5) + (ht_blk*2.5) +
+         (ht_tov*-1) + ht_threes + (ht_fga*-0.5) + (ht_fgm*0.5) + ht_ftm + (ht_fta*-1)) %>% 
+  mutate(ht_gsd2_fpts = ht_pts + ht_dreb + (ht_orb*1.25) + (ht_ast*1.5) + (ht_stl*1.5) + (ht_blk*2) +
+         (ht_tov*-1)+ht_threes+(ht_fga*-0.5)+(ht_fgm*0.5)+(ht_ftm*0.5)+(ht_fta*-0.75)) %>%
+  mutate(ht_botb_fpts = ht_pts + ht_dreb + (ht_orb*1.25) + (ht_ast*1.5) + (ht_stl*1.5) + (ht_blk*2) +
+         (ht_tov*-1)+ht_threes+(ht_fga*-0.5)+(ht_fgm*0.5)+(ht_ftm*0.5)+(ht_fta*-0.75)) %>% 
+  select(player, ht_ld_fpts, ht_fr_fpts, ht_gsd2_fpts, ht_botb_fpts, ht_gms, ht_mpg, 
+         ht_pts, ht_dreb, ht_orb, ht_ast, ht_stl, ht_blk, ht_tov, ht_threes, ht_fga, ht_fgm, ht_fgp, ht_ftm, ht_fta, ht_ftp)
+
+combined_data <- combined_data %>% 
+  full_join(hashtag19, by = "player")
+```
+
+```{r contract data}
+# contract data 
+
+spottrac_contracts <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=2095258080") %>% gs_read(ws = "botb_contracts") 
+spottrac_contracts$player <- spottrac_contracts$player %>% 
+  str_replace_all(c('C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', "O.G." = "OG", "Demarre" = "DeMarre",
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', 
+                    'Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
+                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ'))
+
+combined_data <- combined_data %>% 
+  full_join(spottrac_contracts, by = "player")
+
+
+legacy_contracts <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=0") %>% gs_read(ws = "legacy_contracts") 
+
+legacy_contracts$player <- legacy_contracts$player %>% 
+  str_replace_all(c('C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', "O.G." = "OG", "Demarre" = "DeMarre",
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', 
+                    'Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
+                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ'))
+
+combined_data <- combined_data %>% 
+  full_join(legacy_contracts, by = "player")
+
+franchise_contracts <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=1961950332") %>% gs_read(ws = "franchise_contracts") 
+
+franchise_contracts$player <- franchise_contracts$player %>% 
+  str_replace_all(c('C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', "O.G." = "OG", "Demarre" = "DeMarre",
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', 
+                    'Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
+                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ'))
+
+combined_data <- combined_data %>% 
+  full_join(franchise_contracts, by = "player") 
+
+the_invitational <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=1960421065") %>% gs_read(ws = "the_invitational")
+
+the_invitational$player <- the_invitational$player %>% 
+  str_replace_all(c('C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', "O.G." = "OG", "Demarre" = "DeMarre",
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', 
+                    'Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
+                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ'))
+
+combined_data <- combined_data %>% 
+  full_join(the_invitational, by = "player")
+
+```
+
+```{r select_data}
+select_data <- combined_data %>% 
+  select(player, age,
+         bbr_ld_fpts, bbr_fr_fpts, bbr_gsd2_fpts, bbr_botb_fpts, bbr_gms, bbr_mpg,
+         hta_ld_fpts, hta_fr_fpts, hta_gsd2_fpts, hta_botb_fpts, hta_gms, hta_mpg,
+         ht_ld_fpts, ht_fr_fpts, ht_gsd2_fpts, ht_botb_fpts, ht_gms, ht_mpg, inv_abbreviated,
+         botb_team, spottrac_2019,	spottrac_2020, spottrac_2021, spottrac_2022, spottrac_2023, spottrac_rfa, 
+         ld_team, ld_2019, ld_2020, ld_2021, ld_2022, ld_2023, ld_2024, ld_rfa, ld_gleague, ld_intl,
+         fr_team, fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, fr_rfa, fr_gleague, fr_intl)
+rm(bballref18, hashtag19, hashalt19, legacy_contracts, franchise_contracts, the_invitational, spottrac_contracts, my_sheets)
+```
+
+# Examining Contract Value 
+
+## Best of the Best Contract Value 
+
+```{r bballref evaluations in botb}
+select_data %>% 
+  mutate(bbr_botb_value_19 = bbr_botb_fpts / spottrac_2019) %>% 
+  mutate(bbr_botb_value_20 = bbr_botb_fpts / spottrac_2020) %>%
+  mutate(bbr_botb_value_21 = bbr_botb_fpts / spottrac_2021) %>%
+  filter(bbr_gms > 50) %>% 
+  filter(bbr_botb_fpts > 24) %>% 
+  filter(botb_team == "ZZZ") %>%
+  #filter(age < 25) %>% 
+  arrange(-bbr_botb_value_19) %>% 
+  select(player, age, bbr_botb_fpts, bbr_botb_value_19, bbr_botb_value_20, bbr_botb_value_21, 
+         spottrac_2019, spottrac_2020, spottrac_2021, spottrac_rfa)
+```
+
+```{r hashtag_alt evaluations in botb}
+select_data %>% 
+  mutate(hta_botb_value_19 = hta_botb_fpts / spottrac_2019) %>% 
+  mutate(hta_botb_value_20 = hta_botb_fpts / spottrac_2020) %>%
+  mutate(hta_botb_value_21 = hta_botb_fpts / spottrac_2021) %>%
+  #filter(hta_gms > 50) %>% 
+  filter(hta_botb_fpts > 24) %>% 
+  #filter(age < 25) %>% 
+  arrange(-hta_botb_value_19) %>% 
+  select(player, age, hta_botb_fpts, hta_botb_value_19, hta_botb_value_20, hta_botb_value_21, 
+         spottrac_2019, spottrac_2020, spottrac_2021, spottrac_rfa)
+```
+
+```{r hashtag evaluations in botb}
+select_data %>% 
+  mutate(ht_botb_value_19 = ht_botb_fpts / spottrac_2019) %>% 
+  mutate(ht_botb_value_20 = ht_botb_fpts / spottrac_2020) %>%
+  mutate(ht_botb_value_21 = ht_botb_fpts / spottrac_2021) %>%
+  #filter(ht_gms > 50) %>% 
+  filter(ht_botb_fpts > 24) %>% 
+  #filter(age < 25) %>% 
+  arrange(-ht_botb_value_19) %>% 
+  select(player, age, ht_botb_fpts, ht_botb_value_19, ht_botb_value_20, ht_botb_value_21, 
+         spottrac_2019, spottrac_2020, spottrac_2021, spottrac_rfa)
+```
+
+## Legacy Dynasty Contract Value  
+
+```{r looking at projections}
+select_data %>% 
+  #filter(bbr_gms > 50) %>%
+  #filter(bbr_ld_fpts > 25) %>%
+  #filter(hta_ld_fpts > 25) %>%
+  filter(ht_ld_fpts > 25) %>%
+  #filter(age < 25) %>% 
+  #arrange(-bbr_ld_fpts) %>% 
+  #arrange(-hta_ld_fpts) %>% 
+  arrange(-ht_ld_fpts) %>% 
+  select(player, age, bbr_ld_fpts, hta_ld_fpts, ht_ld_fpts, ld_2019, ld_2020, ld_2021, ld_rfa, ld_gleague, ld_intl)
+```
+
+```{r bballref evaluations in ld}
+select_data %>% 
+  mutate(bbr_ld_value_19 = bbr_ld_fpts / ld_2019) %>% 
+  mutate(bbr_ld_value_20 = bbr_ld_fpts / ld_2020) %>%
+  mutate(bbr_ld_value_21 = bbr_ld_fpts / ld_2021) %>%
+  #filter(bbr_gms > 50) %>%
+  filter(bbr_ld_fpts > 25) %>% 
+  #filter(age < 25) %>% 
+  arrange(-bbr_ld_value_19) %>% 
+  select(player, age, bbr_ld_fpts, bbr_ld_value_19, bbr_ld_value_20, bbr_ld_value_21, 
+         ld_2019, ld_2020, ld_2021, ld_rfa, ld_gleague, ld_intl)
+```
+
+```{r hashtag_alt evaluations in ld}
+select_data %>% 
+  mutate(hta_ld_value_19 = hta_ld_fpts / ld_2019) %>% 
+  mutate(hta_ld_value_20 = hta_ld_fpts / ld_2020) %>%
+  mutate(hta_ld_value_21 = hta_ld_fpts / ld_2021) %>%
+  filter(hta_ld_fpts > 25) %>% 
+  #filter(age < 25) %>% 
+  arrange(-hta_ld_value_19) %>% 
+  select(player, age, hta_ld_fpts, hta_ld_value_19, hta_ld_value_20, hta_ld_value_21, 
+         ld_2019, ld_2020, ld_2021, ld_rfa, ld_gleague, ld_intl)
+```
+
+```{r hashtag evaluations in ld}
+select_data %>% 
+  mutate(ht_ld_value_19 = ht_ld_fpts / ld_2019) %>% 
+  mutate(ht_ld_value_20 = ht_ld_fpts / ld_2020) %>%
+  mutate(ht_ld_value_21 = ht_ld_fpts / ld_2021) %>%
+  #filter(ht_ld_fpts > 30) %>% 
+  #filter(age < 25) %>% 
+  arrange(-ht_ld_value_19) %>% 
+  select(player, age, ht_ld_fpts, ht_ld_value_19, ht_ld_value_20, ht_ld_value_21, 
+         ld_2019, ld_2020, ld_2021, ld_rfa, ld_gleague, ld_intl)
+```
+
+## Franchise NBA Contract Value  
+
+```{r looking at projections in franchise}
+select_data %>% 
+  #filter(bbr_gms > 50) %>%
+  #filter(bbr_fr_fpts > 25) %>%
+  #filter(hta_fr_fpts > 25) %>%
+  filter(ht_fr_fpts > 25) %>%
+  #filter(age < 25) %>% 
+  #arrange(-bbr_fr_fpts) %>% 
+  #arrange(-hta_fr_fpts) %>% 
+  arrange(-ht_fr_fpts) %>% 
+  select(player, age, bbr_fr_fpts, hta_fr_fpts, ht_fr_fpts, fr_2019, fr_2020, fr_2021, fr_rfa, fr_gleague, fr_intl)
+```
+
+```{r bballref evaluations in fr}
+select_data %>% 
+  mutate(bbr_fr_value_19 = bbr_fr_fpts / fr_2019) %>% 
+  mutate(bbr_fr_value_20 = bbr_fr_fpts / fr_2020) %>%
+  mutate(bbr_fr_value_21 = bbr_fr_fpts / fr_2021) %>%
+  #filter(bbr_gms > 50) %>%
+  filter(bbr_fr_fpts > 26) %>% 
+  #filter(age < 25) %>% 
+  arrange(-bbr_fr_value_19) %>% 
+  select(player, age, bbr_fr_fpts, bbr_fr_value_19, bbr_fr_value_20, bbr_fr_value_21, 
+         fr_2019, fr_2020, fr_2021, fr_rfa, fr_gleague, fr_intl)
+```
+
+```{r hashtag_alt evaluations in fr}
+select_data %>% 
+  mutate(hta_fr_value_19 = hta_fr_fpts / fr_2019) %>% 
+  mutate(hta_fr_value_20 = hta_fr_fpts / fr_2020) %>%
+  mutate(hta_fr_value_21 = hta_fr_fpts / fr_2021) %>%
+  filter(hta_fr_fpts > 24) %>% 
+  #filter(age < 25) %>% 
+  arrange(-hta_fr_value_19) %>% 
+  select(player, age, hta_fr_fpts, hta_fr_value_19, hta_fr_value_20, hta_fr_value_21, 
+         fr_2019, fr_2020, fr_2021, fr_rfa, fr_gleague, fr_intl)
+```
+
+```{r hashtag evaluations in fr}
+select_data %>% 
+  mutate(ht_fr_value_19 = ht_fr_fpts / fr_2019) %>% 
+  mutate(ht_fr_value_20 = ht_fr_fpts / fr_2020) %>%
+  mutate(ht_fr_value_21 = ht_fr_fpts / fr_2021) %>%
+  filter(ht_fr_fpts > 25) %>% 
+  #filter(age < 25) %>% 
+  arrange(-ht_fr_value_19) %>% 
+  select(player, age, ht_fr_fpts, ht_fr_value_19, ht_fr_value_20, ht_fr_value_21, 
+         fr_2019, fr_2020, fr_2021, fr_rfa, fr_gleague, fr_intl)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
