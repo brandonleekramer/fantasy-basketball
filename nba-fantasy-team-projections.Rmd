@@ -157,6 +157,14 @@ combined_data <- combined_data %>%
 
 ```
 
+```{r adding in schedule}
+nba_schedule <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=1604050216") %>% gs_read(ws = "2019_nba_schedule")
+
+combined_data <- combined_data %>% 
+  full_join(nba_schedule, by = "nba_team"); rm(nba_schedule)
+```
+
+
 ```{r select_data}
 select_data <- combined_data %>% 
   select(player, age,
@@ -165,7 +173,7 @@ select_data <- combined_data %>%
          ht_ld_fpts, ht_fr_fpts, ht_gsd2_fpts, ht_botb_fpts, ht_gms, ht_mpg, inv_abbreviated,
          botb_team, spottrac_2019,	spottrac_2020, spottrac_2021, spottrac_2022, spottrac_2023, spottrac_rfa, 
          ld_team, ld_2019, ld_2020, ld_2021, ld_2022, ld_2023, ld_2024, ld_rfa, ld_gleague, ld_intl,
-         fr_team, fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, fr_rfa, fr_gleague, fr_intl)
+         fr_team, fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, fr_rfa, fr_gleague, fr_intl, week1:week26)
 rm(bballref18, hashtag19, hashalt19, legacy_contracts, franchise_contracts, the_invitational, spottrac_contracts, my_sheets)
 ```
 
