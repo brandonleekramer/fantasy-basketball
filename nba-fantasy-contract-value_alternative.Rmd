@@ -179,8 +179,8 @@ select_data %>%
   mutate(bbr_botb_value_19 = bbr_botb_fpts / spottrac_2019) %>% 
   mutate(bbr_botb_value_20 = bbr_botb_fpts / spottrac_2020) %>%
   mutate(bbr_botb_value_21 = bbr_botb_fpts / spottrac_2021) %>%
-  filter(bbr_gms > 50) %>% 
-  filter(bbr_botb_fpts > 24) %>% 
+  #filter(bbr_gms > 50) %>% 
+  #filter(bbr_botb_fpts > 24) %>% 
   filter(botb_team == "ZZZ") %>%
   #filter(age < 25) %>% 
   arrange(-bbr_botb_value_19) %>% 
@@ -193,10 +193,11 @@ select_data %>%
   mutate(hta_botb_value_19 = hta_botb_fpts / spottrac_2019) %>% 
   mutate(hta_botb_value_20 = hta_botb_fpts / spottrac_2020) %>%
   mutate(hta_botb_value_21 = hta_botb_fpts / spottrac_2021) %>%
-  #filter(hta_gms > 50) %>% 
-  filter(hta_botb_fpts > 24) %>% 
-  #filter(age < 25) %>% 
-  arrange(-hta_botb_value_19) %>% 
+  #filter(bbr_gms > 50) %>% 
+  #filter(bbr_botb_fpts > 24) %>% 
+  filter(botb_team == "ZZZ") %>%
+  filter(age < 28) %>% 
+  arrange(-hta_botb_value_19) %>%
   select(player, age, hta_botb_fpts, hta_botb_value_19, hta_botb_value_20, hta_botb_value_21, 
          spottrac_2019, spottrac_2020, spottrac_2021, spottrac_rfa)
 ```
@@ -207,9 +208,10 @@ select_data %>%
   mutate(ht_botb_value_20 = ht_botb_fpts / spottrac_2020) %>%
   mutate(ht_botb_value_21 = ht_botb_fpts / spottrac_2021) %>%
   #filter(ht_gms > 50) %>% 
-  filter(ht_botb_fpts > 24) %>% 
-  #filter(age < 25) %>% 
-  arrange(-ht_botb_value_19) %>% 
+  #filter(ht_botb_fpts > 22) %>% 
+  filter(botb_team == "ZZZ") %>%
+  filter(age < 23) %>% 
+  arrange(-ht_botb_value_20) %>% 
   select(player, age, ht_botb_fpts, ht_botb_value_19, ht_botb_value_20, ht_botb_value_21, 
          spottrac_2019, spottrac_2020, spottrac_2021, spottrac_rfa)
 ```
