@@ -141,7 +141,7 @@ select_data %>%
   mutate(bbr_ld_value_20 = bbr_ld_fpts / ld_2020) %>%
   mutate(bbr_ld_value_21 = bbr_ld_fpts / ld_2021) %>%
   #filter(bbr_gms > 50) %>%
-  filter(bbr_ld_fpts > 25) %>% 
+  #filter(bbr_ld_fpts > 25) %>% 
   #filter(age < 25) %>% 
   arrange(-bbr_ld_value_19) %>% 
   select(player, age, bbr_ld_fpts, bbr_ld_value_19, bbr_ld_value_20, bbr_ld_value_21, 

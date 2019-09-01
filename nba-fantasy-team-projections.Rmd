@@ -183,15 +183,28 @@ rm(bballref18, hashtag19, hashalt19, legacy_contracts, franchise_contracts, the_
 
 ```{r ld 2018 bbr projections, fig.width=11, fig.height=6}
 ld_temp_1 <- select_data %>% 
-  filter(ld_gleague == "0") %>% 
-  filter(ld_intl == "0") %>% 
+  filter(ld_gleague == "0" | ld_intl == "0") %>% 
   group_by(ld_team) %>% summarize(avg_fppg = mean(bbr_ld_fpts, na.rm = TRUE))  
 ld_temp_2 <- select_data %>% 
-  filter(ld_gleague == "0") %>% 
-  filter(ld_intl == "0") %>% 
+  filter(ld_gleague == "0" | ld_intl == "0") %>% 
   group_by(ld_team) %>% summarize(ld_players = n())
+ld_temp_3 <- select_data %>% 
+  filter(ld_gleague == "0" | ld_intl == "0") %>%
+  group_by(ld_team) %>% 
+  summarize(ld_2019_cap = sum(ld_2019, na.rm = TRUE))
+ld_temp_4 <- select_data %>% 
+  filter(ld_gleague == "1" | ld_intl == "1") %>%
+  group_by(ld_team) %>%
+  summarize(gleague_cap = sum(ld_2019 / 2, na.rm = TRUE)) 
+
+# need to fix this snippit still 
+
 ld_bbr_team_projections <- full_join(ld_temp_1, ld_temp_2, by = "ld_team") %>% 
-  mutate(team_total = avg_fppg * ld_players) %>% 
+  full_join(ld_temp_2, ld_temp_3, by = "ld_team") %>% 
+  full_join(ld_temp_3, ld_temp_4, by = "ld_team") #%>%
+  mutate(team_total = avg_fppg * ld_players) #%>% 
+  
+mutate(ld_2019_cap = ld_2019_cap + gleague_cap) %>% 
   arrange(-team_total); rm(ld_temp_1, ld_temp_2)
 ld_bbr_team_projections
 ggplot(data=ld_bbr_team_projections, aes(x=reorder(ld_team, -team_total), y=team_total, fill=ld_team)) +
@@ -206,12 +219,10 @@ ggplot(data=ld_bbr_team_projections, aes(x=reorder(ld_team, -team_total), y=team
 
 ```{r ld 2019 hta projections, fig.width=11, fig.height=6}
 ld_temp_1 <- select_data %>% 
-  filter(ld_gleague == "0") %>% 
-  filter(ld_intl == "0") %>% 
+  filter(ld_gleague == "0" | ld_intl == "0") %>%
   group_by(ld_team) %>% summarize(avg_fppg = mean(hta_ld_fpts, na.rm = TRUE))  
 ld_temp_2 <- select_data %>% 
-  filter(ld_gleague == "0") %>% 
-  filter(ld_intl == "0") %>% 
+  filter(ld_gleague == "0" | ld_intl == "0") %>%
   group_by(ld_team) %>% summarize(ld_players = n())
 ld_hta_team_projections <- full_join(ld_temp_1, ld_temp_2, by = "ld_team") %>% 
   mutate(team_total = avg_fppg * ld_players) %>% 
@@ -229,12 +240,10 @@ ggplot(data=ld_hta_team_projections, aes(x=reorder(ld_team, -team_total), y=team
 
 ```{r ld 2019 ht projections, fig.width=11, fig.height=6}
 ld_temp_1 <- select_data %>% 
-  filter(ld_gleague == "0") %>% 
-  filter(ld_intl == "0") %>%  
+  filter(ld_gleague == "0" | ld_intl == "0") %>%  
   group_by(ld_team) %>% summarize(avg_fppg = mean(ht_ld_fpts, na.rm = TRUE))  
 ld_temp_2 <- select_data %>% 
-  filter(ld_gleague == "0") %>% 
-  filter(ld_intl == "0") %>% 
+  filter(ld_gleague == "0" | ld_intl == "0") %>%
   group_by(ld_team) %>% summarize(ld_players = n())
 ld_ht_team_projections <- full_join(ld_temp_1, ld_temp_2, by = "ld_team") %>% 
   mutate(team_total = avg_fppg * ld_players) %>% 
@@ -261,12 +270,10 @@ select_data %>%
 
 ```{r fr 2018 bbr projections, fig.width=11, fig.height=6}
 fr_temp_1 <- select_data %>% 
-  filter(fr_gleague == "0") %>% 
-  filter(fr_intl == "0") %>% 
+  filter(ld_gleague == "0" | ld_intl == "0") %>% 
   group_by(fr_team) %>% summarize(avg_fppg = mean(bbr_fr_fpts, na.rm = TRUE))  
 fr_temp_2 <- select_data %>% 
-  filter(fr_gleague == "0") %>% 
-  filter(fr_intl == "0") %>% 
+  filter(ld_gleague == "0" | ld_intl == "0") %>% 
   group_by(fr_team) %>% summarize(fr_players = n())
 fr_bbr_team_projections <- full_join(fr_temp_1, fr_temp_2, by = "fr_team") %>% 
   mutate(team_total = avg_fppg * fr_players) %>% 
@@ -284,12 +291,10 @@ ggplot(data=fr_bbr_team_projections, aes(x=reorder(fr_team, -team_total), y=team
 
 ```{r fr 2019 hta projections, fig.width=11, fig.height=6}
 fr_temp_1 <- select_data %>% 
-  filter(fr_gleague == "0") %>% 
-  filter(fr_intl == "0") %>% 
+  filter(ld_gleague == "0" | ld_intl == "0") %>%
   group_by(fr_team) %>% summarize(avg_fppg = mean(hta_fr_fpts, na.rm = TRUE))  
 fr_temp_2 <- select_data %>% 
-  filter(fr_gleague == "0") %>% 
-  filter(fr_intl == "0") %>% 
+  filter(ld_gleague == "0" | ld_intl == "0") %>%
   group_by(fr_team) %>% summarize(fr_players = n())
 fr_hta_team_projections <- full_join(fr_temp_1, fr_temp_2, by = "fr_team") %>% 
   mutate(team_total = avg_fppg * fr_players) %>% 
@@ -307,12 +312,10 @@ ggplot(data=fr_hta_team_projections, aes(x=reorder(fr_team, -team_total), y=team
 
 ```{r fr 2019 ht projections, fig.width=11, fig.height=6}
 fr_temp_1 <- select_data %>% 
-  filter(fr_gleague == "0") %>% 
-  filter(fr_intl == "0") %>%  
+  filter(ld_gleague == "0" | ld_intl == "0") %>%  
   group_by(fr_team) %>% summarize(avg_fppg = mean(ht_fr_fpts, na.rm = TRUE))  
 fr_temp_2 <- select_data %>% 
-  filter(fr_gleague == "0") %>% 
-  filter(fr_intl == "0") %>% 
+  filter(ld_gleague == "0" | ld_intl == "0") %>% 
   group_by(fr_team) %>% summarize(fr_players = n())
 fr_ht_team_projections <- full_join(fr_temp_1, fr_temp_2, by = "fr_team") %>% 
   mutate(team_total = avg_fppg * fr_players) %>% 
