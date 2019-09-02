@@ -1,9 +1,18 @@
 ---
-title: "Legacy Dynasty"
+title: "Legacy Dynasty Fantasy Tools"
 author: "Brandon L. Kramer"
 date: "8/29/2019"
 output: html_document
 ---
+
+This file contains the following materials for Legacy Dynasty NBA fantasy points league 
+
+* Concatenation of Basketball Reference (2018), Hashtag (2019), and Hashtag Alt (2019) Projections
+* Overall Stats and Projections
+* Contract Value Calculator
+* Team Projections
+* Team Players Quick Comparisons 
+* Post-Trade Comparison Tool 
 
 ```{r pull packages and projection data}
 #install.packages("tidyverse"); install.packages("googlesheets")
@@ -15,10 +24,12 @@ bballref18 <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCp
   gs_read(ws = "bballref18") 
 
 bballref18$player <- bballref18$player %>% 
-  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e', 'ić' = 'ic',
-                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z', 'Élie' = 'Elie',
-                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ', 'Dončić' = 'Doncic',
-                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", "Demarre" = "DeMarre",
+  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 
+                    'é' = 'e', 'ê' = 'e', 'ić' = 'ic', 'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 
+                    'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z', 
+                    'Élie' = 'Elie','P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 
+                    'D.J.' = 'DJ', 'J.J.' = 'JJ', 'Dončić' = 'Doncic', 'Louis' = 'Lou', 'Edrice' = 'Bam', 
+                    'Waller-Prince' = 'Prince', "O.G." = "OG", "Demarre" = "DeMarre",
                     'Jaren Jackson' = 'Jaren Jackson Jr.','Kelly Oubre' = 'Kelly Oubre Jr.', 
                     'Marvin Bagley' = 'Marvin Bagley III', 'Otto Porter' = 'Otto Porter Jr.', 
                     'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
@@ -47,12 +58,12 @@ hashalt19$player <- hashalt19$player %>%
   str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
                     'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
                     'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ',
-                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", "Demarre" = "DeMarre",
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", 
                     'Jaren Jackson' = 'Jaren Jackson Jr.','Kelly Oubre' = 'Kelly Oubre Jr.', 
                     'Marvin Bagley' = 'Marvin Bagley III', 'Otto Porter' = 'Otto Porter Jr.', 
                     'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
                     'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schröder' = 'Dennis Schroder', 
-                    'Tim Hardaway' = 'Tim Hardaway Jr.'))
+                    'Tim Hardaway' = 'Tim Hardaway Jr.', "Demarre" = "DeMarre"))
 
 hashalt19 <- hashalt19 %>% 
   rename(hta_pts = "PTS", hta_treb = "REB", hta_ast = "AST", hta_stl = "STL", hta_blk = "BLK",
@@ -80,8 +91,8 @@ hashtag19$player <- hashtag19$player %>%
   str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
                     'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
                     'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ',
-                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", "Demarre" = "DeMarre",
-                    'Dennis Schröder' = 'Dennis Schroder'))
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", 
+                    "Demarre" = "DeMarre",'Dennis Schröder' = 'Dennis Schroder'))
 
 hashtag19 <- hashtag19 %>% 
   rename(ht_pts = "PTS", ht_dreb = "DREB", ht_orb = "OREB", ht_ast = "AST", ht_stl = "STL", ht_blk = "BLK",
@@ -116,11 +127,11 @@ combined_data <- combined_data %>%
 select_data <- combined_data %>% 
   select(player, age,
          bbr_ld_fpts, bbr_gms, bbr_mpg, hta_ld_fpts, hta_gms, hta_mpg, ht_ld_fpts, ht_gms, ht_mpg, 
-         ld_team, ld_2019, ld_2020, ld_2021, ld_2022, ld_2023, ld_2024, ld_rfa, ld_gleague, ld_intl)
+         ld_team, ld_2019, ld_2020, ld_2021, ld_2022, ld_2023, ld_2024, ld_rfa, ld_gleague, ld_intl, trade_comp)
 rm(bballref18, hashtag19, hashalt19, legacy_contracts, my_sheets)
 ```
 
-# LD Contract Value  
+# LD Overall Stats and Projections  
 
 ```{r looking at overall projections}
 select_data %>% 
@@ -134,6 +145,8 @@ select_data %>%
   arrange(-ht_ld_fpts) %>% 
   select(player, age, bbr_ld_fpts, hta_ld_fpts, ht_ld_fpts, ld_2019, ld_2020, ld_2021, ld_rfa, ld_gleague, ld_intl)
 ```
+
+# LD Contract Value Calculators
 
 ```{r bballref evaluations in ld}
 select_data %>% 
@@ -174,6 +187,8 @@ select_data %>%
 
 # LD Team Projections 
 
+LD Team Projections BBR
+
 ```{r ld 2018 bbr projections, fig.width=11, fig.height=6, warning=FALSE}
 ld_temp_1 <- select_data %>% 
   filter(ld_gleague == "0") %>% 
@@ -192,20 +207,30 @@ ggplot(data=ld_bbr_team_projections, aes(x=reorder(ld_team, -team_total), y=team
   theme_bw() +
   theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2018 Stats)", fill = "LD Team Name") +
-  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
-                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
-                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")) 
+  labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "LD Team Name") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")) 
 ggplot(data=ld_bbr_team_projections, aes(x=reorder(ld_team, -avg_fppg), y=avg_fppg, fill=ld_team)) +
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() +
   theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Legacy Dynasty Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", fill = "LD Team Name") +
-  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
-                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
-                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
+  labs(title = "Legacy Dynasty Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+       fill = "LD Team Name") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
 ```
+
+LD Team Projections HashTag Alt 
 
 ```{r ld 2019 hta projections, fig.width=11, fig.height=6, warning=FALSE}
 ld_temp_1 <- select_data %>% 
@@ -225,20 +250,29 @@ ggplot(data=ld_hta_team_projections, aes(x=reorder(ld_team, -team_total), y=team
   theme_bw() +
   theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2018 Stats)", fill = "LD Team Name") +
-  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
-                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
-                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")) 
+  labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "LD Team Name") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")) 
 ggplot(data=ld_hta_team_projections, aes(x=reorder(ld_team, -avg_fppg), y=avg_fppg, fill=ld_team)) +
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() +
   theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
   labs(title = "Legacy Dynasty Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", fill = "LD Team Name") +
-  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
-                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
-                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
 ```
+
+LD Team Projections HashTag 
 
 ```{r ld 2019 ht projections, fig.width=11, fig.height=6, warning=FALSE}
 ld_temp_1 <- select_data %>% 
@@ -258,20 +292,30 @@ ggplot(data=ld_ht_team_projections, aes(x=reorder(ld_team, -team_total), y=team_
   theme_bw() +
   theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2018 Stats)", fill = "LD Team Name") +
-  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
-                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
-                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")) 
+  labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "LD Team Name") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")) 
 ggplot(data=ld_ht_team_projections, aes(x=reorder(ld_team, -avg_fppg), y=avg_fppg, fill=ld_team)) +
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() +
   theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Legacy Dynasty Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", fill = "LD Team Name") +
-  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
-                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
-                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
+  labs(title = "Legacy Dynasty Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+       fill = "LD Team Name") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
 ```
+
+# Team Players Quick Comparisons
 
 ```{r looking at specific team's players projections}
 select_data %>% 
@@ -292,18 +336,212 @@ select_data %>%
   filter(ld_team == "MIN") %>% 
   arrange(-ht_ld_value_19) %>% 
   select(player, age, ld_team, bbr_ld_fpts, hta_ld_fpts, ht_ld_fpts, ht_ld_value_19, 
-         ld_2019, ld_2020, ld_2021, ld_2022, ld_2023, ld_2024, ld_rfa, ld_gleague, ld_intl)
+         ld_2019, ld_2020, ld_2021, ld_2022, ld_2023, ld_2024, ld_rfa, ld_gleague, ld_intl, )
 ```
 
+# Post-Trade Comparison Tool
 
+Post-Trade Comparison Tool HashTag Alt 
 
+```{r comparing team projections before and after trade using hta, fig.width=11, fig.height=6, warning=FALSE}
+temp_1 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>%  
+  group_by(ld_team) %>% summarize(avg_fppg = mean(hta_ld_fpts, na.rm = TRUE)) 
+temp_2 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>% 
+  group_by(ld_team) %>% summarize(ld_players = n()) %>% filter(ld_team != "NA") %>% 
+  full_join(temp_1, temp_2, by = "ld_team")
+temp_3 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>% 
+  group_by(ld_team) %>% 
+  summarize(cap_used = sum(ld_2019, na.rm = TRUE)) %>% 
+  mutate(cap_left = 109400000 - cap_used)
+ld_hta_team_projections <- full_join(temp_2, temp_3, by = "ld_team") %>% 
+  mutate(team_total = avg_fppg * ld_players) %>% 
+  arrange(-team_total) %>%
+  select(ld_team, ld_players, avg_fppg, team_total, cap_used, cap_left); rm(temp_1, temp_2); rm(temp_3)
 
+temp_1 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>%  
+  group_by(trade_comp) %>% summarize(avg_fppg = mean(hta_ld_fpts, na.rm = TRUE)) 
+temp_2 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>% 
+  group_by(trade_comp) %>% summarize(ld_players = n()) %>% filter(trade_comp != "NA") %>% 
+  full_join(temp_1, temp_2, by = "trade_comp")
+temp_3 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>% 
+  group_by(trade_comp) %>% 
+  summarize(cap_used = sum(ld_2019, na.rm = TRUE)) %>% 
+  mutate(cap_left = 109400000 - cap_used)
+ld_hta_team_posttrade <- full_join(temp_2, temp_3, by = "trade_comp") %>% 
+  mutate(team_total = avg_fppg * ld_players) %>% 
+  arrange(-team_total) %>%
+  select(trade_comp, ld_players, avg_fppg, team_total, cap_used, cap_left); rm(temp_1, temp_2); rm(temp_3)
 
+ld_hta_team_projections; ld_hta_team_posttrade
 
+ggplot(data=ld_hta_team_projections, 
+       aes(x=reorder(ld_team, -team_total), y=team_total, fill=ld_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = ld_players), size = 5, colour="white", fontface="bold", hjust = 0.4, vjust = 5) +
+  labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "LD Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")) 
 
+ggplot(data=ld_hta_team_posttrade, 
+       aes(x=reorder(trade_comp, -team_total), y=team_total, fill=trade_comp)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = ld_players), size = 5, colour="white", fontface="bold", hjust = 0.4, vjust = 5) +
+  labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "LD Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
 
+ggplot(data=ld_hta_team_projections, aes(x=reorder(ld_team, -avg_fppg), y=avg_fppg, fill=ld_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.4, vjust = 3) +
+  labs(title = "Legacy Dynasty Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+       fill = "LD Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
 
+ggplot(data=ld_hta_team_posttrade, aes(x=reorder(trade_comp, -avg_fppg), y=avg_fppg, fill=trade_comp)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.4, vjust = 3) +
+  labs(title = "Legacy Dynasty Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+       fill = "LD Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
 
+```
+
+Post-Trade Comparison Tool HashTag Alt
+
+```{r comparing team projections before and after trade using ht, fig.width=11, fig.height=6, warning=FALSE}
+temp_1 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>%  
+  group_by(ld_team) %>% summarize(avg_fppg = mean(ht_ld_fpts, na.rm = TRUE)) 
+temp_2 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>% 
+  group_by(ld_team) %>% summarize(ld_players = n()) %>% filter(ld_team != "NA") %>% 
+  full_join(temp_1, temp_2, by = "ld_team")
+temp_3 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>% 
+  group_by(ld_team) %>% 
+  summarize(cap_used = sum(ld_2019, na.rm = TRUE)) %>% 
+  mutate(cap_left = 109400000 - cap_used)
+ld_ld_team_projections <- full_join(temp_2, temp_3, by = "ld_team") %>% 
+  mutate(team_total = avg_fppg * ld_players) %>% 
+  arrange(-team_total) %>%
+  select(ld_team, ld_players, avg_fppg, team_total, cap_used, cap_left); rm(temp_1, temp_2); rm(temp_3)
+
+temp_1 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>%  
+  group_by(trade_comp) %>% summarize(avg_fppg = mean(ht_ld_fpts, na.rm = TRUE)) 
+temp_2 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>% 
+  group_by(trade_comp) %>% summarize(ld_players = n()) %>% filter(trade_comp != "NA") %>% 
+  full_join(temp_1, temp_2, by = "trade_comp")
+temp_3 <- select_data %>% 
+  filter(ld_gleague == "0") %>% 
+  filter(ld_intl == "0") %>% 
+  group_by(trade_comp) %>% 
+  summarize(cap_used = sum(ld_2019, na.rm = TRUE)) %>% 
+  mutate(cap_left = 109400000 - cap_used)
+ld_ht_team_posttrade <- full_join(temp_2, temp_3, by = "trade_comp") %>% 
+  mutate(team_total = avg_fppg * ld_players) %>% 
+  arrange(-team_total) %>%
+  select(trade_comp, ld_players, avg_fppg, team_total, cap_used, cap_left); rm(temp_1, temp_2); rm(temp_3)
+
+ld_ht_team_projections; ld_ht_team_posttrade
+
+ggplot(data=ld_ld_team_projections, 
+       aes(x=reorder(ld_team, -team_total), y=team_total, fill=ld_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.4, vjust = 3) +
+  labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "LD Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")) 
+
+ggplot(data=ld_ht_team_posttrade, 
+       aes(x=reorder(trade_comp, -team_total), y=team_total, fill=trade_comp)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.4, vjust = 3) +
+  labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "LD Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
+
+ggplot(data=ld_hta_team_projections, aes(x=reorder(ld_team, -avg_fppg), y=avg_fppg, fill=ld_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.4, vjust = 3) +
+  labs(title = "Legacy Dynasty Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+       fill = "LD Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
+
+ggplot(data=ld_hta_team_posttrade, aes(x=reorder(trade_comp, -avg_fppg), y=avg_fppg, fill=trade_comp)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.4, vjust = 3) +
+  labs(title = "Legacy Dyntasy Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+       fill = "LD Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
+
+```
 
 
 

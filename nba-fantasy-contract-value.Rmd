@@ -174,15 +174,29 @@ rm(bballref18, hashtag19, hashalt19, legacy_contracts, franchise_contracts, the_
 
 ## Best of the Best Contract Value 
 
+```{r looking at projections in BOTB}
+select_data %>% 
+  #filter(bbr_gms > 50) %>%
+  #filter(bbr_botb_fpts > 25) %>%
+  #filter(hta_botb_fpts > 25) %>%
+  filter(ht_botb_fpts > 22) %>%
+  filter(age < 27) %>% 
+  #arrange(-bbr_ld_fpts) %>% 
+  #arrange(-hta_ld_fpts) %>% 
+  arrange(-ht_ld_fpts) %>% 
+  select(player, age, bbr_botb_fpts, ht_botb_fpts, hta_botb_fpts,  
+         spottrac_2019, spottrac_2020, spottrac_2021, spottrac_rfa)
+```
+
 ```{r bballref evaluations in botb}
 select_data %>% 
-  mutate(bbr_botb_value_19 = bbr_botb_fpts / spottrac_2019) %>% 
-  mutate(bbr_botb_value_20 = bbr_botb_fpts / spottrac_2020) %>%
-  mutate(bbr_botb_value_21 = bbr_botb_fpts / spottrac_2021) %>%
-  filter(bbr_gms > 50) %>% 
-  filter(bbr_botb_fpts > 24) %>% 
+  mutate(bbr_botb_value_19 = bbr_botb_fpts / spottrac_2019 * 10000) %>% 
+  mutate(bbr_botb_value_20 = bbr_botb_fpts / spottrac_2020 * 10000) %>%
+  mutate(bbr_botb_value_21 = bbr_botb_fpts / spottrac_2021 * 10000) %>%
+  #filter(bbr_gms > 50) %>% 
+  filter(bbr_botb_fpts > 20) %>% 
   filter(botb_team == "ZZZ") %>%
-  #filter(age < 25) %>% 
+  filter(age < 27) %>% 
   arrange(-bbr_botb_value_19) %>% 
   select(player, age, bbr_botb_fpts, bbr_botb_value_19, bbr_botb_value_20, bbr_botb_value_21, 
          spottrac_2019, spottrac_2020, spottrac_2021, spottrac_rfa)
@@ -190,38 +204,40 @@ select_data %>%
 
 ```{r hashtag_alt evaluations in botb}
 select_data %>% 
-  mutate(hta_botb_value_19 = hta_botb_fpts / spottrac_2019) %>% 
-  mutate(hta_botb_value_20 = hta_botb_fpts / spottrac_2020) %>%
-  mutate(hta_botb_value_21 = hta_botb_fpts / spottrac_2021) %>%
-  #filter(hta_gms > 50) %>% 
-  filter(hta_botb_fpts > 24) %>% 
-  #filter(age < 25) %>% 
-  arrange(-hta_botb_value_19) %>% 
+  mutate(hta_botb_value_19 = hta_botb_fpts / spottrac_2019 * 10000) %>% 
+  mutate(hta_botb_value_20 = hta_botb_fpts / spottrac_2020 * 10000) %>%
+  mutate(hta_botb_value_21 = hta_botb_fpts / spottrac_2021 * 10000) %>%
+  #filter(bbr_gms > 50) %>% 
+  filter(bbr_botb_fpts > 21) %>% 
+  filter(botb_team == "ZZZ") %>%
+  filter(age < 27) %>% 
+  arrange(-hta_botb_value_21) %>%
   select(player, age, hta_botb_fpts, hta_botb_value_19, hta_botb_value_20, hta_botb_value_21, 
          spottrac_2019, spottrac_2020, spottrac_2021, spottrac_rfa)
 ```
 
 ```{r hashtag evaluations in botb}
 select_data %>% 
-  mutate(ht_botb_value_19 = ht_botb_fpts / spottrac_2019) %>% 
-  mutate(ht_botb_value_20 = ht_botb_fpts / spottrac_2020) %>%
-  mutate(ht_botb_value_21 = ht_botb_fpts / spottrac_2021) %>%
+  mutate(ht_botb_value_19 = ht_botb_fpts / spottrac_2019 * 10000) %>% 
+  mutate(ht_botb_value_20 = ht_botb_fpts / spottrac_2020 * 10000) %>%
+  mutate(ht_botb_value_21 = ht_botb_fpts / spottrac_2021 * 10000) %>%
   #filter(ht_gms > 50) %>% 
-  filter(ht_botb_fpts > 24) %>% 
-  #filter(age < 25) %>% 
-  arrange(-ht_botb_value_19) %>% 
+  filter(ht_botb_fpts > 21) %>% 
+  filter(botb_team == "ZZZ") %>%
+  filter(age < 27) %>% 
+  arrange(-ht_botb_value_20) %>% 
   select(player, age, ht_botb_fpts, ht_botb_value_19, ht_botb_value_20, ht_botb_value_21, 
          spottrac_2019, spottrac_2020, spottrac_2021, spottrac_rfa)
 ```
 
 ## Legacy Dynasty Contract Value  
 
-```{r looking at projections}
+```{r looking at projections in ld}
 select_data %>% 
   #filter(bbr_gms > 50) %>%
   #filter(bbr_ld_fpts > 25) %>%
   #filter(hta_ld_fpts > 25) %>%
-  filter(ht_ld_fpts > 25) %>%
+  filter(ht_ld_fpts > 22) %>%
   #filter(age < 25) %>% 
   #arrange(-bbr_ld_fpts) %>% 
   #arrange(-hta_ld_fpts) %>% 
@@ -318,9 +334,22 @@ select_data %>%
          fr_2019, fr_2020, fr_2021, fr_rfa, fr_gleague, fr_intl)
 ```
 
-
-
-
+```{r}
+output <- select_data %>% 
+  mutate(ht_frval19 = ht_fr_fpts / fr_2019) %>% 
+  mutate(hta_frval19 = ht_fr_fpts / fr_2019) %>% 
+  mutate(bbr_frval19 = ht_fr_fpts / fr_2019) %>% 
+  mutate(ht_ldval19 = ht_ld_fpts / ld_2019) %>% 
+  mutate(hta_ldval19 = ht_ld_fpts / ld_2019) %>% 
+  mutate(bbr_ldval19 = ht_ld_fpts / ld_2019) %>%
+  rename(ht_fpts = ht_fr_fpts, 
+         hta_fpts = hta_fr_fpts, 
+         bbr_fpts = bbr_fr_fpts) %>%  
+  #arrange(-ht_fr_value_19) %>% 
+  select(player, ld_team, fr_team, ht_fpts, hta_fpts, bbr_fpts, 
+         ht_frval19, hta_frval19, bbr_frval19, ht_ldval19, hta_ldval19, bbr_ldval19)
+write_csv(output, "favlgs_projections.csv")
+```
 
 
 

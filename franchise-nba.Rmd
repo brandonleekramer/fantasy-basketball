@@ -1,9 +1,18 @@
 ---
-title: "Legacy Dynasty"
+title: "Franchise NBA Fantasy Tools"
 author: "Brandon L. Kramer"
 date: "8/29/2019"
 output: html_document
 ---
+
+This file contains the following materials for Franchise NBA fantasy points league 
+
+* Concatenation of Basketball Reference (2018), Hashtag (2019), and Hashtag Alt (2019) Projections
+* Overall Stats and Projections
+* Contract Value Calculator
+* Team Projections
+* Team Players Quick Comparisons 
+* Post-Trade Comparison Tool 
 
 ```{r pull packages and projection data}
 #install.packages("tidyverse"); install.packages("googlesheets")
@@ -15,10 +24,12 @@ bballref18 <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCp
   gs_read(ws = "bballref18") 
 
 bballref18$player <- bballref18$player %>% 
-  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e', 'ić' = 'ic',
-                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z', 'Élie' = 'Elie',
-                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ', 'Dončić' = 'Doncic',
-                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", "Demarre" = "DeMarre",
+  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 
+                    'é' = 'e', 'ê' = 'e', 'ić' = 'ic', 'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 
+                    'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z', 'Élie' = 'Elie',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 
+                    'J.J.' = 'JJ', 'Dončić' = 'Doncic', "Demarre" = "DeMarre",
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", 
                     'Jaren Jackson' = 'Jaren Jackson Jr.','Kelly Oubre' = 'Kelly Oubre Jr.', 
                     'Marvin Bagley' = 'Marvin Bagley III', 'Otto Porter' = 'Otto Porter Jr.', 
                     'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
@@ -47,12 +58,12 @@ hashalt19$player <- hashalt19$player %>%
   str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
                     'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
                     'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ',
-                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", "Demarre" = "DeMarre",
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", 
                     'Jaren Jackson' = 'Jaren Jackson Jr.','Kelly Oubre' = 'Kelly Oubre Jr.', 
                     'Marvin Bagley' = 'Marvin Bagley III', 'Otto Porter' = 'Otto Porter Jr.', 
                     'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
                     'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schröder' = 'Dennis Schroder', 
-                    'Tim Hardaway' = 'Tim Hardaway Jr.'))
+                    'Tim Hardaway' = 'Tim Hardaway Jr.', "Demarre" = "DeMarre"))
 
 hashalt19 <- hashalt19 %>% 
   rename(hta_pts = "PTS", hta_treb = "REB", hta_ast = "AST", hta_stl = "STL", hta_blk = "BLK",
@@ -80,8 +91,8 @@ hashtag19$player <- hashtag19$player %>%
   str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
                     'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
                     'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ',
-                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", "Demarre" = "DeMarre",
-                    'Dennis Schröder' = 'Dennis Schroder'))
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", 
+                    "Demarre" = "DeMarre", 'Dennis Schröder' = 'Dennis Schroder'))
 
 hashtag19 <- hashtag19 %>% 
   rename(ht_pts = "PTS", ht_dreb = "DREB", ht_orb = "OREB", ht_ast = "AST", ht_stl = "STL", ht_blk = "BLK",
@@ -104,8 +115,8 @@ combined_data <- combined_data %>%
 franchise_contracts <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=1961950332") %>% gs_read(ws = "franchise_contracts") 
 
 franchise_contracts$player <- franchise_contracts$player %>% 
-  str_replace_all(c('C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', "O.G." = "OG", "Demarre" = "DeMarre",
-                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', 
+  str_replace_all(c('C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', "O.G." = "OG", 
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "Demarre" = "DeMarre",
                     'Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
                     'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
                     'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ'))
@@ -120,7 +131,7 @@ select_data <- combined_data %>%
 rm(bballref18, hashtag19, hashalt19, franchise_contracts, my_sheets)
 ```
 
-# Franchise Contract Value  
+# Franchise Overall Stats and Projections  
 
 ```{r looking at overall projections}
 select_data %>% 
@@ -134,6 +145,8 @@ select_data %>%
   arrange(-ht_fr_fpts) %>% 
   select(player, age, bbr_fr_fpts, hta_fr_fpts, ht_fr_fpts, fr_2019, fr_2020, fr_2021, fr_rfa, fr_gleague, fr_intl)
 ```
+
+# Franchise NBA Contract Value Calculators
 
 ```{r bballref evaluations in ld}
 select_data %>% 
@@ -172,7 +185,9 @@ select_data %>%
          fr_2019, fr_2020, fr_2021, fr_rfa, fr_gleague, fr_intl)
 ```
 
-# Franchise Team Projections 
+# Franchise NBA Team Projections 
+
+Franchise Team Projections BBR 
 
 ```{r ld 2018 bbr projections, fig.width=11, fig.height=6, warning=FALSE}
 fr_temp_1 <- select_data %>% 
@@ -199,8 +214,9 @@ ggplot(data=fr_bbr_team_projections, aes(x=reorder(fr_team, -team_total), y=team
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() +
   theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
-  geom_text(aes(label = fr_players), size = 5, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
-  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", fill = "Franchise Team") +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
@@ -211,7 +227,7 @@ ggplot(data=fr_bbr_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fp
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() +
   theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
-  geom_text(aes(label = fr_players), size = 5, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
   labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
        fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
@@ -221,6 +237,8 @@ ggplot(data=fr_bbr_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fp
                              "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
                              "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
 ```
+
+Franchise Team Projections HashTag Alt
 
 ```{r ld 2019 hta projections, fig.width=11, fig.height=6, warning=FALSE}
 fr_temp_1 <- select_data %>% 
@@ -247,8 +265,9 @@ ggplot(data=fr_hta_team_projections,
        aes(x=reorder(fr_team, -team_total), y=team_total, fill=fr_team)) +
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
-  geom_text(aes(label = fr_players), size = 5, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
-  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", fill = "Franchise Team") +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
@@ -259,7 +278,8 @@ ggplot(data=fr_hta_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fp
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", fill = "Franchise Team") +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
@@ -267,6 +287,8 @@ ggplot(data=fr_hta_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fp
                              "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
                              "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
 ```
+
+Franchise Team Projections HashTag
 
 ```{r ld 2019 ht projections, fig.width=11, fig.height=6, warning=FALSE}
 fr_temp_1 <- select_data %>% 
@@ -294,8 +316,9 @@ ggplot(data=fr_ht_team_projections,
        #aes(x=reorder(trade_comp, -team_total), y=team_total, fill=trade_comp)) +
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
-  geom_text(aes(label = fr_players), size = 5, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
-  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", fill = "Franchise Team") +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
@@ -305,8 +328,9 @@ ggplot(data=fr_ht_team_projections,
 ggplot(data=fr_ht_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fppg, fill=fr_team)) +
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
-  geom_text(aes(label = fr_players), size = 5, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
-  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", fill = "Franchise Team") +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
@@ -315,7 +339,7 @@ ggplot(data=fr_ht_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fpp
                              "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
 ```
 
-# Trade Comparison Tools 
+# Team Players Quick Comparisons
 
 ```{r looking at specific team's players projections}
 select_data %>% 
@@ -338,6 +362,10 @@ select_data %>%
   select(player, age, fr_team, bbr_fr_fpts, hta_fr_fpts, ht_fr_fpts, ht_fr_value_19, 
          fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, fr_rfa, fr_gleague, fr_intl)
 ```
+
+# Post-Trade Comparison Tool
+
+Post-Trade Comparison Tool HashTag Alt 
 
 ```{r comparing team projections before and after trade using hta, fig.width=11, fig.height=6, warning=FALSE}
 temp_1 <- select_data %>% 
@@ -386,8 +414,9 @@ ggplot(data=fr_hta_team_projections,
        aes(x=reorder(fr_team, -team_total), y=team_total, fill=fr_team)) +
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
-  geom_text(aes(label = fr_players), size = 5, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
-  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", fill = "Franchise Team") +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
@@ -399,8 +428,9 @@ ggplot(data=fr_hta_team_posttrade,
        aes(x=reorder(trade_comp, -team_total), y=team_total, fill=trade_comp)) +
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
-  geom_text(aes(label = fr_players), size = 5, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
-  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", fill = "Franchise Team") +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
@@ -412,7 +442,8 @@ ggplot(data=fr_hta_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fp
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", fill = "Franchise Team") +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
@@ -424,7 +455,8 @@ ggplot(data=fr_hta_team_posttrade, aes(x=reorder(trade_comp, -avg_fppg), y=avg_f
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", fill = "Franchise Team") +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
@@ -433,6 +465,8 @@ ggplot(data=fr_hta_team_posttrade, aes(x=reorder(trade_comp, -avg_fppg), y=avg_f
                              "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
 
 ```
+
+Post-Trade Comparison Tool HashTag Alt
 
 ```{r comparing team projections before and after trade using ht, fig.width=11, fig.height=6, warning=FALSE}
 temp_1 <- select_data %>% 
@@ -481,8 +515,9 @@ ggplot(data=fr_ht_team_projections,
        aes(x=reorder(fr_team, -team_total), y=team_total, fill=fr_team)) +
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
-  geom_text(aes(label = fr_players), size = 5, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
-  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", fill = "Franchise Team") +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
@@ -494,8 +529,9 @@ ggplot(data=fr_ht_team_posttrade,
        aes(x=reorder(trade_comp, -team_total), y=team_total, fill=trade_comp)) +
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
-  geom_text(aes(label = fr_players), size = 5, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
-  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", fill = "Franchise Team") +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
@@ -507,7 +543,8 @@ ggplot(data=fr_hta_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fp
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", fill = "Franchise Team") +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
@@ -519,7 +556,8 @@ ggplot(data=fr_hta_team_posttrade, aes(x=reorder(trade_comp, -avg_fppg), y=avg_f
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", fill = "Franchise Team") +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
