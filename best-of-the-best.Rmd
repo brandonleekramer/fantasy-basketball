@@ -154,12 +154,12 @@ select_data %>%
   mutate(bbr_botb_value_20 = bbr_botb_fpts / botb_2020) %>%
   mutate(bbr_botb_value_21 = bbr_botb_fpts / botb_2021) %>%
   filter(botb_team == "ZZZ") %>%
-  filter(bbr_gms > 30) %>%
-  filter(bbr_botb_fpts > 25) %>% 
+  #filter(bbr_gms > 30) %>%
+  filter(bbr_botb_fpts > 20) %>% 
   #filter(age < 25) %>% 
   arrange(-bbr_botb_value_19) %>% 
-  select(player, age, bbr_botb_fpts, bbr_botb_value_19, bbr_botb_value_20, bbr_botb_value_21, 
-         botb_2019, botb_2020, botb_2021, botb_rfa, botb_gleague, botb_intl)
+  select(player, age, bbr_botb_fpts, bbr_botb_value_19,  
+         botb_2019, botb_2020, botb_2021, botb_rfa, botb_gleague, botb_intl, bbr_botb_value_20, bbr_botb_value_21)
 ```
 
 ```{r hashtag_alt evaluations in ld}
@@ -168,11 +168,11 @@ select_data %>%
   mutate(hta_botb_value_20 = hta_botb_fpts / botb_2020 * 10000) %>%
   mutate(hta_botb_value_21 = hta_botb_fpts / botb_2021 * 10000) %>%
   filter(botb_team == "ZZZ") %>%
-  filter(hta_botb_fpts > 22) %>% 
+  filter(hta_botb_fpts > 18) %>% 
   #filter(age < 25) %>% 
   arrange(-hta_botb_value_19) %>% 
-  select(player, age, hta_botb_fpts, hta_botb_value_19, hta_botb_value_20, hta_botb_value_21, 
-         botb_2019, botb_2020, botb_2021, botb_rfa, botb_gleague, botb_intl)
+  select(player, age, hta_botb_fpts, hta_botb_value_19,  
+         botb_2019, botb_2020, botb_2021, botb_rfa, botb_gleague, botb_intl, hta_botb_value_20, hta_botb_value_21)
 ```
 
 ```{r hashtag evaluations in ld}
@@ -181,11 +181,11 @@ select_data %>%
   mutate(ht_botb_value_20 = ht_botb_fpts / botb_2020 * 10000) %>%
   mutate(ht_botb_value_21 = ht_botb_fpts / botb_2021 * 10000) %>%
   filter(botb_team == "ZZZ") %>%
-  filter(ht_botb_fpts > 22) %>% 
+  filter(ht_botb_fpts > 20) %>% 
   #filter(age < 25) %>% 
-  arrange(-ht_botb_value_19) %>% 
-  select(player, age, ht_botb_fpts, ht_botb_value_19, ht_botb_value_20, ht_botb_value_21, 
-         botb_2019, botb_2020, botb_2021, botb_rfa, botb_gleague, botb_intl)
+  arrange(-ht_botb_value_20) %>% 
+  select(player, age, ht_botb_fpts, ht_botb_value_19,  
+         botb_2019, botb_2020, botb_2021, botb_rfa, botb_gleague, botb_intl, ht_botb_value_20, ht_botb_value_21)
 ```
 
 # BOTB Team Projections 

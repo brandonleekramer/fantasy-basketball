@@ -181,7 +181,7 @@ select_data %>%
   filter(ht_fr_fpts > 25) %>% 
   #filter(age < 25) %>% 
   arrange(-ht_fr_value_19) %>% 
-  select(player, age, ht_fr_fpts, ht_fr_value_19, ht_fr_value_20, ht_fr_value_21, 
+  select(player, age, fr_team, ht_fr_fpts, ht_fr_value_19, ht_fr_value_20, ht_fr_value_21, 
          fr_2019, fr_2020, fr_2021, fr_rfa, fr_gleague, fr_intl)
 ```
 
@@ -346,7 +346,7 @@ select_data %>%
   mutate(ht_fr_value_19 = ht_fr_fpts / fr_2019) %>% 
   mutate(ht_fr_value_20 = ht_fr_fpts / fr_2020) %>%
   mutate(ht_fr_value_21 = ht_fr_fpts / fr_2021) %>%
-  filter(fr_team == "NYK") %>% 
+  filter(fr_team == "IND") %>% 
   arrange(-ht_fr_value_19) %>% 
   select(player, age, fr_team, bbr_fr_fpts, hta_fr_fpts, ht_fr_fpts, ht_fr_value_19, 
          fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, fr_rfa, fr_gleague, fr_intl)
