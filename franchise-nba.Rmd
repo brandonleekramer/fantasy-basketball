@@ -138,7 +138,7 @@ select_data %>%
   #filter(bbr_gms > 50) %>%
   #filter(bbr_fr_fpts > 25) %>%
   #filter(hta_fr_fpts > 25) %>%
-  filter(ht_fr_fpts > 25) %>%
+  #filter(ht_fr_fpts > 25) %>%
   #filter(age < 25) %>% 
   #arrange(-bbr_fr_fpts) %>% 
   #arrange(-hta_fr_fpts) %>% 
