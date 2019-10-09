@@ -14,7 +14,7 @@ This file contains the following materials for Legacy Dynasty NBA fantasy points
 * Team Players Quick Comparisons 
 * Post-Trade Comparison Tool 
 
-```{r pull packages and projection data}
+```{r pull packages and projection data, warning=FALSE, eval=FALSE}
 #install.packages("tidyverse"); install.packages("googlesheets")
 rm(list = ls())
 for (pkg in c("googlesheets", "tidyverse")) {library(pkg, character.only = TRUE)}
@@ -390,7 +390,7 @@ ggplot(data=ld_hta_team_projections,
        aes(x=reorder(ld_team, -team_total), y=team_total, fill=ld_team)) +
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
-  geom_text(aes(label = ld_players), size = 5, colour="white", fontface="bold", hjust = 0.4, vjust = 5) +
+  geom_text(aes(label = ld_players), size = 5, colour="white", fontface="bold", hjust = 0.4, vjust = 3) +
   labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
        fill = "LD Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
@@ -404,7 +404,7 @@ ggplot(data=ld_hta_team_posttrade,
        aes(x=reorder(trade_comp, -team_total), y=team_total, fill=trade_comp)) +
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
-  geom_text(aes(label = ld_players), size = 5, colour="white", fontface="bold", hjust = 0.4, vjust = 5) +
+  geom_text(aes(label = ld_players), size = 5, colour="white", fontface="bold", hjust = 0.4, vjust = 3) +
   labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
        fill = "LD Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
@@ -485,7 +485,7 @@ ld_ht_team_posttrade <- full_join(temp_2, temp_3, by = "trade_comp") %>%
   arrange(-team_total) %>%
   select(trade_comp, ld_players, avg_fppg, team_total, cap_used, cap_left); rm(temp_1, temp_2); rm(temp_3)
 
-ld_ht_team_projections; ld_ht_team_posttrade
+#ld_ht_team_projections; ld_ht_team_posttrade
 
 ggplot(data=ld_ld_team_projections, 
        aes(x=reorder(ld_team, -team_total), y=team_total, fill=ld_team)) +

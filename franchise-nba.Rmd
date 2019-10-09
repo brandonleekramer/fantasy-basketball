@@ -266,7 +266,7 @@ ggplot(data=fr_hta_team_projections,
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
-  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2019 HTA Stats)", 
        fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
@@ -278,7 +278,7 @@ ggplot(data=fr_hta_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fp
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2019 HTA Stats)", 
        fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
@@ -317,7 +317,7 @@ ggplot(data=fr_ht_team_projections,
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
-  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2019 HT Stats)", 
        fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
@@ -329,7 +329,7 @@ ggplot(data=fr_ht_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fpp
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
-  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2019 HT Stats)", 
        fill = "Franchise Team") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
@@ -343,21 +343,21 @@ ggplot(data=fr_ht_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fpp
 
 ```{r looking at specific team's players projections}
 select_data %>% 
-  mutate(ht_fr_value_19 = ht_fr_fpts / fr_2019) %>% 
-  mutate(ht_fr_value_20 = ht_fr_fpts / fr_2020) %>%
-  mutate(ht_fr_value_21 = ht_fr_fpts / fr_2021) %>%
-  filter(fr_team == "IND") %>% 
-  arrange(-ht_fr_value_19) %>% 
+  mutate(ht_fr_value_19 = ht_fr_fpts / fr_2019 * 1000000) %>% 
+  mutate(ht_fr_value_20 = ht_fr_fpts / fr_2020 * 1000000) %>%
+  mutate(ht_fr_value_21 = ht_fr_fpts / fr_2021 * 1000000) %>%
+  filter(fr_team == "PHI") %>% 
+  arrange(-ht_fr_fpts) %>% 
   select(player, age, fr_team, bbr_fr_fpts, hta_fr_fpts, ht_fr_fpts, ht_fr_value_19, 
          fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, fr_rfa, fr_gleague, fr_intl)
 ```
 
 ```{r looking at specific team's players projections}
 select_data %>% 
-  mutate(ht_fr_value_19 = ht_fr_fpts / fr_2019) %>% 
-  mutate(ht_fr_value_20 = ht_fr_fpts / fr_2020) %>%
-  mutate(ht_fr_value_21 = ht_fr_fpts / fr_2021) %>%
-  filter(fr_team == "CLE") %>% 
+  mutate(ht_fr_value_19 = ht_fr_fpts / fr_2019 * 1000000) %>% 
+  mutate(ht_fr_value_20 = ht_fr_fpts / fr_2020 * 1000000) %>%
+  mutate(ht_fr_value_21 = ht_fr_fpts / fr_2021 * 1000000) %>%
+  filter(fr_team == "WAS") %>% 
   arrange(-ht_fr_fpts) %>% 
   select(player, age, fr_team, bbr_fr_fpts, hta_fr_fpts, ht_fr_fpts, ht_fr_value_19, 
          fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, fr_rfa, fr_gleague, fr_intl)
