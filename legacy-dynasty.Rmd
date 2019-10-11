@@ -138,7 +138,7 @@ select_data %>%
   #filter(bbr_gms > 50) %>%
   #filter(bbr_ld_fpts > 25) %>%
   #filter(hta_ld_fpts > 25) %>%
-  filter(ht_ld_fpts > 25) %>%
+  #filter(ht_ld_fpts > 25) %>%
   #filter(age < 25) %>% 
   #arrange(-bbr_ld_fpts) %>% 
   #arrange(-hta_ld_fpts) %>% 
@@ -250,7 +250,7 @@ ggplot(data=ld_hta_team_projections, aes(x=reorder(ld_team, -team_total), y=team
   theme_bw() +
   theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+  labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2019 HTA Stats)", 
        fill = "LD Team Name") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
@@ -263,7 +263,7 @@ ggplot(data=ld_hta_team_projections, aes(x=reorder(ld_team, -avg_fppg), y=avg_fp
   theme_bw() +
   theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Legacy Dynasty Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", fill = "LD Team Name") +
+  labs(title = "Legacy Dynasty Rankings - Avg Fantasy Points Per Player (Based on 2019 HTA Stats)", fill = "LD Team Name") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
@@ -292,7 +292,7 @@ ggplot(data=ld_ht_team_projections, aes(x=reorder(ld_team, -team_total), y=team_
   theme_bw() +
   theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+  labs(title = "Legacy Dynasty Rankings - Projected Team Points Per Week (Based on 2019 HT Stats)", 
        fill = "LD Team Name") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
@@ -305,7 +305,7 @@ ggplot(data=ld_ht_team_projections, aes(x=reorder(ld_team, -avg_fppg), y=avg_fpp
   theme_bw() +
   theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
   geom_text(aes(label = ld_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
-  labs(title = "Legacy Dynasty Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+  labs(title = "Legacy Dynasty Rankings - Avg Fantasy Points Per Player (Based on 2019 HT Stats)", 
        fill = "LD Team Name") +
   scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",

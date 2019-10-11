@@ -16,7 +16,7 @@ This file contains the following materials for Legacy Dynasty NBA fantasy points
 ```{r pull packages and projection data}
 #install.packages("tidyverse"); install.packages("googlesheets")
 rm(list = ls())
-for (pkg in c("googlesheets", "tidyverse")) {library(pkg, character.only = TRUE)}
+for (pkg in c("googlesheets", "tidyverse", "fmsb", "plotly", "radarchart")) {library(pkg, character.only = TRUE)}
 (my_sheets <- gs_ls())
 
 bballref18 <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=58340951") %>% 
@@ -195,6 +195,8 @@ select_data %>%
          hta_fga, hta_fgm,  hta_fta, hta_ftm, hta_gms, hta_mpg, hta_fgp, hta_ftp, bbr_gms, bbr_mpg)
 ```
 
+# invitational conversions 
+
 ```{r}
 inv_projections <- select_data %>% 
   group_by(inv_abbreviated) %>% 
@@ -316,9 +318,6 @@ ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -ht_team_ftp), y=ht_
 ```
 
 
-
-
-
 ```{r hashtag alt rankings graphed, fig.width=11, fig.height=6, warning=FALSE}
 # points 
 ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -hta_team_pts), y=hta_team_pts, fill=inv_abbreviated)) +
@@ -411,6 +410,146 @@ select_data %>%
   arrange(-ht_pts)
   
 ```
+
+# spider charts of teams 
+
+```{r list of team names}
+inv_projections$inv_abbreviated
+
+```
+
+# two-team spider plots 
+
+```{r interactive spider plot, fig.width=8, fig.height=6}
+
+inv_ht_matrix <- inv_projections %>% 
+  select(inv_abbreviated, ht_team_pts:ht_team_ftp) %>% 
+  filter(inv_abbreviated == "BBB" | inv_abbreviated == "GB" ) %>% 
+  mutate(ht_team_pts = ht_team_pts/2, 
+         ht_team_stls = ht_team_stls,
+         ht_team_blks = ht_team_blks,
+         ht_team_threes = ht_team_threes,
+         ht_team_fgp = ht_team_fgp*100,
+         ht_team_ftp = ht_team_ftp*100) %>% 
+  mutate_if(is.numeric, round, digits = 1) %>% 
+  rename(points = ht_team_pts, rebounds = ht_team_rebs, assists = ht_team_asts, steals = ht_team_stls,
+         blocks = ht_team_blks, turnovers = ht_team_tovs, threes = ht_team_threes, fgp = ht_team_fgp, ftp = ht_team_ftp) %>% 
+  column_to_rownames(var = "inv_abbreviated") 
+
+labs <- c("points","rebounds","assists","steals","blocks","turnovers","threes","fg%","ft%")
+scores <- as.list(as.data.frame(t(inv_ht_matrix)))
+colors <- grDevices::col2rgb(c("#82D4BB","#1789FC"))
+chartJSRadar(scores=scores, labs=labs, showToolTipLabel = TRUE, colMatrix = colors)
+
+```
+
+# all team spider plots 
+
+```{r interactive spider plot, fig.width=9.5, fig.height=8}
+
+inv_ht_matrix <- inv_projections %>% 
+  select(inv_abbreviated, ht_team_pts:ht_team_ftp) %>% 
+  filter(inv_abbreviated == "ALi"  | inv_abbreviated == "BASK" | inv_abbreviated == "BBB"  | inv_abbreviated == "BEET" | 
+         inv_abbreviated == "CLAS" | inv_abbreviated == "GB"   | inv_abbreviated == "GMBL" | inv_abbreviated == "HAWK" |
+         inv_abbreviated == "HEAT" | inv_abbreviated == "JESI" | inv_abbreviated == "JFOX" | inv_abbreviated == "KANO" |
+         inv_abbreviated == "LGR"  | inv_abbreviated == "MLDR" | inv_abbreviated == "NJ15" | inv_abbreviated == "PIP"  | 
+         inv_abbreviated == "PP"   | inv_abbreviated == "SERB" | inv_abbreviated == "TREE" | inv_abbreviated == "WOLV" ) %>%   
+  mutate(ht_team_pts = ht_team_pts/2, 
+         ht_team_asts = ht_team_asts,
+         ht_team_stls = ht_team_stls,
+         ht_team_blks = ht_team_blks,
+         ht_team_threes = ht_team_threes,
+         ht_team_tovs = ht_team_tovs,
+         ht_team_fgp = ht_team_fgp*100,
+         ht_team_ftp = ht_team_ftp*100) %>% 
+  mutate_if(is.numeric, round, digits = 1) %>% 
+  rename(points = ht_team_pts, rebounds = ht_team_rebs, assists = ht_team_asts, steals = ht_team_stls,
+         blocks = ht_team_blks, turnovers = ht_team_tovs, threes = ht_team_threes, fgp = ht_team_fgp, ftp = ht_team_ftp) %>% 
+  column_to_rownames(var = "inv_abbreviated") 
+
+labs <- c("points(halved)","rebounds","assists","steals","blocks","turnovers","threes","fg%","ft%")
+scores <- as.list(as.data.frame(t(inv_ht_matrix)))
+colors <- grDevices::col2rgb(c('#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000'))
+chartJSRadar(scores=scores, labs=labs, showToolTipLabel = TRUE, colMatrix = colors)
+
+```
+
+
+
+
+# static spider plot 
+
+```{r, fig.width=8, fig.height=6}
+
+inv_ht_matrix <- inv_projections %>% 
+  select(inv_abbreviated, ht_team_pts:ht_team_ftp) %>% 
+  filter(inv_abbreviated == "MLDR" | inv_abbreviated == "ALi" ) %>% 
+  mutate(ht_team_pts = ht_team_pts/2, 
+         ht_team_stls = ht_team_stls*2,
+         ht_team_blks = ht_team_blks*2,
+         ht_team_threes = ht_team_threes*2,
+         ht_team_fgp = ht_team_fgp*100,
+         ht_team_ftp = ht_team_ftp*100) %>% 
+  mutate_if(is.numeric, round, digits = 1) %>% 
+  rename(points = ht_team_pts, rebounds = ht_team_rebs, assists = ht_team_asts, steals = ht_team_stls,
+         blocks = ht_team_blks, turnovers = ht_team_tovs, threes = ht_team_threes, fgp = ht_team_fgp, ftp = ht_team_ftp) %>% 
+  column_to_rownames(var = "inv_abbreviated") 
+
+inv_ht_matrix <- rbind(rep(100,10) , rep(0,10) , inv_ht_matrix)
+
+#colors_border=c( rgb(0.2,0.5,0.5,0.9), rgb(0.8,0.2,0.5,0.9)  )
+#colors_in=c( rgb(0.2,0.5,0.5,0.4), rgb(0.8,0.2,0.5,0.4)  )
+
+coul <- as.character(c("#a31a2d","#255e58"))
+colors_border <- coul
+library(scales)
+colors_in <- alpha(coul,0.3)
+
+# plot with default options:
+radarchart(inv_ht_matrix, axistype=0 , 
+    #custom polygon
+    pcol=colors_border , pfcol=colors_in , plwd=2.5 , plty=1,
+    #custom the grid
+    cglcol="grey", cglty=1.2, axislabcol="black", caxislabels=seq(0,100,20), cglwd=0.8,
+    #custom labels
+    vlcex=0.8 
+    )
+legend(x=0.85, y=1.25, legend = rownames(inv_ht_matrix[-c(1,2),]), bty = "n", pch=20 , col=colors_in , text.col = "black", cex=0.8, pt.cex=2.8)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
