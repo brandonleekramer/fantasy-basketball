@@ -166,10 +166,13 @@ select_data %>%
   mutate(hta_fr_value_19 = hta_fr_fpts / fr_2019 * 10000) %>% 
   mutate(hta_fr_value_20 = hta_fr_fpts / fr_2020 * 10000) %>%
   mutate(hta_fr_value_21 = hta_fr_fpts / fr_2021 * 10000) %>%
-  filter(hta_fr_fpts > 25) %>% 
-  #filter(age < 25) %>% 
+  filter(hta_fr_fpts > 34) %>% 
+  filter(age > 24) %>% 
+  filter(fr_team == "MIA" | fr_team == "UTA" | fr_team == "DAL" | fr_team == "LAC" | fr_team == "SAC" | 
+         fr_team == "MEM" | fr_team == "WAS" | fr_team == "BKN" | fr_team == "MIL" | fr_team == "DET" |
+         fr_team == "IND" | fr_team == "NOP" | fr_team == "CHI" | fr_team == "ORL" ) %>% 
   arrange(-hta_fr_value_19) %>% 
-  select(player, age, hta_fr_fpts, hta_fr_value_19, hta_fr_value_20, hta_fr_value_21, 
+  select(player, age, fr_team, hta_fr_fpts, hta_fr_value_19, hta_fr_value_20, hta_fr_value_21, 
          fr_2019, fr_2020, fr_2021, fr_rfa, fr_gleague, fr_intl)
 ```
 
@@ -178,7 +181,7 @@ select_data %>%
   mutate(ht_fr_value_19 = ht_fr_fpts / fr_2019 * 10000) %>% 
   mutate(ht_fr_value_20 = ht_fr_fpts / fr_2020 * 10000) %>%
   mutate(ht_fr_value_21 = ht_fr_fpts / fr_2021 * 10000) %>%
-  filter(ht_fr_fpts > 25) %>% 
+  filter(ht_fr_fpts > 30) %>% 
   #filter(age < 25) %>% 
   arrange(-ht_fr_value_19) %>% 
   select(player, age, fr_team, ht_fr_fpts, ht_fr_value_19, ht_fr_value_20, ht_fr_value_21, 
@@ -346,7 +349,7 @@ select_data %>%
   mutate(ht_fr_value_19 = ht_fr_fpts / fr_2019 * 1000000) %>% 
   mutate(ht_fr_value_20 = ht_fr_fpts / fr_2020 * 1000000) %>%
   mutate(ht_fr_value_21 = ht_fr_fpts / fr_2021 * 1000000) %>%
-  filter(fr_team == "PHI") %>% 
+  filter(fr_team == "CLE") %>% 
   arrange(-ht_fr_fpts) %>% 
   select(player, age, fr_team, bbr_fr_fpts, hta_fr_fpts, ht_fr_fpts, ht_fr_value_19, 
          fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, fr_rfa, fr_gleague, fr_intl)

@@ -97,7 +97,7 @@ hashtag19$player <- hashtag19$player %>%
 hashtag19 <- hashtag19 %>% 
   rename(ht_pts = "PTS", ht_dreb = "DREB", ht_orb = "OREB", ht_ast = "AST", ht_stl = "STL", ht_blk = "BLK",
          ht_tov = "TO", ht_threes = "THREES", ht_fga = "FGA", ht_fgm = "FGM", ht_ftm = "FTM",  
-         ht_fta = "FTA", ht_mpg = "MPG", ht_gms = "GP", ht_fgp = "FG%", ht_ftp = "FT%") %>%
+         ht_fta = "FTA", ht_mpg = "MPG", ht_gms = "GP", ht_fgp = "FG%", ht_ftp = "FT%", team = "TEAM") %>%
   mutate(ht_ld_fpts = ht_pts + (ht_dreb*1.5) + (ht_orb*2) + (ht_ast*2) + (ht_stl*2.5) + (ht_blk*2.5) +
          (ht_tov*-1) + ht_threes + (ht_fga*-0.5) + (ht_fgm*0.5) + ht_ftm + (ht_fta*-1)) %>%
   mutate(ht_fr_fpts = ht_pts + (ht_dreb*1.5) + (ht_orb*2) + (ht_ast*2) + (ht_stl*2.5) + (ht_blk*2.5) +
@@ -106,7 +106,7 @@ hashtag19 <- hashtag19 %>%
          (ht_tov*-1)+ht_threes+(ht_fga*-0.5)+(ht_fgm*0.5)+(ht_ftm*0.5)+(ht_fta*-0.75)) %>%
   mutate(ht_botb_fpts = ht_pts + ht_dreb + (ht_orb*1.25) + (ht_ast*1.5) + (ht_stl*1.5) + (ht_blk*2) +
          (ht_tov*-1)+ht_threes+(ht_fga*-0.5)+(ht_fgm*0.5)+(ht_ftm*0.5)+(ht_fta*-0.75)) %>% 
-  select(player, ht_ld_fpts, ht_fr_fpts, ht_gsd2_fpts, ht_botb_fpts, ht_gms, ht_mpg, 
+  select(player, team, ht_ld_fpts, ht_fr_fpts, ht_gsd2_fpts, ht_botb_fpts, ht_gms, ht_mpg, 
          ht_pts, ht_dreb, ht_orb, ht_ast, ht_stl, ht_blk, ht_tov, ht_threes, ht_fga, ht_fgm, ht_fgp, ht_ftm, ht_fta, ht_ftp)
 
 combined_data <- combined_data %>% 
@@ -125,10 +125,14 @@ combined_data <- combined_data %>%
   full_join(legacy_contracts, by = "player")
 
 select_data <- combined_data %>% 
-  select(player, age,
+  select(player, age, team,
          bbr_ld_fpts, bbr_gms, bbr_mpg, hta_ld_fpts, hta_gms, hta_mpg, ht_ld_fpts, ht_gms, ht_mpg, 
          ld_team, ld_2019, ld_2020, ld_2021, ld_2022, ld_2023, ld_2024, ld_rfa, ld_gleague, ld_intl, trade_comp)
 rm(bballref18, hashtag19, hashalt19, legacy_contracts, my_sheets)
+
+nba_schedule <- gs_url("https://docs.google.com/spreadsheets/d/13EnBmUWDmxJ86xFzCpaHUuXGW0KADW_bDUVLf0dWFgA/edit#gid=1604050216") %>% 
+  gs_read(ws = "2019_nba_schedule")
+
 ```
 
 # LD Overall Stats and Projections  
@@ -146,7 +150,7 @@ select_data %>%
   select(player, age, bbr_ld_fpts, hta_ld_fpts, ht_ld_fpts, ld_2019, ld_2020, ld_2021, ld_rfa, ld_gleague, ld_intl)
 ```
 
-# LD Contract Value Calculators
+## LD Contract Value Calculators
 
 ```{r bballref evaluations in ld}
 select_data %>% 
@@ -185,7 +189,7 @@ select_data %>%
          ld_2019, ld_2020, ld_2021, ld_rfa, ld_gleague, ld_intl)
 ```
 
-# LD Team Projections 
+## LD Team Projections 
 
 LD Team Projections BBR
 
@@ -315,7 +319,7 @@ ggplot(data=ld_ht_team_projections, aes(x=reorder(ld_team, -avg_fppg), y=avg_fpp
                              "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c"))
 ```
 
-# Team Players Quick Comparisons
+## Team Players Quick Comparisons
 
 ```{r looking at specific team's players projections}
 select_data %>% 
@@ -339,7 +343,7 @@ select_data %>%
          ld_2019, ld_2020, ld_2021, ld_2022, ld_2023, ld_2024, ld_rfa, ld_gleague, ld_intl, )
 ```
 
-# Post-Trade Comparison Tool
+## Post-Trade Comparison Tool
 
 Post-Trade Comparison Tool HashTag Alt 
 
@@ -460,7 +464,7 @@ temp_3 <- select_data %>%
   group_by(ld_team) %>% 
   summarize(cap_used = sum(ld_2019, na.rm = TRUE)) %>% 
   mutate(cap_left = 109400000 - cap_used)
-ld_ld_team_projections <- full_join(temp_2, temp_3, by = "ld_team") %>% 
+ld_team_projections <- full_join(temp_2, temp_3, by = "ld_team") %>% 
   mutate(team_total = avg_fppg * ld_players) %>% 
   arrange(-team_total) %>%
   select(ld_team, ld_players, avg_fppg, team_total, cap_used, cap_left); rm(temp_1, temp_2); rm(temp_3)
@@ -487,7 +491,7 @@ ld_ht_team_posttrade <- full_join(temp_2, temp_3, by = "trade_comp") %>%
 
 #ld_ht_team_projections; ld_ht_team_posttrade
 
-ggplot(data=ld_ld_team_projections, 
+ggplot(data=ld_team_projections, 
        aes(x=reorder(ld_team, -team_total), y=team_total, fill=ld_team)) +
   geom_bar(stat="identity", width=0.6, colour="black") +
   theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
@@ -543,13 +547,15 @@ ggplot(data=ld_hta_team_posttrade, aes(x=reorder(trade_comp, -avg_fppg), y=avg_f
 
 ```
 
+## Projecting Team Totals with Scheduling 
+
+```{r}
+
+select_data$ht_ld_fpts + nba
 
 
 
-
-
-
-
+```
 
 
 
