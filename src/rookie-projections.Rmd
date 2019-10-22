@@ -1,0 +1,90 @@
+---
+title: "NBA Rookie Projections"
+author: "Brandon L. Kramer"
+date: "10/21/2019"
+output: html_document
+---
+
+```{r setup}
+rm(list = ls())
+for (pkg in c("googlesheets", "tidyverse", "plotly", "radarchart")) {library(pkg, character.only = TRUE)}
+(my_sheets <- gs_ls())
+
+# loading and merging all of the data 
+rookies <- gs_url("https://docs.google.com/spreadsheets/d/1syFcQvq0xvzNFVkY3VbcQoZiDRoaEe88SCS20_HtoVI/edit#gid=0") 
+rookies_per40 <- rookies %>% gs_read(ws = "Per 40")
+rookies_adv <- rookies %>% gs_read(ws = "Advanced")
+rookies_adv40 <- merge(rookies_per40, rookies_adv, by = "UniqueID")
+
+# renaming advanced stats 
+rookies_adv40 %>% 
+  mutate(pts_per40 = PTS, reb_per40 = TRB, stl_per40 = STL, ast_per40 = AST, blk_per40 = BLK,
+         ft_percentage = rookies_adv40$`FT%`, ts_percentage = rookies_adv40$`TS%`,
+         ast_percentage = rookies_adv40$`AST%`, stl_percentage = rookies_adv40$`STL%`,
+         blk_percentage = rookies_adv40$`BLK%`, orb_percentage = rookies_adv40$`ORB%`, 
+         drb_percentage = rookies_adv40$`DRB%`, trb_percentage = rookies_adv40$`TRB%`, 
+         dbpm = rookies_adv40$DBPM, obpm = rookies_adv40$OBPM, ws = rookies_adv40$WS, 
+         ast2to = rookies_adv40$`AST/TO`, per = PER)  
+
+
+#breaking the data down by position (guards, wings, bigs)
+guards <- rookies_adv40 %>% 
+  filter(Position == "Guard") %>% 
+  mutate(g_PER = PER, g_pts_per40 = PTS, g_reb_per40 = TRB, g_stl_per40 = STL, 
+         g_ast_per40 = AST, g_blk_per40 = BLK, g_ft_percentage = `FT%`, g_ts_percentage = `TS%`, 
+         g_ast_percentage = `AST%`, g_stl_percentage = `STL%`, g_blk_percentage = `BLK%`, 
+         g_orb_percentage = `ORB%`, g_drb_percentage = `DRB%`, g_trb_percentage = `TRB%`, 
+         g_dbpm = DBPM, g_obpm = OBPM, g_ws = WS)
+
+wings <- rookies_adv40 %>% 
+  filter(Position == "Wing") %>%
+  mutate(w_PER = PER, w_pts_per40 = PTS, w_reb_per40 = TRB, w_stl_per40 = STL, 
+         w_ast_per40 = AST, w_blk_per40 = BLK, w_ft_percentage = `FT%`, w_ts_percentage = `TS%`, 
+         w_ast_percentage = `AST%`, w_stl_percentage = `STL%`, w_blk_percentage = `BLK%`, 
+         w_orb_percentage = `ORB%`, w_drb_percentage = `DRB%`, w_trb_percentage = `TRB%`, 
+         w_dbpm = DBPM, w_obpm = OBPM, w_ws = WS)
+
+guards_wings <- rookies_adv40[which(rookies_adv40$Position !='Big'),]
+
+gw_PER <- guards_wings$PER
+gw_pts_per40 <- guards_wings$PTS
+gw_reb_per40 <- guards_wings$TRB
+gw_stl_per40 <- guards_wings$STL
+gw_ast_per40 <- guards_wings$AST
+gw_blk_per40 <- guards_wings$BLK
+gw_ft_percentage <- guards_wings$`FT%`
+gw_ts_percentage <- guards_wings$`TS%`
+gw_ast_percentage <- guards_wings$`AST%`
+gw_stl_percentage <- guards_wings$`STL%`
+gw_blk_percentage <- guards_wings$`BLK%`
+gw_orb_percentage <- guards_wings$`ORB%`
+gw_drb_percentage <- guards_wings$`DRB%`
+gw_trb_percentage <- guards_wings$`TRB%`
+gw_dbpm <- guards_wings$DBPM
+gw_obpm <- guards_wings$OBPM
+gw_ws <- guards_wings$WS
+
+bigs <- rookies_adv40[which(rookies_adv40$Position =='Big'),]
+
+b_PER <- bigs$PER
+b_pts_per40 <- bigs$PTS
+b_reb_per40 <- bigs$TRB
+b_stl_per40 <- bigs$STL
+b_ast_per40 <- bigs$AST
+b_blk_per40 <- bigs$BLK
+b_ft_percentage <- bigs$`FT%`
+b_ts_percentage <- bigs$`TS%`
+b_ast_percentage <- bigs$`AST%`
+b_stl_percentage <- bigs$`STL%`
+b_blk_percentage <- bigs$`BLK%`
+b_orb_percentage <- bigs$`ORB%`
+b_drb_percentage <- bigs$`DRB%`
+b_trb_percentage <- bigs$`TRB%`
+b_dbpm <- bigs$DBPM
+b_obpm <- bigs$OBPM
+b_ws <- bigs$WS
+
+
+```
+
+
