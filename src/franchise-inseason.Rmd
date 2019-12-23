@@ -1,7 +1,6 @@
 ---
 title: "Franchise In-Season Tools"
 author: "Brandon L. Kramer"
-date: "11/26/2019"
 output: html_document
 ---
 
