@@ -371,10 +371,10 @@ ggplot(data=pre_trade,
   geom_text(aes(label = gsd2_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
   labs(title = "Legacy NBA Rankings - Projected Team Points Per Week (HT 2019 Stats - Before)", 
        fill = "Legacy Team") +
-  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+  scale_fill_manual(values=c("#C8102E", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
-                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#98002e", "#00471b", "#78be20", "#061922", "#b6995a", "#F58426",
                              "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
                              "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly() 
 
@@ -385,10 +385,10 @@ ggplot(data=post_trade,
   geom_text(aes(label = gsd2_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
   labs(title = "Legacy NBA Rankings - Projected Team Points Per Week (HT 2019 Stats - After)", 
        fill = "Legacy Team") +
-  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+  scale_fill_manual(values=c("#C8102E", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
-                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#98002e", "#00471b", "#78be20", "#061922", "#b6995a", "#F58426",
                              "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
                              "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
 
@@ -398,10 +398,10 @@ ggplot(data=pre_trade, aes(x=reorder(gsd2_team, -avg_fppg), y=avg_fppg, fill=gsd
   geom_text(aes(label = gsd2_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
   labs(title = "Legacy NBA Rankings - Avg Fantasy Points Per Player (HT 2019 Stats - Before)", 
        fill = "Legacy Team") +
-  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+  scale_fill_manual(values=c("#C8102E", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
-                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#98002e", "#00471b", "#78be20", "#061922", "#b6995a", "#F58426",
                              "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
                              "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
 
@@ -411,10 +411,10 @@ ggplot(data=post_trade, aes(x=reorder(trade_comp, -avg_fppg), y=avg_fppg, fill=t
   geom_text(aes(label = gsd2_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
   labs(title = "Legacy NBA Rankings - Avg Fantasy Points Per Player (HT 2019 Stats - After)", 
        fill = "Legacy Team") +
-  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+  scale_fill_manual(values=c("#C8102E", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
                              "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
-                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#98002e", "#00471b", "#78be20", "#061922", "#b6995a", "#F58426",
                              "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
                              "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
 
