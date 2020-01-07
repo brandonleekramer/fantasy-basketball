@@ -7,9 +7,10 @@ output: html_document
 ```{r pull packages and projection data, include=FALSE}
 #install.packages("tidyverse"); install.packages("googlesheets")
 rm(list = ls())
-for (pkg in c("googledrive", "googlesheets4", "tidyverse", "plotly")) {library(pkg, character.only = TRUE)}
+for (pkg in c( "tidyverse", "plotly")) {library(pkg, character.only = TRUE)}
 
-setwd("C:/Users/bkram/CloudStation/NBA/data")
+#setwd("C:/Users/bkram/CloudStation/NBA/data")
+setwd("~/Documents/fantasy-basketball/data")
 botb_contracts <- read_csv("nba_fantasy_data - botb_contracts.csv")
 franchise_contracts <- read_csv("nba_fantasy_data - franchise_contracts.csv")
 legacy_contracts <- read_csv("nba_fantasy_data - legacy_contracts.csv")
@@ -121,13 +122,15 @@ franchise_inseason$player <- franchise_inseason$Player %>%
                     'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
                     'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ',
                     'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", 
-                    'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schröder' = 'Dennis Schroder', "Demarre" = "DeMarre"))
+                    'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schröder' = 'Dennis Schroder', 
+                    "Demarre" = "DeMarre"))
 
 franchise_inseason <- franchise_inseason %>% 
   rename(fntx_pts = "PTS", fntx_orb = "OREB", fntx_dreb = "DREB", fntx_ast = "AST", fntx_stl = "ST", 
          fntx_blk = "BLK", fntx_tov = "TO", fntx_threes = "3PTM", fntx_fga = "FGA",fntx_fgm = "FGM", 
-         trade_comp = "Trade",
-         fntx_ftm = "FTM", fntx_fta = "FTA", fntx_gms = "GP", fntx_fppg = "FP/G", fr_team = "Status") %>%
+         trade_comp = "Trade2",
+         fntx_ftm = "FTM", fntx_fta = "FTA", fntx_gms = "GP", fntx_fppg = "FP/G", 
+         fr_team = "Status", position = "Position") %>%
   mutate(fntx_ld_fpts = fntx_pts + (fntx_dreb*1.5) + (fntx_orb*2) + (fntx_ast*2) + (fntx_stl*2.5) + (fntx_blk*2.5) +
          (fntx_tov*-1) + fntx_threes + (fntx_fga*-0.5) + (fntx_fgm*0.5) + fntx_ftm + (fntx_fta*-1)) %>%
   mutate(fntx_fr_fpts = fntx_pts + (fntx_dreb*1.5) + (fntx_orb*2) + (fntx_ast*2) + (fntx_stl*2.5) + (fntx_blk*2.5) +
@@ -139,7 +142,7 @@ franchise_inseason <- franchise_inseason %>%
   rename(nba_team = "Team") %>% 
   mutate(nba_team = recode(nba_team, PHO = "PHX", SA = "SAS", NY = "NYK", NO = "NOP", GS = "GSW")) %>% 
   select(player, fntx_fppg, fntx_ld_fpts, fntx_fr_fpts, fntx_gsd2_fpts, fntx_botb_fpts, fntx_gms,  
-         fntx_pts, fntx_dreb, fntx_orb, fntx_ast, fntx_stl, fntx_blk, 
+         fntx_pts, fntx_dreb, fntx_orb, fntx_ast, fntx_stl, fntx_blk, position,
          trade_comp, 
          fntx_tov, fntx_threes, fntx_fga, fntx_fgm, fntx_ftm, fntx_fta, fr_team, nba_team)
 
@@ -149,7 +152,7 @@ select_data <- combined_data %>%
          bbr_gms, bbr_mpg, hta_gms, hta_mpg, ht_gms, ht_mpg,
          fr_team, fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, 
          trade_comp, 
-         fr_rfa, fr_injured, fr_gleague, fr_intl, fr_position, nba_team) %>%   
+         fr_rfa, fr_injured, fr_gleague, fr_intl, fr_position, nba_team, position) %>%   
   inner_join(nba_schedule, by = "nba_team") %>%  
   mutate(playoff1 = week20,playoff2 = week21,playoff3 = week22,playoff4 = week23) %>% 
   # regular season schedule 
@@ -177,8 +180,10 @@ select_data <- combined_data %>%
   mutate(playoff2_totals = (fntx_fppg * playoff2)) %>%
   mutate(playoff3_totals = (fntx_fppg * playoff3)) %>%
   mutate(playoff4_totals = (fntx_fppg * playoff4)) %>% 
-  filter(player != "Rodions Kurucs" & player != "Jontay Porter" & player != "Chimezie Metu" & player != "Issuf Sanon" &
-         player != "Dewan Hernandez" & player != "Ognen Jaramaz" & player != "Marial Shayok" & player != "Justin James" &
+  filter(player != "Rodions Kurucs" & player != "Jontay Porter" & 
+           player != "Chimezie Metu" & player != "Issuf Sanon" &
+         player != "Dewan Hernandez" & player != "Ognen Jaramaz" & 
+           player != "Marial Shayok" & player != "Justin James" &
          player != "Didi Louzada Silva" &  player != "Alessandro Gentile" ) 
   
 rm(bballref18, hashtag19, hashalt19, franchise_contracts)
@@ -189,7 +194,8 @@ rm(bballref18, hashtag19, hashalt19, franchise_contracts)
 ```{r looking at overall projections}
 select_data %>% 
   #filter(player == "Skal Labissiere") %>% # by player
-  filter(fr_team == "BOS") %>% 
+  #filter(fr_team == "CLE") %>% 
+  filter(trade_comp == "CLE") %>% 
   #filter(bbr_gms > 50) %>%        # by games played
   #filter(bbr_fr_fpts > 25) %>%    # by 2018 stats
   #filter(hta_fr_fpts > 25) %>%    # by hta projections 
@@ -210,17 +216,20 @@ select_data %>%
   mutate(fntx_value_20 = fntx_fppg / fr_2020 * 10000) %>%
   mutate(fntx_value_21 = fntx_fppg / fr_2021 * 10000) %>%
   mutate(diff = fntx_fppg - ht_fr_fpts) %>%
-  filter(fntx_fppg > 28) %>% 
-  filter(fr_team == "MIA" | fr_team == "UTA" | fr_team == "DAL" | fr_team == "LAC" |  
-         fr_team == "MEM" | fr_team == "WAS" | fr_team == "BKN" | fr_team == "MIL" | 
-         fr_team == "DET" | fr_team == "IND" | fr_team == "ORL" 
+  filter(fntx_fppg > 22) %>% 
+  #filter(fr_2019 < 17000000) %>% 
+  #filter(fr_team == "MIA" | fr_team == "UTA" | fr_team == "DAL" | fr_team == "LAC" |  
+  #       fr_team == "MEM" | fr_team == "WAS" | fr_team == "BKN" | fr_team == "MIL" | 
+  #       fr_team == "DET" | fr_team == "IND" | fr_team == "ORL" 
          # | fr_team == "NOP" | fr_team == "CHI"  
-        ) %>%
+  #      ) %>%
   #filter(fr_team == "CLE") %>% 
   #filter(age < 25) %>% 
-  arrange(-fntx_value_19) %>% 
-  select(player, age, fr_team, fntx_fppg, ht_fr_fpts, diff, fntx_value_19, fntx_value_20, 
-         fr_2019, fr_2020, fr_2021, fr_rfa, fr_injured, fr_gleague, fr_intl)
+  #filter(grepl("SF", position)) %>% 
+  arrange(-diff) %>% 
+  #arrange(-fntx_value_19) %>% 
+  select(player, age, fr_team, fntx_fppg, ht_fr_fpts, diff, fntx_value_19,  
+         fr_2019, fr_2020, fr_2021, fr_rfa, fr_injured, fr_gleague, fr_intl, fntx_value_20,)
 ```
 
 ```{r playoff-value-calculator}
@@ -308,8 +317,8 @@ weekly_totals <- weekly_totals %>% select(week, everything()); rm(week)
 class(weekly_totals)
 
 weekly_totals_plot <- weekly_totals %>% 
-  filter(week > 9 & week < 20) %>% # games that have passed in regular season 
-  #filter(week > 19 & week < 24) %>% # playoff filter 
+  #filter(week > 9 & week < 20) %>% # games that have passed in regular season 
+  filter(week > 19 & week < 24) %>% # playoff filter 
   ggplot() +
   geom_line(aes(y = ATL, x = week, colour = "ATL"), group = 1) +
   geom_line(aes(y = BKN, x = week, colour = "BKN"), group = 1) +
@@ -340,7 +349,7 @@ weekly_totals_plot <- weekly_totals %>%
   geom_line(aes(y = SAS, x = week, colour = "SAS"), group = 1) +
   geom_line(aes(y = TOR, x = week, colour = "TOR"), group = 1) +
   geom_line(aes(y = UTA, x = week, colour = "UTA"), group = 1) +
-  geom_line(aes(y = WAS, x = week, colour = "WAS"), group = 1, size = 1.2) + # pick 
+  geom_line(aes(y = WAS, x = week, colour = "WAS"), group = 1) + 
   labs(title = "Projected Weekly Totals in Franchise") + 
   scale_color_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
                              "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
@@ -561,8 +570,8 @@ weekly_totals <- weekly_totals %>% select(week, everything()); rm(week)
 class(weekly_totals)
 
 weekly_totals_plot <- weekly_totals %>% 
-  filter(week > 10 & week < 20) %>% # games that have passed in regular season 
-  #filter(week > 19 & week < 24) %>% # playoff filter 
+  #filter(week > 10 & week < 20) %>% # games that have passed in regular season 
+  filter(week > 19 & week < 24) %>% # playoff filter 
   ggplot() +
   geom_line(aes(y = ATL, x = week, colour = "ATL"), group = 1) +
   geom_line(aes(y = BKN, x = week, colour = "BKN"), group = 1) +

@@ -1,0 +1,1263 @@
+Player,Team,Position,Rk,Status,Barton,Harden,Opponent,FPts,FP/G,% Owned,#ERROR!,FGM,FGA,3PTM,FTM,FTA,PTS,OREB,DREB,AST,ST,BLK,TO,GP
+Nikola Jokic,DEN,"PF,C,Flx",12,ATL,ATL,ATL,,645.5,43.03,100%,0%,101,217,16,32,41,250,32,114,91,19,8,38,15
+Tristan Thompson,CLE,"PF,C,Flx",36,ATL,ATL,ATL,BKN 54<br/>@CLE 55,563,35.19,94%,-1%,96,184,3,32,50,227,62,93,37,13,20,25,16
+Bojan Bogdanovic,UTA,"SG,SF,PF,Flx",65,ATL,ATL,ATL,UTA 9<br/>@MIL 8,449.5,28.09,98%,-0.20%,109,236,46,49,56,313,10,53,32,11,4,40,16
+RJ Barrett,NY,"SG,SF,Flx",68,ATL,ATL,ATL,,441,27.56,99%,-0.10%,92,223,17,41,83,242,22,68,57,22,7,43,16
+Goran Dragic,MIA,"PG,SG,Flx",92,ATL,ATL,ATL,CHA 41<br/>@MIA 47,410,27.33,91%,-0.70%,73,162,33,47,63,226,4,42,73,9,4,38,15
+Eric Paschall,GS,"SF,PF,Flx",95,ATL,ATL,ATL,OKC Mon 10:30PM,405,25.31,81%,2.90%,100,202,10,58,72,268,20,61,25,7,6,22,16
+Isaiah Thomas,WAS,"PG,Flx",173,ATL,ATL,ATL,,298,24.83,78%,-2.70%,59,133,25,10,11,153,1,18,67,5,3,25,12
+Darius Garland,CLE,"PG,Flx",187,ATL,ATL,ATL,BKN 54<br/>@CLE 55,273.5,16.09,59%,-4.70%,64,182,24,16,20,168,4,23,51,16,0,40,17
+Kevin Knox,NY,"SF,PF,Flx",190,ATL,ATL,ATL,,268.5,15.79,47%,-4.30%,44,114,23,26,40,137,9,43,26,10,4,12,17
+Taj Gibson,NY,"PF,C,Flx",216,ATL,ATL,ATL,,236,15.73,14%,0.10%,39,67,1,9,13,88,31,37,18,8,1,11,15
+Jeff Green,UTA,"SF,PF,Flx",248,ATL,ATL,ATL,UTA 9<br/>@MIL 8,205.5,12.84,17%,-0.50%,34,101,19,33,42,120,5,38,11,7,9,20,16
+Enes Kanter,BOS,"C,Flx",277,ATL,ATL,ATL,SAC 39<br/>@BOS 28,156,17.33,77%,-10.50%,24,39,0,14,22,62,19,28,8,5,4,9,9
+Jordan McRae,WAS,"PG,SG,Flx",301,ATL,ATL,ATL,,125,15.62,8%,2.20%,19,40,4,11,12,53,1,18,20,3,4,7,8
+Terance Mann,LAC,"SF,Flx",336,ATL,ATL,ATL,,77.5,6.46,9%,-0.50%,11,23,1,4,5,27,1,15,17,2,0,7,12
+Andre Iguodala,MEM,"SG,SF,Flx",459,ATL,ATL,ATL,MEM 58<br/>@IND 77,0,0,10%,-0.40%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Miye Oni,UTA,"SG,Flx",483,ATL,ATL,ATL,UTA 9<br/>@MIL 8,0,0,2%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,1
+Aleksandar Vezenkov,(N/A),"PF,Flx",568,ATL,ATL,ATL,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Olivier Hanlan,SA,"PG,Flx",681,ATL,ATL,ATL,LAL Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Karl-Anthony Towns,MIN,"C,Flx",6,BKN,BKN,BKN,MIN 42<br/>@ATL 39,800,53.33,100%,0%,128,246,59,60,78,375,36,142,54,17,21,45,15
+Chris Paul,OKC,"PG,Flx",51,BKN,BKN,BKN,@GS Mon 10:30PM,515.5,34.37,97%,-0.10%,72,161,25,70,80,239,4,57,86,29,0,32,15
+Langston Galloway,DET,"PG,SG,Flx",124,BKN,BKN,BKN,ORL 55<br/>@DET 53,347.5,20.44,44%,1.70%,65,152,41,41,45,212,5,30,30,9,7,13,17
+Frank Kaminsky,PHO,"PF,C,Flx",129,BKN,BKN,BKN,,343,21.44,51%,-5.40%,56,136,18,39,55,169,14,74,34,4,6,20,16
+Lonzo Ball,NO,"PG,Flx",157,BKN,BKN,BKN,,318,28.91,98%,0.00%,46,119,24,6,10,122,10,35,63,14,2,26,11
+Robert Williams,BOS,"PF,C,Flx",204,BKN,BKN,BKN,SAC 39<br/>@BOS 28,249,17.79,34%,-7.40%,25,32,0,6,11,56,14,48,20,13,16,11,14
+Meyers Leonard,MIA,"PF,C,Flx",215,BKN,BKN,BKN,CHA 41<br/>@MIA 47,236.5,14.78,20%,-4%,40,68,14,4,7,98,4,60,13,5,8,15,16
+Bismack Biyombo,CHA,"PF,C,Flx",235,BKN,BKN,BKN,CHA 41<br/>@MIA 47,216.5,13.53,8%,1.90%,43,67,0,26,48,112,19,33,10,6,10,9,16
+Thabo Sefolosha,HOU,"SG,SF,PF,Flx",298,BKN,BKN,BKN,,129.5,9.25,3%,0.10%,11,37,7,0,0,29,10,25,14,6,4,4,14
+Raul Neto,PHI,"PG,Flx",299,BKN,BKN,BKN,PHI 39<br/>@TOR 38,127,9.07,6%,-4.90%,23,48,6,2,2,54,2,14,23,7,2,14,14
+Rodney McGruder,LAC,"SG,SF,Flx",317,BKN,BKN,BKN,,105.5,8.12,6%,-0.20%,18,49,10,3,8,49,8,18,10,1,3,6,13
+Troy Daniels,LAL,"PG,SG,Flx",327,BKN,BKN,BKN,@SA Mon 8:30PM,92,8.36,6%,0%,19,59,13,3,3,54,3,14,6,3,1,4,11
+Luke Kornet,CHI,"PF,C,Flx",329,BKN,BKN,BKN,POR 10<br/>@CHI 12,91,9.1,7%,-1.20%,15,43,5,5,5,40,5,14,6,1,7,3,10
+Brandon Knight,CLE,"PG,SG,Flx",347,BKN,BKN,BKN,BKN 54<br/>@CLE 55,63.5,10.58,4%,0.00%,11,32,9,2,4,33,1,6,12,2,0,6,6
+Ante Zizic,CLE,"C,Flx",365,BKN,BKN,BKN,BKN 54<br/>@CLE 55,46.5,11.62,13%,-1%,10,18,0,4,5,24,5,9,0,1,1,1,4
+Bol Bol,DEN,"C,Flx",449,BKN,BKN,BKN,,0,0,23%,-1%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Rawle Alkins,(N/A),"SG,Flx",577,BKN,BKN,BKN,,0,0,0%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Anthony Davis,LAL,"PF,C,Flx",7,BOS,BOS,BOS,@SA Mon 8:30PM,763.5,50.9,100%,0%,132,274,18,101,115,383,34,98,54,22,45,43,15
+Trae Young,ATL,"PG,Flx",9,BOS,BOS,BOS,MIN 42<br/>@ATL 39,708.5,44.28,100%,0%,132,302,48,91,110,403,7,60,134,24,1,73,16
+Bam Adebayo,MIA,"PF,C,Flx",19,BOS,BOS,BOS,CHA 41<br/>@MIA 47,614,38.38,100%,0.10%,78,130,1,56,89,213,35,123,67,26,19,42,16
+Eric Bledsoe,MIL,"PG,SG,Flx",45,BOS,BOS,BOS,UTA 9<br/>@MIL 8,538.5,31.68,99%,0.10%,105,226,22,49,63,281,17,68,84,13,5,39,17
+Jonathan Isaac,ORL,"SF,PF,Flx",57,BOS,BOS,BOS,ORL 55<br/>@DET 53,489.5,34.96,99%,0.30%,67,134,20,26,31,180,21,78,22,19,39,20,14
+Thomas Bryant,WAS,"C,Flx",60,BOS,BOS,BOS,,476,34,99%,0.10%,83,149,8,30,40,204,37,86,35,6,16,21,14
+Danilo Gallinari,OKC,"SF,PF,Flx",71,BOS,BOS,BOS,@GS Mon 10:30PM,439,29.27,98%,0.00%,82,186,40,78,84,282,7,69,25,10,1,20,15
+Harrison Barnes,SAC,"SF,PF,Flx",86,BOS,BOS,BOS,SAC 39<br/>@BOS 28,421,26.31,90%,-0.10%,86,168,25,54,68,251,16,58,29,15,3,22,16
+Patrick Beverley,LAC,"PG,SG,Flx",99,BOS,BOS,BOS,,394,26.27,79%,3.20%,44,114,17,11,19,116,20,80,43,23,9,22,15
+Bruce Brown Jr.,DET,"SG,Flx",126,BOS,BOS,BOS,ORL 55<br/>@DET 53,346.5,20.38,31%,-4.00%,48,117,10,16,31,122,14,49,64,18,9,33,17
+Ish Smith,WAS,"PG,Flx",178,BOS,BOS,BOS,,295,21.07,32%,2%,46,108,10,5,10,107,10,36,58,9,7,16,14
+Terence Davis,TOR,"SG,Flx",214,BOS,BOS,BOS,PHI 39<br/>@TOR 38,237.5,14.84,20%,6.40%,32,68,17,11,11,92,6,38,30,7,4,10,16
+Isaac Bonga,WAS,"SF,PF,Flx",310,BOS,BOS,BOS,,111,12.33,10%,-0.80%,15,31,2,6,9,38,7,20,12,7,1,6,9
+Evan Turner,ATL,"SG,SF,Flx",322,BOS,BOS,BOS,MIN 42<br/>@ATL 39,95.5,10.61,10%,-0.40%,17,34,0,10,12,44,3,12,16,5,1,9,9
+Khem Birch,ORL,"PF,C,Flx",362,BOS,BOS,BOS,ORL 55<br/>@DET 53,49,7,20%,15.10%,9,17,0,4,11,22,8,13,1,1,0,2,7
+Chimezie Metu,SA,"PF,Flx",372,BOS,BOS,BOS,LAL Mon 8:30PM,39,7.8,4%,-0.20%,7,12,0,1,2,15,7,3,2,0,2,0,5
+Issuf Sanon,WAS,"PG,Flx",505,BOS,BOS,BOS,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+LeBron James,LAL,"SF,PF,Flx",4,CHA,CHA,CHA,@SA Mon 8:30PM,882,55.12,100%,0.00%,155,317,30,63,89,403,16,106,173,21,9,56,16
+Kemba Walker,BOS,"PG,Flx",37,CHA,CHA,CHA,SAC 39<br/>@BOS 28,561,37.4,99%,-0.10%,100,250,51,66,72,317,15,54,70,14,8,32,15
+Shai Gilgeous-Alexander,OKC,"PG,SG,Flx",59,CHA,CHA,CHA,@GS Mon 10:30PM,479.5,31.97,99%,0.00%,111,243,25,49,62,296,14,65,45,13,9,33,15
+Taurean Prince,BKN,"SF,Flx",70,CHA,CHA,CHA,BKN 54<br/>@CLE 55,440,25.88,89%,-2%,78,191,43,18,25,217,14,93,31,15,5,36,17
+Dario Saric,PHO,"PF,C,Flx",91,CHA,CHA,CHA,,411.5,25.72,85%,-4.10%,61,145,28,15,19,165,22,84,32,16,5,22,16
+Dwight Howard,LAL,"PF,C,Flx",109,CHA,CHA,CHA,@SA Mon 8:30PM,378,23.62,73%,-2.80%,45,60,0,24,43,114,38,84,15,6,25,19,16
+Dillon Brooks,MEM,"SG,SF,Flx",118,CHA,CHA,CHA,MEM 58<br/>@IND 77,366.5,22.91,71%,0.60%,75,189,29,32,37,211,17,39,31,15,7,21,16
+D.J. Augustin,ORL,"PG,Flx",164,CHA,CHA,CHA,ORL 55<br/>@DET 53,311,19.44,45%,-2.80%,53,134,16,30,35,152,7,24,70,7,0,19,16
+Gorgui Dieng,MIN,"PF,C,Flx",237,CHA,CHA,CHA,MIN 42<br/>@ATL 39,215,16.54,11%,-0.40%,22,53,4,11,14,59,12,44,15,8,15,7,13
+Dewayne Dedmon,SAC,"C,Flx",256,CHA,CHA,CHA,SAC 39<br/>@BOS 28,194.5,12.16,40%,-2.60%,30,79,8,11,11,79,22,41,7,6,9,25,16
+Solomon Hill,MEM,"SG,SF,Flx",260,CHA,CHA,CHA,MEM 58<br/>@IND 77,185.5,13.25,6%,0.10%,25,59,13,9,14,72,8,30,22,10,1,10,14
+Torrey Craig,DEN,"SG,SF,Flx",284,CHA,CHA,CHA,,143.5,11.04,9%,-1%,14,41,4,4,9,36,9,26,15,5,11,5,13
+Rajon Rondo,LAL,"PG,Flx",285,CHA,CHA,CHA,@SA Mon 8:30PM,143,23.83,51%,0.80%,19,49,7,5,7,50,3,16,34,6,0,10,6
+DeMarre Carroll,SA,"SF,PF,Flx",340,CHA,CHA,CHA,LAL Mon 8:30PM,73,9.12,16%,-1.10%,7,18,3,2,2,19,5,18,8,1,2,4,8
+Carmelo Anthony,POR,"SF,PF,Flx",350,CHA,CHA,CHA,POR 10<br/>@CHI 12,62.5,15.62,53%,13.10%,16,47,6,4,6,42,3,11,5,2,1,8,4
+Ognen Jaramaz,NY,"PG,Flx",824,CHA,CHA,CHA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Miles Bridges,CHA,"SF,Flx",76,CHI,CHI,CHI,CHA 41<br/>@MIA 47,434.5,24.14,94%,0.30%,88,191,29,16,22,221,22,70,32,10,14,31,18
+Jaylen Brown,BOS,"SG,SF,Flx",94,CHI,CHI,CHI,SAC 39<br/>@BOS 28,407,31.31,98%,0.10%,85,184,22,38,53,230,14,77,28,13,3,20,13
+Coby White,CHI,"PG,Flx",108,CHI,CHI,CHI,POR 10<br/>@CHI 12,380,22.35,81%,-2.00%,86,223,37,27,34,236,5,57,39,14,0,26,17
+Kyle Lowry,TOR,"PG,Flx",143,CHI,CHI,CHI,PHI 39<br/>@TOR 38,327.5,40.94,98%,-0.10%,54,113,29,37,42,174,2,32,52,9,3,27,8
+Danny Green,LAL,"SG,SF,Flx",145,CHI,CHI,CHI,@SA Mon 8:30PM,326.5,20.41,68%,-1%,50,111,34,8,11,142,11,42,21,22,8,18,16
+Maxi Kleber,DAL,"PF,C,Flx",150,CHI,CHI,CHI,,323.5,21.57,47%,-9.90%,44,102,24,16,18,128,21,65,17,4,12,11,15
+Omari Spellman,GS,"PF,C,Flx",168,CHI,CHI,CHI,OKC Mon 10:30PM,306.5,19.16,18%,-0.40%,42,99,12,23,30,119,40,48,18,10,8,22,16
+Gary Harris,DEN,"SG,SF,Flx",179,CHI,CHI,CHI,,293.5,19.57,76%,-5.00%,59,145,20,15,21,153,6,43,27,18,4,16,15
+Duncan Robinson,MIA,"SG,SF,PF,Flx",183,CHI,CHI,CHI,CHA 41<br/>@MIA 47,281,17.56,24%,7%,56,126,41,10,10,163,2,36,10,11,7,11,16
+Jarrett Culver,MIN,"SG,SF,Flx",185,CHI,CHI,CHI,MIN 42<br/>@ATL 39,275.5,16.21,44%,-1.50%,56,151,18,13,34,143,15,33,35,15,8,24,17
+Tyler Johnson,PHO,"PG,SG,Flx",229,CHI,CHI,CHI,,221.5,13.84,16%,0.80%,38,98,17,14,18,107,4,26,37,5,6,17,16
+Ryan Arcidiacono,CHI,"PG,Flx",232,CHI,CHI,CHI,POR 10<br/>@CHI 12,218.5,12.85,9%,0.00%,27,65,18,14,19,86,10,22,33,10,1,8,17
+Boban Marjanovic,DAL,"C,Flx",308,CHI,CHI,CHI,,113.5,16.21,16%,0.40%,23,44,0,8,10,54,12,25,5,2,1,7,7
+Bruno Caboclo,MEM,"SF,PF,Flx",328,CHI,CHI,CHI,MEM 58<br/>@IND 77,91,10.11,13%,-0.80%,14,32,3,0,0,31,6,12,5,4,8,4,9
+Ryan Anderson,(N/A),"PF,C,Flx",395,CHI,CHI,CHI,,19.5,9.75,1%,-0.50%,2,7,1,0,0,5,0,7,2,1,0,1,2
+Zion Williamson,NO,"PF,Flx",442,CHI,CHI,CHI,,0,0,99%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Talen Horton-Tucker,LAL,"SF,Flx",460,CHI,CHI,CHI,@SA Mon 8:30PM,0,0,8%,-0.20%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kyle Guy,SAC,"PG,Flx",465,CHI,CHI,CHI,SAC 39<br/>@BOS 28,0,0,5%,-0.30%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Deividas Sirvydis,(N/A),"SF,Flx",478,CHI,CHI,CHI,,0,0,3%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Arnoldas Kulboka,CHA,"SF,Flx",525,CHI,CHI,CHI,CHA 41<br/>@MIA 47,0,0,1%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marcus Smart,BOS,"PG,SG,Flx",61,CLE,CLE,CLE,SAC 39<br/>@BOS 28,467.5,29.22,93%,0.60%,66,171,37,19,22,188,12,41,78,22,7,16,16
+Tomas Satoransky,CHI,"PG,SG,Flx",78,CLE,CLE,CLE,POR 10<br/>@CHI 12,431.5,23.97,77%,-6.40%,56,121,21,16,18,149,12,41,87,26,3,36,18
+Cody Zeller,CHA,"PF,C,Flx",80,CLE,CLE,CLE,CHA 41<br/>@MIA 47,430,25.29,83%,-4.90%,73,142,11,29,45,186,52,85,21,8,6,25,17
+Dejounte Murray,SA,"PG,Flx",88,CLE,CLE,CLE,LAL Mon 8:30PM,415,29.64,97%,-1%,59,122,3,30,39,151,18,72,62,22,5,34,14
+Ricky Rubio,PHO,"PG,Flx",97,CLE,CLE,CLE,,398,36.18,99%,0%,47,122,12,31,36,137,6,58,89,15,0,23,11
+Mitchell Robinson,NY,"C,Flx",134,CLE,CLE,CLE,,336.5,25.88,97%,-0.60%,50,69,0,23,32,123,38,41,9,8,27,11,13
+JaVale McGee,LAL,"C,Flx",139,CLE,CLE,CLE,@SA Mon 8:30PM,331.5,20.72,59%,-1.80%,50,82,0,11,19,111,33,62,13,9,20,13,16
+Steven Adams,OKC,"C,Flx",142,CLE,CLE,CLE,@GS Mon 10:30PM,328,27.33,95%,-0.80%,48,87,0,12,31,108,33,73,33,6,8,18,12
+Ky Bowman,GS,"PG,Flx",180,CLE,CLE,CLE,OKC Mon 10:30PM,292.5,17.21,28%,4.60%,57,121,17,8,9,139,6,31,41,17,1,16,17
+Marvin Williams,CHA,"SF,PF,Flx",203,CLE,MEM,ORL,CHA 41<br/>@MIA 47,249.5,13.86,26%,-0.40%,48,93,23,15,18,134,7,37,11,10,5,11,18
+Serge Ibaka,TOR,"PF,C,Flx",246,CLE,CLE,ORL,PHI 39<br/>@TOR 38,207,25.88,92%,0.50%,44,84,5,19,23,112,7,45,6,5,10,17,8
+Kevin Huerter,ATL,"SG,Flx",250,CLE,CLE,ORL,MIN 42<br/>@ATL 39,202.5,20.25,60%,-8.50%,32,75,17,12,15,93,6,29,28,6,3,17,10
+Mohamed Bamba,ORL,"C,Flx",251,CLE,CLE,CLE,ORL 55<br/>@DET 53,201.5,14.39,44%,7.40%,25,68,6,2,6,58,19,47,7,5,18,17,14
+Otto Porter Jr.,CHI,"SF,PF,Flx",259,CLE,CLE,CLE,POR 10<br/>@CHI 12,189,21,88%,-3%,35,84,16,15,20,101,8,23,14,9,3,7,9
+DeAnthony Melton,MEM,"PG,SG,Flx",357,CLE,CLE,CLE,MEM 58<br/>@IND 77,54.5,9.08,11%,0%,8,21,3,2,4,21,1,7,7,6,1,5,6
+Rodions Kurucs,BKN,"SF,PF,Flx",360,CLE,CLE,CLE,BKN 54<br/>@CLE 55,50.5,5.61,18%,-1.00%,8,20,3,2,6,21,5,17,1,4,0,11,9
+Didi Louzada Silva,NO,"SF,Flx",474,CLE,CLE,CLE,,0,0,4%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bobby Portis,NY,"PF,C,Flx",114,DAL,DAL,DAL,,370,21.76,58%,-9.40%,63,157,20,12,16,158,30,77,21,12,5,17,17
+Moritz Wagner,WAS,"PF,C,Flx",128,DAL,DAL,DAL,,343.5,24.54,61%,5.10%,67,106,17,21,26,172,20,61,16,8,11,32,14
+Derrick White,SA,"PG,SG,Flx",174,DAL,DAL,DAL,LAL Mon 8:30PM,296.5,19.77,71%,-7.10%,50,110,11,36,46,147,10,31,41,8,12,20,15
+Anfernee Simons,POR,"SG,Flx",184,DAL,DAL,DAL,POR 10<br/>@CHI 12,277.5,16.32,45%,-4.60%,68,156,28,24,32,188,4,27,25,10,2,15,17
+Frank Jackson,NO,"PG,Flx",253,DAL,DAL,DAL,,199,12.44,17%,-0.20%,48,124,19,24,30,139,5,21,19,8,1,17,16
+Nicolas Claxton,BKN,"C,Flx",343,DAL,DAL,DAL,BKN 54<br/>@CLE 55,67,8.38,13%,0.00%,10,20,0,5,10,25,6,13,8,1,2,3,8
+Admiral Schofield,WAS,"SF,Flx",370,DAL,DAL,DAL,,39.5,6.58,10%,-0.40%,7,10,4,4,4,22,2,6,1,0,0,0,6
+Ignas Brazdeikis,NY,"SF,Flx",415,DAL,DAL,DAL,,7,1.75,10%,-0.10%,2,7,0,2,2,6,0,0,1,0,1,1,4
+Jonah Bolden,PHI,"PF,Flx",435,DAL,DAL,DAL,PHI 39<br/>@TOR 38,1.5,0.75,5%,-0.50%,1,1,0,0,2,2,0,0,0,1,0,1,2
+Klay Thompson,GS,"SG,SF,Flx",445,DAL,DAL,DAL,OKC Mon 10:30PM,0,0,51%,-1.90%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kevin Durant,BKN,"SF,PF,Flx",446,DAL,DAL,DAL,BKN 54<br/>@CLE 55,0,0,46%,-0.40%,0,0,0,0,0,0,0,0,0,0,0,0,0
+John Wall,WAS,"PG,Flx",448,DAL,DAL,DAL,,0,0,38%,-0.30%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Luka Samanic,SA,"PF,Flx",457,DAL,DAL,DAL,LAL Mon 8:30PM,0,0,13%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mathias Lessort,(N/A),"PF,Flx",566,DAL,DAL,DAL,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Domantas Sabonis,IND,"PF,C,Flx",20,DEN,DEN,DEN,MEM 58<br/>@IND 77,613.5,43.82,100%,0%,102,203,5,49,59,258,53,133,50,8,9,37,14
+Brandon Ingram,NO,"SG,SF,PF,Flx",32,DEN,DEN,DEN,,569.5,43.81,99%,0.00%,125,247,34,55,71,339,13,80,55,11,12,40,13
+Jonas Valanciunas,MEM,"C,Flx",72,DEN,DEN,DEN,MEM 58<br/>@IND 77,437.5,27.34,98%,-0.10%,77,147,8,22,25,184,32,107,29,4,10,34,16
+OG Anunoby,TOR,"SF,PF,Flx",110,DEN,DEN,DEN,PHI 39<br/>@TOR 38,376.5,25.1,91%,-0.60%,66,122,26,9,14,167,13,62,22,13,14,14,15
+Josh Hart,NO,"SG,SF,Flx",182,DEN,DEN,DEN,,283.5,28.35,75%,-5%,43,93,22,18,22,126,13,53,14,14,4,14,10
+Caris LeVert,BKN,"SG,SF,Flx",205,DEN,DEN,DEN,BKN 54<br/>@CLE 55,243.5,27.06,94%,-2.90%,59,140,13,20,31,151,10,35,36,6,1,31,9
+Terrance Ferguson,OKC,"SG,SF,Flx",264,DEN,DEN,DEN,@GS Mon 10:30PM,181.5,12.96,12%,0.60%,29,62,18,3,3,79,11,19,16,7,4,9,14
+Stephen Curry,GS,"PG,SG,Flx",276,DEN,DEN,DEN,OKC Mon 10:30PM,157,39.25,95%,-0.60%,27,66,9,18,18,81,4,16,26,5,2,15,4
+Landry Shamet,LAC,"PG,Flx",283,DEN,DEN,DEN,,145.5,14.55,36%,-2.70%,30,77,21,10,10,91,0,15,17,4,1,12,10
+Tony Bradley,UTA,"C,Flx",297,DEN,DEN,DEN,UTA 9<br/>@MIL 8,131,10.92,9%,-0.80%,24,37,0,7,12,55,16,26,3,2,5,7,12
+Gary Trent Jr.,POR,"SG,Flx",333,DEN,DEN,DEN,POR 10<br/>@CHI 12,80.5,7.32,7%,0.10%,15,33,11,0,0,41,3,9,5,2,2,2,11
+Gary Clark,HOU,"SF,PF,Flx",407,DEN,DEN,DEN,,10.5,2.62,3%,0%,2,4,2,0,0,6,0,1,1,0,0,0,4
+Naz Reid,MIN,"C,Flx",468,DEN,DEN,DEN,MIN 42<br/>@ATL 39,0,0,5%,-0.30%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Luguentz Dort,OKC,"SG,Flx",475,DEN,DEN,DEN,@GS Mon 10:30PM,0,0,3%,-0.30%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nikola Radicevic,DEN,"PG,Flx",688,DEN,DEN,DEN,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+CJ McCollum,POR,"PG,SG,Flx",23,DET,DET,DET,POR 10<br/>@CHI 12,604.5,33.58,99%,0.00%,153,356,42,29,37,377,16,64,67,15,13,37,18
+Wendell Carter Jr.,CHI,"C,Flx",48,DET,DET,DET,POR 10<br/>@CHI 12,524,29.11,98%,0.10%,83,140,2,52,73,220,63,106,16,8,15,23,18
+Moe Harkless,LAC,"SF,PF,Flx",194,DET,DET,DET,,259.5,15.26,22%,-1%,41,81,8,7,12,97,14,38,20,17,12,18,17
+Jaxson Hayes,NO,"PF,C,Flx",202,DET,DET,DET,,250,17.86,50%,14.70%,45,72,0,23,38,113,24,33,10,10,14,12,14
+Kentavious Caldwell-Pope,LAL,"SG,SF,Flx",219,DET,DET,DET,@SA Mon 8:30PM,233,14.56,24%,0.30%,49,109,18,13,16,129,9,28,21,11,1,13,16
+Nicolo Melli,NO,"PF,Flx",220,DET,DET,DET,,232,15.47,24%,8.10%,34,73,19,16,20,103,11,36,21,9,2,12,15
+John Collins,ATL,"PF,C,Flx",258,DET,DET,DET,MIN 42<br/>@ATL 39,192,38.4,98%,0.00%,32,61,9,12,17,85,10,34,8,5,10,7,5
+Quinn Cook,LAL,"PG,Flx",279,DET,DET,DET,@SA Mon 8:30PM,152,10.13,11%,-0.70%,32,77,9,2,3,75,4,16,27,6,1,12,15
+Matt Thomas,TOR,"SG,Flx",324,DET,DET,DET,PHI 39<br/>@TOR 38,94.5,7.88,6%,0.00%,20,37,14,3,5,57,1,12,4,4,0,4,12
+Edmond Sumner,IND,"PG,Flx",367,DET,DET,DET,MEM 58<br/>@IND 77,45.5,15.17,7%,-0.20%,9,18,0,3,5,21,1,2,6,5,1,1,3
+Reggie Jackson,DET,"PG,SG,Flx",383,DET,DET,DET,ORL 55<br/>@DET 53,30.5,15.25,41%,-2.10%,4,11,1,1,1,10,1,4,8,0,0,1,2
+Ryan Broekhoff,DAL,"SF,Flx",385,DET,DET,DET,,29,7.25,2%,-0.10%,4,8,4,0,0,12,0,5,3,1,0,1,4
+Vincent Poirier,BOS,"C,Flx",386,DET,DET,DET,SAC 39<br/>@BOS 28,28.5,5.7,5%,-0.20%,3,8,0,1,2,7,5,3,3,1,2,3,5
+Justin Robinson,WAS,"PG,Flx",406,DET,DET,DET,,11.5,2.88,6%,0%,2,5,1,0,0,5,1,2,2,0,0,2,4
+John Konchar,MEM,"SG,Flx",476,DET,DET,DET,MEM 58<br/>@IND 77,0,0,3%,-0.20%,0,0,0,0,0,0,0,0,0,0,0,0,1
+Allen Crabbe,ATL,"SG,SF,Flx",337,FA,FA,FA,MIN 42<br/>@ATL 39,76,10.86,8%,-0.20%,17,38,5,5,7,44,3,14,2,3,2,4,7
+Theo Pinson,BKN,"SF,Flx",341,FA,FA,FA,BKN 54<br/>@CLE 55,73,9.12,3%,0.60%,13,46,5,5,6,36,0,9,15,6,0,9,8
+Kelan Martin,MIN,"SG,Flx",344,FA,FA,FA,MIN 42<br/>@ATL 39,66,9.43,6%,5.50%,15,43,5,0,0,35,2,20,2,1,1,3,7
+Iman Shumpert,BKN,"SG,SF,Flx",358,FA,FA,FA,BKN 54<br/>@CLE 55,52,8.67,5%,0.60%,9,28,4,3,5,25,3,11,2,6,0,7,6
+Naz Mitrou-Long,IND,"PG,Flx",375,FA,FA,FA,MEM 58<br/>@IND 77,37,12.33,2%,1.40%,6,16,2,0,0,14,0,6,7,1,1,2,3
+Deonte Burton,OKC,"SF,Flx",377,FA,FA,FA,@GS Mon 10:30PM,36,5.14,3%,-0.20%,9,20,5,0,0,23,0,8,1,1,0,3,7
+Wenyen Gabriel,SAC,"PF,Flx",378,FA,FA,FA,SAC 39<br/>@BOS 28,34.5,4.93,3%,0.10%,5,16,1,5,9,16,4,4,3,2,2,3,7
+Alize Johnson,IND,"PF,Flx",379,FA,FA,FA,MEM 58<br/>@IND 77,34,6.8,3%,0.10%,5,9,0,3,4,13,6,6,2,0,0,1,5
+Jordan McLaughlin,MIN,"PG,Flx",381,FA,FA,FA,MIN 42<br/>@ATL 39,32,8,1%,-0.50%,4,15,1,2,2,11,1,6,8,1,0,4,4
+Tyler Cook,CLE,"PF,Flx",390,FA,FA,FA,BKN 54<br/>@CLE 55,22,3.67,1%,-0.10%,5,6,0,2,2,12,3,2,0,1,0,1,6
+Denzel Valentine,CHI,"SG,SF,Flx",391,FA,FA,FA,POR 10<br/>@CHI 12,21,7,6%,-0.60%,4,9,4,0,0,12,1,3,1,0,0,1,3
+Chandler Parsons,ATL,"SF,PF,Flx",394,FA,FA,FA,MIN 42<br/>@ATL 39,19.5,9.75,3%,-0.20%,3,7,2,0,0,8,1,2,0,3,0,1,2
+Caleb Martin,CHA,"SG,Flx",396,FA,FA,FA,CHA 41<br/>@MIA 47,16,5.33,3%,-0.70%,2,9,0,1,3,5,0,4,3,1,2,3,3
+Charlie Brown,ATL,"SF,Flx",398,FA,FA,FA,MIN 42<br/>@ATL 39,15,3.75,1%,-0.10%,1,3,1,4,4,7,2,1,0,0,1,0,4
+Josh Magette,ORL,"PG,Flx",399,FA,FA,FA,ORL 55<br/>@DET 53,15,7.5,0%,0.00%,2,5,0,0,0,4,1,1,2,2,0,0,2
+Malcolm Miller,TOR,"PF,Flx",402,FA,FA,FA,PHI 39<br/>@TOR 38,13.5,2.7,1%,-0.20%,2,4,1,0,0,5,0,5,1,0,0,1,5
+Jarrell Brantley,UTA,"PF,Flx",409,FA,FA,FA,UTA 9<br/>@MIL 8,9,9,2%,0.00%,0,0,0,0,0,0,0,3,1,0,1,0,1
+Dean Wade,CLE,"PG,Flx",410,FA,FA,FA,BKN 54<br/>@CLE 55,9,3,0%,0.20%,1,2,1,0,0,3,0,2,0,1,0,0,3
+Johnathan Motley,LAC,"SF,Flx",411,FA,FA,FA,,8.5,4.25,2%,0.00%,1,3,1,0,0,3,1,1,2,0,0,2,2
+Udonis Haslem,MIA,"PF,Flx",412,FA,FA,FA,CHA 41<br/>@MIA 47,8.5,4.25,0%,0%,1,1,0,3,4,5,0,3,0,0,0,0,2
+Jaylen Nowell,MIN,"SG,Flx",413,FA,FA,FA,MIN 42<br/>@ATL 39,8,4,3%,0.10%,1,4,0,1,1,3,0,1,3,0,0,1,2
+Max Strus,CHI,"SG,Flx",417,FA,FA,FA,POR 10<br/>@CHI 12,6.5,6.5,0%,0.00%,2,3,0,1,1,5,1,0,0,0,0,0,1
+Zylan Cheatham,NO,"SF,Flx",418,FA,FA,FA,,6,3,1%,-0.10%,1,4,0,0,0,2,0,3,1,0,0,1,2
+Derrick Walton Jr.,LAC,"PG,Flx",421,FA,FA,FA,,5,1.67,0%,0.00%,1,1,1,0,0,3,0,0,1,0,0,1,3
+Brian Bowen II,IND,"SG,Flx",422,FA,FA,FA,MEM 58<br/>@IND 77,4.5,1.5,0%,0.10%,1,4,0,0,0,2,0,1,0,0,1,0,3
+Melvin Frazier,ORL,"SF,Flx",424,FA,FA,FA,ORL 55<br/>@DET 53,4,2,2%,0%,1,5,0,0,0,2,1,0,1,0,0,0,2
+Moses Brown,POR,"C,Flx",425,FA,FA,FA,POR 10<br/>@CHI 12,4,2,1%,0.10%,0,1,0,0,0,0,0,3,0,0,0,0,2
+Josh Gray,NO,"PG,Flx",426,FA,FA,FA,,4,2,0%,0%,1,2,0,0,0,2,1,1,2,0,0,5,2
+Jalen McDaniels,CHA,"PF,Flx",428,FA,FA,FA,CHA 41<br/>@MIA 47,3.5,3.5,3%,0.10%,1,2,0,0,0,2,1,0,0,0,0,0,1
+Drew Eubanks,SA,"PF,Flx",429,FA,FA,FA,LAL Mon 8:30PM,3.5,3.5,1%,0%,0,2,0,0,0,0,2,1,0,0,0,1,1
+Garrison Mathews,WAS,"SG,Flx",430,FA,FA,FA,,3.5,1.75,1%,-0.10%,0,2,0,0,0,0,0,1,2,0,0,1,2
+Daryl Macon,MIA,"PG,Flx",431,FA,FA,FA,CHA 41<br/>@MIA 47,3,1,0%,0.00%,1,3,1,0,0,3,0,0,1,0,0,2,3
+Stanton Kidd,(N/A),"PF,Flx",432,FA,FA,FA,,3,0.75,0%,0%,0,3,0,0,0,0,0,3,1,0,0,2,4
+Oshae Brissett,TOR,"PF,Flx",433,FA,FA,FA,PHI 39<br/>@TOR 38,3,1.5,0%,0.00%,1,3,1,0,0,3,0,0,0,0,0,0,2
+Jaylen Hoard,POR,"SF,Flx",436,FA,FA,FA,POR 10<br/>@CHI 12,1.5,1.5,1%,0.10%,0,0,0,0,0,0,0,1,0,0,0,0,1
+Devon Hall,OKC,"SG,Flx",439,FA,FA,FA,@GS Mon 10:30PM,1,1,1%,0%,1,1,0,0,0,2,0,0,0,0,0,1,1
+Gerald Green,HOU,"SG,SF,Flx",467,FA,FA,FA,,0,0,5%,-0.30%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nikola Mirotic,(N/A),"SF,PF,Flx",470,FA,FA,FA,,0,0,4%,-0.30%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kenneth Faried,(N/A),"PF,C,Flx",477,FA,FA,FA,,0,0,3%,-0.30%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kadeem Allen,NY,"SG,Flx",480,FA,FA,FA,,0,0,2%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Darius Miller,NO,"SG,SF,Flx",482,FA,FA,FA,,0,0,2%,0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tyreke Evans,IND,"PG,SG,Flx",484,FA,FA,FA,MEM 58<br/>@IND 77,0,0,2%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jeremy Lin,(N/A),"PG,SG,Flx",486,FA,FA,FA,,0,0,2%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Frank Mason III,MIL,"PG,Flx",487,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,2%,-0.20%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Joe Johnson,(N/A),"SF,PF,Flx",488,FA,FA,FA,,0,0,2%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kevin Hervey,OKC,"SF,PF,Flx",490,FA,FA,FA,@GS Mon 10:30PM,0,0,2%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nick Young,DEN,"SG,SF,Flx",491,FA,FA,FA,,0,0,2%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jaylen Adams,(N/A),"PG,Flx",492,FA,FA,FA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Cameron Payne,(N/A),"PG,Flx",493,FA,FA,FA,,0,0,1%,-0.20%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nigel Williams-Goss,UTA,"PG,Flx",494,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,1%,0.00%,0,2,0,0,0,0,0,0,1,0,0,1,4
+Jamal Crawford,(N/A),"SG,SF,Flx",496,FA,FA,FA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Norvel Pelle,PHI,"C,Flx",497,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,1%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Josh Reaves,DAL,"SG,Flx",498,FA,FA,FA,,0,0,1%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Cristiano Felicio,CHI,"C,Flx",500,FA,FA,FA,POR 10<br/>@CHI 12,0,0,1%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jaylen Hands,(N/A),"PG,Flx",501,FA,FA,FA,,0,0,1%,0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Trevon Bluiett,(N/A),"PG,Flx",503,FA,FA,FA,,0,0,1%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Joakim Noah,(N/A),"PF,C,Flx",504,FA,FA,FA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Lance Stephenson,(N/A),"SG,SF,Flx",507,FA,FA,FA,,0,0,1%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Shamorie Ponds,TOR,"PG,Flx",508,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nene Hilario,HOU,"PF,C,Flx",509,FA,FA,FA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jonas Jerebko,(N/A),"SF,PF,Flx",510,FA,FA,FA,,0,0,1%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Alberto Abalde,(N/A),"SF,Flx",512,FA,FA,FA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Justin Jackson,ORL,"SF,PF,Flx",513,FA,FA,FA,ORL 55<br/>@DET 53,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Yante Maten,BOS,"SF,Flx",514,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Justin Anderson,(N/A),"SF,Flx",515,FA,FA,FA,,0,0,1%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Demetrius Jackson,(N/A),"PG,Flx",516,FA,FA,FA,,0,0,1%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ray Spalding,(N/A),"PF,Flx",517,FA,FA,FA,,0,0,1%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sindarius Thornwell,(N/A),"SG,Flx",518,FA,FA,FA,,0,0,1%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+PJ Dozier,DEN,"PG,Flx",519,FA,FA,FA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Zach Andrews,(N/A),"SF,PF,Flx",520,FA,FA,FA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Matt Barnes,(N/A),"SG,SF,Flx",521,FA,FA,FA,,0,0,1%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Andre Barrett,(N/A),"PG,Flx",522,FA,FA,FA,,0,0,1%,0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jerian Grant,(N/A),"PG,SG,Flx",523,FA,FA,FA,,0,0,1%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tyler Lydon,(N/A),"PF,Flx",524,FA,FA,FA,,0,0,1%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Adam Hanga,SA,"SG,Flx",526,FA,FA,FA,LAL Mon 8:30PM,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Antonio Blakeney,(N/A),"PG,Flx",528,FA,FA,FA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Walt Lemon Jr.,(N/A),"SF,Flx",529,FA,FA,FA,,0,0,1%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Wayne Selden Jr.,(N/A),"SG,Flx",531,FA,FA,FA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Quincy Acy,PHO,"SF,PF,Flx",532,FA,FA,FA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Wade Baldwin IV,IND,"PG,Flx",533,FA,FA,FA,MEM 58<br/>@IND 77,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marcin Gortat,LAC,"C,Flx",534,FA,FA,FA,,0,0,1%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Vincent Edwards,(N/A),"SF,Flx",535,FA,FA,FA,,0,0,1%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Devin Harris,(N/A),"PG,SG,Flx",536,FA,FA,FA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jemerrio Jones,(N/A),"SG,Flx",537,FA,FA,FA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Greg Monroe,(N/A),"PF,C,Flx",538,FA,FA,FA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Alex Poythress,(N/A),"SF,Flx",539,FA,FA,FA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Guerschon Yabusele,(N/A),"SF,PF,Flx",540,FA,FA,FA,,0,0,1%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+MarShon Brooks,CHI,"SG,SF,Flx",541,FA,FA,FA,POR 10<br/>@CHI 12,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Chinanu Onuaku,POR,"PF,C,Flx",542,FA,FA,FA,POR 10<br/>@CHI 12,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jalen Adams,(N/A),"PG,Flx",543,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jarell Martin,(N/A),"PF,C,Flx",544,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jaron Blossomgame,(N/A),"SF,Flx",545,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ian Clark,(N/A),"PG,SG,Flx",546,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jawun Evans,(N/A),"PG,Flx",547,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jon Leuer,(N/A),"PF,C,Flx",548,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Davon Reed,(N/A),"SG,Flx",549,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Devin Robinson,(N/A),"SG,SF,Flx",550,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nik Stauskas,(N/A),"SG,SF,Flx",551,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Louis King,DET,"PF,Flx",552,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ike Anigbogu,IND,"C,Flx",553,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Isaiah Briscoe,ORL,"PG,Flx",554,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,-0.20%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Deyonta Davis,ATL,"PF,Flx",555,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Michael Frazier,HOU,"SG,Flx",556,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Isaiah Austin,(N/A),"C,Flx",557,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Askia Booker,(N/A),"SG,Flx",558,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mamadou N'Diaye,(N/A),"C,Flx",559,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+lex Abrines,(N/A),"SG,SF,Flx",560,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Arron Afflalo,(N/A),"SG,SF,Flx",561,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Dairis Bertans,(N/A),"SG,Flx",562,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marques Bolden,(N/A),"C,Flx",563,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Trevon Duval,(N/A),"PG,Flx",565,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Zaza Pachulia,(N/A),"C,Flx",567,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Omer Asik,CHI,"PF,C,Flx",569,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Joel Berry II,LAL,"PG,Flx",570,FA,FA,FA,@SA Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Juwan Morgan,UTA,"PF,Flx",572,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Malik Newman,MIA,"PG,Flx",573,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kobi Simmons,CHA,"SG,Flx",574,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Robert Carter Jr.,(N/A),"PF,Flx",575,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+David Michineau,LAC,"PG,Flx",576,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Anthony Bennett,(N/A),"SF,PF,Flx",578,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jordan Caroline,(N/A),"SF,Flx",579,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Luol Deng,(N/A),"SF,PF,Flx",581,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tyler Dorsey,(N/A),"PG,Flx",582,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kosta Koufos,(N/A),"PF,C,Flx",583,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Vanja Marinkovic,(N/A),"SG,SF,Flx",584,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+J.R. Smith,(N/A),"SG,SF,Flx",585,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ekpe Udoh,(N/A),"PF,C,Flx",586,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Johnathan Williams,(N/A),"PF,Flx",587,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Troy Williams,(N/A),"SG,SF,Flx",588,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Isaiah Canaan,MIL,"PG,Flx",589,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tony Carr,NO,"PG,Flx",590,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Adam Mokoka,CHI,"SG,Flx",592,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Cameron Oliver,POR,"SF,Flx",593,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jonathan Jeanne,(N/A),"C,Flx",594,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Borisa Simanic,(N/A),"PF,Flx",595,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Scott Suggs,TOR,"SG,Flx",596,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Deng Adel,(N/A),"C,Flx",597,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Cole Aldrich,(N/A),"C,Flx",598,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+James Augustine,(N/A),"SF,PF,C,Flx",599,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jerryd Bayless,(N/A),"PG,SG,Flx",600,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Javon Bess,(N/A),"SG,Flx",601,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Corey Brewer,(N/A),"SG,SF,Flx",602,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Devontae Cacok,(N/A),"PF,Flx",603,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Troy Caupain,(N/A),"SG,Flx",604,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sam Dekker,(N/A),"SF,PF,Flx",605,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Andrew Harrison,(N/A),"PG,SG,Flx",606,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Amir Johnson,(N/A),"PF,C,Flx",607,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brandon McCoy,(N/A),"C,Flx",608,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Miles Plumlee,(N/A),"PF,C,Flx",609,FA,FA,FA,,0,0,0%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Justin Simon,(N/A),"SG,Flx",610,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tyler Zeller,(N/A),"PF,C,Flx",611,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jaylen Barford,CHA,"PG,Flx",612,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Justin Bibbs,LAC,"SG,Flx",613,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kay Felder,TOR,"PG,Flx",614,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Robert Franks,CHA,"SF,Flx",615,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Wesley Johnson,WAS,"SG,SF,Flx",616,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Billy Preston,CLE,"SF,PF,Flx",617,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Zhou Qi,HOU,"PF,Flx",618,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+KT Harrell,(N/A),"SG,Flx",619,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Michalis Kamperidis,(N/A),"SF,Flx",620,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Derrick Marks,(N/A),"SG,Flx",621,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bobby Ray Parks Jr.,(N/A),"SG,Flx",622,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Malik Pope,(N/A),"SF,Flx",623,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nik Slavica,(N/A),"SF,Flx",624,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ray Smith,(N/A),"SF,Flx",625,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jarvis Threatt,(N/A),"PG,Flx",626,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Byron Wesley,(N/A),"SG,Flx",627,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jordan Adams,(N/A),"SG,Flx",628,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Maurice Ager,(N/A),"SG,SF,Flx",629,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Alexis Ajinca,(N/A),"PF,C,Flx",630,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Deji Akindele,(N/A),"C,Flx",631,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Cliff Alexander,(N/A),"PF,Flx",632,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bryce Alford,(N/A),"PG,Flx",633,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tony Allen,(N/A),"SG,SF,Flx",634,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Louis Amundson,(N/A),"PF,Flx",635,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Keith Appling,(N/A),"PG,Flx",636,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Gilbert Arenas,(N/A),"PG,Flx",637,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Hilton Armstrong,(N/A),"PF,C,Flx",638,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Cyril Awere,(N/A),"C,Flx",639,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Andrea Bargnani,(N/A),"PF,C,Flx",640,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Esteban Batista,(N/A),"C,Flx",641,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mike Bibby,(N/A),"PG,Flx",642,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Andris Biedrins,(N/A),"C,Flx",643,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tyrell Biggs,(N/A),"SF,PF,Flx",644,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marqus Blakely,(N/A),"SF,Flx",645,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Keljin Blevins,(N/A),"PG,Flx",646,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Barry Brown Jr.,(N/A),"PG,Flx",647,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tyler Cavanaugh,(N/A),"PF,C,Flx",648,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bonzie Colson,(N/A),"SF,Flx",649,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Isaiah Cousins,(N/A),"SG,Flx",650,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Raymond Felton,(N/A),"PG,SG,Flx",651,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jalen Jones,(N/A),"SG,SF,Flx",652,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sagaba Konate,(N/A),"SF,Flx",653,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jordan Loyd,(N/A),"PG,Flx",654,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jeremiah Martin,(N/A),"PG,Flx",655,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Luke Maye,(N/A),"PF,Flx",656,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Salah Mejri,(N/A),"C,Flx",657,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Quincy Pondexter,(N/A),"SG,SF,Flx",658,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brandon Sampson,(N/A),"PG,Flx",659,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Simi Shittu,(N/A),"C,Flx",660,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Isaiah Taylor,(N/A),"PG,Flx",661,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Lance Thomas,(N/A),"SG,SF,Flx",662,FA,FA,FA,,0,0,0%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Alan Williams,(N/A),"PF,C,Flx",663,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+C.J. Williams,(N/A),"SG,Flx",664,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kenny Wooten,(N/A),"PF,Flx",665,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Furkan Aldemir,PHI,"PF,Flx",666,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Darrell Arthur,PHO,"PF,C,Flx",667,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jamel Artis,SAC,"SF,Flx",668,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Cameron Bairstow,DET,"PF,C,Flx",669,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ron Baker,WAS,"PG,SG,Flx",670,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Renaldo Balkman,DAL,"SF,PF,Flx",671,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jerrelle Benimon,UTA,"PF,Flx",672,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ben Bentil,DAL,"SF,PF,Flx",673,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sim Bhullar,SAC,"C,Flx",674,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jabari Bird,ATL,"SG,Flx",675,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Joel Bolomboy,MIL,"PF,Flx",676,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Gian Clavell,DAL,"PG,Flx",677,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Amir Coffey,LAC,"SF,Flx",678,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tiny Gallon,MIL,"PF,Flx",679,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brandon Goodwin,ATL,"PG,Flx",680,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Josh Huestis,SA,"SF,Flx",682,FA,FA,FA,LAL Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mike James,NO,"PG,Flx",683,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brice Johnson,MEM,"PF,Flx",684,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Zach Lofton,DET,"SG,Flx",685,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Luc Richard Mbah a Moute,LAC,"SF,PF,Flx",686,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Gary Payton II,WAS,"SG,Flx",687,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Xavier Rathan-Mayes,MEM,"PG,Flx",689,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Willie Reed,CHI,"PF,C,Flx",690,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Cameron Reynolds,MIL,"SF,Flx",691,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Malachi Richardson,PHI,"SG,Flx",692,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Milos Teodosic,LAC,"PG,SG,Flx",693,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jameel Warney,DAL,"SF,Flx",694,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jamil Wilson,LAC,"PF,Flx",695,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jeff Adrien,(N/A),"SF,PF,Flx",696,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Josh Akognon,(N/A),"PG,SG,Flx",697,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+DeVaughn Akoon-Purcell,(N/A),"PG,Flx",698,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Joe Alexander,(N/A),"SF,Flx",699,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Lavoy Allen,(N/A),"PF,C,Flx",700,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marcus Allen,(N/A),"PG,Flx",701,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ryan Allen,(N/A),"PG,SG,Flx",702,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Alan Anderson,(N/A),"SG,SF,Flx",703,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jake Anderson,(N/A),"PG,Flx",704,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Andrew Andrews,(N/A),"PG,Flx",705,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Joel Anthony,(N/A),"PF,C,Flx",706,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Pero Antic,(N/A),"C,Flx",707,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brandon Ashley,(N/A),"PF,Flx",708,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Connor Atchley,(N/A),"PF,C,Flx",709,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Chucky Atkins,(N/A),"PG,Flx",710,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Eric Atkins,(N/A),"PG,Flx",711,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Zach Auguste,(N/A),"PF,Flx",712,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+J.J. Avila,(N/A),"SF,Flx",713,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Gustavo Ayon,(N/A),"PF,C,Flx",714,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jeff Ayres,(N/A),"PF,C,Flx",715,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jordan Bachynski,(N/A),"C,Flx",716,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Gracin Bakumanya,(N/A),"C,Flx",717,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Anthony Barber,(N/A),"PG,Flx",718,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Leandro Barbosa,(N/A),"PG,SG,Flx",719,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kadeem Batts,(N/A),"PF,Flx",720,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+V.J. Beachem,(N/A),"SF,Flx",721,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tarik Black,(N/A),"PF,C,Flx",722,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+James Blackmon Jr.,(N/A),"SG,Flx",723,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Vander Blue,LAL,"PG,Flx",724,FA,FA,FA,@SA Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Andrew Bogut,(N/A),"C,Flx",725,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tim Bond,HOU,"SG,Flx",726,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Trevor Booker,(N/A),"PF,C,Flx",727,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ryan Bowen,OKC,"SF,Flx",728,FA,FA,FA,@GS Mon 10:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ronnie Brewer,(N/A),"SG,SF,Flx",729,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Amida Brimah,(N/A),"C,Flx",730,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Armoni Brooks,(N/A),"PG,Flx",731,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Alec Brown,(N/A),"C,Flx",732,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bobby Brown,(N/A),"PG,SG,Flx",733,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bryce Brown,(N/A),"PG,Flx",734,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jabari Brown,MIL,"SG,Flx",735,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Shannon Brown,(N/A),"SG,Flx",736,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Justin Brownlee,(N/A),"PF,Flx",737,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nicolas Brussino,ATL,"SG,SF,Flx",738,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Dwight Buycks,(N/A),"PG,Flx",739,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Justin Cage,CHI,"SF,PF,Flx",740,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jose Calderon,(N/A),"PG,Flx",741,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nik Caner-Medley,SAC,"SF,PF,Flx",742,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Derrick Caracter,LAL,"PF,Flx",743,FA,FA,FA,@SA Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Phillip Carr,NY,"PF,Flx",744,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jeffrey Carroll,LAL,"SG,Flx",745,FA,FA,FA,@SA Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Matt Carroll,NO,"SG,SF,Flx",746,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brian Chase,MIA,"PG,SG,Flx",747,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Eric Chenowith,NO,"C,Flx",748,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Will Cherry,GS,"PG,Flx",749,FA,FA,FA,OKC Mon 10:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Patrick Christopher,UTA,"SG,Flx",750,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Coty Clarke,BOS,"SF,Flx",751,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Victor Claver,DEN,"SG,SF,Flx",752,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Speedy Claxton,GS,"PG,Flx",753,FA,FA,FA,OKC Mon 10:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Antonius Cleveland,DAL,"SG,Flx",754,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kyle Collinsworth,(N/A),"SG,Flx",755,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Will Conroy,MIN,"PG,SG,Flx",756,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Elgin Cook,GS,"SF,Flx",757,FA,FA,FA,OKC Mon 10:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Derek Cooke Jr.,PHO,"PF,Flx",758,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Charles Cooke,MIA,"SG,Flx",759,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bryce Cotton,MEM,"PG,Flx",760,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jaleel Cousins,GS,"C,Flx",761,FA,FA,FA,OKC Mon 10:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Aaron Craft,GS,"PG,Flx",762,FA,FA,FA,OKC Mon 10:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Chris Crawford,MEM,"SG,Flx",763,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Drew Crawford,TOR,"SG,Flx",764,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mitch Creek,(N/A),"SG,Flx",765,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jared Cunningham,MIL,"PG,SG,Flx",766,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Eddy Curry,DAL,"C,Flx",767,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brandon Davies,BKN,"PF,Flx",768,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Josh Davis,MEM,"PF,Flx",769,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Paul Davis,WAS,"PF,C,Flx",770,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ricky Davis,LAC,"SG,SF,Flx",771,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tyler Davis,OKC,"C,Flx",772,FA,FA,FA,@GS Mon 10:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Andre Dawkins,BOS,"SG,Flx",773,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Branden Dawson,ORL,"SF,PF,Flx",774,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Willie Deane,WAS,"PG,SG,Flx",775,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bryce Dejean-Jones,NO,"PG,SG,Flx",776,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Carlos Delfino,LAC,"SG,SF,Flx",777,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Cody Demps,SAC,"SG,Flx",778,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Justin Dentmon,DAL,"PG,Flx",779,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Guillermo Diaz,LAC,"PG,SG,Flx",780,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Daniel Dixon,BOS,"SG,Flx",781,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Joey Dorsey,DEN,"PF,C,Flx",782,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Quincy Douby,TOR,"PG,SG,Flx",783,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Toney Douglas,MEM,"PG,SG,Flx",784,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marcus Douthit,LAC,"C,Flx",785,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Milton Doyle,(N/A),"PG,Flx",786,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Robert Dozier,MIA,"SF,PF,Flx",787,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Larry Drew II,NO,"PG,Flx",788,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Chris Duhon,LAL,"PG,Flx",789,FA,FA,FA,@SA Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Duje Dukan,SAC,"SF,Flx",790,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kellen Dunham,MEM,"SG,Flx",791,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ronald Dupree,MEM,"SF,Flx",792,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Cleanthony Early,NY,"SF,Flx",793,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Devin Ebanks,DAL,"SG,SF,Flx",794,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jarell Eddie,CHI,"SG,Flx",795,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+John Edwards,MIN,"C,Flx",796,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Melvin Ejim,ORL,"SF,PF,Flx",797,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Chris Ellis,POR,"SF,PF,Flx",798,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Keenan Evans,DET,"PG,Flx",799,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Festus Ezeli,POR,"C,Flx",800,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+C.J. Fair,CHI,"PF,Flx",801,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jordan Farmar,SAC,"PG,Flx",802,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Vitor Faverani,BOS,"C,Flx",803,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Carrick Felix,WAS,"SG,SF,Flx",804,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kyrylo Fesenko,MIN,"C,Flx",805,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kimani Ffriend,LAC,"C,Flx",806,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Gerald Fitch,DET,"PG,SG,Flx",807,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Gary Flowers,GS,"SF,PF,Flx",808,FA,FA,FA,OKC Mon 10:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jonny Flynn,DET,"PG,Flx",809,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Gary Forbes,BKN,"SG,SF,Flx",810,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Courtney Fortson,LAC,"PG,SG,Flx",811,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Richie Frahm,LAC,"SG,Flx",812,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jamaal Franklin,DEN,"SG,SF,Flx",813,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Trey Freeman,DET,"PG,Flx",814,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tony Gaffney,MEM,"PF,Flx",815,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sundiata Gaines,IND,"PG,SG,Flx",816,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marcus Georges-Hunt,BOS,"SG,Flx",817,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Hassani Gravett,(N/A),"PG,Flx",818,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Daniel Hamilton,(N/A),"SF,Flx",819,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Dusty Hannahs,(N/A),"PG,Flx",820,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Aaron Harrison,(N/A),"PG,Flx",821,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+William Howard,(N/A),"SF,Flx",822,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Stefan Jankovic,(N/A),"PF,Flx",823,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Livio Jean-Charles,(N/A),"SF,PF,Flx",825,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+B.J. Johnson,ORL,"SF,Flx",826,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Dakari Johnson,(N/A),"C,Flx",827,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Peter Jok,PHO,"PG,Flx",828,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+George King,(N/A),"SG,Flx",829,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+V.J. King,(N/A),"SG,Flx",830,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Christ Koumadje,(N/A),"C,Flx",831,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Shane Larkin,(N/A),"PG,Flx",832,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Vic Law,(N/A),"PG,Flx",833,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Dedric Lawson,(N/A),"SF,PF,Flx",834,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Shawn Long,(N/A),"PF,C,Flx",835,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+J.P. Macura,(N/A),"SG,Flx",836,FA,FA,FA,,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Dakota Mathias,(N/A),"PG,Flx",837,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kennedy Meeks,TOR,"C,Flx",838,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jordan Mickey,(N/A),"PF,C,Flx",839,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Matt Mooney,(N/A),"PG,Flx",840,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Eric Moreland,(N/A),"PF,Flx",841,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jaylen Morris,MIL,"SG,Flx",842,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Donatas Motiejunas,(N/A),"PF,C,Flx",843,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Lucas Nogueira,(N/A),"PF,C,Flx",844,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+James Nunnally,HOU,"SF,Flx",845,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jermaine O'Neal,(N/A),"C,Flx",846,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brandon Paul,SA,"SG,Flx",847,FA,FA,FA,LAL Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+L.J. Peak,BOS,"SG,Flx",848,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kendrick Perkins,(N/A),"C,Flx",849,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Alec Peters,(N/A),"PF,Flx",850,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Isaiah Pineiro,(N/A),"SG,Flx",851,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tayshaun Prince,(N/A),"SF,PF,Flx",852,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Chasson Randle,(N/A),"PG,Flx",853,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Zach Randolph,DAL,"PF,C,Flx",854,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ryan Richards,(N/A),"PF,C,Flx",855,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brian Scalabrine,(N/A),"PF,C,Flx",856,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Renaldas Seibutis,LAC,"PG,SG,Flx",857,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ramon Sessions,(N/A),"PG,SG,Flx",858,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jason Smith,NO,"PF,C,Flx",859,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Edy Tavares,(N/A),"C,Flx",860,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jared Terrell,(N/A),"PG,Flx",861,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Emanuel Terry,MIA,"PF,Flx",862,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Melo Trimble,MIN,"PG,Flx",863,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sasha Vujacic,(N/A),"SG,Flx",864,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Julian Washburn,GS,"SF,Flx",865,FA,FA,FA,OKC Mon 10:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Maalik Wayns,DAL,"PG,SG,Flx",866,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Travis Wear,LAL,"PF,Flx",867,FA,FA,FA,@SA Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Thomas Welsh,(N/A),"C,Flx",868,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Okaro White,WAS,"PF,Flx",869,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Lindell Wigginton,(N/A),"PG,Flx",870,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Metta World Peace,(N/A),"SF,PF,Flx",871,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Rade Zagorac,(N/A),"SF,Flx",872,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ronnie Aguilar,(N/A),"C,Flx",873,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Lance Allred,(N/A),"C,Flx",874,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+James Anderson,(N/A),"SG,SF,Flx",875,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Braian Angola-Rodas,(N/A),"SG,Flx",876,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Darion Atkins,(N/A),"PF,Flx",877,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Yudai Baba,(N/A),"SF,Flx",878,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ondrej Balvin,(N/A),"C,Flx",879,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jordan Barnett,(N/A),"SF,Flx",880,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tyus Battle,(N/A),"SG,Flx",881,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kavell Bigby-Williams,(N/A),"C,Flx",882,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bennie Boatwright,(N/A),"PF,Flx",883,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Matt Bonner,(N/A),"PF,C,Flx",884,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Phil Booth,(N/A),"PG,Flx",885,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Carlos Boozer,(N/A),"PF,C,Flx",886,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Chris Bosh,(N/A),"PF,C,Flx",887,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Anthony Brown,(N/A),"SF,Flx",888,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Lorenzo Brown,TOR,"PG,Flx",889,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Markel Brown,(N/A),"SG,Flx",890,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Deonte Burton,(N/A),"PG,Flx",891,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Perrion Callandret,(N/A),"PG,Flx",892,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marcus Camby,(N/A),"PF,C,Flx",893,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Devin Cannady,(N/A),"PG,Flx",894,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sampson Carter,(N/A),"PF,Flx",895,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tweety Carter,(N/A),"PG,Flx",896,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Warren Carter,(N/A),"SF,PF,Flx",897,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kyle Casey,(N/A),"PF,Flx",898,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mario Chalmers,(N/A),"PG,SG,Flx",899,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Joe Chealey,(N/A),"PG,Flx",900,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Rakeem Christmas,(N/A),"PF,Flx",901,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Norris Cole,(N/A),"PG,SG,Flx",902,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jack Cooley,(N/A),"PF,C,Flx",903,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Chris Copeland,(N/A),"SF,PF,Flx",904,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Matt Costello,(N/A),"PF,Flx",905,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marcus Cousin,(N/A),"C,Flx",906,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jordan Crawford,(N/A),"PG,SG,Flx",907,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Will Cummings,(N/A),"PG,Flx",908,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+JamesOn Curry,(N/A),"PG,SG,Flx",909,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Olek Czyz,(N/A),"SF,Flx",910,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Samuel Dalembert,(N/A),"C,Flx",911,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Luigi Datome,(N/A),"SG,SF,Flx",912,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Baron Davis,(N/A),"PG,Flx",913,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Glen Davis,(N/A),"PF,C,Flx",914,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jon Davis,(N/A),"PG,Flx",915,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Aubrey Dawkins,(N/A),"SG,Flx",916,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Shawn Dawson,(N/A),"SF,Flx",917,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Malcolm Delaney,(N/A),"PG,SG,Flx",918,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Stephen Dennis,(N/A),"PG,Flx",919,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marcus Derrickson,(N/A),"PF,Flx",920,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Boris Diaw,(N/A),"PF,C,Flx",921,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ike Diogu,(N/A),"PF,C,Flx",922,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+DeSagana Diop,(N/A),"C,Flx",923,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Juan Dixon,(N/A),"PG,SG,Flx",924,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Chris Douglas-Roberts,(N/A),"SG,SF,Flx",925,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mike Dunleavy,(N/A),"SG,SF,Flx",926,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Shane Edwards,(N/A),"SF,Flx",927,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+John Egbunu,(N/A),"C,Flx",928,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jordan Eglseder,(N/A),"C,Flx",929,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nnanna Egwu,(N/A),"C,Flx",930,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Moses Ehambe,(N/A),"SG,SF,Flx",931,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Monta Ellis,(N/A),"PG,SG,Flx",932,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Perry Ellis,(N/A),"PF,Flx",933,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Melvin Ely,(N/A),"PF,C,Flx",934,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Andre Emmett,(N/A),"SG,Flx",935,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kim English,(N/A),"PG,SG,Flx",936,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tyler Ennis,(N/A),"PG,Flx",937,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Micheal Eric,(N/A),"PF,C,Flx",938,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jeremy Evans,(N/A),"SF,PF,Flx",939,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Maurice Evans,(N/A),"SG,SF,Flx",940,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Reggie Evans,(N/A),"PF,C,Flx",941,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Patrick Ewing Jr.,(N/A),"SF,Flx",942,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Christian Eyenga,(N/A),"SF,Flx",943,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jarrid Famous,(N/A),"PF,C,Flx",944,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Courtney Fells,(N/A),"SG,Flx",945,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Vashil Fernandez,(N/A),"C,Flx",946,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Michael Fey,(N/A),"C,Flx",947,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brandon Fields,(N/A),"SG,Flx",948,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Landry Fields,(N/A),"SG,SF,Flx",949,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Skyler Flatten,(N/A),"SG,Flx",950,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kyle Fogg,(N/A),"PG,SG,Flx",951,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Quincy Ford,(N/A),"SF,Flx",952,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Randy Foye,(N/A),"PG,SG,Flx",953,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jimmer Fredette,(N/A),"PG,SG,Flx",954,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Joel Freeland,(N/A),"PF,C,Flx",955,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kenny Gabriel,(N/A),"SF,Flx",956,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Abdul Gaddy,(N/A),"PG,Flx",957,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jakeenan Gant,(N/A),"SG,Flx",958,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jorge Garbajosa,TOR,"SF,PF,C,Flx",959,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Patricio Garino,(N/A),"SG,Flx",960,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kevin Garnett,(N/A),"PF,C,Flx",961,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kaiser Gates,(N/A),"SF,Flx",962,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Michael Gbinije,(N/A),"SF,Flx",963,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Alonzo Gee,DEN,"SG,SF,Flx",964,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jonathan Gibson,(N/A),"PG,SG,Flx",965,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+James Gist,SA,"SF,PF,Flx",966,FA,FA,FA,LAL Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Drew Gooden,WAS,"PF,C,Flx",967,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Vernon Goodridge,(N/A),"PF,Flx",968,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Archie Goodwin,POR,"PG,SG,Flx",969,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Danny Granger,(N/A),"SF,Flx",970,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Donte Grantham,(N/A),"SG,Flx",971,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Rob Gray,HOU,"PG,Flx",972,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Taj Gray,(N/A),"SF,PF,Flx",973,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Erick Green,UTA,"PG,SG,Flx",974,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Willie Green,(N/A),"SG,Flx",975,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Eric Griffin,UTA,"SF,Flx",976,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jorge Gutierrez,(N/A),"PG,Flx",977,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Isaac Haas,(N/A),"C,Flx",978,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marcus Haislip,SA,"PF,Flx",979,FA,FA,FA,LAL Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Donta Hall,(N/A),"SF,Flx",980,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mike Hall,WAS,"SF,PF,Flx",981,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Isaac Hamilton,CLE,"SG,Flx",982,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Johnny Hamilton,DET,"C,Flx",983,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Justin Hamilton,(N/A),"PF,C,Flx",984,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+A.J. Hammons,MIA,"C,Flx",985,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tyler Hansbrough,(N/A),"PF,C,Flx",986,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Anfernee Hardaway,MIA,"PG,SG,SF,PF,Flx",987,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Demonte Harper,(N/A),"PG,SG,Flx",988,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Elias Harris,LAL,"SF,PF,Flx",989,FA,FA,FA,@SA Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jason Hart,MIN,"PG,Flx",990,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Spencer Hawes,(N/A),"PF,C,Flx",991,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nigel Hayes,SAC,"PF,Flx",992,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Luther Head,SAC,"PG,SG,Flx",993,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Reggie Hearn,(N/A),"SG,Flx",994,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Gerald Henderson,PHI,"SG,SF,Flx",995,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Myke Henry,(N/A),"SF,Flx",996,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Isaiah Hicks,(N/A),"PF,Flx",997,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Stephan Hicks,IND,"SG,Flx",998,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Haywood Highsmith,(N/A),"SG,Flx",999,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ahmed Hill,(N/A),"SG,Flx",1000,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jordan Hill,(N/A),"PF,C,Flx",1001,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Amir Hinton,(N/A),"PG,Flx",1002,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+John Holland,CLE,"SG,Flx",1003,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Aric Holman,(N/A),"PF,Flx",1004,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jonathan Holmes,(N/A),"PF,Flx",1005,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Daulton Hommes,(N/A),"SF,Flx",1006,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tyler Honeycutt,HOU,"SF,Flx",1007,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Scotty Hopson,OKC,"SG,Flx",1008,FA,FA,FA,@GS Mon 10:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Richard Howell,(N/A),"PF,Flx",1009,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Isaac Humphries,(N/A),"PF,Flx",1010,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kris Humphries,(N/A),"PF,C,Flx",1011,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+R.J. Hunter,(N/A),"SG,Flx",1012,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mile Ilic,NO,"C,Flx",1013,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Damien Inglis,NY,"SF,Flx",1014,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Andre Ingram,LAL,"SG,Flx",1015,FA,FA,FA,@SA Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ike Iroegbu,(N/A),"SG,Flx",1016,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jarrett Jack,NO,"PG,SG,Flx",1017,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Aaron Jackson,(N/A),"PG,Flx",1018,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Pierre Jackson,DAL,"PG,Flx",1019,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Damion James,WAS,"SF,Flx",1020,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Dominic James,(N/A),"PG,SG,Flx",1021,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Al Jefferson,(N/A),"PF,C,Flx",1022,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Richard Jefferson,(N/A),"SG,SF,Flx",1023,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+John Jenkins,(N/A),"SG,SF,Flx",1024,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brandon Jennings,MIL,"PG,Flx",1025,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Yi Jianlian,(N/A),"PF,C,Flx",1026,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+DerMarr Johnson,(N/A),"SG,SF,Flx",1027,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jaylen Johnson,CHI,"SF,Flx",1028,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nick Johnson,SA,"SG,Flx",1029,FA,FA,FA,LAL Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Darius Johnson-Odom,MIN,"SG,Flx",1030,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Dominique Jones,DAL,"PG,SG,Flx",1031,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Perry Jones,(N/A),"SF,PF,Flx",1032,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Terrence Jones,HOU,"SF,PF,Flx",1033,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Myck Kabongo,SA,"PG,Flx",1034,FA,FA,FA,LAL Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nikola Kalinic,(N/A),"SF,Flx",1035,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Chris Kaman,(N/A),"PF,C,Flx",1036,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jason Kapono,GS,"SG,SF,Flx",1037,FA,FA,FA,OKC Mon 10:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tre Kelley,(N/A),"PG,Flx",1038,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+D.J. Kennedy,(N/A),"SG,SF,Flx",1039,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sean Kilpatrick,(N/A),"PG,SG,Flx",1040,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Andrei Kirilenko,PHI,"SF,PF,Flx",1041,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Linas Kleiza,TOR,"SF,Flx",1042,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Adam Koch,(N/A),"SG,SF,Flx",1043,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bronson Koenig,(N/A),"SG,Flx",1044,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Yaroslav Korolev,LAC,"SF,PF,Flx",1045,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+David Kramer,(N/A),"PG,Flx",1046,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Viacheslav Kravtsov,PHO,"C,Flx",1047,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mindaugas Kuzminskas,NY,"SF,PF,Flx",1048,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Michale Kyser,(N/A),"PF,Flx",1049,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Trevor Lacey,(N/A),"PG,Flx",1050,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nicolas Laprovittola,SA,"PG,Flx",1051,FA,FA,FA,LAL Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Terry Larrier,(N/A),"PF,Flx",1052,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Joffrey Lauvergne,(N/A),"PF,C,Flx",1053,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ty Lawson,(N/A),"PG,Flx",1054,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marcus Lee,MIA,"C,Flx",1055,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Dwight Lewis,(N/A),"SG,Flx",1056,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+DeAndre Liggins,MIA,"SG,SF,Flx",1057,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sheldon Mac,ATL,"SG,Flx",1058,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Scott Machado,LAL,"PG,SG,Flx",1059,FA,FA,FA,@SA Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Matur Maker,(N/A),"C,Flx",1060,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Devyn Marble,(N/A),"SG,SF,Flx",1061,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Shawn Marion,(N/A),"SG,SF,Flx",1062,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Cartier Martin,(N/A),"SG,SF,Flx",1063,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kenyon Martin,MIL,"PF,C,Flx",1064,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Roger Mason Jr.,SAC,"SG,Flx",1065,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+CJ Massinburg,(N/A),"PG,Flx",1066,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mangok Mathiang,CHA,"PF,C,Flx",1067,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+O.J. Mayo,(N/A),"PG,SG,Flx",1068,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+James Michael McAdoo,PHI,"PF,Flx",1069,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tahjere McCall,(N/A),"SG,Flx",1070,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Erik McCree,UTA,"SF,Flx",1071,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Chris McCullough,DET,"PF,Flx",1072,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+K.J. McDaniels,(N/A),"SF,Flx",1073,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+William McDowell-White,(N/A),"SG,Flx",1074,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mitch McGary,(N/A),"PF,C,Flx",1075,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Josh McRoberts,DAL,"PF,C,Flx",1076,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jodie Meeks,(N/A),"SG,Flx",1077,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Fab Melo,DAL,"C,Flx",1078,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Eric Mika,(N/A),"C,Flx",1079,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Isaiah Miles,(N/A),"SF,Flx",1080,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Darko Milicic,BOS,"C,Flx",1081,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mike Miller,(N/A),"SG,SF,Flx",1082,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Elijah Millsap,(N/A),"SG,SF,Flx",1083,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nick Minnerath,CLE,"PF,Flx",1084,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tommy Mitchell,(N/A),"PG,SG,Flx",1085,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Luis Montero,DET,"SF,Flx",1086,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ben Moore,(N/A),"SF,Flx",1087,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Doral Moore,(N/A),"C,Flx",1088,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jeremy Morgan,MEM,"SG,Flx",1089,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Darius Morris,NO,"PG,SG,Flx",1090,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brock Motum,(N/A),"PF,Flx",1091,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Timofey Mozgov,(N/A),"C,Flx",1092,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Shabazz Muhammad,MIL,"SG,SF,Flx",1093,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mychal Mulder,(N/A),"PG,Flx",1094,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Byron Mullens,(N/A),"PF,C,Flx",1095,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jordan Murphy,(N/A),"SG,Flx",1096,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Hamady Ndiaye,(N/A),"C,Flx",1097,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Gary Neal,ATL,"PG,SG,Flx",1098,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jameer Nelson,(N/A),"PG,Flx",1099,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Spencer Nelson,(N/A),"SF,PF,Flx",1100,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Luke Nevill,IND,"C,Flx",1101,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Landry Nnoko,(N/A),"C,Flx",1102,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Andres Nocioni,PHI,"SF,PF,Flx",1103,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Steve Novak,MIL,"SF,PF,Flx",1104,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+JJ O'Brien,(N/A),"SF,Flx",1105,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Johnny O'Bryant III,NY,"PF,Flx",1106,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Lukasz Obrzut,IND,"C,Flx",1107,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Daniel Ochefu,BOS,"C,Flx",1108,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Greg Oden,(N/A),"C,Flx",1109,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Norense Odiase,(N/A),"C,Flx",1110,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Lamar Odom,NY,"SF,PF,Flx",1111,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Emeka Okafor,PHI,"C,Flx",1112,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mehmet Okur,POR,"C,Flx",1113,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nuni Omot,(N/A),"SF,Flx",1114,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Arinze Onuaku,ORL,"PF,Flx",1115,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Romero Osby,ORL,"SF,PF,Flx",1116,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Yakuba Ouattara,BKN,"SG,Flx",1117,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bo Outlaw,ORL,"PF,Flx",1118,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Travis Outlaw,(N/A),"SF,PF,Flx",1119,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tariq Owens,(N/A),"PF,Flx",1120,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marcus Paige,(N/A),"PG,Flx",1121,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+James Palmer Jr.,(N/A),"SG,Flx",1122,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kevin Palmer,WAS,"SG,SF,Flx",1123,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bubu Palo,(N/A),"PG,Flx",1124,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Georgios Papagiannis,POR,"C,Flx",1125,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kostas Papanikolaou,DEN,"SF,PF,Flx",1126,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nikola Pekovic,MIN,"C,Flx",1127,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kleon Penn,(N/A),"C,Flx",1128,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Josh Perkins,(N/A),"PG,Flx",1129,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+London Perrantes,(N/A),"PG,Flx",1130,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Lamar Peters,(N/A),"PG,Flx",1131,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tarik Phillip,(N/A),"PG,Flx",1132,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mickael Pietrus,(N/A),"SG,SF,Flx",1133,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kavion Pippen,(N/A),"C,Flx",1134,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marshall Plumlee,(N/A),"C,Flx",1135,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+James Posey,IND,"SG,SF,Flx",1136,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+A.J. Price,PHO,"PG,Flx",1137,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Pablo Prigioni,(N/A),"PG,SG,Flx",1138,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tim Quarterman,HOU,"PG,Flx",1139,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Chris Quinn,CLE,"PG,SG,Flx",1140,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Miroslav Raduljica,MIN,"C,Flx",1141,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Shavlik Randolph,DEN,"PF,Flx",1142,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Darius Rice,CLE,"SF,PF,Flx",1143,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Anthony Richardson,NO,"SF,PF,Flx",1144,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Lawrence Roberts,(N/A),"SF,PF,Flx",1145,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Frank Robinson,(N/A),"PG,SG,Flx",1146,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nate Robinson,NO,"PG,SG,Flx",1147,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Thomas Robinson,(N/A),"PF,C,Flx",1148,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Leon Rodgers,(N/A),"SF,PF,Flx",1149,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Magnum Rolle,(N/A),"PF,C,Flx",1150,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brandon Rush,POR,"SG,SF,Flx",1151,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Orlando Sanchez,(N/A),"PF,Flx",1152,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Larry Sanders,CLE,"PF,C,Flx",1153,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mike Scott,(N/A),"PG,Flx",1154,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Shannon Scott,BKN,"SG,Flx",1155,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tornike Shengelia,CHI,"SF,PF,Flx",1156,FA,FA,FA,POR 10<br/>@CHI 12,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jordan Sibert,(N/A),"SG,Flx",1157,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Xavier Silas,(N/A),"SG,Flx",1158,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+DeShawn Sims,BOS,"SF,Flx",1159,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kyle Singler,(N/A),"SG,SF,Flx",1160,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+James Singleton,(N/A),"PF,Flx",1161,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Josh Smith,NO,"SF,PF,Flx",1162,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Scoochie Smith,CLE,"SG,Flx",1163,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Richard Solomon,OKC,"PF,Flx",1164,FA,FA,FA,@GS Mon 10:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+James Southerland,(N/A),"SF,Flx",1165,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marreese Speights,(N/A),"PF,C,Flx",1166,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jonathan Stark,(N/A),"PG,Flx",1167,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+D.J. Stephens,MEM,"SF,Flx",1168,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Elijah Stewart,IND,"SG,Flx",1169,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+David Stockton,(N/A),"PG,Flx",1170,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jarnell Stokes,MEM,"PF,Flx",1171,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Diamond Stone,(N/A),"C,Flx",1172,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Julyan Stone,(N/A),"SG,SF,Flx",1173,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Rodney Stuckey,IND,"PG,SG,Flx",1174,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Rasheed Sulaimon,(N/A),"SG,Flx",1175,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jared Sullinger,PHO,"PF,C,Flx",1176,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bob Sura,HOU,"PG,SG,Flx",1177,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+BJ Taylor,(N/A),"PG,Flx",1178,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Donell Taylor,(N/A),"PG,SG,Flx",1179,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jermaine Taylor,(N/A),"SG,Flx",1180,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marquis Teague,MEM,"PG,Flx",1181,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mirza Teletovic,MIL,"SF,PF,Flx",1182,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jason Terry,(N/A),"PG,SG,Flx",1183,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Hasheem Thabeet,(N/A),"C,Flx",1184,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Adonis Thomas,(N/A),"SF,PF,Flx",1185,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Malcolm Thomas,PHI,"SF,PF,Flx",1186,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Hollis Thompson,(N/A),"SG,SF,Flx",1187,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ryan Thompson,(N/A),"SG,Flx",1188,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marcus Thornton,BKN,"SG,SF,Flx",1189,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jamaal Tinsley,UTA,"PG,Flx",1190,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mike Tisdale,(N/A),"C,Flx",1191,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mike Tobey,CHA,"C,Flx",1192,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Yuki Togashi,(N/A),"PG,Flx",1193,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+J.P. Tokoto,NY,"SF,Flx",1194,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Juan Toscano-Anderson,(N/A),"SF,Flx",1195,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Axel Toupane,(N/A),"SG,SF,Flx",1196,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Travis Trice II,(N/A),"SG,Flx",1197,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Rayjon Tucker,(N/A),"SF,Flx",1198,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Beno Udrih,(N/A),"PG,Flx",1199,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tyler Ulis,(N/A),"PG,Flx",1200,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Robert Upshaw,(N/A),"C,Flx",1201,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jarrod Uthoff,(N/A),"PF,Flx",1202,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Anderson Varejao,GS,"PF,C,Flx",1203,FA,FA,FA,OKC Mon 10:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Greivis Vasquez,BKN,"PG,SG,Flx",1204,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Rashad Vaughn,ORL,"SG,SF,Flx",1205,FA,FA,FA,ORL 55<br/>@DET 53,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marcus Vinicius,MEM,"SF,PF,Flx",1206,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jake Voskuhl,(N/A),"C,Flx",1207,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Corey Walden,(N/A),"PG,Flx",1208,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Luke Walton,(N/A),"SF,Flx",1209,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jason Washburn,(N/A),"C,Flx",1210,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Michael Washington,(N/A),"PF,C,Flx",1211,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+David Wear,SAC,"PF,Flx",1212,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+James Webb III,(N/A),"SF,Flx",1213,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Briante Weber,MIA,"PG,Flx",1214,FA,FA,FA,CHA 41<br/>@MIA 47,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Corey Webster,(N/A),"PG,Flx",1215,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Martell Webster,(N/A),"SG,SF,Flx",1216,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Charlie Westbrook,(N/A),"SG,Flx",1217,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Andrew White III,(N/A),"SF,Flx",1218,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+James White,(N/A),"SG,SF,Flx",1219,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Isaiah Whitehead,(N/A),"PG,SG,Flx",1220,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nick Wiggins,MIN,"SG,Flx",1221,FA,FA,FA,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Scottie Wilbekin,(N/A),"PG,Flx",1222,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+CJ Wilcox,(N/A),"SG,Flx",1223,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jacob Wiley,BKN,"PG,Flx",1224,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tyler Wilkerson,(N/A),"SF,PF,Flx",1225,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Deron Williams,(N/A),"PG,Flx",1226,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Derrick Williams,LAL,"SF,PF,Flx",1227,FA,FA,FA,@SA Mon 8:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Donell Williams,LAC,"PG,SG,Flx",1228,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Marcus Williams,SAC,"PG,Flx",1229,FA,FA,FA,SAC 39<br/>@BOS 28,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+T.J. Williams,(N/A),"SG,Flx",1230,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kyle Wiltjer,TOR,"PF,Flx",1231,FA,FA,FA,PHI 39<br/>@TOR 38,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jeremy Wise,(N/A),"PG,Flx",1232,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Todd Withers,(N/A),"PF,Flx",1233,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Wesley Witherspoon,(N/A),"SG,SF,Flx",1234,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jeff Withey,DAL,"C,Flx",1235,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nate Wolters,UTA,"PG,Flx",1236,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Scott Wood,(N/A),"SF,Flx",1237,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Loren Woods,CLE,"C,Flx",1238,FA,FA,FA,BKN 54<br/>@CLE 55,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brandan Wright,HOU,"PF,C,Flx",1239,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Chris Wright,OKC,"SF,PF,Flx",1240,FA,FA,FA,@GS Mon 10:30PM,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Dorell Wright,(N/A),"SG,SF,Flx",1241,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Joel Wright,(N/A),"SF,Flx",1242,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tony Wroten,(N/A),"PG,SG,Flx",1243,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Khalif Wyatt,(N/A),"PG,Flx",1244,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ding Yanyuhang,(N/A),"SF,Flx",1245,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Gabe York,(N/A),"PG,Flx",1246,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+James Young,MIL,"SG,Flx",1247,FA,FA,FA,UTA 9<br/>@MIL 8,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Joe Young,(N/A),"PG,SG,Flx",1248,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Patric Young,NO,"PF,Flx",1249,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sun Yue,(N/A),"SF,PF,Flx",1250,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Talib Zanna,(N/A),"PF,Flx",1251,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nick Zeisloft,IND,"PG,Flx",1252,FA,FA,FA,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Wang Zhelin,(N/A),"C,Flx",1253,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Stephen Zimmerman Jr.,(N/A),"PF,Flx",1254,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Paul Zipser,(N/A),"SF,PF,Flx",1255,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Maik Zirbes,(N/A),"C,Flx",1256,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+George de Paula,(N/A),"PG,Flx",1257,FA,FA,FA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jared Harper,PHO,"PG,Flx",1260,FA,FA,FA,,-0.5,-0.5,0%,0%,0,1,0,0,0,0,0,0,0,0,0,0,1
+Tremont Waters,BOS,"PG,Flx",1261,FA,FA,FA,SAC 39<br/>@BOS 28,-1,-1,4%,0%,0,2,0,0,0,0,0,0,0,0,0,0,1
+Timothe Luwawu-Cabarrot,BKN,"SG,SF,Flx",1262,FA,FA,FA,BKN 54<br/>@CLE 55,-1,-1,0%,0.00%,0,2,0,1,2,1,0,0,0,0,0,0,1
+Luka Doncic,DAL,"PG,SF,Flx",2,GSW,GSW,GSW,,990,61.88,100%,0%,161,325,52,116,142,490,23,139,156,22,3,73,16
+Tobias Harris,PHI,"SF,PF,Flx",28,GSW,GSW,GSW,PHI 39<br/>@TOR 38,591,34.76,98%,-0.20%,117,234,21,41,53,296,13,109,56,19,11,32,17
+Ben McLemore,HOU,"SG,Flx",239,GSW,GSW,GSW,,214,12.59,14%,-0.30%,38,114,29,19,23,124,7,24,14,11,3,10,17
+Wayne Ellington,NY,"SG,SF,Flx",304,GSW,GSW,GSW,,118,9.08,7%,-1.00%,23,65,20,1,3,67,0,21,12,2,1,9,13
+Juancho Hernangomez,DEN,"SF,PF,Flx",346,GSW,GSW,GSW,,65,8.12,9%,0.90%,11,24,6,2,5,30,4,15,4,0,2,5,8
+Keita Bates-Diop,MIN,"SF,Flx",352,GSW,GSW,GSW,MIN 42<br/>@ATL 39,59,9.83,8%,1.10%,13,26,5,4,7,35,2,9,2,1,3,3,6
+Javonte Green,BOS,"PG,Flx",355,GSW,GSW,GSW,SAC 39<br/>@BOS 28,56,5.6,4%,-1.10%,15,28,2,2,5,34,2,7,3,4,0,1,10
+Courtney Lee,DAL,"SG,SF,Flx",373,GSW,GSW,GSW,,38.5,7.7,2%,0.10%,10,17,4,0,0,24,0,2,3,0,2,0,5
+Amile Jefferson,ORL,"PF,Flx",401,GSW,GSW,GSW,ORL 55<br/>@DET 53,14.5,4.83,1%,0.00%,3,3,0,0,0,6,2,1,2,0,0,1,3
+Thanasis Antetokounmpo,MIL,"SF,Flx",414,GSW,GSW,GSW,UTA 9<br/>@MIL 8,8,2.67,2%,0%,2,4,0,0,0,4,2,0,1,0,0,1,3
+Dragan Bender,MIL,"PF,C,Flx",427,GSW,GSW,GSW,UTA 9<br/>@MIL 8,3.5,3.5,6%,-0.20%,0,0,0,0,0,0,0,0,1,0,1,1,1
+Justin Patton,OKC,"C,Flx",438,GSW,GSW,GSW,@GS Mon 10:30PM,1,1,3%,-0.20%,0,2,0,0,0,0,0,2,0,0,0,1,1
+Vlatko Cancar,DEN,"SF,Flx",481,GSW,GSW,GSW,,0,0,2%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,1
+Justin Wright-Foreman,UTA,"PG,Flx",489,GSW,GSW,GSW,UTA 9<br/>@MIL 8,0,0,2%,-0.20%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Henry Ellenson,BKN,"PF,Flx",499,GSW,GSW,GSW,BKN 54<br/>@CLE 55,0,0,1%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,1
+Devin Booker,PHO,"PG,SG,Flx",18,HOU,HOU,HOU,,614.5,38.41,100%,0.00%,142,274,36,76,80,396,7,52,98,8,5,68,16
+Zach LaVine,CHI,"PG,SG,Flx",33,HOU,HOU,HOU,POR 10<br/>@CHI 12,566.5,31.47,100%,0%,130,303,50,54,66,364,15,55,64,20,7,57,18
+Lauri Markkanen,CHI,"PF,Flx",62,HOU,HOU,HOU,POR 10<br/>@CHI 12,464,25.78,100%,-0.10%,71,200,27,68,84,237,17,110,27,16,9,35,18
+Josh Richardson,PHI,"SG,SF,Flx",82,HOU,HOU,HOU,PHI 39<br/>@TOR 38,426,28.4,98%,-0.20%,85,188,29,38,45,237,10,41,54,18,8,36,15
+Collin Sexton,CLE,"PG,SG,Flx",104,HOU,HOU,HOU,BKN 54<br/>@CLE 55,383,22.53,95%,-0.70%,111,259,21,48,60,291,13,38,34,13,1,29,17
+George Hill,MIL,"PG,SG,Flx",125,HOU,HOU,HOU,UTA 9<br/>@MIL 8,346.5,21.66,33%,-1.80%,51,100,23,22,28,147,17,34,49,12,2,11,16
+DeAndre Hunter,ATL,"SF,Flx",130,HOU,HOU,HOU,MIN 42<br/>@ATL 39,342.5,20.15,79%,15.70%,73,175,28,29,39,203,8,58,29,11,4,26,17
+Draymond Green,GS,"PF,C,Flx",162,HOU,HOU,HOU,OKC Mon 10:30PM,311.5,31.15,98%,-0.40%,33,87,8,13,17,87,6,68,54,12,5,17,10
+Mike Scott,PHI,"PF,Flx",240,HOU,HOU,HOU,PHI 39<br/>@TOR 38,213,12.53,9%,-0.50%,38,85,18,7,7,101,12,47,10,3,1,7,17
+Kyle Korver,MIL,"SG,SF,Flx",294,HOU,HOU,HOU,UTA 9<br/>@MIL 8,134,10.31,11%,-0.40%,28,72,23,6,8,85,5,15,3,5,4,11,13
+Malik Beasley,DEN,"PG,SG,SF,Flx",312,HOU,HOU,HOU,,110,10,20%,-1.00%,24,65,14,3,3,65,4,11,10,6,2,13,11
+Elie Okobo,PHO,"PG,Flx",314,HOU,HOU,HOU,,108,9.82,7%,1.30%,15,39,7,9,17,46,1,11,26,3,0,3,11
+Justin James,SAC,"SG,Flx",361,HOU,HOU,HOU,SAC 39<br/>@BOS 28,50,7.14,4%,2.00%,12,26,3,1,6,28,0,7,5,2,3,2,7
+Deandre Ayton,PHO,"C,Flx",366,HOU,HOU,HOU,,46,46,99%,0.10%,9,14,0,0,0,18,3,8,0,1,4,0,1
+Harry Giles,SAC,"PF,C,Flx",376,HOU,HOU,HOU,SAC 39<br/>@BOS 28,36.5,7.3,24%,-2.10%,9,22,0,2,2,20,3,3,4,1,2,3,5
+Marial Shayok,PHI,"SF,Flx",485,HOU,HOU,HOU,PHI 39<br/>@TOR 38,0,0,2%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Joel Embiid,PHI,"PF,C,Flx",34,IND,IND,IND,PHI 39<br/>@TOR 38,564.5,43.42,100%,0%,93,198,17,70,90,273,33,111,36,14,17,35,13
+Kristaps Porzingis,DAL,"PF,C,Flx",35,IND,IND,IND,,563,37.53,99%,0%,101,243,34,41,57,277,26,111,24,6,33,25,15
+Davis Bertans,WAS,"PF,C,Flx",112,IND,IND,IND,,371,26.5,76%,21.50%,62,136,47,11,12,182,9,55,26,9,6,10,14
+Jakob Poeltl,SA,"C,Flx",153,IND,IND,IND,LAL Mon 8:30PM,320.5,18.85,38%,4.30%,42,73,0,14,26,98,38,56,26,9,13,17,17
+Skal Labissiere,POR,"PF,C,Flx",171,IND,IND,IND,POR 10<br/>@CHI 12,302,17.76,23%,11.20%,47,83,2,13,20,109,34,47,20,4,19,20,17
+Jalen Brunson,DAL,"PG,Flx",188,IND,IND,IND,,272,17,23%,-2.50%,50,102,9,16,25,125,10,34,46,10,0,15,16
+Kevin Porter Jr.,CLE,"SG,SF,Flx",226,IND,IND,IND,BKN 54<br/>@CLE 55,224,14,22%,0.70%,40,98,8,19,25,107,5,40,27,12,4,20,16
+Cameron Johnson,PHO,"SG,SF,Flx",228,IND,IND,IND,,223.5,15.96,30%,0.10%,41,98,27,14,15,123,10,28,10,8,4,9,14
+Hamidou Diallo,OKC,"SG,Flx",238,IND,IND,IND,@GS Mon 10:30PM,214,17.83,20%,-6.50%,46,92,2,11,18,105,14,32,10,18,4,14,12
+Shaquille Harrison,CHI,"PG,Flx",318,IND,IND,IND,POR 10<br/>@CHI 12,104.5,9.5,13%,8.40%,13,31,1,8,12,35,2,21,14,5,3,2,11
+Allonzo Trier,NY,"SG,Flx",326,IND,IND,IND,,93,11.62,15%,-1.40%,16,34,9,16,21,57,1,11,12,2,3,14,8
+Victor Oladipo,IND,"PG,SG,Flx",443,IND,IND,IND,MEM 58<br/>@IND 77,0,0,96%,0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ty Jerome,PHO,"PG,Flx",456,IND,IND,IND,,0,0,14%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sekou Doumbouya,DET,"SF,PF,Flx",1258,IND,IND,IND,ORL 55<br/>@DET 53,-0.5,-0.5,20%,-1%,0,1,0,0,0,0,0,0,0,0,0,0,1
+Keldon Johnson,SA,"SF,Flx",1259,IND,IND,IND,LAL Mon 8:30PM,-0.5,-0.5,12%,-0.10%,0,1,0,0,0,0,0,0,0,0,0,0,1
+Richaun Holmes,SAC,"PF,C,Flx",64,LAC,LAC,LAC,SAC 39<br/>@BOS 28,460,28.75,82%,4.00%,76,115,0,27,34,179,39,88,13,11,24,16,16
+Brook Lopez,MIL,"C,Flx",69,LAC,LAC,LAC,UTA 9<br/>@MIL 8,441,25.94,97%,1.00%,61,145,24,33,36,179,11,67,23,13,40,18,17
+Mike Conley,UTA,"PG,Flx",77,LAC,LAC,LAC,UTA 9<br/>@MIL 8,432,25.41,96%,-0.40%,81,213,32,54,69,248,10,43,73,13,2,35,17
+Dorian Finney-Smith,DAL,"SF,PF,Flx",144,LAC,LAC,LAC,,327,20.44,23%,3%,54,111,19,18,28,145,30,56,16,11,6,17,16
+Norman Powell,TOR,"SG,SF,Flx",156,LAC,LAC,LAC,PHI 39<br/>@TOR 38,319,19.94,59%,1.20%,66,146,23,28,34,183,7,53,25,10,5,22,16
+Jordan Poole,GS,"SG,Flx",196,LAC,LAC,LAC,OKC Mon 10:30PM,259,15.24,24%,-3.20%,49,181,22,30,33,150,3,39,39,11,4,24,17
+Emmanuel Mudiay,UTA,"PG,Flx",245,LAC,LAC,LAC,UTA 9<br/>@MIL 8,208,16,19%,-0.70%,46,89,6,16,20,114,5,31,29,6,4,26,13
+Damyean Dotson,NY,"SG,Flx",306,LAC,LAC,LAC,,117,9,8%,0.20%,25,65,8,3,5,61,2,20,11,6,2,6,13
+Elfrid Payton,NY,"PG,Flx",323,LAC,LAC,LAC,,94.5,23.62,49%,-2.50%,11,29,5,5,6,32,3,9,15,10,0,7,4
+Patrick McCaw,TOR,"SG,SF,Flx",388,LAC,LAC,LAC,PHI 39<br/>@TOR 38,27.5,13.75,5%,0.00%,3,5,1,1,2,8,2,4,3,3,0,3,2
+Jordan Bone,DET,"PG,Flx",441,LAC,LAC,LAC,ORL 55<br/>@DET 53,0.5,0.17,3%,0.10%,2,5,0,0,0,4,0,0,0,0,0,2,3
+Josh Jackson,MEM,"SG,SF,Flx",450,LAC,LAC,LAC,MEM 58<br/>@IND 77,0,0,20%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Isaiah Roby,DAL,"PF,Flx",471,LAC,LAC,LAC,,0,0,4%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Khyri Thomas,DET,"SG,Flx",472,LAC,LAC,LAC,ORL 55<br/>@DET 53,0,0,4%,0%,0,0,0,1,2,1,0,0,0,0,0,0,2
+Kyle Alexander,(N/A),"PF,Flx",495,LAC,LAC,LAC,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Anzejs Pasecniks,(N/A),"C,Flx",511,LAC,LAC,LAC,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Donovan Mitchell,UTA,"PG,SG,Flx",13,LAL,LAL,LAL,UTA 9<br/>@MIL 8,642.5,37.79,100%,0%,151,333,37,76,92,415,19,72,63,21,4,37,17
+Kendrick Nunn,MIA,"PG,Flx",89,LAL,LAL,LAL,CHA 41<br/>@MIA 47,414,25.88,84%,0.20%,103,214,34,18,22,258,2,37,49,20,4,36,16
+Brandon Clarke,MEM,"PF,C,Flx",98,LAL,LAL,LAL,MEM 58<br/>@IND 77,394,26.27,90%,0.90%,79,126,9,17,20,184,23,69,17,9,15,16,15
+Aaron Gordon,ORL,"SF,PF,Flx",106,LAL,LAL,LAL,ORL 55<br/>@DET 53,382,27.29,98%,-0.30%,67,159,15,34,47,183,23,64,40,9,7,19,14
+Tyler Herro,MIA,"SG,SF,Flx",132,LAL,LAL,LAL,CHA 41<br/>@MIA 47,340,22.67,83%,0.80%,73,162,30,31,38,207,5,52,33,11,2,32,15
+Mikal Bridges,PHO,"SG,SF,Flx",189,LAL,LAL,LAL,,271.5,16.97,57%,2%,33,74,5,24,29,95,13,47,18,25,4,8,16
+James Ennis III,PHI,"SG,SF,Flx",210,LAL,LAL,LAL,PHI 39<br/>@TOR 38,241,14.18,8%,0.10%,43,79,12,17,24,115,24,36,12,7,3,12,17
+Troy Brown,WAS,"SG,SF,Flx",234,LAL,LAL,LAL,,217,19.73,38%,-6.60%,29,70,6,7,8,71,15,40,25,12,1,11,11
+Goga Bitadze,IND,"C,Flx",262,LAL,LAL,LAL,MEM 58<br/>@IND 77,184,16.73,33%,-5.90%,25,48,4,11,15,65,13,28,12,1,18,9,11
+Bruno Fernando,ATL,"C,Flx",263,LAL,LAL,LAL,MIN 42<br/>@ATL 39,182,10.71,25%,-1.40%,29,53,2,9,17,69,17,33,17,4,7,14,17
+Michael Carter-Williams,ORL,"PG,Flx",293,LAL,LAL,LAL,ORL 55<br/>@DET 53,134.5,13.45,8%,-1.20%,14,47,3,16,20,47,11,20,13,8,6,8,10
+Dzanan Musa,BKN,"SF,Flx",300,LAL,LAL,LAL,BKN 54<br/>@CLE 55,126,10.5,12%,0.80%,20,59,5,17,22,62,6,29,14,6,0,15,12
+Cheick Diallo,PHO,"PF,C,Flx",319,LAL,LAL,LAL,,103.5,9.41,9%,1.80%,24,30,0,5,6,53,7,17,5,0,4,5,11
+Michael Porter Jr.,DEN,"SF,Flx",339,LAL,LAL,LAL,,74.5,7.45,44%,-2.30%,15,34,2,5,8,37,8,15,4,0,3,6,10
+Wes Iwundu,ORL,"SG,SF,Flx",359,LAL,LAL,LAL,ORL 55<br/>@DET 53,51.5,6.44,4%,0.70%,4,22,0,11,14,19,3,13,6,3,1,3,8
+Jarred Vanderbilt,DEN,"SF,Flx",423,LAL,LAL,LAL,,4,1.33,6%,-0.10%,0,0,0,0,0,0,0,2,1,0,0,1,3
+Zach Norvell Jr.,LAL,"SG,Flx",437,LAL,LAL,LAL,@SA Mon 8:30PM,1,0.5,4%,-0.30%,0,1,0,0,0,0,0,1,0,0,0,0,2
+Will Barton,DEN,"SG,SF,Flx",79,CLE,CLE,MEM,,430.5,33.12,89%,0.00%,74,163,26,26,35,200,25,65,39,13,6,15,13
+Glenn Robinson III,GS,"SG,SF,Flx",93,MEM,MEM,MEM,OKC Mon 10:30PM,408,24,59%,2.30%,77,161,20,17,19,191,31,56,33,16,2,16,17
+Jeff Teague,MIN,"PG,Flx",115,MEM,MEM,MEM,MIN 42<br/>@ATL 39,368.5,28.35,94%,0.60%,50,116,8,50,61,158,6,26,93,11,4,28,13
+Markelle Fultz,ORL,"PG,SG,Flx",138,MEM,MEM,MEM,ORL 55<br/>@DET 53,331.5,20.72,74%,3.90%,70,142,6,26,32,172,7,26,54,21,2,23,16
+Garrett Temple,BKN,"SG,SF,Flx",158,MEM,MEM,MEM,BKN 54<br/>@CLE 55,316.5,18.62,21%,4.50%,49,125,30,17,22,145,8,39,27,18,10,14,17
+Ersan Ilyasova,MIL,"SF,PF,Flx",241,MEM,MEM,MEM,UTA 9<br/>@MIL 8,212.5,15.18,14%,-1.50%,28,68,8,16,18,80,15,52,8,6,5,5,14
+Darius Bazley,OKC,"SF,PF,Flx",266,MEM,MEM,MEM,@GS Mon 10:30PM,179,11.93,19%,-1.00%,27,60,12,7,12,73,5,51,9,5,5,14,15
+Noah Vonleh,MIN,"PF,C,Flx",272,MEM,MEM,MEM,MIN 42<br/>@ATL 39,163,11.64,15%,-2%,20,43,1,16,19,57,17,34,15,4,3,13,14
+Ed Davis,UTA,"PF,C,Flx",348,MEM,MEM,MEM,UTA 9<br/>@MIL 8,63,10.5,15%,-0.20%,4,10,0,2,4,10,9,22,1,1,3,5,6
+Jacob Evans III,GS,"SG,Flx",384,MEM,MEM,MEM,OKC Mon 10:30PM,29.5,9.83,9%,-0.10%,5,12,4,4,4,18,1,4,2,0,0,1,3
+Kevon Looney,GS,"PF,C,Flx",393,MEM,MEM,MEM,OKC Mon 10:30PM,19.5,19.5,60%,3.60%,1,4,1,0,0,3,5,4,1,0,0,1,1
+Stanley Johnson,TOR,"SG,SF,Flx",397,MEM,MEM,MEM,PHI 39<br/>@TOR 38,15,3,7%,-0.60%,3,9,1,0,0,7,2,5,0,1,0,4,5
+Tacko Fall,BOS,"C,Flx",416,MEM,MEM,MEM,SAC 39<br/>@BOS 28,6.5,6.5,18%,-0.80%,2,4,0,0,0,4,0,3,0,0,0,1,1
+Reggie Bullock,NY,"SG,SF,Flx",458,MEM,MEM,MEM,,0,0,11%,-0.20%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Andre Roberson,OKC,"SG,SF,Flx",462,MEM,MEM,MEM,@GS Mon 10:30PM,0,0,7%,-0.30%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jalen Lecque,PHO,"PG,Flx",466,MEM,MEM,MEM,,0,0,5%,0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+DAngelo Russell,GS,"PG,SG,Flx",100,MIA,MIA,MIA,OKC Mon 10:30PM,393.5,39.35,99%,-0.60%,85,187,28,45,59,243,2,34,67,8,5,34,10
+Bryn Forbes,SA,"PG,SG,Flx",127,MIA,MIA,MIA,LAL Mon 8:30PM,346,20.35,57%,-1.30%,77,191,42,29,32,225,6,39,29,9,0,12,17
+Kent Bazemore,POR,"SG,SF,Flx",152,MIA,MIA,MIA,POR 10<br/>@CHI 12,320.5,18.85,46%,0%,46,134,22,21,29,135,5,66,33,14,13,27,17
+Matthew Dellavedova,CLE,"PG,SG,Flx",290,MIA,MIA,MIA,BKN 54<br/>@CLE 55,135,9,4%,-0.40%,12,47,3,12,13,39,4,20,35,6,1,14,15
+Tyson Chandler,HOU,"C,Flx",296,MIA,MIA,MIA,,132,8.8,7%,-2.50%,11,15,0,4,7,26,18,27,6,4,7,5,15
+Tim Frazier,DET,"PG,SG,Flx",320,MIA,MIA,MIA,ORL 55<br/>@DET 53,100.5,10.05,5%,-1.50%,8,38,3,11,14,30,3,6,30,8,1,12,10
+Tyrone Wallace,ATL,"PG,SG,Flx",338,MIA,MIA,MIA,MIN 42<br/>@ATL 39,75,6.82,4%,-1%,12,35,0,11,17,35,3,16,12,5,0,9,11
+Yuta Watanabe,MEM,"SG,SF,Flx",420,MIA,MIA,MIA,MEM 58<br/>@IND 77,5.5,5.5,2%,0%,2,2,0,0,0,4,0,1,0,0,0,0,1
+Michael Beasley,(N/A),"SF,PF,Flx",527,MIA,MIA,MIA,,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Dante Cunningham,(N/A),"SF,PF,Flx",564,MIA,MIA,MIA,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Lou Williams,LAC,"PG,SG,Flx",29,MIL,MIL,MIL,,585.5,34.44,100%,0.10%,124,286,29,105,122,382,12,49,98,9,3,51,17
+Andrew Wiggins,MIN,"SG,SF,Flx",50,MIL,MIL,MIL,MIN 42<br/>@ATL 39,515.5,36.82,99%,0.00%,134,280,30,41,59,339,17,51,46,9,15,25,14
+Jaren Jackson Jr.,MEM,"PF,C,Flx",111,MIL,MIL,MIL,MEM 58<br/>@IND 77,374,24.93,99%,-0.40%,81,169,27,29,36,218,22,51,17,8,13,27,15
+Marc Gasol,TOR,"C,Flx",116,MIL,MIL,MIL,PHI 39<br/>@TOR 38,367.5,22.97,83%,-0.10%,32,96,19,13,15,96,11,93,49,7,13,23,16
+Delon Wright,DAL,"PG,SG,Flx",123,MIL,MIL,MIL,,350,21.88,74%,-5.90%,50,100,8,22,28,130,12,43,51,19,6,10,16
+Treveon Graham,MIN,"SG,SF,Flx",211,MIL,MIL,MIL,MIN 42<br/>@ATL 39,239.5,14.97,12%,-2.00%,39,112,10,14,18,102,18,42,22,12,2,10,16
+Kyle Kuzma,LAL,"SF,PF,Flx",242,MIL,MIL,MIL,@SA Mon 8:30PM,210,17.5,95%,-0.90%,54,117,21,17,23,146,6,38,7,2,5,20,12
+Rondae Hollis-Jefferson,TOR,"SF,PF,Flx",255,MIL,MIL,MIL,PHI 39<br/>@TOR 38,195,21.67,27%,-0.20%,32,55,0,17,24,81,25,28,12,8,3,11,9
+TJ Leaf,IND,"PF,Flx",270,MIL,MIL,MIL,MEM 58<br/>@IND 77,167.5,12.88,11%,-0.70%,25,55,5,5,8,60,19,36,6,6,3,6,13
+Patrick Patterson,LAC,"PF,C,Flx",271,MIL,MIL,MIL,,167,11.13,9%,-1.30%,23,63,19,2,4,67,11,34,13,2,2,6,15
+Cody Martin,CHA,"SF,Flx",286,MIL,MIL,MIL,CHA 41<br/>@MIA 47,141.5,10.11,10%,-1.00%,13,37,1,15,21,42,7,28,17,12,1,6,14
+Nassir Little,POR,"SF,Flx",287,MIL,MIL,MIL,POR 10<br/>@CHI 12,136,13.6,24%,4.90%,20,50,5,10,16,55,14,29,4,5,4,5,10
+Nicolas Batum,CHA,"SG,SF,Flx",291,MIL,MIL,MIL,CHA 41<br/>@MIA 47,134.5,19.21,46%,-3.30%,7,16,7,0,0,21,4,27,28,4,3,11,7
+Shabazz Napier,MIN,"PG,Flx",295,MIL,MIL,MIL,MIN 42<br/>@ATL 39,132,22,17%,-0.90%,13,43,7,14,16,47,1,14,27,9,3,12,6
+Jerome Robinson,LAC,"SG,Flx",325,MIL,MIL,MIL,,93.5,7.79,9%,-0.10%,16,41,8,2,2,42,0,11,13,4,5,9,12
+Grayson Allen,MEM,"SG,Flx",349,MIL,MIL,MIL,MEM 58<br/>@IND 77,63,10.5,13%,-1%,12,36,5,10,12,39,1,10,9,2,0,7,6
+John Henson,CLE,"PF,C,Flx",405,MIL,MIL,MIL,BKN 54<br/>@CLE 55,12,12,7%,-0.10%,1,2,0,1,6,3,2,1,0,2,2,1,1
+Quinndary Weatherspoon,SA,"SG,Flx",479,MIL,MIL,MIL,LAL Mon 8:30PM,0,0,3%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Rudy Gobert,UTA,"C,Flx",24,MIN,MIN,MIN,UTA 9<br/>@MIL 8,603.5,40.23,100%,0.10%,72,109,0,56,87,200,46,165,16,15,32,36,15
+Kyrie Irving,BKN,"PG,SG,Flx",43,MIN,MIN,MIN,BKN 54<br/>@CLE 55,541.5,49.23,100%,-0.10%,112,252,31,59,63,314,10,49,79,12,6,26,11
+Alec Burks,GS,"PG,SG,Flx",117,MIN,MIN,MIN,OKC Mon 10:30PM,366.5,26.18,71%,6.20%,65,155,19,60,66,209,7,54,35,11,6,18,14
+Willie Cauley-Stein,GS,"PF,C,Flx",135,MIN,MIN,MIN,OKC Mon 10:30PM,336.5,24.04,83%,-0.10%,48,83,0,10,13,106,15,70,24,15,17,12,14
+Kelly Olynyk,MIA,"PF,C,Flx",136,MIN,MIN,MIN,CHA 41<br/>@MIA 47,334,20.88,50%,-0.30%,41,97,26,15,18,123,14,65,26,16,7,19,16
+Royce ONeale,UTA,"SF,Flx",147,MIN,MIN,MIN,UTA 9<br/>@MIL 8,326,19.18,19%,-1.40%,34,65,19,10,12,97,1,76,42,13,4,15,17
+Markieff Morris,DET,"PF,C,Flx",154,MIN,MIN,MIN,ORL 55<br/>@DET 53,320.5,18.85,32%,-6%,68,146,27,22,30,185,7,57,26,12,2,31,17
+Khris Middleton,MIL,"SG,SF,Flx",159,MIN,MIN,MIN,UTA 9<br/>@MIL 8,314.5,31.45,96%,-0.70%,65,139,24,31,35,185,7,50,29,8,1,23,10
+Joe Ingles,UTA,"SG,SF,Flx",165,MIN,MIN,MIN,UTA 9<br/>@MIL 8,309.5,19.34,69%,-6.70%,34,103,20,14,18,102,5,66,56,10,2,25,16
+Christian Wood,DET,"PF,C,Flx",191,MIN,MIN,MIN,ORL 55<br/>@DET 53,268.5,17.9,19%,2.30%,45,74,11,25,35,126,16,46,6,5,17,12,15
+Mario Hezonja,POR,"SG,SF,Flx",209,MIN,MIN,MIN,POR 10<br/>@CHI 12,241,15.06,19%,-3.40%,28,79,10,17,21,83,11,70,17,11,2,16,16
+Jerami Grant,DEN,"SF,PF,Flx",218,MIN,MIN,MIN,,233.5,15.57,50%,-1.90%,49,115,14,15,26,127,9,44,16,4,9,12,15
+Dwight Powell,DAL,"PF,C,Flx",227,MIN,MIN,MIN,,223.5,17.19,64%,-10%,40,62,2,13,24,95,23,34,17,7,6,15,13
+Seth Curry,DAL,"PG,SG,Flx",252,MIN,MIN,MIN,,199.5,14.25,27%,-1%,35,83,18,17,19,105,5,17,24,9,3,11,14
+Derrick Jones Jr.,MIA,"SF,Flx",364,MIN,MIN,MIN,CHA 41<br/>@MIA 47,48,12,19%,-0.90%,12,20,1,3,3,28,3,5,2,3,0,2,4
+Dewan Hernandez,TOR,"C,Flx",408,MIN,MIN,MIN,PHI 39<br/>@TOR 38,9,4.5,3%,0.40%,1,2,0,0,0,2,0,4,0,1,0,1,2
+Julius Randle,NY,"PF,C,Flx",38,NOP,NOP,NOP,,559.5,32.91,100%,0%,106,239,16,49,80,277,43,111,64,14,3,59,17
+Spencer Dinwiddie,BKN,"PG,Flx",53,NOP,NOP,NOP,BKN 54<br/>@CLE 55,509,29.94,96%,2.30%,103,245,28,92,107,326,3,37,86,13,6,40,17
+Jae Crowder,MEM,"SF,PF,Flx",90,NOP,NOP,NOP,MEM 58<br/>@IND 77,412.5,25.78,71%,5.00%,55,133,35,17,26,162,10,81,46,15,7,25,16
+Dennis Schroder,OKC,"PG,Flx",101,NOP,NOP,NOP,@GS Mon 10:30PM,392.5,26.17,88%,-1.80%,85,196,17,33,43,220,7,59,60,13,4,44,15
+Jordan Clarkson,CLE,"PG,SG,Flx",120,NOP,NOP,NOP,BKN 54<br/>@CLE 55,366,21.53,69%,-4.30%,75,178,27,60,68,237,11,26,38,11,6,18,17
+Thaddeus Young,CHI,"SF,PF,Flx",133,NOP,NOP,NOP,POR 10<br/>@CHI 12,338.5,19.91,62%,-7.10%,64,158,19,14,23,161,31,42,29,17,6,26,17
+Cedi Osman,CLE,"SF,PF,Flx",140,NOP,NOP,NOP,BKN 54<br/>@CLE 55,331,19.47,51%,-6.60%,55,134,26,11,18,147,8,59,35,17,3,20,17
+Donte DiVincenzo,MIL,"SG,Flx",197,NOP,NOP,NOP,UTA 9<br/>@MIL 8,257.5,18.39,42%,24.90%,42,96,18,5,8,107,12,40,20,19,2,14,14
+Jahlil Okafor,NO,"C,Flx",236,NOP,NOP,NOP,,216,21.6,30%,-2.10%,40,60,0,19,30,99,19,31,13,4,13,15,10
+Pat Connaughton,MIL,"SG,SF,Flx",243,NOP,NOP,NOP,UTA 9<br/>@MIL 8,210,15,13%,-0.20%,31,67,14,3,3,79,5,40,22,3,7,4,14
+Robin Lopez,MIL,"C,Flx",282,NOP,NOP,NOP,UTA 9<br/>@MIL 8,148.5,9.28,15%,0%,29,61,7,7,13,72,13,28,8,3,8,20,16
+Dante Exum,UTA,"PG,SG,Flx",403,NOP,NOP,NOP,UTA 9<br/>@MIL 8,13,3.25,11%,-0.40%,2,7,0,0,0,4,1,1,2,1,1,1,4
+Kostas Antetokounmpo,LAL,"SF,PF,Flx",434,NOP,NOP,NOP,@SA Mon 8:30PM,1.5,0.75,6%,-0.20%,0,0,0,0,0,0,0,1,0,0,0,0,2
+Jusuf Nurkic,POR,"C,Flx",444,NOP,NOP,NOP,POR 10<br/>@CHI 12,0,0,57%,-1.30%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Romeo Langford,BOS,"PG,SG,Flx",452,NOP,NOP,NOP,SAC 39<br/>@BOS 28,0,0,16%,-0.70%,0,0,0,0,0,0,0,0,0,0,0,0,1
+Andre Drummond,DET,"PF,C,Flx",5,NYK,NYK,NYK,ORL 55<br/>@DET 53,846,49.76,100%,0%,126,230,0,48,70,300,74,199,49,27,30,67,17
+Russell Westbrook,HOU,"PG,Flx",15,NYK,NYK,NYK,,635,42.33,99%,-0.30%,121,292,20,71,100,333,21,92,102,24,5,60,15
+Larry Nance Jr.,CLE,"PF,C,Flx",103,NYK,NYK,NYK,BKN 54<br/>@CLE 55,390.5,26.03,86%,2.10%,58,108,17,18,25,151,28,78,19,17,6,14,15
+Kenrich Williams,NO,"SF,PF,Flx",105,NYK,NYK,NYK,,382.5,22.5,47%,2.60%,35,83,17,8,17,95,31,74,33,17,14,13,17
+Derrick Rose,DET,"PG,Flx",160,NYK,NYK,NYK,ORL 55<br/>@DET 53,314,26.17,92%,-0.80%,76,149,8,36,40,196,4,17,57,11,5,37,12
+ETwaun Moore,NO,"SG,SF,Flx",233,NYK,NYK,NYK,,218,18.17,17%,4.20%,52,120,18,10,16,132,13,24,19,5,1,7,12
+Blake Griffin,DET,"PF,C,Flx",289,NYK,NYK,NYK,ORL 55<br/>@DET 53,135.5,27.1,98%,-0.20%,28,68,6,26,32,88,6,17,17,2,2,14,5
+Trey Burke,PHI,"PG,Flx",330,NYK,NYK,NYK,PHI 39<br/>@TOR 38,90.5,15.08,9%,-0.80%,14,41,4,6,8,38,4,7,20,2,1,2,6
+David Nwaba,BKN,"SG,SF,Flx",342,NYK,NYK,NYK,BKN 54<br/>@CLE 55,68,6.8,4%,-0.60%,6,10,1,6,10,19,3,18,3,2,6,5,10
+James Johnson,MIA,"SF,PF,Flx",363,NYK,NYK,NYK,CHA 41<br/>@MIA 47,48.5,9.7,14%,-1.20%,8,18,2,2,4,20,2,8,4,3,2,3,5
+Jared Dudley,LAL,"SF,PF,Flx",369,NYK,NYK,NYK,@SA Mon 8:30PM,41.5,4.15,3%,0.10%,4,9,4,0,0,12,0,8,6,1,1,1,10
+Marvin Bagley III,SAC,"PF,Flx",387,NYK,NYK,NYK,SAC 39<br/>@BOS 28,28,28,98%,0.20%,6,16,0,2,4,14,4,6,0,1,1,1,1
+Jonathon Simmons,(N/A),"SG,SF,Flx",506,NYK,NYK,NYK,,0,0,1%,-0.20%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Omri Casspi,MEM,"SF,PF,Flx",571,NYK,NYK,NYK,MEM 58<br/>@IND 77,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Fred VanVleet,TOR,"PG,SG,Flx",22,OKC,OKC,OKC,PHI 39<br/>@TOR 38,605.5,37.84,99%,0%,91,230,39,62,69,283,3,59,117,27,2,41,16
+Terry Rozier,CHA,"PG,SG,Flx",47,OKC,OKC,OKC,CHA 41<br/>@MIA 47,525,29.17,98%,0%,107,246,38,50,59,302,12,54,77,20,3,53,18
+Evan Fournier,ORL,"SG,SF,Flx",75,OKC,OKC,OKC,ORL 55<br/>@DET 53,436.5,27.28,92%,2%,99,205,38,38,46,274,2,43,54,13,3,31,16
+Nemanja Bjelica,SAC,"PF,Flx",83,OKC,OKC,OKC,SAC 39<br/>@BOS 28,425,26.56,67%,9.70%,63,127,28,7,8,161,27,74,36,16,6,23,16
+Ivica Zubac,LAC,"C,Flx",102,OKC,OKC,OKC,,392,23.06,65%,-2.50%,55,92,0,32,41,142,43,77,16,3,21,16,17
+JJ Redick,NO,"SG,Flx",107,OKC,OKC,OKC,,380,23.75,88%,7.70%,74,166,54,40,47,242,4,42,30,7,5,24,16
+Kris Dunn,CHI,"PG,SG,Flx",122,OKC,OKC,OKC,POR 10<br/>@CHI 12,361,21.24,48%,0.40%,48,108,6,9,13,111,8,43,55,35,6,15,17
+Nerlens Noel,OKC,"PF,C,Flx",155,OKC,OKC,OKC,@GS Mon 10:30PM,320,22.86,63%,12.10%,41,64,0,22,27,104,17,49,24,16,22,18,14
+Wesley Matthews,MIL,"SG,SF,Flx",225,OKC,OKC,OKC,UTA 9<br/>@MIL 8,226,13.29,24%,-1%,41,95,25,15,19,122,2,34,19,11,1,13,17
+Avery Bradley,LAL,"PG,SG,Flx",261,OKC,OKC,OKC,@SA Mon 8:30PM,184.5,18.45,18%,-3.30%,41,84,8,6,8,96,7,25,18,10,1,11,10
+Marco Belinelli,SA,"SG,SF,Flx",278,OKC,OKC,OKC,LAL Mon 8:30PM,155.5,9.15,9%,0%,31,107,16,10,16,88,1,24,27,5,0,9,17
+C.J. Miles,WAS,"SG,SF,Flx",307,OKC,OKC,OKC,,114.5,12.72,13%,-0.70%,18,52,11,12,15,59,4,7,10,8,4,4,9
+DeMarcus Cousins,LAL,"PF,C,Flx",447,OKC,OKC,OKC,@SA Mon 8:30PM,0,0,45%,-0.70%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Alpha Kaba,ATL,"PF,Flx",591,OKC,OKC,OKC,MIN 42<br/>@ATL 39,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+James Harden,HOU,"PG,SG,Flx",1,ORL,ORL,ORL,,1007.5,59.26,100%,0%,179,411,79,208,241,645,15,89,136,28,8,93,17
+Kevin Love,CLE,"PF,C,Flx",39,ORL,ORL,CLE,BKN 54<br/>@CLE 55,558,39.86,98%,-1%,74,166,30,73,82,251,16,149,38,11,6,42,14
+Buddy Hield,SAC,"SG,Flx",67,ORL,ORL,ORL,SAC 39<br/>@BOS 28,444.5,27.78,100%,0.00%,104,255,54,31,35,293,13,54,35,12,6,45,16
+Robert Covington,MIN,"SF,PF,Flx",84,ORL,ORL,ORL,MIN 42<br/>@ATL 39,424.5,26.53,97%,-0.40%,67,147,31,33,38,198,11,76,17,23,16,27,16
+Frank Ntilikina,NY,"PG,SG,Flx",141,ORL,ORL,ORL,,329.5,20.59,40%,-0.40%,38,100,13,13,17,102,8,31,57,26,10,17,16
+Rodney Hood,POR,"SG,SF,Flx",151,ORL,ORL,ORL,POR 10<br/>@CHI 12,320.5,20.03,50%,-3.70%,67,130,26,16,21,176,9,46,20,14,4,17,16
+DeAaron Fox,SAC,"PG,Flx",177,ORL,ORL,ORL,SAC 39<br/>@BOS 28,295,32.78,99%,-0.20%,55,128,10,44,62,164,5,31,63,7,5,37,9
+Anthony Tolliver,POR,"SF,PF,Flx",274,ORL,ORL,ORL,POR 10<br/>@CHI 12,158.5,11.32,6%,-0.90%,16,54,13,9,11,54,9,40,11,3,6,10,14
+Kyle OQuinn,PHI,"PF,C,Flx",280,ORL,ORL,ORL,PHI 39<br/>@TOR 38,152,11.69,6%,-0.60%,18,33,5,2,6,43,13,30,17,2,7,12,13
+Jakarr Sampson,IND,"SG,SF,Flx",315,ORL,ORL,ORL,MEM 58<br/>@IND 77,107,11.89,5%,-1.60%,23,41,2,2,7,50,7,17,4,5,6,6,9
+Daniel Gafford,CHI,"C,Flx",345,ORL,ORL,ORL,POR 10<br/>@CHI 12,65,8.12,20%,5.10%,14,22,0,3,8,31,9,6,1,0,6,1,8
+Zach Collins,POR,"PF,C,Flx",354,ORL,ORL,ORL,POR 10<br/>@CHI 12,56,18.67,51%,-2.50%,9,19,3,6,6,27,4,8,6,0,2,6,3
+Chris Chiozza,WAS,"PG,Flx",382,ORL,ORL,ORL,,31.5,15.75,2%,-0.50%,2,9,2,0,0,6,0,4,7,2,2,3,2
+Alen Smailagic,GS,"PF,Flx",461,ORL,ORL,ORL,OKC Mon 10:30PM,0,0,8%,0.20%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ian Mahinmi,WAS,"C,Flx",464,ORL,ORL,ORL,,0,0,6%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Pascal Siakam,TOR,"PF,Flx",10,PHI,PHI,PHI,PHI 39<br/>@TOR 38,684,42.75,100%,0.00%,146,308,36,65,78,393,24,106,63,12,12,44,16
+Clint Capela,HOU,"PF,C,Flx",14,PHI,PHI,PHI,,640,42.67,100%,0.00%,100,157,0,19,43,219,56,163,15,14,30,23,15
+Ben Simmons,PHI,"PG,SF,Flx",30,PHI,PHI,PHI,PHI 39<br/>@TOR 38,573,38.2,99%,-0.10%,79,143,1,26,46,185,20,75,117,32,9,50,15
+Jamal Murray,DEN,"PG,SG,Flx",46,PHI,PHI,PHI,,537,35.8,100%,0.00%,107,247,31,39,44,284,13,58,75,23,5,36,15
+Kelly Oubre Jr.,PHO,"SF,Flx",56,PHI,PHI,PHI,,491.5,30.72,99%,0.20%,96,211,22,67,81,281,23,71,28,22,9,26,16
+Luke Kennard,DET,"SG,Flx",58,PHI,PHI,PHI,ORL 55<br/>@DET 53,487,28.65,91%,0%,90,210,41,50,56,271,4,56,75,8,2,26,17
+PJ Washington,CHA,"SF,PF,Flx",85,PHI,PHI,PHI,CHA 41<br/>@MIA 47,424.5,23.58,85%,-3.00%,72,149,25,23,35,192,16,75,27,19,14,23,18
+Rui Hachimura,WAS,"SF,PF,Flx",146,PHI,PHI,PHI,,326,23.29,88%,-1.70%,79,158,5,18,22,181,25,49,22,11,1,14,14
+Kyle Anderson,MEM,"SG,SF,PF,Flx",149,PHI,PHI,PHI,MEM 58<br/>@IND 77,324,20.25,40%,-0.70%,46,90,4,16,28,112,15,57,42,11,12,15,16
+Myles Turner,IND,"PF,C,Flx",212,PHI,PHI,PHI,MEM 58<br/>@IND 77,238,29.75,99%,0.00%,39,78,15,8,11,101,13,40,8,4,19,15,8
+Jeremy Lamb,IND,"SG,SF,Flx",244,PHI,PHI,PHI,MEM 58<br/>@IND 77,209.5,29.93,96%,0.20%,41,88,7,21,24,110,5,34,16,9,5,9,7
+Matisse Thybulle,PHI,"SG,SF,Flx",275,PHI,PHI,PHI,PHI 39<br/>@TOR 38,157.5,9.84,31%,-3.60%,18,54,9,10,15,55,4,11,15,21,11,18,16
+Trevor Ariza,SAC,"SG,SF,Flx",288,PHI,PHI,PHI,SAC 39<br/>@BOS 28,136,12.36,23%,-2%,15,42,12,4,5,46,4,34,9,9,0,7,11
+Mike Muscala,OKC,"PF,C,Flx",305,PHI,PHI,PHI,@GS Mon 10:30PM,117.5,9.79,12%,-0.40%,14,50,9,5,6,42,5,25,14,3,3,5,12
+Dennis Smith Jr.,NY,"PG,SG,Flx",311,PHI,PHI,PHI,,110,11,48%,-3.90%,22,62,7,5,8,56,5,7,25,4,1,13,10
+Jayson Tatum,BOS,"SF,PF,Flx",40,PHX,PHX,PHX,SAC 39<br/>@BOS 28,554.5,34.66,100%,0.00%,117,284,36,47,60,317,22,87,38,21,10,30,16
+Ja Morant,MEM,"PG,Flx",63,PHX,PHX,PHX,MEM 58<br/>@IND 77,460,30.67,99%,0.00%,103,222,13,54,71,273,13,32,89,18,3,54,15
+Danuel House Jr.,HOU,"SG,SF,Flx",148,PHX,PHX,PHX,,324.5,24.96,70%,-2.50%,48,105,32,22,27,150,13,46,14,16,10,12,13
+Malik Monk,CHA,"SG,Flx",166,PHX,PHX,PHX,CHA 41<br/>@MIA 47,308.5,17.14,50%,-5.00%,72,150,19,21,26,184,5,43,39,6,4,28,18
+Mason Plumlee,DEN,"PF,C,Flx",175,PHX,PHX,PHX,,296.5,19.77,28%,-0.70%,39,71,0,20,36,98,27,53,33,8,12,19,15
+Paul George,LAC,"SF,PF,Flx",195,PHX,PHX,PHX,,259,43.17,99%,0.00%,45,101,25,35,38,150,2,36,28,7,3,24,6
+Jake Layman,MIN,"SG,SF,PF,Flx",200,PHX,PHX,PHX,MIN 42<br/>@ATL 39,253,18.07,23%,-5%,61,132,19,6,10,147,12,29,11,12,10,18,14
+Derrick Favors,NO,"PF,C,Flx",206,PHX,PHX,PHX,,243,27,91%,-1.80%,36,58,1,2,6,75,31,49,19,5,4,14,9
+Furkan Korkmaz,PHI,"SG,Flx",221,PHX,PHX,PHX,PHI 39<br/>@TOR 38,231,14.44,17%,-4.20%,54,120,28,12,15,148,4,31,13,4,5,12,16
+Nickeil Alexander-Walker,NO,"SG,Flx",247,PHX,PHX,PHX,,206.5,12.91,43%,2.60%,36,112,21,10,14,103,2,34,36,5,2,20,16
+Dwayne Bacon,CHA,"SG,Flx",267,PHX,PHX,PHX,CHA 41<br/>@MIA 47,176.5,13.58,29%,-5.60%,42,121,9,17,24,110,7,28,18,10,2,18,13
+Shake Milton,PHI,"PG,Flx",380,PHX,PHX,PHX,PHI 39<br/>@TOR 38,33,4.12,6%,-0.60%,10,29,4,6,7,30,1,6,4,1,0,12,8
+Mfiondu Kabengele,LAC,"C,Flx",389,PHX,PHX,PHX,,22,5.5,12%,-0.10%,4,6,3,2,2,13,0,3,0,0,1,0,4
+Chuma Okeke,ORL,"PF,Flx",455,PHX,PHX,PHX,ORL 55<br/>@DET 53,0,0,15%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Angel Delgado,(N/A),"C,Flx",580,PHX,PHX,PHX,,0,0,0%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kawhi Leonard,LAC,"SG,SF,Flx",31,POR,POR,POR,,571.5,47.62,100%,0%,108,248,21,71,86,308,13,83,66,25,11,45,12
+Jimmy Butler,MIA,"SG,SF,Flx",44,POR,POR,POR,CHA 41<br/>@MIA 47,541,41.62,99%,0%,70,159,9,86,100,235,24,44,82,33,10,30,13
+Hassan Whiteside,POR,"C,Flx",49,POR,POR,POR,POR 10<br/>@CHI 12,523,34.87,98%,-0.10%,84,143,0,41,52,209,53,116,13,6,25,29,15
+Patty Mills,SA,"PG,Flx",137,POR,POR,POR,LAL Mon 8:30PM,333,19.59,27%,0.20%,72,147,37,22,28,203,4,20,36,16,3,21,17
+Marquese Chriss,GS,"PF,C,Flx",161,POR,POR,POR,OKC Mon 10:30PM,312,19.5,24%,8.80%,43,89,2,28,34,116,24,50,29,11,15,23,16
+Alex Len,ATL,"PF,C,Flx",198,POR,POR,POR,MIN 42<br/>@ATL 39,255.5,15.03,47%,-6.10%,36,84,4,22,34,98,22,51,16,6,16,18,17
+Austin Rivers,HOU,"PG,SG,Flx",217,POR,POR,POR,,234,13.76,15%,0.10%,49,122,20,13,19,131,11,31,21,8,2,10,17
+Monte Morris,DEN,"PG,Flx",223,POR,POR,POR,,230,15.33,25%,0.10%,42,99,7,12,18,103,4,23,51,6,2,10,15
+Tony Snell,DET,"SG,SF,Flx",231,POR,POR,POR,ORL 55<br/>@DET 53,218.5,16.81,14%,-4.20%,43,93,30,4,4,120,5,14,23,7,2,6,13
+Alex Caruso,LAL,"SG,Flx",254,POR,POR,POR,@SA Mon 8:30PM,196.5,14.04,17%,-0.10%,31,74,10,4,6,76,1,24,29,17,5,17,14
+Yogi Ferrell,SAC,"PG,SG,Flx",316,POR,POR,POR,SAC 39<br/>@BOS 28,106,8.83,7%,-0.50%,19,45,5,13,15,56,2,15,18,2,1,10,12
+Jordan Bell,MIN,"PF,C,Flx",335,POR,POR,POR,MIN 42<br/>@ATL 39,77.5,11.07,14%,-0.70%,10,18,0,7,11,27,9,22,6,0,3,12,7
+D.J. Wilson,MIL,"PF,Flx",368,POR,POR,POR,UTA 9<br/>@MIL 8,42.5,6.07,6%,0.10%,8,20,3,0,0,19,3,8,5,0,1,4,7
+Lonnie Walker IV,SA,"SG,Flx",392,POR,POR,POR,LAL Mon 8:30PM,20.5,2.05,22%,-0.60%,5,17,0,1,7,11,1,8,4,0,1,3,10
+DaQuan Jeffries,SAC,"PG,Flx",419,POR,POR,POR,SAC 39<br/>@BOS 28,6,3,0%,0.00%,1,1,0,0,0,2,1,0,1,0,0,0,2
+Pau Gasol,(N/A),"PF,C,Flx",469,POR,POR,POR,,0,0,4%,0.00%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Giannis Antetokounmpo,MIL,"SF,PF,Flx",3,SAC,SAC,SAC,UTA 9<br/>@MIL 8,967,56.88,100%,0%,178,316,21,107,181,484,41,183,102,25,22,73,17
+Damian Lillard,POR,"PG,Flx",8,SAC,SAC,SAC,POR 10<br/>@CHI 12,740.5,46.28,100%,0%,134,301,50,108,117,426,10,67,109,16,9,44,16
+Montrezl Harrell,LAC,"PF,C,Flx",17,SAC,SAC,SAC,,616.5,36.26,100%,0.00%,134,222,0,55,84,323,48,80,44,16,23,35,17
+Marcus Morris,NY,"SF,PF,Flx",42,SAC,SAC,SAC,,546.5,32.15,92%,1.00%,105,250,50,68,81,328,20,87,23,18,11,35,17
+P.J. Tucker,HOU,"SF,PF,Flx",66,SAC,SAC,SAC,,446,26.24,80%,-3.20%,62,116,33,11,14,168,24,78,23,23,9,16,17
+Paul Millsap,DEN,"PF,C,Flx",73,SAC,SAC,SAC,,437.5,29.17,91%,1.90%,71,144,20,55,62,217,33,61,20,14,11,16,15
+Tim Hardaway Jr.,DAL,"SG,SF,Flx",172,SAC,SAC,SAC,,301.5,18.84,53%,8.90%,67,164,36,29,38,199,5,28,32,4,2,7,16
+Cory Joseph,SAC,"PG,Flx",193,SAC,SAC,SAC,SAC 39<br/>@BOS 28,267,16.69,19%,-7.20%,36,96,4,12,12,88,10,29,57,10,9,20,16
+Al-Farouq Aminu,ORL,"SF,PF,Flx",199,SAC,SAC,SAC,ORL 55<br/>@DET 53,255,15.94,28%,-1.30%,23,75,8,19,27,73,23,59,18,14,7,15,16
+Terrence Ross,ORL,"SG,SF,Flx",207,SAC,SAC,SAC,ORL 55<br/>@DET 53,241,17.21,58%,5.40%,54,144,24,24,28,156,5,34,13,13,3,17,14
+Alfonzo McKinnie,CLE,"PF,Flx",331,SAC,SAC,SAC,BKN 54<br/>@CLE 55,86,7.82,11%,0.10%,10,26,5,6,9,31,5,20,3,5,3,5,11
+Georges Niang,UTA,"SF,PF,Flx",356,SAC,SAC,SAC,UTA 9<br/>@MIL 8,55.5,5.05,3%,-1%,11,23,5,6,8,33,0,11,4,0,2,4,11
+J.J. Barea,DAL,"PG,SG,Flx",371,SAC,SAC,SAC,,39.5,19.75,5%,-1%,8,14,5,2,2,23,1,1,5,1,1,4,2
+Zhaire Smith,PHI,"SG,Flx",454,SAC,SAC,SAC,PHI 39<br/>@TOR 38,0,0,15%,-0.30%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nikola Milutinov,SA,"C,Flx",502,SAC,SAC,SAC,LAL Mon 8:30PM,0,0,1%,0%,0,0,0,0,0,0,0,0,0,0,0,0,0
+LaMarcus Aldridge,SA,"PF,C,Flx",26,SAS,SAS,SAS,LAL Mon 8:30PM,596,35.06,99%,0%,126,242,9,47,57,308,36,79,42,11,30,30,17
+Al Horford,PHI,"PF,C,Flx",41,SAS,SAS,SAS,PHI 39<br/>@TOR 38,549,34.31,98%,-0.10%,92,199,22,20,31,226,32,79,63,16,14,18,16
+Malcolm Brogdon,IND,"PG,SG,Flx",52,SAS,SAS,SAS,MEM 58<br/>@IND 77,511,39.31,99%,-0.10%,87,185,18,48,49,240,7,54,103,13,3,38,13
+Rudy Gay,SA,"SF,PF,Flx",81,SAS,SAS,SAS,LAL Mon 8:30PM,429,25.24,83%,1.10%,75,151,18,36,42,204,25,79,35,6,9,25,17
+Joe Harris,BKN,"SG,SF,Flx",96,SAS,SAS,SAS,BKN 54<br/>@CLE 55,400,23.53,84%,-1.10%,85,180,44,13,18,227,15,48,29,13,6,26,17
+T.J. Warren,IND,"SF,PF,Flx",113,SAS,SAS,SAS,MEM 58<br/>@IND 77,370,23.12,93%,-0.30%,110,228,13,29,36,262,11,46,16,18,6,22,16
+JaMychal Green,LAC,"PF,C,Flx",131,SAS,SAS,SAS,,342.5,20.15,35%,-4.10%,44,108,27,14,17,129,24,94,6,10,5,17,17
+Justin Holiday,IND,"SG,SF,Flx",167,SAS,SAS,SAS,MEM 58<br/>@IND 77,308.5,19.28,24%,2.20%,41,106,24,17,21,123,8,52,29,12,10,9,16
+Josh Okogie,MIN,"SG,Flx",169,SAS,SAS,SAS,MIN 42<br/>@ATL 39,305,20.33,37%,-5.80%,39,92,7,36,50,121,22,53,28,18,6,22,15
+Aaron Holiday,IND,"PG,Flx",170,SAS,SAS,SAS,MEM 58<br/>@IND 77,302.5,21.61,45%,19.50%,53,130,23,9,10,138,8,32,51,13,1,20,14
+Doug McDermott,IND,"SF,Flx",213,SAS,SAS,SAS,MEM 58<br/>@IND 77,238,14.88,11%,-1.00%,54,126,27,8,10,143,7,38,20,2,2,15,16
+Jevon Carter,PHO,"PG,Flx",269,SAS,SAS,SAS,,168,12.92,11%,-0.40%,20,49,12,4,4,56,3,22,24,12,5,15,13
+Guillermo Hernangomez,CHA,"C,Flx",374,SAS,SAS,SAS,CHA 41<br/>@MIA 47,38,9.5,12%,-1.10%,6,12,1,3,6,16,5,4,2,1,3,3,4
+Caleb Swanigan,SAC,"PF,C,Flx",404,SAS,SAS,SAS,SAC 39<br/>@BOS 28,12.5,3.12,2%,0.00%,1,2,0,1,2,3,1,3,0,1,2,3,4
+Shelvin Mack,(N/A),"PG,Flx",530,SAS,SAS,SAS,,0,0,1%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nikola Vucevic,ORL,"PF,C,Flx",27,TOR,TOR,TOR,ORL 55<br/>@DET 53,592.5,42.32,99%,0%,95,211,16,33,39,239,41,121,49,9,15,20,14
+Jabari Parker,ATL,"SF,PF,Flx",54,TOR,TOR,TOR,MIN 42<br/>@ATL 39,502,29.53,93%,0%,113,218,18,31,43,275,30,67,31,24,8,29,17
+Bogdan Bogdanovic,SAC,"SG,SF,Flx",74,TOR,TOR,TOR,SAC 39<br/>@BOS 28,437,29.13,95%,1.30%,76,174,43,27,36,222,2,39,68,21,2,26,15
+DeAndre Jordan,BKN,"C,Flx",87,TOR,TOR,TOR,BKN 54<br/>@CLE 55,416,27.73,93%,-1.60%,46,69,0,21,33,113,33,104,31,6,17,15,15
+Aron Baynes,PHO,"C,Flx",119,TOR,TOR,TOR,,366,30.5,84%,-2.50%,64,114,23,23,32,174,18,49,37,4,9,13,12
+Trey Lyles,SA,"PF,Flx",181,TOR,TOR,TOR,LAL Mon 8:30PM,289.5,17.03,17%,-2.30%,28,59,13,5,9,74,26,85,19,3,4,13,17
+T.J. McConnell,IND,"PG,Flx",186,TOR,TOR,TOR,MEM 58<br/>@IND 77,275.5,19.68,15%,-3.90%,43,84,0,6,7,92,8,34,66,7,3,19,14
+Tyus Jones,MEM,"PG,Flx",192,TOR,TOR,TOR,MEM 58<br/>@IND 77,268,16.75,29%,-4.30%,40,108,5,13,19,98,0,20,78,16,0,21,16
+Brad Wanamaker,BOS,"PG,SG,Flx",208,TOR,TOR,TOR,SAC 39<br/>@BOS 28,241,15.06,20%,12.10%,35,69,6,33,35,109,3,25,42,13,2,20,16
+Sterling Brown,MIL,"SG,SF,Flx",222,TOR,TOR,TOR,UTA 9<br/>@MIL 8,231,16.5,15%,-2%,28,63,14,10,13,80,11,58,20,7,2,14,14
+Chris Silva,MIA,"SG,PF,Flx",257,TOR,TOR,TOR,CHA 41<br/>@MIA 47,194.5,12.16,8%,0.40%,23,35,0,13,18,59,30,31,11,4,12,22,16
+Justin Jackson,DAL,"SF,Flx",268,TOR,TOR,TOR,,169,11.27,13%,-0.20%,36,75,17,9,11,98,7,29,6,2,2,4,15
+Vince Carter,ATL,"SG,SF,Flx",309,TOR,TOR,TOR,MIN 42<br/>@ATL 39,112.5,9.38,5%,0.00%,25,67,10,5,6,65,3,20,7,4,3,8,12
+Chris Clemons,HOU,"PG,SG,Flx",332,TOR,TOR,TOR,,86,7.82,7%,0.50%,18,41,14,3,4,53,2,7,6,2,2,5,11
+Isaiah Hartenstein,HOU,"PF,Flx",351,TOR,TOR,TOR,,60,12,7%,0%,8,9,0,7,7,23,5,13,1,1,3,4,5
+Devonte Graham,CHA,"PG,Flx",16,UTA,UTA,UTA,CHA 41<br/>@MIA 47,617.5,34.31,89%,0.10%,101,248,60,52,65,314,17,45,125,12,3,59,18
+DeMar DeRozan,SA,"SG,SF,Flx",25,UTA,UTA,UTA,LAL Mon 8:30PM,599,35.24,99%,0%,143,270,0,89,108,375,9,82,78,14,9,48,17
+DeAndre Bembry,ATL,"SG,SF,Flx",121,UTA,UTA,UTA,MIN 42<br/>@ATL 39,363,21.35,37%,0.20%,54,99,7,12,28,127,16,52,52,26,7,29,17
+Daniel Theis,BOS,"PF,C,Flx",163,UTA,UTA,UTA,SAC 39<br/>@BOS 28,311.5,23.96,44%,11.40%,33,71,2,17,25,85,22,74,17,8,21,10,13
+Gordon Hayward,BOS,"SG,SF,Flx",176,UTA,UTA,UTA,SAC 39<br/>@BOS 28,296,37,94%,-0.20%,61,110,13,16,19,151,6,51,33,6,2,15,8
+Damion Lee,GS,"SG,Flx",249,UTA,UTA,UTA,OKC Mon 10:30PM,205,18.64,17%,-7.20%,35,91,12,28,33,110,9,34,20,8,0,13,11
+Marko Guduric,MEM,"SG,Flx",265,UTA,UTA,UTA,MEM 58<br/>@IND 77,179.5,11.22,11%,-1.30%,32,87,12,7,7,83,9,25,25,5,4,16,16
+Thon Maker,DET,"PF,C,Flx",281,UTA,UTA,UTA,ORL 55<br/>@DET 53,151.5,8.91,10%,-0.50%,19,39,6,16,31,60,10,25,9,6,12,10,17
+Carsen Edwards,BOS,"PG,Flx",302,UTA,UTA,UTA,SAC 39<br/>@BOS 28,124,8.86,24%,-1.00%,20,62,11,9,11,60,4,19,13,5,2,4,14
+Eric Gordon,HOU,"SG,SF,Flx",303,UTA,UTA,UTA,,122.5,13.61,46%,-5.30%,34,110,21,9,14,98,3,14,7,5,2,12,9
+Chandler Hutchison,CHI,"SG,SF,Flx",313,UTA,UTA,UTA,POR 10<br/>@CHI 12,108.5,15.5,11%,-0.40%,18,42,4,18,26,58,1,29,8,4,2,10,7
+Semi Ojeleye,BOS,"SF,PF,Flx",334,UTA,UTA,UTA,SAC 39<br/>@BOS 28,78,4.88,6%,-0.30%,12,30,5,3,5,32,3,19,4,5,0,3,16
+Abdel Nader,OKC,"SF,PF,Flx",353,UTA,UTA,UTA,@GS Mon 10:30PM,59,7.38,3%,0.80%,11,30,5,7,9,34,3,12,3,2,3,11,8
+Dion Waiters,MIA,"SG,SF,Flx",451,UTA,UTA,UTA,CHA 41<br/>@MIA 47,0,0,17%,-1%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Wilson Chandler,BKN,"SF,PF,Flx",473,UTA,UTA,UTA,BKN 54<br/>@CLE 55,0,0,4%,-0.10%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bradley Beal,WAS,"SG,Flx",11,WAS,WAS,WAS,,652.5,46.61,99%,0%,148,314,41,77,93,414,15,49,100,13,3,47,14
+Jrue Holiday,NO,"PG,SG,Flx",21,WAS,WAS,WAS,,610.5,40.7,98%,0%,110,256,26,34,44,280,16,61,105,31,11,51,15
+Jarrett Allen,BKN,"PF,C,Flx",55,WAS,WAS,WAS,BKN 54<br/>@CLE 55,497,29.24,98%,1.10%,70,106,0,40,67,180,50,113,15,11,22,20,17
+Damian Jones,ATL,"C,Flx",201,WAS,WAS,WAS,MIN 42<br/>@ATL 39,250.5,15.66,18%,-0.90%,42,61,2,16,21,102,23,29,12,9,14,10,16
+Cam Reddish,ATL,"PG,SG,SF,PF,Flx",224,WAS,WAS,WAS,MIN 42<br/>@ATL 39,226.5,15.1,42%,-0.40%,36,124,12,22,28,106,9,45,26,15,5,29,15
+Chris Boucher,TOR,"PF,C,Flx",230,WAS,WAS,WAS,PHI 39<br/>@TOR 38,220,15.71,29%,-13.60%,30,65,6,14,19,80,31,31,5,5,13,7,14
+Justise Winslow,MIA,"PG,PF,Flx",273,WAS,WAS,WAS,CHA 41<br/>@MIA 47,159.5,31.9,91%,-1%,28,72,3,10,17,69,9,31,24,5,3,16,5
+Grant Williams,BOS,"PF,Flx",292,WAS,WAS,WAS,SAC 39<br/>@BOS 28,134.5,8.97,21%,-1.20%,12,46,0,12,15,36,12,24,14,8,9,12,15
+Svi Mykhailiuk,DET,"SG,Flx",321,WAS,WAS,WAS,ORL 55<br/>@DET 53,97.5,8.12,7%,-0.10%,16,40,14,2,2,48,1,11,15,3,1,11,12
+Michael Kidd-Gilchrist,CHA,"SF,Flx",400,WAS,WAS,WAS,CHA 41<br/>@MIA 47,14.5,7.25,6%,-0.70%,2,10,1,2,2,7,1,5,1,0,0,1,2
+KZ Okpala,MIA,"SF,Flx",440,WAS,WAS,WAS,CHA 41<br/>@MIA 47,0.5,0.25,7%,0%,0,0,0,0,0,0,0,1,0,0,0,1,2
+Dylan Windler,CLE,"SF,Flx",453,WAS,WAS,WAS,BKN 54<br/>@CLE 55,0,0,16%,-0.50%,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ivan Rabb,NY,"PF,Flx",463,WAS,WAS,WAS,,0,0,6%,-0.50%,0,0,0,0,0,0,0,0,0,0,0,0,0
