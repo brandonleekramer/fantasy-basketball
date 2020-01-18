@@ -1,0 +1,341 @@
+---
+title: "The Invitational Fantasy Tools"
+author: "Brandon L. Kramer"
+date: "9/2/2019"
+output: html_document
+---
+
+This file contains the following materials for Legacy Dynasty NBA fantasy points league 
+
+* Concatenation of Basketball Reference (2018), Hashtag (2019), and Hashtag Alt (2019) Projections
+* Overall Stats and Projections
+* Team Projections
+* Team Players Quick Comparisons 
+* Post-Trade Comparison Tool 
+
+```{r pull packages and projection data}
+#install.packages("tidyverse"); install.packages("googlesheets")
+rm(list = ls())
+for (pkg in c("googlesheets", "tidyverse", "fmsb", "plotly", "radarchart")) {library(pkg, character.only = TRUE)}
+
+setwd("C:/Users/bkram/CloudStation/NBA/data")
+inseason <- read_csv("nba_fantasy_data - invitational_inseason.csv")
+invitational_rosters <- read_csv("nba_fantasy_data - the_invitational.csv")
+
+invitational_rosters$player <- invitational_rosters$player %>% 
+  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 
+                    'é' = 'e', 'ê' = 'e', 'ić' = 'ic', 'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 
+                    'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z', 
+                    'Élie' = 'Elie','P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 
+                    'D.J.' = 'DJ', 'J.J.' = 'JJ', 'Dončić' = 'Doncic', 'Louis' = 'Lou', 'Edrice' = 'Bam', 
+                    'Waller-Prince' = 'Prince', "O.G." = "OG", "Demarre" = "DeMarre",
+                    'Jaren Jackson' = 'Jaren Jackson Jr.','Kelly Oubre' = 'Kelly Oubre Jr.', 
+                    'Marvin Bagley' = 'Marvin Bagley III', 'Otto Porter' = 'Otto Porter Jr.', 
+                    'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
+                    'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schröder' = 'Dennis Schroder', 
+                    'Tim Hardaway' = 'Tim Hardaway Jr.'))
+
+inseason$player <- inseason$Player %>% 
+  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 
+                    'é' = 'e', 'ê' = 'e', 'ić' = 'ic', 'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 
+                    'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z', 
+                    'Élie' = 'Elie','P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 
+                    'D.J.' = 'DJ', 'J.J.' = 'JJ', 'Dončić' = 'Doncic', 'Louis' = 'Lou', 'Edrice' = 'Bam', 
+                    'Waller-Prince' = 'Prince', "O.G." = "OG", "Demarre" = "DeMarre",
+                    'Jaren Jackson' = 'Jaren Jackson Jr.','Kelly Oubre' = 'Kelly Oubre Jr.', 
+                    'Marvin Bagley' = 'Marvin Bagley III', 'Otto Porter' = 'Otto Porter Jr.', 
+                    'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
+                    'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schröder' = 'Dennis Schroder', 
+                    'Tim Hardaway' = 'Tim Hardaway Jr.')) 
+inseason <- inseason %>% select(-Player) %>% select(player, everything())
+
+
+select_data <- invitational_rosters %>% 
+  full_join(inseason, by = "player") %>% 
+  mutate(ppg = PTS/GP, 
+         rpg = (OREB + DREB) / GP,
+         apg = AST / GP, 
+         spg = ST / GP, 
+         bpg = BLK / GP, 
+         threes = `3PTM` / GP,
+         tpg = TO / GP, 
+         ftp = FTM / FTA, 
+         fgp = FGM / FGA ) %>% 
+  rename(position = Position) %>% 
+  select(player, inv_team, inv_abbreviated, ppg, rpg, apg, spg, bpg, threes, tpg, ftp, fgp, FGM, FGA, FTM, FTA)  
+
+rm(combined_data, invitational_rosters, inseason)
+```
+
+
+```{r, looking at projections by cat in bbr stats}
+select_data %>% 
+  arrange(-apg)
+```
+
+
+
+# invitational conversions 
+
+```{r}
+inv_projections <- select_data %>% 
+  group_by(inv_abbreviated) %>% 
+  filter(inv_abbreviated != "") %>% 
+  summarize(team_pts = sum(ppg, na.rm = TRUE),
+            team_rebs = sum(rpg, na.rm = TRUE),
+            team_asts = sum(apg, na.rm = TRUE),
+            team_stls = sum(spg, na.rm = TRUE),
+            team_blks = sum(bpg, na.rm = TRUE),
+            team_tovs = sum(tpg, na.rm = TRUE),
+            team_threes = sum(threes, na.rm = TRUE),
+            team_fgp = (sum(FGM, na.rm = TRUE) / sum(FGA, na.rm = TRUE)),  
+            team_ftp = (sum(FTM, na.rm = TRUE) / sum(FTA, na.rm = TRUE)))
+            
+            
+
+```
+
+```{r hashtag rankings graphed, fig.width=11, fig.height=6, warning=FALSE}
+# points 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_pts), y=team_pts, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = round(team_pts)), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team Points (Based on 2019 Hashtag)", fill = "Team")
+
+# rebounds 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_rebs), y=team_rebs, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = round(team_rebs)), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team Rebounds (Based on 2019 Hashtag)", fill = "Team")
+
+# assists 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_asts), y=team_asts, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = round(team_asts)), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team Assists (Based on 2019 Hashtag)", fill = "Team")
+
+# steals 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_stls), y=team_stls, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = round(team_stls)), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team Steals (Based on 2019 Hashtag)", fill = "Team")
+
+# blocks 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_blks), y=team_blks, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = round(team_blks)), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team Blocks (Based on 2019 Hashtag)", fill = "Team")
+
+# turnovers 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, team_tovs), y=team_tovs, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = round(team_tovs)), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team Turnovers (Based on 2019 Hashtag)", fill = "Team")
+
+# threes 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_threes), y=team_threes, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = round(team_threes)), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team Threes (Based on 2019 Hashtag)", fill = "Team")
+
+# fgp 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_fgp), y=team_fgp, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = round(team_fgp,digits=2)), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team FG% (Based on 2019 Hashtag)", fill = "Team")
+
+# ftp 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_ftp), y=team_ftp, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = round(team_ftp,digits=2)), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team FG% (Based on 2019 Hashtag)", fill = "Team")
+
+```
+
+
+```{r hashtag alt rankings graphed, fig.width=11, fig.height=6, warning=FALSE}
+# points 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_pts), y=team_pts, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = team_pts), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team Points (Based on 2019 Hashtag Alt)", fill = "Team")
+
+# rebounds 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_rebs), y=team_rebs, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = team_rebs), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team Rebounds (Based on 2019 Hashtag Alt)", fill = "Team")
+
+# assists 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_asts), y=team_asts, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = team_asts), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team Assists (Based on 2019 Hashtag Alt)", fill = "Team")
+
+# steals 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_stls), y=team_stls, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = team_stls), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team Steals (Based on 2019 Hashtag Alt)", fill = "Team")
+
+# blocks 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_blks), y=team_blks, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = team_blks), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team Blocks (Based on 2019 Hashtag Alt)", fill = "Team")
+
+# turnovers 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, team_tovs), y=team_tovs, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = team_tovs), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team Turnovers (Based on 2019 Hashtag Alt)", fill = "Team")
+
+# threes 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_threes), y=team_threes, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = team_threes), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team Threes (Based on 2019 Hashtag Alt)", fill = "Team")
+
+# fgp 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_fgp), y=team_fgp, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = round(team_fgp,digits=2)), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team FG% (Based on 2019 Hashtag Alt)", fill = "Team")
+
+# ftp 
+ggplot(data=inv_projections, aes(x=reorder(inv_abbreviated, -team_ftp), y=team_ftp, fill=inv_abbreviated)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  geom_text(aes(label = round(team_ftp,digits=2)), size = 2.3, colour="black", fontface="bold", hjust = 0.5, vjust = 3) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), 
+        axis.title.y=element_blank()) +
+  labs(title = "The Invitational Rankings - Projected Team FG% (Based on 2019 Hashtag Alt)", fill = "Team")
+
+```
+
+
+```{r looking at specific team's player projections}
+select_data %>% 
+  filter(inv_abbreviated == "TREE") %>% 
+  select(player, age, pts:trade_comp) %>% 
+  arrange(-pts)
+  
+```
+
+# spider charts of teams 
+
+```{r list of team names}
+inv_projections$inv_abbreviated
+
+```
+
+# two-team spider plots 
+
+```{r interactive spider plot, fig.width=8, fig.height=6}
+
+inv_matrix <- inv_projections %>% 
+  select(inv_abbreviated, team_pts:team_ftp) %>% 
+  filter(inv_abbreviated == "BBB" | inv_abbreviated == "GB" ) %>% 
+  mutate(team_pts = team_pts/2, 
+         team_stls = team_stls,
+         team_blks = team_blks,
+         team_threes = team_threes,
+         team_fgp = team_fgp*100,
+         team_ftp = team_ftp*100) %>% 
+  mutate_if(is.numeric, round, digits = 1) %>% 
+  rename(points = team_pts, rebounds = team_rebs, assists = team_asts, steals = team_stls,
+         blocks = team_blks, turnovers = team_tovs, threes = team_threes, fgp = team_fgp, ftp = team_ftp) %>% 
+  column_to_rownames(var = "inv_abbreviated") 
+
+labs <- c("points","rebounds","assists","steals","blocks","turnovers","threes","fg%","ft%")
+scores <- as.list(as.data.frame(t(inv_matrix)))
+colors <- grDevices::col2rgb(c("#82D4BB","#1789FC"))
+chartJSRadar(scores=scores, labs=labs, showToolTipLabel = TRUE, colMatrix = colors)
+
+```
+
+# all team spider plots 
+
+```{r interactive spider plot, fig.width=9.5, fig.height=8}
+
+inv_matrix <- inv_projections %>% 
+  select(inv_abbreviated, team_pts:team_ftp) %>% 
+  filter(inv_abbreviated == "ALi"  | inv_abbreviated == "BASK" | inv_abbreviated == "BBB"  | inv_abbreviated == "BEET" | 
+         inv_abbreviated == "CLAS" | inv_abbreviated == "GB"   | inv_abbreviated == "GMBL" | inv_abbreviated == "HAWK" |
+         inv_abbreviated == "HEAT" | inv_abbreviated == "JESI" | inv_abbreviated == "JFOX" | inv_abbreviated == "KANO" |
+         inv_abbreviated == "LGR"  | inv_abbreviated == "MLDR" | inv_abbreviated == "NJ15" | inv_abbreviated == "PIP"  | 
+         inv_abbreviated == "PP"   | inv_abbreviated == "SERB" | inv_abbreviated == "TREE" | inv_abbreviated == "WOLV" ) %>%   
+  mutate(team_pts = team_pts/2, 
+         team_asts = team_asts,
+         team_stls = team_stls,
+         team_blks = team_blks,
+         team_threes = team_threes,
+         team_tovs = team_tovs,
+         team_fgp = team_fgp*100,
+         team_ftp = team_ftp*100) %>% 
+  mutate_if(is.numeric, round, digits = 1) %>% 
+  rename(points = team_pts, rebounds = team_rebs, assists = team_asts, steals = team_stls,
+         blocks = team_blks, turnovers = team_tovs, threes = team_threes, fgp = team_fgp, ftp = team_ftp) %>% 
+  column_to_rownames(var = "inv_abbreviated") 
+
+labs <- c("points/2","rebounds","assists","steals","blocks","turnovers","threes","fg%","ft%")
+scores <- as.list(as.data.frame(t(inv_matrix)))
+colors <- grDevices::col2rgb(c('#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000'))
+chartJSRadar(scores=scores, labs=labs, showToolTipLabel = TRUE, colMatrix = colors)
+
+```
+
+
+
+

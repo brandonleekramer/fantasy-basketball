@@ -9,8 +9,8 @@ output: html_document
 rm(list = ls())
 for (pkg in c( "tidyverse", "plotly")) {library(pkg, character.only = TRUE)}
 
-#setwd("C:/Users/bkram/CloudStation/NBA/data")
-setwd("~/Documents/fantasy-basketball/data")
+setwd("C:/Users/bkram/CloudStation/NBA/data")
+#setwd("~/Documents/fantasy-basketball/data")
 botb_contracts <- read_csv("nba_fantasy_data - botb_contracts.csv")
 legacy_contracts <- read_csv("nba_fantasy_data - legacy_contracts.csv")
 legacy_contracts <- read_csv("nba_fantasy_data - legacy_contracts.csv")
@@ -208,12 +208,12 @@ select_data %>%
   mutate(fntx_value_20 = fntx_fppg / ld_2020 * 10000) %>%
   mutate(fntx_value_21 = fntx_fppg / ld_2021 * 10000) %>%
   mutate(diff = fntx_fppg - ht_ld_fpts) %>%
-  filter(fntx_fppg > 20) %>% 
-  filter(ld_team == "CHA" | ld_team == "CHI" | ld_team == "HOU" | ld_team == "BKN" |  
-         ld_team == "TOR" | ld_team == "MEM" | ld_team == "MIN" | ld_team == "SAC" | 
-         ld_team == "DEN" | ld_team == "ATL" | ld_team == "OKC" | ld_team == "BOS" | ld_team == "GSW"
-         # | ld_team == "NOP" | ld_team == "CHI"  
-        ) %>%
+  filter(fntx_fppg > 25) %>% 
+  #filter(ld_team == "CHA" | ld_team == "CHI" | ld_team == "HOU" | ld_team == "BKN" |  
+  #       ld_team == "TOR" | ld_team == "MEM" | ld_team == "MIN" | ld_team == "SAC" | 
+  #       ld_team == "DEN" | ld_team == "ATL" | ld_team == "OKC" | ld_team == "BOS" | ld_team == "GSW"
+  #       # | ld_team == "NOP" | ld_team == "CHI"  
+  #      ) %>%
   #filter(ld_team == "CLE") %>% 
   #filter(age < 25) %>% 
   arrange(-fntx_value_19) %>% 
@@ -305,8 +305,8 @@ weekly_totals <- weekly_totals %>% select(week, everything()); rm(week)
 class(weekly_totals)
 
 weekly_totals_plot <- weekly_totals %>% 
-  filter(week > 7 & week < 19) %>% # games that have passed in regular season 
-  #filter(week > 18 & week < 23) %>% # playoff filter 
+  #filter(week > 7 & week < 19) %>% # games that have passed in regular season 
+  filter(week > 18 & week < 23) %>% # playoff filter 
   ggplot() +
   geom_line(aes(y = ATL, x = week, colour = "ATL"), group = 1) +
   geom_line(aes(y = BKN, x = week, colour = "BKN"), group = 1) +

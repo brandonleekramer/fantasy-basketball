@@ -10,8 +10,8 @@ output: html_document
 rm(list = ls())
 for (pkg in c("tidyverse", "plotly")) {library(pkg, character.only = TRUE)}
 
-setwd("~/Documents/fantasy-basketball/data")
-#setwd("C:/Users/bkram/CloudStation/NBA/data")
+#setwd("~/Documents/fantasy-basketball/data")
+setwd("C:/Users/bkram/CloudStation/NBA/data")
 botb_contracts <- read_csv("nba_fantasy_data - botb_contracts.csv")
 gsd2_contracts <- read_csv("nba_fantasy_data - gsd2_contracts.csv")
 franchise_contracts <- read_csv("nba_fantasy_data - franchise_contracts.csv")
@@ -159,7 +159,7 @@ rm(bballref18, hashtag19, hashalt19, franchise_contracts, gsd2_contracts, legacy
 select_data %>% 
   #filter(player == "Skal Labissiere") %>% # by player
   #filter(gsd2_team == "DAL") %>% 
-  filter(trade_comp == "DAL") %>% 
+  filter(trade_comp == "MEM") %>% 
   #filter(bbr_gms > 50) %>%        # by games played
   #filter(bbr_gsd2_fpts > 25) %>%    # by 2018 stats
   #filter(hta_gsd2_fpts > 25) %>%    # by hta projections 
