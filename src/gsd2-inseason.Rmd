@@ -158,8 +158,8 @@ rm(bballref18, hashtag19, hashalt19, franchise_contracts, gsd2_contracts, legacy
 ```{r looking at overall projections}
 select_data %>% 
   #filter(player == "Skal Labissiere") %>% # by player
-  #filter(gsd2_team == "DAL") %>% 
-  filter(trade_comp == "MEM") %>% 
+  filter(gsd2_team == "DAL") %>% 
+  #filter(trade_comp == "LAC") %>% 
   #filter(bbr_gms > 50) %>%        # by games played
   #filter(bbr_gsd2_fpts > 25) %>%    # by 2018 stats
   #filter(hta_gsd2_fpts > 25) %>%    # by hta projections 
@@ -180,12 +180,12 @@ select_data %>%
   mutate(fntx_value_20 = fntx_fppg / gsd2_2020 * 10000) %>%
   mutate(fntx_value_21 = fntx_fppg / gsd2_2021 * 10000) %>%
   mutate(diff = fntx_fppg - ht_gsd2_fpts) %>%
-  filter(fntx_fppg > 25) %>% 
-  filter(gsd2_2019 < 5000000) %>% 
-  #filter(gsd2_team == "POR" | gsd2_team == "MIN" | gsd2_team == "BOS" | gsd2_team == "GSW" |  
-  #       gsd2_team == "NOP" | gsd2_team == "CHI" | gsd2_team == "PHI" | gsd2_team == "CHA" | 
-  #       gsd2_team == "ORL" | gsd2_team == "MIL" | gsd2_team == "DET" | gsd2_team == "OKC"  
-  #) %>%
+  filter(fntx_fppg > 18) %>% 
+  #filter(gsd2_2019 < 5000000) %>% 
+  filter(gsd2_team == "POR" | gsd2_team == "MIN" | gsd2_team == "BOS" | gsd2_team == "GSW" |  
+         gsd2_team == "NOP" | gsd2_team == "CHI" | gsd2_team == "PHI" | gsd2_team == "CHA" | 
+         gsd2_team == "ORL" | gsd2_team == "MIL" | gsd2_team == "DET" | gsd2_team == "OKC"  
+  ) %>%
   #filter(gsd2_team == "CLE") %>% 
   #filter(age < 25) %>% 
   #filter(grepl("PG", position)) %>% 

@@ -212,7 +212,7 @@ select_data %>%
   mutate(fntx_value_20 = fntx_fppg / fr_2020 * 10000) %>%
   mutate(fntx_value_21 = fntx_fppg / fr_2021 * 10000) %>%
   mutate(diff = fntx_fppg - ht_fr_fpts) %>%
-  filter(fntx_fppg > 24) %>% 
+  filter(fntx_fppg > 34) %>% 
   #filter(fr_team == "MIA" | fr_team == "UTA" | fr_team == "DAL" | fr_team == "LAC" |  
   #       fr_team == "MEM" | fr_team == "WAS" | fr_team == "BKN" | fr_team == "MIL" | 
   #       fr_team == "DET" | fr_team == "IND" | fr_team == "ORL" | fr_team == "OKC"
@@ -220,7 +220,7 @@ select_data %>%
   #      ) %>%
   #filter(fr_team == "CLE") %>% 
   #filter(age < 25) %>% 
-  filter(grepl("SF", position)) %>% 
+  #filter(grepl("SF", position)) %>% 
   arrange(-fntx_value_19) %>% 
   select(player, age, position, fr_team, fntx_fppg, ht_fr_fpts, diff, fntx_value_19, fntx_value_20, 
          fr_2019, fr_2020, fr_2021, fr_rfa, fr_injured, fr_gleague, fr_intl)
