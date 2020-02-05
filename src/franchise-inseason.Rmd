@@ -9,15 +9,15 @@ output: html_document
 rm(list = ls())
 for (pkg in c("tidyverse", "plotly")) {library(pkg, character.only = TRUE)}
 
-setwd("C:/Users/bkram/CloudStation/NBA/data")
+setwd("C:/Users/bkram/CloudStation/NBA/fantasy-basketball/data")
 botb_contracts <- read_csv("nba_fantasy_data - botb_contracts.csv")
 franchise_contracts <- read_csv("nba_fantasy_data - franchise_contracts.csv")
 legacy_contracts <- read_csv("nba_fantasy_data - legacy_contracts.csv")
 bballref18 <- read_csv("nba_fantasy_data - bballref18.csv")
 hashalt19 <- read_csv("nba_fantasy_data - 2019_hashtag_alt_proj.csv")
 hashtag19 <- read_csv("nba_fantasy_data - 2019_hashtag_proj.csv")
-#franchise_inseason <- read_csv("nba_fantasy_data - franchise_inseason.csv")
-franchise_inseason <- read_csv("nba_fantasy_data - franchise_inseason_last30.csv")
+franchise_inseason <- read_csv("nba_fantasy_data - franchise_inseason.csv")
+#franchise_inseason <- read_csv("nba_fantasy_data - franchise_inseason_last30.csv")
 nba_schedule <- read_csv("nba_fantasy_data - 2019_nba_schedule.csv")
 
 
@@ -127,7 +127,7 @@ franchise_inseason$player <- franchise_inseason$Player %>%
 
 franchise_inseason <- franchise_inseason %>% 
   rename(fntx_pts = "PTS", fntx_orb = "OREB", fntx_dreb = "DREB", fntx_ast = "AST", fntx_stl = "ST", 
-         fntx_blk = "BLK", fntx_tov = "TO", fntx_threes = "3PTM", fntx_fga = "FGA",fntx_fgm = "FGM", 
+         fntx_blk = "BLK", fntx_tov = "TO", fntx_threes = "3PTM", fntx_fga = "FGA", fntx_fgm = "FGM", 
          trade_comp = "Trade", position = "Position",
          fntx_ftm = "FTM", fntx_fta = "FTA", fntx_gms = "GP", fntx_fppg = "FP/G", fr_team = "Status") %>%
   mutate(fntx_ld_fpts = fntx_pts + (fntx_dreb*1.5) + (fntx_orb*2) + (fntx_ast*2) + (fntx_stl*2.5) + (fntx_blk*2.5) +
@@ -191,7 +191,7 @@ rm(bballref18, hashtag19, hashalt19, franchise_contracts)
 ```{r looking at overall projections}
 select_data %>% 
   #filter(player == "Skal Labissiere") %>% # by player
-  filter(fr_team == "CLE") %>% 
+  filter(fr_team == "DEN") %>% 
   #filter(bbr_gms > 50) %>%        # by games played
   #filter(bbr_fr_fpts > 25) %>%    # by 2018 stats
   #filter(hta_fr_fpts > 25) %>%    # by hta projections 
@@ -212,7 +212,7 @@ select_data %>%
   mutate(fntx_value_20 = fntx_fppg / fr_2020 * 10000) %>%
   mutate(fntx_value_21 = fntx_fppg / fr_2021 * 10000) %>%
   mutate(diff = fntx_fppg - ht_fr_fpts) %>%
-  filter(fntx_fppg > 34) %>% 
+  filter(fntx_fppg > 40) %>% 
   #filter(fr_team == "MIA" | fr_team == "UTA" | fr_team == "DAL" | fr_team == "LAC" |  
   #       fr_team == "MEM" | fr_team == "WAS" | fr_team == "BKN" | fr_team == "MIL" | 
   #       fr_team == "DET" | fr_team == "IND" | fr_team == "ORL" | fr_team == "OKC"
@@ -220,7 +220,7 @@ select_data %>%
   #      ) %>%
   #filter(fr_team == "CLE") %>% 
   #filter(age < 25) %>% 
-  #filter(grepl("SF", position)) %>% 
+  filter(grepl("SF", position)) %>% 
   arrange(-fntx_value_19) %>% 
   select(player, age, position, fr_team, fntx_fppg, ht_fr_fpts, diff, fntx_value_19, fntx_value_20, 
          fr_2019, fr_2020, fr_2021, fr_rfa, fr_injured, fr_gleague, fr_intl)
@@ -602,7 +602,24 @@ weekly_totals_plot <- weekly_totals %>%
         axis.title.y = element_blank(), legend.title = element_blank()); ggplotly()
 ```
 
-
+```{r}
+p <- select_data %>% 
+  #filter(fr_team == "CLE") %>% 
+  #filter(fntx_fppg > 5) %>% 
+  ggplot(aes(ld_2019, fntx_fppg, label = player)) + 
+  geom_point(color = dplyr::case_when(select_data$ld_team == "CLE" ~ "#ff4f00",
+                                      TRUE ~ "#000000")) +
+  geom_text_repel(data = subset(select_data, ld_team == "CLE"),
+                  size = 4,
+                  box.padding = 0.35, 
+                  point.padding = 0.5,
+                  force         = 100,
+                  #segment.size  = 0.2,
+                  segment.color = "lightgrey") +
+  geom_smooth(method=lm)
+p
+ggplotly(p)
+```
 
 
 

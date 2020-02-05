@@ -461,5 +461,21 @@ ggplot(data=post_trade, aes(x=reorder(trade_comp, -avg_fppg), y=avg_fppg, fill=t
 
 ```
 
-
-
+```{r}
+p <- select_data %>% 
+  #filter(fr_team == "CLE") %>% 
+  #filter(fntx_fppg > 5) %>% 
+  ggplot(aes(ld_2019, fntx_fppg, label = player)) + 
+  geom_point(color = dplyr::case_when(select_data$ld_team == "PHX" ~ "#ff4f00",
+                                      TRUE ~ "#000000")) +
+  geom_text_repel(data = subset(select_data, ld_team == "PHX"),
+                  size = 4,
+                  box.padding = 0.35, 
+                  point.padding = 0.5,
+                  force         = 100,
+                  #segment.size  = 0.2,
+                  segment.color = "lightgrey") +
+  geom_smooth(method=lm)
+p
+ggplotly(p)
+```
