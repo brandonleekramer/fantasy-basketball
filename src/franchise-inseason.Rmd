@@ -12,7 +12,6 @@ for (pkg in c("tidyverse", "plotly", "ggrepel", "modelr")) {library(pkg, charact
 setwd("C:/Users/bkram/CloudStation/NBA/fantasy-basketball/data")
 botb_contracts <- read_csv("nba_fantasy_data - botb_contracts.csv")
 franchise_contracts <- read_csv("nba_fantasy_data - franchise_contracts.csv")
-legacy_contracts <- read_csv("nba_fantasy_data - legacy_contracts.csv")
 bballref18 <- read_csv("nba_fantasy_data - bballref18.csv")
 hashalt19 <- read_csv("nba_fantasy_data - 2019_hashtag_alt_proj.csv")
 hashtag19 <- read_csv("nba_fantasy_data - 2019_hashtag_proj.csv")
@@ -191,7 +190,8 @@ rm(bballref18, hashtag19, hashalt19, franchise_contracts)
 ```{r looking at overall projections}
 select_data %>% 
   #filter(player == "Skal Labissiere") %>% # by player
-  filter(fr_team == "DEN") %>% 
+  #filter(fr_team == "CLE") %>% 
+  filter(trade_comp == "CLE") %>%
   #filter(bbr_gms > 50) %>%        # by games played
   #filter(bbr_fr_fpts > 25) %>%    # by 2018 stats
   #filter(hta_fr_fpts > 25) %>%    # by hta projections 
@@ -212,7 +212,8 @@ select_data %>%
   mutate(fntx_value_20 = fntx_fppg / fr_2020 * 10000) %>%
   mutate(fntx_value_21 = fntx_fppg / fr_2021 * 10000) %>%
   mutate(diff = fntx_fppg - ht_fr_fpts) %>%
-  filter(fntx_fppg > 40) %>% 
+  filter(fntx_fppg > 22) %>% 
+  filter(fr_2019 < 10000000) %>% 
   #filter(fr_team == "MIA" | fr_team == "UTA" | fr_team == "DAL" | fr_team == "LAC" |  
   #       fr_team == "MEM" | fr_team == "WAS" | fr_team == "BKN" | fr_team == "MIL" | 
   #       fr_team == "DET" | fr_team == "IND" | fr_team == "ORL" | fr_team == "OKC"
@@ -557,8 +558,8 @@ weekly_totals <- weekly_totals %>% select(week, everything()); rm(week)
 class(weekly_totals)
 
 weekly_totals_plot <- weekly_totals %>% 
-  filter(week > 10 & week < 20) %>% # games that have passed in regular season 
-  #filter(week > 19 & week < 24) %>% # playoff filter 
+  #filter(week > 10 & week < 20) %>% # games that have passed in regular season 
+  filter(week > 19 & week < 24) %>% # playoff filter 
   ggplot() +
   geom_line(aes(y = ATL, x = week, colour = "ATL"), group = 1) +
   geom_line(aes(y = BKN, x = week, colour = "BKN"), group = 1) +
@@ -607,9 +608,9 @@ p <- select_data %>%
   #filter(fr_team == "CLE") %>% 
   #filter(fntx_fppg > 10) %>% 
   ggplot(aes(fr_2019, fntx_fppg, label = player)) + 
-  geom_point(color = dplyr::case_when(select_data$fr_team == "DEN" ~ "#ff4f00",
+  geom_point(color = dplyr::case_when(select_data$trade_comp == "PHI" ~ "#ff4f00",
                                       TRUE ~ "#000000")) +
-  geom_text_repel(data = subset(select_data, fr_team == "DEN"),
+  geom_text_repel(data = subset(select_data, fr_team == "PHI"),
                   size = 4,
                   box.padding = 0.35, 
                   point.padding = 0.5,
@@ -623,7 +624,7 @@ ggplotly(p)
 
 ```{r}
 
-lm1 <- lm(fntx_fppg ~ fr_2019 + fr_2020 + fr_2021 + age, data = select_data)
+lm1 <- lm(fntx_fppg ~ fr_2019, data = select_data)
 lm1_resid <- resid(lm1)
 qqnorm(lm1_resid, 
      ylab="Standardized Residuals", 
@@ -631,14 +632,12 @@ qqnorm(lm1_resid,
      main="Old Faithful Eruptions") 
 qqline(lm1_resid)
 
-
-
 test_data <- add_residuals(select_data, lm1, var = "resid")
 
 test_data %>% 
-  select(player, resid) %>% 
-  arrange(-resid)
-
+  select(player, trade_comp, resid) %>% 
+  arrange(-resid) %>%  
+  filter(trade_comp == "CLE")
 
 ```
 
