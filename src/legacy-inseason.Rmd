@@ -462,6 +462,8 @@ ggplot(data=post_trade, aes(x=reorder(trade_comp, -avg_fppg), y=avg_fppg, fill=t
 ```
 
 ```{r}
+select_data <- select_data %>% filter(fntx_fppg != 0)
+
 p <- select_data %>% 
   #filter(fr_team == "CLE") %>% 
   #filter(fntx_fppg > 5) %>% 
@@ -475,7 +477,86 @@ p <- select_data %>%
                   force         = 100,
                   #segment.size  = 0.2,
                   segment.color = "lightgrey") +
-  geom_smooth(method=lm)
+  geom_smooth(method=loess)
 p
 ggplotly(p)
 ```
+```{r}
+
+lm1 <- lm(fntx_fppg ~ ld_2019, data = select_data)
+lm1_resid <- resid(lm1)
+qqnorm(lm1_resid) 
+qqline(lm1_resid)
+
+test_data <- add_residuals(select_data, lm1, var = "resid")
+
+# value by players 
+test_data %>% 
+  select(player, ld_team, resid) %>% 
+  drop_na(resid) %>% 
+  #arrange(-resid) %>% 
+  filter(ld_team != "FA") %>% 
+  group_by(ld_team) %>% 
+  top_n(15) %>% 
+  arrange(-resid) 
+
+# value by teams 
+test_data %>% 
+  select(player, ld_team, resid) %>% 
+  drop_na(resid) %>% 
+  #arrange(-resid) %>% 
+  filter(ld_team != "FA") %>% 
+  group_by(ld_team) %>% 
+  top_n(15) %>%
+  summarize(total_value = sum(resid)) %>% 
+  arrange(-total_value)
+
+```
+
+```{r}
+
+
+clean_data <- select_data %>% 
+  filter(ld_team != "FA") %>% 
+  #filter(fntx_fppg > 1) %>% 
+  drop_na(ld_2019) 
+
+
+mod1 <- lm(fntx_fppg ~ ld_2019, data = clean_data)
+b1 <- coef(mod1)[[1]]
+b2 <- coef(mod1)[[2]]
+smod1 <- summary(mod1)
+smod1
+
+plot(clean_data$fntx_fppg, clean_data$ld_2019, 
+     xlab="fntx_fppg", 
+     ylab="ld_2019", 
+     type = "p")
+abline(b1,b2)
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
