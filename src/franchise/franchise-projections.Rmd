@@ -1,0 +1,792 @@
+---
+title: "Franchise NBA Fantasy Tools"
+author: "Brandon L. Kramer"
+date: "8/29/2019"
+output: html_document
+---
+
+This file contains the following materials for Franchise NBA fantasy points league 
+
+* Concatenation of Basketball Reference (2018), Hashtag (2019), and Hashtag Alt (2019) Projections
+* Overall Stats and Projections
+* Contract Value Calculator
+* Team Projections
+* Team Players Quick Comparisons 
+* Post-Trade Comparison Tool 
+
+```{r pull packages and projection data}
+#install.packages("tidyverse"); install.packages("googlesheets")
+rm(list = ls())
+for (pkg in c("googledrive", "googlesheets4", "tidyverse", "plotly")) {library(pkg, character.only = TRUE)}
+
+setwd("C:/Users/bkram/CloudStation/NBA/data")
+botb_contracts <- read_csv("nba_fantasy_data - botb_contracts.csv")
+franchise_contracts <- read_csv("nba_fantasy_data - franchise_contracts.csv")
+legacy_contracts <- read_csv("nba_fantasy_data - legacy_contracts.csv")
+bballref18 <- read_csv("nba_fantasy_data - bballref18.csv")
+hashalt19 <- read_csv("nba_fantasy_data - 2019_hashtag_alt_proj.csv")
+hashtag19 <- read_csv("nba_fantasy_data - 2019_hashtag_proj.csv")
+franchise_inseason <- read_csv("nba_fantasy_data - franchise_inseason.csv")
+nba_schedule <- read_csv("nba_fantasy_data - 2019_nba_schedule.csv")
+
+bballref18$player <- bballref18$player %>% 
+  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 
+                    'é' = 'e', 'ê' = 'e', 'ić' = 'ic', 'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 
+                    'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z', 'Élie' = 'Elie',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 
+                    'J.J.' = 'JJ', 'Dončić' = 'Doncic', "Demarre" = "DeMarre",
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", 
+                    'Jaren Jackson' = 'Jaren Jackson Jr.','Kelly Oubre' = 'Kelly Oubre Jr.', 
+                    'Marvin Bagley' = 'Marvin Bagley III', 'Otto Porter' = 'Otto Porter Jr.', 
+                    'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
+                    'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schröder' = 'Dennis Schroder', 
+                    'Tim Hardaway' = 'Tim Hardaway Jr.'))
+
+combined_data <- bballref18 %>% 
+  rename(bbr_pts = "PTS", bbr_dreb = "DRB", bbr_orb = "ORB",
+         bbr_ast = "AST", bbr_stl = "STL", bbr_blk = "BLK",
+         bbr_tov = "TOV", bbr_threes = "3P", bbr_fga = "FGA",
+         bbr_fgm = "FG", bbr_ftm = "FT",  bbr_fta = "FTA", bbr_gms = "G", bbr_mpg = "MP", age = "Age") %>%
+  mutate(bbr_ld_fpts = bbr_pts + (bbr_dreb*1.5) + (bbr_orb*2) + (bbr_ast*2) + (bbr_stl*2.5) + (bbr_blk*2.5) +
+         (bbr_tov*-1) + bbr_threes + (bbr_fga*-0.5) + (bbr_fgm*0.5) + bbr_ftm + (bbr_fta*-1)) %>%
+  mutate(bbr_fr_fpts = bbr_pts + (bbr_dreb*1.5) + (bbr_orb*2) + (bbr_ast*2) + (bbr_stl*2.5) + (bbr_blk*2.5) +
+         (bbr_tov*-1) + bbr_threes + (bbr_fga*-0.5) + (bbr_fgm*0.5) + bbr_ftm + (bbr_fta*-1)) %>% 
+  mutate(bbr_gsd2_fpts = bbr_pts + bbr_dreb + (bbr_orb*1.25) + (bbr_ast*1.5) + (bbr_stl*1.5) + (bbr_blk*2) +
+         (bbr_tov*-1)+bbr_threes+(bbr_fga*-0.5)+(bbr_fgm*0.5)+(bbr_ftm*0.5)+(bbr_fta*-0.75)) %>%
+  mutate(bbr_botb_fpts = bbr_pts + bbr_dreb + (bbr_orb*1.25) + (bbr_ast*1.5) + (bbr_stl*1.5) + (bbr_blk*2) +
+         (bbr_tov*-1)+bbr_threes+(bbr_fga*-0.5)+(bbr_fgm*0.5)+(bbr_ftm*0.5)+(bbr_fta*-0.75)) %>% 
+  select(player, age, bbr_ld_fpts, bbr_fr_fpts, bbr_gsd2_fpts, bbr_botb_fpts, bbr_gms, bbr_mpg,
+         bbr_pts, bbr_dreb, bbr_orb, bbr_ast, bbr_stl, bbr_blk, bbr_tov, bbr_threes, bbr_fga, bbr_fgm, bbr_ftm, bbr_fta)
+
+hashalt19$player <- hashalt19$player %>% 
+  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
+                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ',
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", 
+                    'Jaren Jackson' = 'Jaren Jackson Jr.','Kelly Oubre' = 'Kelly Oubre Jr.', 
+                    'Marvin Bagley' = 'Marvin Bagley III', 'Otto Porter' = 'Otto Porter Jr.', 
+                    'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
+                    'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schröder' = 'Dennis Schroder', 
+                    'Tim Hardaway' = 'Tim Hardaway Jr.', "Demarre" = "DeMarre"))
+
+hashalt19 <- hashalt19 %>% 
+  rename(hta_pts = "PTS", hta_treb = "REB", hta_ast = "AST", hta_stl = "STL", hta_blk = "BLK",
+         hta_tov = "TOV", hta_threes = "THREES", hta_fga = "FGA",hta_fgm = "FGM", hta_ftm = "FTM",  
+         hta_fta = "FTA", hta_mpg = "MPG", hta_ftp = "FT", hta_gms = "Gs") %>%
+  mutate(hta_dreb = hta_treb*0.78) %>% 
+  mutate(hta_orb = hta_treb*0.22) %>% 
+  mutate(hta_ld_fpts = hta_pts + (hta_dreb*1.5) + (hta_orb*2) + (hta_ast*2) + (hta_stl*2.5) + (hta_blk*2.5) +
+         (hta_tov*-1) + hta_threes + (hta_fga*-0.5) + (hta_fgm*0.5) + hta_ftm + (hta_fta*-1)) %>%
+  mutate(hta_fr_fpts = hta_pts + (hta_dreb*1.5) + (hta_orb*2) + (hta_ast*2) + (hta_stl*2.5) + (hta_blk*2.5) +
+         (hta_tov*-1) + hta_threes + (hta_fga*-0.5) + (hta_fgm*0.5) + hta_ftm + (hta_fta*-1)) %>% 
+  mutate(hta_gsd2_fpts = hta_pts + hta_dreb + (hta_orb*1.25) + (hta_ast*1.5) + (hta_stl*1.5) + (hta_blk*2) +
+         (hta_tov*-1)+hta_threes+(hta_fga*-0.5)+(hta_fgm*0.5)+(hta_ftm*0.5)+(hta_fta*-0.75)) %>%
+  mutate(hta_botb_fpts = hta_pts + hta_dreb + (hta_orb*1.25) + (hta_ast*1.5) + (hta_stl*1.5) + (hta_blk*2) +
+         (hta_tov*-1)+hta_threes+(hta_fga*-0.5)+(hta_fgm*0.5)+(hta_ftm*0.5)+(hta_fta*-0.75)) %>% 
+  select(player, hta_ld_fpts, hta_fr_fpts, hta_gsd2_fpts, hta_botb_fpts, hta_gms, hta_mpg, 
+         hta_pts, hta_dreb, hta_orb, hta_ast, hta_stl, hta_blk, hta_tov, hta_threes, hta_fga, hta_fgm, hta_ftm, hta_fta, hta_ftp)
+  
+combined_data <- combined_data %>% 
+  full_join(hashalt19, by = "player")
+
+hashtag19$player <- hashtag19$player %>% 
+  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
+                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ',
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", 
+                    "Demarre" = "DeMarre", 'Dennis Schröder' = 'Dennis Schroder'))
+
+hashtag19 <- hashtag19 %>% 
+  rename(ht_pts = "PTS", ht_dreb = "DREB", ht_orb = "OREB", ht_ast = "AST", ht_stl = "STL", ht_blk = "BLK",
+         ht_tov = "TO", ht_threes = "THREES", ht_fga = "FGA", ht_fgm = "FGM", ht_ftm = "FTM",  
+         ht_fta = "FTA", ht_mpg = "MPG", ht_gms = "GP", ht_fgp = "FG%", ht_ftp = "FT%") %>%
+  mutate(ht_ld_fpts = ht_pts + (ht_dreb*1.5) + (ht_orb*2) + (ht_ast*2) + (ht_stl*2.5) + (ht_blk*2.5) +
+         (ht_tov*-1) + ht_threes + (ht_fga*-0.5) + (ht_fgm*0.5) + ht_ftm + (ht_fta*-1)) %>%
+  mutate(ht_fr_fpts = ht_pts + (ht_dreb*1.5) + (ht_orb*2) + (ht_ast*2) + (ht_stl*2.5) + (ht_blk*2.5) +
+         (ht_tov*-1) + ht_threes + (ht_fga*-0.5) + (ht_fgm*0.5) + ht_ftm + (ht_fta*-1)) %>% 
+  mutate(ht_gsd2_fpts = ht_pts + ht_dreb + (ht_orb*1.25) + (ht_ast*1.5) + (ht_stl*1.5) + (ht_blk*2) +
+         (ht_tov*-1)+ht_threes+(ht_fga*-0.5)+(ht_fgm*0.5)+(ht_ftm*0.5)+(ht_fta*-0.75)) %>%
+  mutate(ht_botb_fpts = ht_pts + ht_dreb + (ht_orb*1.25) + (ht_ast*1.5) + (ht_stl*1.5) + (ht_blk*2) +
+         (ht_tov*-1)+ht_threes+(ht_fga*-0.5)+(ht_fgm*0.5)+(ht_ftm*0.5)+(ht_fta*-0.75)) %>% 
+  select(player, ht_ld_fpts, ht_fr_fpts, ht_gsd2_fpts, ht_botb_fpts, ht_gms, ht_mpg, 
+         ht_pts, ht_dreb, ht_orb, ht_ast, ht_stl, ht_blk, ht_tov, ht_threes, ht_fga, ht_fgm, ht_fgp, ht_ftm, ht_fta, ht_ftp)
+
+combined_data <- combined_data %>% 
+  full_join(hashtag19, by = "player")
+
+franchise_contracts$player <- franchise_contracts$player %>% 
+  str_replace_all(c('C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', "O.G." = "OG", 
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "Demarre" = "DeMarre",
+                    'Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
+                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ'))
+
+combined_data <- combined_data %>% 
+  full_join(franchise_contracts, by = "player") %>% select(-fr_team, -trade_comp)
+
+# in-season fantrax 
+
+franchise_inseason$player <- franchise_inseason$Player %>% 
+  str_replace_all(c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e',
+                    'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 'Ž' = 'Z', 'ž' = 'z',
+                    'P.J.' = 'PJ','C.J.' = 'CJ', 'R.J.' = 'RJ', 'T.J.' = 'TJ', 'D.J.' = 'DJ', 'J.J.' = 'JJ',
+                    'Louis' = 'Lou', 'Edrice' = 'Bam', 'Waller-Prince' = 'Prince', "O.G." = "OG", 
+                    'Jaren Jackson' = 'Jaren Jackson Jr.','Kelly Oubre' = 'Kelly Oubre Jr.', 
+                    'Marvin Bagley' = 'Marvin Bagley III', 'Otto Porter' = 'Otto Porter Jr.', 
+                    'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
+                    'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schröder' = 'Dennis Schroder', 
+                    'Tim Hardaway' = 'Tim Hardaway Jr.', "Demarre" = "DeMarre"))
+
+franchise_inseason <- franchise_inseason %>% 
+  rename(fntx_pts = "PTS", fntx_orb = "OREB", fntx_dreb = "DREB", fntx_ast = "AST", fntx_stl = "ST", 
+         fntx_blk = "BLK", fntx_tov = "TO", fntx_threes = "3PTM", fntx_fga = "FGA",fntx_fgm = "FGM", 
+         fntx_ftm = "FTM", fntx_fta = "FTA", fntx_gms = "GP", fntx_fppg = "FP/G", fr_team = "Status", trade_comp = "Trade") %>%
+  mutate(fntx_ld_fpts = fntx_pts + (fntx_dreb*1.5) + (fntx_orb*2) + (fntx_ast*2) + (fntx_stl*2.5) + (fntx_blk*2.5) +
+         (fntx_tov*-1) + fntx_threes + (fntx_fga*-0.5) + (fntx_fgm*0.5) + fntx_ftm + (fntx_fta*-1)) %>%
+  mutate(fntx_fr_fpts = fntx_pts + (fntx_dreb*1.5) + (fntx_orb*2) + (fntx_ast*2) + (fntx_stl*2.5) + (fntx_blk*2.5) +
+         (fntx_tov*-1) + fntx_threes + (fntx_fga*-0.5) + (fntx_fgm*0.5) + fntx_ftm + (fntx_fta*-1)) %>% 
+  mutate(fntx_gsd2_fpts = fntx_pts + fntx_dreb + (fntx_orb*1.25) + (fntx_ast*1.5) + (fntx_stl*1.5) + (fntx_blk*2) +
+         (fntx_tov*-1)+fntx_threes+(fntx_fga*-0.5)+(fntx_fgm*0.5)+(fntx_ftm*0.5)+(fntx_fta*-0.75)) %>%
+  mutate(fntx_botb_fpts = fntx_pts + fntx_dreb + (fntx_orb*1.25) + (fntx_ast*1.5) + (fntx_stl*1.5) + (fntx_blk*2) +
+         (fntx_tov*-1)+fntx_threes+(fntx_fga*-0.5)+(fntx_fgm*0.5)+(fntx_ftm*0.5)+(fntx_fta*-0.75)) %>% 
+  select(player, fntx_fppg, fntx_ld_fpts, fntx_fr_fpts, fntx_gsd2_fpts, fntx_botb_fpts, fntx_gms,  
+         fntx_pts, fntx_dreb, fntx_orb, fntx_ast, fntx_stl, fntx_blk, 
+         fntx_tov, fntx_threes, fntx_fga, fntx_fgm, fntx_ftm, fntx_fta, fr_team, trade_comp)
+
+select_data <- combined_data %>% 
+  full_join(franchise_inseason, by = "player") %>% 
+  select(player, age, fntx_fppg, 
+         bbr_fr_fpts, hta_fr_fpts, ht_fr_fpts, bbr_gms, bbr_mpg, hta_gms, hta_mpg, ht_gms, ht_mpg,
+         fr_team, fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, 
+         fr_rfa, fr_injured, fr_gleague, fr_intl, trade_comp, fr_position)
+rm(bballref18, hashtag19, hashalt19, franchise_contracts)
+```
+
+# Franchise Overall Stats and Projections  
+
+```{r looking at overall projections}
+select_data %>% 
+  #filter(player == "Skal Labissiere") %>% # by player
+  filter(fr_team == "CLE") %>% 
+  #filter(bbr_gms > 50) %>%        # by games played
+  #filter(bbr_fr_fpts > 25) %>%    # by 2018 stats
+  #filter(hta_fr_fpts > 25) %>%    # by hta projections 
+  #filter(ht_fr_fpts > 25) %>%     # by ht projections 
+  #filter(age < 25) %>%            # by age 
+  #arrange(-bbr_fr_fpts) %>%       # arrange by 2018 stats
+  #arrange(-hta_fr_fpts) %>%       # arrange by hta projections
+  arrange(-fntx_fppg) %>%         # arrange by ht projections
+  select(player, age, fntx_fppg, fr_2019, fr_2020, fr_2021, fr_rfa, bbr_fr_fpts, hta_fr_fpts, ht_fr_fpts, fr_injured, fr_gleague, fr_intl)
+```
+
+# Franchise NBA Contract Value Calculators
+
+```{r bballref evaluations in ld}
+select_data %>% 
+  mutate(bbr_fr_value_19 = bbr_fr_fpts / fr_2019 * 10000) %>% 
+  mutate(bbr_fr_value_20 = bbr_fr_fpts / fr_2020 * 10000) %>%
+  mutate(bbr_fr_value_21 = bbr_fr_fpts / fr_2021 * 10000) %>%
+  #filter(bbr_gms > 50) %>%
+  filter(fr_position == "3/3" | fr_position == "2/3" | fr_position == "3/4") %>% 
+  #filter(fr_team == "MIA" | fr_team == "UTA" | fr_team == "DAL" | fr_team == "LAC" |  
+  #       fr_team == "MEM" | fr_team == "WAS" | fr_team == "BKN" | fr_team == "MIL" | fr_team == "DET" |
+  #       fr_team == "IND" | fr_team == "NOP" | fr_team == "CHI" | fr_team == "ORL" ) %>% 
+  filter(bbr_fr_fpts > 25) %>% 
+  #filter(age < 25) %>% 
+  arrange(-bbr_fr_value_19) %>% 
+  select(player, fr_team, age, bbr_fr_fpts, bbr_fr_value_19, bbr_fr_value_20, #bbr_fr_value_21, 
+         fr_2019, fr_2020, fr_2021, fr_rfa, fr_injured, fr_gleague, fr_intl)
+```
+
+```{r hashtag_alt evaluations in ld}
+select_data %>% 
+  mutate(hta_fr_value_19 = hta_fr_fpts / fr_2019 * 10000) %>% 
+  mutate(hta_fr_value_20 = hta_fr_fpts / fr_2020 * 10000) %>%
+  mutate(hta_fr_value_21 = hta_fr_fpts / fr_2021 * 10000) %>%
+  #filter(hta_fr_fpts > 34) %>% 
+  #filter(age > 24) %>% 
+  filter(fr_team == "CLE") %>% 
+  #filter(fr_team == "MIA" | fr_team == "UTA" | fr_team == "DAL" | fr_team == "LAC" | fr_team == "SAC" | 
+  #       fr_team == "MEM" | fr_team == "WAS" | fr_team == "BKN" | fr_team == "MIL" | fr_team == "DET" |
+  #       fr_team == "IND" | fr_team == "NOP" | fr_team == "CHI" | fr_team == "ORL" ) %>% 
+  arrange(-hta_fr_value_19) %>% 
+  select(player, age, fr_team, hta_fr_fpts, hta_fr_value_19, hta_fr_value_20, hta_fr_value_21, 
+         fr_2019, fr_2020, fr_2021, fr_rfa, fr_injured, fr_gleague, fr_intl)
+```
+
+```{r hashtag evaluations in fr}
+select_data %>% 
+  mutate(ht_fr_value_19 = ht_fr_fpts / fr_2019 * 10000) %>% 
+  mutate(ht_fr_value_20 = ht_fr_fpts / fr_2020 * 10000) %>%
+  mutate(ht_fr_value_21 = ht_fr_fpts / fr_2021 * 10000) %>%
+  filter(ht_fr_fpts > 26) %>% 
+  #filter(age < 25) %>% 
+  arrange(-ht_fr_value_19) %>% 
+  select(player, age, fr_team, ht_fr_fpts, ht_fr_value_19, ht_fr_value_20, ht_fr_value_21, 
+         fr_2019, fr_2020, fr_2021, fr_rfa, fr_injured, fr_gleague, fr_intl)
+```
+
+```{r hashtag evaluations in fr}
+select_data %>% 
+  mutate(fntx_value_19 = fntx_fppg / fr_2019 * 10000) %>% 
+  mutate(fntx_value_20 = fntx_fppg / fr_2020 * 10000) %>%
+  mutate(fntx_value_21 = fntx_fppg / fr_2021 * 10000) %>%
+  mutate(diff = fntx_fppg - ht_fr_fpts) %>%
+  filter(fntx_fppg > 28) %>% 
+  filter(fr_team == "MIA" | fr_team == "UTA" | fr_team == "DAL" | fr_team == "LAC" |  
+         fr_team == "MEM" | fr_team == "WAS" | fr_team == "BKN" | fr_team == "MIL" | fr_team == "DET" |
+         fr_team == "IND" | #fr_team == "NOP" | fr_team == "CHI" | 
+           fr_team == "ORL" ) %>%
+  #filter(fr_team == "CLE") %>% 
+  #filter(age < 25) %>% 
+  arrange(-fntx_value_19) %>% 
+  select(player, age, fr_team, fntx_fppg, ht_fr_fpts, diff, fntx_value_19, fntx_value_20, 
+         fr_2019, fr_2020, fr_2021, fr_rfa, fr_injured, fr_gleague, fr_intl)
+```
+
+
+# Franchise NBA Team Projections 
+
+Franchise Team Projections BBR 
+
+```{r ld 2018 bbr projections, fig.width=12, fig.height=5.5, warning=FALSE}
+fr_temp_1 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>%  
+  group_by(fr_team) %>% summarize(avg_fppg = mean(bbr_fr_fpts, na.rm = TRUE)) 
+fr_temp_2 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(fr_team) %>% summarize(fr_players = n()) %>% filter(fr_team != "NA") %>% 
+  full_join(fr_temp_1, fr_temp_2, by = "fr_team")
+fr_temp_3 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(fr_team) %>% 
+  summarize(cap_used = sum(fr_2019, na.rm = TRUE)) %>% 
+  mutate(cap_left = 109400000 - cap_used)
+fr_bbr_team_projections <- full_join(fr_temp_2, fr_temp_3, by = "fr_team") %>% 
+  mutate(team_total = avg_fppg * fr_players) %>% 
+  arrange(-team_total) %>%
+  select(fr_team, fr_players, avg_fppg, team_total, cap_used, cap_left); rm(fr_temp_1, fr_temp_2)
+fr_bbr_team_projections
+ggplot(data=fr_bbr_team_projections, aes(x=reorder(fr_team, -team_total), y=team_total, fill=fr_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly() 
+ggplot(data=fr_bbr_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fppg, fill=fr_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +
+  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2018 Stats)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
+```
+
+Franchise Team Projections HashTag Alt
+
+```{r ld 2019 hta projections, fig.width=12, fig.height=5.5, warning=FALSE}
+fr_temp_1 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>%  
+  group_by(fr_team) %>% summarize(avg_fppg = mean(hta_fr_fpts, na.rm = TRUE)) 
+fr_temp_2 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(fr_team) %>% summarize(fr_players = n()) %>% filter(fr_team != "NA") %>% 
+  full_join(fr_temp_1, fr_temp_2, by = "fr_team")
+fr_temp_3 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(fr_team) %>% 
+  summarize(cap_used = sum(fr_2019, na.rm = TRUE)) %>% 
+  mutate(cap_left = 109400000 - cap_used)
+fr_hta_team_projections <- full_join(fr_temp_2, fr_temp_3, by = "fr_team") %>% 
+  mutate(team_total = avg_fppg * fr_players) %>% 
+  arrange(-team_total) %>%
+  select(fr_team, fr_players, avg_fppg, team_total, cap_used, cap_left); rm(fr_temp_1, fr_temp_2)
+fr_hta_team_projections
+ggplot(data=fr_hta_team_projections, 
+       aes(x=reorder(fr_team, -team_total), y=team_total, fill=fr_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2019 HTA Stats)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly() 
+ggplot(data=fr_hta_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fppg, fill=fr_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2019 HTA Stats)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
+```
+
+Franchise Team Projections HashTag
+
+```{r ld 2019 ht projections, fig.width=12, fig.height=5.5, warning=FALSE}
+fr_temp_1 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>%  
+  group_by(fr_team) %>% summarize(avg_fppg = mean(ht_fr_fpts, na.rm = TRUE)) 
+fr_temp_2 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(fr_team) %>% summarize(fr_players = n()) %>% filter(fr_team != "NA") %>% 
+  full_join(fr_temp_1, fr_temp_2, by = "fr_team")
+fr_temp_3 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(fr_team) %>% 
+  summarize(cap_used = sum(fr_2019, na.rm = TRUE)) %>% 
+  mutate(cap_left = 109400000 - cap_used)
+fr_ht_team_projections <- full_join(fr_temp_2, fr_temp_3, by = "fr_team") %>% 
+  mutate(team_total = avg_fppg * fr_players) %>% 
+  arrange(-team_total) %>%
+  select(fr_team, fr_players, avg_fppg, team_total, cap_used, cap_left); rm(fr_temp_1, fr_temp_2)
+fr_ht_team_projections
+ggplot(data=fr_ht_team_projections, 
+       aes(x=reorder(fr_team, -team_total), y=team_total, fill=fr_team)) +
+       #aes(x=reorder(trade_comp, -team_total), y=team_total, fill=trade_comp)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (Based on 2019 HT Stats)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly() 
+ggplot(data=fr_ht_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fppg, fill=fr_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (Based on 2019 HT Stats)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
+```
+
+# Team Players Quick Comparisons
+
+```{r looking at specific team's players projections}
+select_data %>% 
+  mutate(ht_fr_value_19 = ht_fr_fpts / fr_2019 * 1000000) %>% 
+  mutate(ht_fr_value_20 = ht_fr_fpts / fr_2020 * 1000000) %>%
+  mutate(ht_fr_value_21 = ht_fr_fpts / fr_2021 * 1000000) %>%
+  #filter(fr_team == "CLE") %>% 
+  filter(trade_comp == "CLE") %>% 
+  arrange(-ht_fr_fpts) %>% 
+  select(player, age, fr_team, bbr_fr_fpts, hta_fr_fpts, ht_fr_fpts, ht_fr_value_19, 
+         fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, fr_rfa, fr_gleague, fr_intl)
+```
+
+```{r looking at specific team's players projections}
+select_data %>% 
+  mutate(ht_fr_value_19 = ht_fr_fpts / fr_2019 * 1000000) %>% 
+  mutate(ht_fr_value_20 = ht_fr_fpts / fr_2020 * 1000000) %>%
+  mutate(ht_fr_value_21 = ht_fr_fpts / fr_2021 * 1000000) %>%
+  filter(fr_team == "CLE") %>% 
+  arrange(-ht_fr_fpts) %>% 
+  select(player, age, fr_team, bbr_fr_fpts, hta_fr_fpts, ht_fr_fpts, ht_fr_value_19, 
+         fr_2019, fr_2020, fr_2021, fr_2022, fr_2023, fr_2024, fr_rfa, fr_gleague, fr_intl)
+```
+
+# Post-Trade Comparison Tool
+
+Post-Trade Comparison Tool HashTag Alt 
+
+```{r comparing team projections before and after trade using hta, fig.width=12, fig.height=4.5, warning=FALSE}
+temp_1 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>%  
+  group_by(fr_team) %>% summarize(avg_fppg = mean(hta_fr_fpts, na.rm = TRUE)) 
+temp_2 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(fr_team) %>% summarize(fr_players = n()) %>% filter(fr_team != "NA") %>% 
+  full_join(temp_1, temp_2, by = "fr_team")
+temp_3 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(fr_team) %>% 
+  summarize(cap_used = sum(fr_2019, na.rm = TRUE)) %>% 
+  mutate(cap_left = 109400000 - cap_used)
+fr_hta_team_projections <- full_join(temp_2, temp_3, by = "fr_team") %>% 
+  mutate(team_total = avg_fppg * fr_players) %>% 
+  arrange(-team_total) %>%
+  select(fr_team, fr_players, avg_fppg, team_total, cap_used, cap_left); rm(temp_1, temp_2); rm(temp_3)
+
+temp_1 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>%  
+  group_by(trade_comp) %>% summarize(avg_fppg = mean(hta_fr_fpts, na.rm = TRUE)) 
+temp_2 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(trade_comp) %>% summarize(fr_players = n()) %>% filter(trade_comp != "NA") %>% 
+  full_join(temp_1, temp_2, by = "trade_comp")
+temp_3 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  group_by(trade_comp) %>% 
+  summarize(cap_used = sum(fr_2019, na.rm = TRUE)) %>% 
+  mutate(cap_left = 109400000 - cap_used)
+fr_hta_team_posttrade <- full_join(temp_2, temp_3, by = "trade_comp") %>% 
+  mutate(team_total = avg_fppg * fr_players) %>% 
+  arrange(-team_total) %>%
+  select(trade_comp, fr_players, avg_fppg, team_total, cap_used, cap_left); rm(temp_1, temp_2); rm(temp_3)
+
+fr_hta_team_projections; fr_hta_team_posttrade
+
+ggplot(data=fr_hta_team_projections, 
+       aes(x=reorder(fr_team, -team_total), y=team_total, fill=fr_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (HTA 2019 Stats - Before)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly() 
+
+ggplot(data=fr_hta_team_posttrade, 
+       aes(x=reorder(trade_comp, -team_total), y=team_total, fill=trade_comp)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (HTA 2019 Stats - After)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
+
+ggplot(data=fr_hta_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fppg, fill=fr_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (HTA 2019 Stats - Before)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
+
+ggplot(data=fr_hta_team_posttrade, aes(x=reorder(trade_comp, -avg_fppg), y=avg_fppg, fill=trade_comp)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (HTA 2019 Stats - After)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
+
+```
+
+Post-Trade Comparison Tool HashTag Alt
+
+```{r comparing team projections before and after trade using ht, fig.width=12, fig.height=4.5, warning=FALSE}
+
+select_data %>% group_by(fr_team) %>% count(fr_team)
+
+temp_1 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>%  
+  filter(fr_team == "FA") %>% drop_na(fr_team) %>% 
+  group_by(fr_team) %>% summarize(avg_fppg = mean(ht_fr_fpts, na.rm = TRUE)) 
+temp_2 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  filter(fr_team == "FA") %>% drop_na(fr_team) %>%
+  group_by(fr_team) %>% summarize(fr_players = n()) %>% filter(fr_team != "NA") %>% 
+  full_join(temp_1, temp_2, by = "fr_team")
+temp_3 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  filter(fr_team == "FA") %>% drop_na(fr_team) %>%
+  group_by(fr_team) %>% 
+  summarize(cap_used = sum(fr_2019, na.rm = TRUE)) %>% 
+  mutate(cap_left = 109400000 - cap_used)
+fr_ht_team_projections <- full_join(temp_2, temp_3, by = "fr_team") %>% 
+  mutate(team_total = avg_fppg * fr_players) %>% 
+  arrange(-team_total) %>%
+  select(fr_team, fr_players, avg_fppg, team_total, cap_used, cap_left); rm(temp_1, temp_2); rm(temp_3)
+
+temp_1 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>%  
+  filter(fr_team == "FA") %>% drop_na(fr_team) %>%
+  group_by(trade_comp) %>% summarize(avg_fppg = mean(ht_fr_fpts, na.rm = TRUE)) 
+temp_2 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  filter(fr_team == "FA") %>% drop_na(fr_team) %>%
+  group_by(trade_comp) %>% summarize(fr_players = n()) %>% filter(trade_comp != "NA") %>% 
+  full_join(temp_1, temp_2, by = "trade_comp")
+temp_3 <- select_data %>% 
+  filter(fr_injured == "0") %>% 
+  filter(fr_gleague == "0") %>% 
+  filter(fr_intl == "0") %>% 
+  filter(fr_team == "FA") %>% drop_na(fr_team) %>%
+  group_by(trade_comp) %>% 
+  summarize(cap_used = sum(fr_2019, na.rm = TRUE)) %>% 
+  mutate(cap_left = 109400000 - cap_used)
+fr_ht_team_posttrade <- full_join(temp_2, temp_3, by = "trade_comp") %>% 
+  mutate(team_total = avg_fppg * fr_players) %>% 
+  arrange(-team_total) %>%
+  select(trade_comp, fr_players, avg_fppg, team_total, cap_used, cap_left); rm(temp_1, temp_2); rm(temp_3)
+
+fr_ht_team_projections; fr_ht_team_posttrade
+
+ggplot(data=fr_ht_team_projections, 
+       aes(x=reorder(fr_team, -team_total), y=team_total, fill=fr_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (HT 2019 Stats - Before)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly() 
+
+ggplot(data=fr_ht_team_posttrade, 
+       aes(x=reorder(trade_comp, -team_total), y=team_total, fill=trade_comp)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (HT 2019 Stats - After)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
+
+ggplot(data=fr_hta_team_projections, aes(x=reorder(fr_team, -avg_fppg), y=avg_fppg, fill=fr_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (HT 2019 Stats - Before)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
+
+ggplot(data=fr_hta_team_posttrade, aes(x=reorder(trade_comp, -avg_fppg), y=avg_fppg, fill=trade_comp)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (HT 2019 Stats - After)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
+
+```
+
+# Trade Tool with Fantrax Data 
+
+```{r comparing team projections before and after trade using ht, fig.width=12, fig.height=4.5, warning=FALSE}
+temp_1 <- select_data %>% 
+  #filter(fr_injured == "0") %>% 
+  #filter(fr_gleague == "0") %>% 
+  #filter(fr_intl == "0") %>%  
+  filter(fr_team != "FA") %>% drop_na(fr_team) %>%
+  group_by(fr_team) %>% summarize(avg_fppg = mean(fntx_fppg, na.rm = TRUE)) 
+temp_2 <- select_data %>% 
+  #filter(fr_injured == "0") %>% 
+  #filter(fr_gleague == "0") %>% 
+  #filter(fr_intl == "0") %>% 
+  filter(fr_team != "FA") %>% drop_na(fr_team) %>%
+  group_by(fr_team) %>% summarize(fr_players = n()) %>% filter(fr_team != "NA") %>% 
+  full_join(temp_1, temp_2, by = "fr_team")
+temp_3 <- select_data %>% 
+  #filter(fr_injured == "0") %>% 
+  #filter(fr_gleague == "0") %>% 
+  #filter(fr_intl == "0") %>% 
+  filter(fr_team != "FA") %>% drop_na(fr_team) %>%
+  group_by(fr_team) %>% 
+  summarize(cap_used = sum(fr_2019, na.rm = TRUE)) %>% 
+  mutate(cap_left = 109400000 - cap_used)
+pre_trade <- full_join(temp_2, temp_3, by = "fr_team") %>% 
+  mutate(team_total = avg_fppg * fr_players) %>% 
+  arrange(-team_total) %>%
+  select(fr_team, fr_players, avg_fppg, team_total, cap_used, cap_left); rm(temp_1, temp_2); rm(temp_3)
+
+temp_1 <- select_data %>% 
+  #filter(fr_injured == "0") %>% 
+  #filter(fr_gleague == "0") %>% 
+  #filter(fr_intl == "0") %>%  
+  filter(fr_team != "FA") %>% drop_na(fr_team) %>%
+  group_by(trade_comp) %>% summarize(avg_fppg = mean(fntx_fppg, na.rm = TRUE)) 
+temp_2 <- select_data %>% 
+  #filter(fr_injured == "0") %>% 
+  #filter(fr_gleague == "0") %>% 
+  #filter(fr_intl == "0") %>% 
+  filter(fr_team != "FA") %>% drop_na(fr_team) %>%
+  group_by(trade_comp) %>% summarize(fr_players = n()) %>% filter(trade_comp != "NA") %>% 
+  full_join(temp_1, temp_2, by = "trade_comp")
+temp_3 <- select_data %>% 
+  #filter(fr_injured == "0") %>% 
+ # filter(fr_gleague == "0") %>% 
+  #filter(fr_intl == "0") %>% 
+  filter(fr_team != "FA") %>% drop_na(fr_team) %>%
+  group_by(trade_comp) %>% 
+  summarize(cap_used = sum(fr_2019, na.rm = TRUE)) %>% 
+  mutate(cap_left = 109400000 - cap_used)
+post_trade <- full_join(temp_2, temp_3, by = "trade_comp") %>% 
+  mutate(team_total = avg_fppg * fr_players) %>% 
+  arrange(-team_total) %>%
+  select(trade_comp, fr_players, avg_fppg, team_total, cap_used, cap_left); rm(temp_1, temp_2); rm(temp_3)
+
+ggplot(data=pre_trade, 
+       aes(x=reorder(fr_team, -team_total), y=team_total, fill=fr_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (HT 2019 Stats - Before)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly() 
+
+ggplot(data=post_trade, 
+       aes(x=reorder(trade_comp, -team_total), y=team_total, fill=trade_comp)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() +  theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 5) +
+  labs(title = "Franchise NBA Rankings - Projected Team Points Per Week (HT 2019 Stats - After)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
+
+ggplot(data=pre_trade, aes(x=reorder(fr_team, -avg_fppg), y=avg_fppg, fill=fr_team)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (HT 2019 Stats - Before)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
+
+ggplot(data=post_trade, aes(x=reorder(trade_comp, -avg_fppg), y=avg_fppg, fill=trade_comp)) +
+  geom_bar(stat="identity", width=0.6, colour="black") +
+  theme_bw() + theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+  geom_text(aes(label = fr_players), size = 3, colour="white", fontface="bold", hjust = 0.5, vjust = 3) +
+  labs(title = "Franchise NBA Rankings - Avg Fantasy Points Per Player (HT 2019 Stats - After)", 
+       fill = "Franchise Team") +
+  scale_fill_manual(values=c("#C8102E", "#061922", "#008348", "#00788C", "#ce1141", 
+                             "#860038", "#007dc5", "#0E2240", "#C8102E", "#1D428A",
+                             "#ce1141", "#ffc633", "#1D428A", "#552582", "#5D76A9", 
+                             "#98002e", "#00471b", "#78be20", "#b6995a", "#F58426",
+                             "#EF3B24", "#007dc5", "#006bb6", "#e56020", "#000000", 
+                             "#724c9f", "#bac3c9", "#ce1141", "#002B5C", "#002b5c")); ggplotly()
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+---
+title: "Untitled"
+author: "Brandon L. Kramer"
+date: "10/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#install.packages("tidyverse"); install.packages("googlesheets")
+rm(list = ls())
+for (pkg in c( "tidyverse", "nbastatR")) {library(pkg, character.only = TRUE)}
+
+bref_players_stats(seasons = 2019, tables = c("advanced", "totals"), widen = TRUE, assign_to_environment = TRUE)
+
+bref_advanced <- dataBREFPlayerAdvanced
+bref_totals <- dataBREFPlayerTotals
+
+adv_player_stats <- bref_advanced %>%
+  filter(minutes >= 500) %>%
+  mutate(bref_url = glue::glue("https://www.basketball-reference.com/players/{stringr::str_sub(namePlayer, 1, 1)}/{namePlayer}.html"),
+         bref_link = glue::glue('<a href="{bref_url}">{namePlayer}</a>'))
+
+```

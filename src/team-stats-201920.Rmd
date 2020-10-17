@@ -1,0 +1,89 @@
+---
+title: "Untitled"
+author: "Brandon L. Kramer"
+date: "10/15/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#install.packages("tidyverse"); install.packages("googlesheets")
+rm(list = ls())
+for (pkg in c( "tidyverse", "plotly", "janitor", "readxl", "ggcorrplot", "corrr", "treemap")) {library(pkg, character.only = TRUE)}
+
+#setwd("C:/Users/bkram/CloudStation/NBA/data")
+setwd("~/Documents/fantasy-basketball/data")
+totals <- read_csv("nba_201920pts_totals.csv") %>% clean_names()
+per_game <- read_csv("nba_201920pts_pergame.csv") %>% clean_names()
+team_data <- read_csv("nba_team201920_stats.csv") %>% 
+  clean_names() %>% rename(full_team = team, team = team_abb)
+```
+
+Let's look at the relationship between total points produced by teams and their winning percentage. 
+
+```{r}
+team_totals <- totals %>% 
+  filter(team != "(N/A)") %>% 
+  group_by(team) %>% 
+  summarize(f_pts = sum(f_pts), fp_g = sum(fp_g),
+            fgm = sum(fgm), fga = sum(fga), 
+            ftm = sum(ftm), fta = sum(fta),
+            pts = sum(pts), x3ptm = sum(x3ptm),
+            oreb = sum(oreb), dreb = sum(dreb),
+            ast = sum(ast), stl = sum(st),
+            blk = sum(blk), to = sum(to)) %>% 
+  arrange(-f_pts) %>% 
+  left_join(team_data %>% 
+  separate(overall, c("wins", "losses"), sep = "-") %>% 
+  mutate(wins = as.numeric(wins),
+         losses = as.numeric(losses),
+         winpct = round(wins / (wins + losses), 3)) %>% 
+  select(team, winpct), by = "team") %>% 
+  mutate(year = 2020)
+team_totals
+```
+```{r, fig.width=10}
+corr_matrix <- cor(team_totals %>% select(-team))
+ggcorrplot(corr_matrix, hc.order = TRUE, type = "lower", 
+           outline.col = "white", lab = TRUE, 
+           colors = c( "#6D9EC1", "white", "#E46726"))
+```
+```{r}
+totals_per_player <- totals %>% 
+  full_join(team_totals %>% 
+    rename(team_fpts = f_pts) %>% 
+    select(team, team_fpts, winpct), by = "team") %>% 
+  select(player, team, status, f_pts, team_fpts, winpct) %>% 
+  mutate(team_frac = round(f_pts / team_fpts, 3))
+
+totals_per_player %>% 
+  filter(team == "ATL") %>% 
+  select(player, team_frac) %>% 
+  plot_ly(labels = ~player, values=~team_frac) %>%
+  add_pie(hole = 0.6) %>%
+  layout(title = "ATL 2019-20",  showlegend = T,
+         xaxis = list(showgrid = F, zeroline = F, showticklabels = F),
+         yaxis = list(showgrid = F, zeroline = F, showticklabels = F))
+```
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
