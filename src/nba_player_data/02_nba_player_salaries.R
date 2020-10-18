@@ -2,6 +2,7 @@ rm(list = ls())
 
 for (pkg in c( "tidyverse", "janitor")) {library(pkg, character.only = TRUE)}
 
+### clean raw data and output that to an Rds 
 setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_salaries/")
 players <- read_csv("nba_players.csv") %>% rename(player_id = `_id`) %>% clean_names() 
 salaries <- read_csv("nba_player_salaries_19852018.csv") %>% clean_names()
@@ -15,3 +16,4 @@ cleaned_salaries <- players %>%
 cleaned_salaries
 
 write_rds(cleaned_salaries, "nba_player_salaries_19852018_cleaned.Rds")
+

@@ -1,11 +1,13 @@
 
 rm(list = ls())
-for (pkg in c( "tidyverse", "janitor", "nbastatR")) {library(pkg, character.only = TRUE)}
+for (pkg in c( "tidyverse", "janitor", "nbastatR", "naniar")) {library(pkg, character.only = TRUE)}
 
 # pull in the 1950-2017 data 
-setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/nba_player_season_byteam")
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/")
 bref_19502017 <- read_csv("nba_player_season_by_team.csv") %>% clean_names()
-bref_19502017 <- bref_19502017 %>% select(-x1, -blanl, -blank2, -x3p_ar) 
+bref_19502017 <- bref_19502017 %>% 
+  select(-x1, -blanl, -blank2, -x3p_ar) %>% 
+  drop_na(year, player)
 
 # scrape the rest of the data   
 bref_players_stats(seasons = c(2018, 2019, 2020), tables = c("advanced", "totals"), widen = TRUE, assign_to_environment = TRUE)
@@ -17,13 +19,10 @@ bref_combined <- bref_advanced %>%
   full_join(bref_totals,  by = c("namePlayer", "slugSeason", "yearSeason", "slugPlayerSeason",
                                  "slugPosition", "agePlayer", "slugTeamBREF", "slugPlayerBREF",
               "countGames", "isSeasonCurrent", "isHOFPlayer", "slugTeamsBREF", "idPlayerNBA")) %>% 
-  select(-starts_with("url"))
+  select(-starts_with("url")) 
 
-
-bref_combined
-bref_totals
-
-bref_19502020 <- bref_combined %>% 
+# reorder and format scraped data to bind 
+bref_20172019 <- bref_combined %>% 
   rename(year = yearSeason, player = namePlayer, pos = slugPosition, tm = slugTeamBREF,
          mp = minutes, age = agePlayer, g = countGames, gs = countGamesStarted,
          per = ratioPER, ts_percent = pctTrueShooting, f_tr = pctFTRate, 
@@ -45,8 +44,35 @@ bref_19502020 <- bref_combined %>%
          x2p, x2pa, x2p_percent, e_fg_percent, ft, fta, ft_percent, 
          orb, drb, trb, ast, stl, blk, tov, pf, pts, -slugSeason, 
          -isSeasonCurrent, -isHOFPlayer, -idPlayerNBA, -slugPlayerBREF, -slugPlayerSeason, -slugTeamsBREF) %>% 
-  bind_rows(bref_19502017) %>% 
-  rename(position = pos, games = g, mins = mp, efg_percent = e_fg_percent)
+  filter(year != 2017)
+ 
+# bind the two datasets together  
+bref_19502019 <- bref_19502017 %>% 
+  bind_rows(bref_20192020) %>% 
+  rename(position = pos, games = g, mins = mp, efg_percent = e_fg_percent) 
+
+bref_19702019 <- bref_19502019 %>% filter(year < 1970)
+
+# missing on full dataset
+pct_complete_case(bref_19502019) # only 4.12335% of all cases have full data 
+pct_complete_var(bref_19502019) # 28.57143 of vars have complete data 
+pct_miss_var(bref_19502019) # 71.42857 are missing data 
+
+
+pct_complete_case(bref_19502019 %>% filter(year < 1970)) # everything after 1970 has data for all cases 
+pct_complete_var(bref_19502019 %>% filter(year < 1970)) 
+pct_miss_var(bref_19502019 %>% filter(year < 1970)) 
+
+write_rds(bref_19502019, "~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/bbref_19502019.Rds")
+write_rds(bref_19702019, "~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/bbref_19702019.Rds")
+
+
+
+
+
+
+
+
 
 
 

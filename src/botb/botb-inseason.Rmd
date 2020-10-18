@@ -10,9 +10,9 @@ output: html_document
 rm(list = ls())
 for (pkg in c("tidyverse", "plotly")) {library(pkg, character.only = TRUE)}
 
-setwd("~/Documents/fantasy-basketball/data")
-#setwd("C:/Users/bkram/CloudStation/NBA/data")
-botb_contracts <- read_csv("nba_fantasy_data - botb_contracts.csv")
+#setwd("~/Documents/fantasy-basketball/data")
+setwd("C:/Users/bkram/CloudStation/NBA/fantasy-basketball/data")
+#botb_contracts <- read_csv("nba_fantasy_data - botb_contracts.csv")
 botb_contracts <- read_csv("nba_fantasy_data - botb_contracts.csv")
 franchise_contracts <- read_csv("nba_fantasy_data - franchise_contracts.csv")
 legacy_contracts <- read_csv("nba_fantasy_data - legacy_contracts.csv")
@@ -20,7 +20,7 @@ bballref18 <- read_csv("nba_fantasy_data - bballref18.csv")
 hashalt19 <- read_csv("nba_fantasy_data - 2019_hashtag_alt_proj.csv")
 hashtag19 <- read_csv("nba_fantasy_data - 2019_hashtag_proj.csv")
 botb_inseason <- read_csv("nba_fantasy_data - botb_inseason.csv")
-botb_inseason <- read_csv("nba_fantasy_data - botb_inseason.csv")
+#botb_inseason <- read_csv("nba_fantasy_data - botb_inseason_last30.csv")
 nba_schedule <- read_csv("nba_fantasy_data - 2019_nba_schedule.csv")
 
 bballref18$player <- bballref18$player %>% 
@@ -131,11 +131,10 @@ botb_inseason$player <- botb_inseason$Player %>%
 botb_inseason <- botb_inseason %>% 
   rename(
          #trade_comp = "Trade",
-         fntx_gms = "GP", fntx_fppg = "FP/G", botb_team = "Status", position = "Position") %>%
+         fntx_gms = "GP", fntx_fppg = "FP/G", botb_team = "Status", trade_comp = "Trade", position = "Position") %>%
   rename(nba_team = "Team") %>% 
   mutate(nba_team = recode(nba_team, PHO = "PHX", SA = "SAS", NY = "NYK", NO = "NOP", GS = "GSW")) %>% 
-  select(player, fntx_fppg, fntx_gms, botb_team, nba_team, position, 
-         #trade_comp
+  select(player, fntx_fppg, fntx_gms, botb_team, nba_team, position, trade_comp
          )
          
 select_data <- combined_data %>% 
@@ -144,7 +143,7 @@ select_data <- combined_data %>%
   select(player, age, fntx_fppg, bbr_botb_fpts, hta_botb_fpts, ht_botb_fpts, 
          bbr_gms, bbr_mpg, hta_gms, hta_mpg, ht_gms, ht_mpg,
          botb_team, botb_2019, botb_2020, botb_2021, botb_2022, botb_2023, 
-         botb_rfa, botb_gleague, nba_team, position 
+         botb_rfa, botb_gleague, nba_team, position, trade_comp 
          #botb_intl, trade_comp
          ) %>%   
   inner_join(nba_schedule, by = "nba_team") 
@@ -157,7 +156,7 @@ select_data <- combined_data %>%
   #mutate(playoff4_totals = (fntx_fppg * playoff4))  
    
   
-rm(bballref18, hashtag19, hashalt19, franchise_contracts, botb_contracts, legacy_contracts, botb_contracts)
+rm(bballref18, hashtag19, hashalt19, franchise_contracts, legacy_contracts)
 ```
 
 ```{r looking at overall projections}
@@ -188,13 +187,13 @@ select_data %>%
   mutate(diff = fntx_fppg - ht_botb_fpts) %>%
   filter(fntx_fppg > 18) %>% 
   filter(botb_2019 < 9600000) %>% 
-  #filter(botb_team == "SAC" | botb_team == "MIL" | botb_team == "BOS" | botb_team == "VAN" |  
-  #       botb_team == "ORL" | botb_team == "TOR" | botb_team == "DET" | botb_team == "DAL" | 
-  #       botb_team == "NOP" | botb_team == "CLE" | botb_team == "MIN" | botb_team == "NYK"  
-  #) %>%
+  filter(botb_team == "SAC" | botb_team == "MIL" | botb_team == "BOS" | botb_team == "VAN" |  
+         botb_team == "ORL" | botb_team == "TOR" | botb_team == "DET" | botb_team == "DAL" | 
+         botb_team == "NOP" | botb_team == "CLE" | botb_team == "MIN" | botb_team == "NYK"  
+  ) %>%
   #filter(botb_team == "CLE") %>% 
   #filter(age < 25) %>% 
-  filter(grepl("C", position)) %>% 
+  #filter(grepl("C", position)) %>% 
   arrange(-fntx_value_19) %>% 
   select(player, age, botb_team, fntx_fppg, position, ht_botb_fpts, botb_2019, botb_2020, fntx_value_19,diff,
          fntx_value_20,   botb_2021, botb_rfa, botb_gleague)
