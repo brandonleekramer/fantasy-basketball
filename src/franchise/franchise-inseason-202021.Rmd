@@ -14,7 +14,7 @@ setwd("~/Documents/fantasy-basketball/data/nba_fantasy_data/")
 bballref19 <- read_csv("nba_fantasy_data - bballref1920.csv")
 hashtag19 <- read_csv("nba_fantasy_data - 2019_hashtag_proj.csv")
 hashalt19 <- read_csv("nba_fantasy_data - 2019_hashtag_alt_proj.csv")
-#franchise_inseason <- read_csv("nba_fantasy_data - franchise_inseason.csv")
+franchise_inseason <- read_csv("nba_fantasy_data - franchise_inseason.csv")
 nba_schedule <- read_csv("nba_fantasy_data - 2019_nba_schedule.csv")
 franchise_contracts <- read_csv("nba_fantasy_data - franchise_contracts.csv") %>% 
   select(-starts_with("X"), -fr_team, -trade_comp, fr_position)
@@ -24,7 +24,7 @@ bballref19 <- bballref19 %>%
   rename(player = Player, position = Pos, age = Age) %>% 
   clean_nba_names(player) %>% 
   bbr_avgs_to_fppg() %>% 
-  select(player, position, age, G, GS, contains("fppg"))
+  select(player, -position, age, G, GS, contains("fppg"))
   
 # 2018-19 projections from hashtag 
 hashtag19 <- hashtag19 %>% 
@@ -48,56 +48,96 @@ combined_data <- bballref19 %>%
   full_join(franchise_contracts, by = "player") %>% 
   arrange(-fr_fppg_bbr)
 
-combined_data
-```
-
-```{r}
-
+# clean franchise data 
 franchise_inseason <- franchise_inseason %>% 
   rename(fntx_pts = "PTS", fntx_orb = "OREB", fntx_dreb = "DREB", fntx_ast = "AST", fntx_stl = "ST", 
          fntx_blk = "BLK", fntx_tov = "TO", fntx_threes = "3PTM", fntx_fga = "FGA",fntx_fgm = "FGM", 
-         fntx_ftm = "FTM", fntx_fta = "FTA", fntx_gms = "GP", fntx_fppg = "FP/G", position = "Position",
+         fntx_ftm = "FTM", fntx_fta = "FTA", fntx_gms = "GP", fntx_fppg = "FP/G",
          trade_comp = "Trade", 
-         nba_team = "Team", fr_team = "Status") %>%
+         nba_team = "Team", fr_team = "Status", player = "Player", position = "Position") %>%
   mutate(nba_team = recode(nba_team, PHO = "PHX", SA = "SAS", NY = "NYK", NO = "NOP", GS = "GSW")) 
 
-select_data <- combined_data %>% 
+combined_data <- combined_data %>% 
   inner_join(franchise_inseason, by = "player") %>% 
   inner_join(nba_schedule, by = "nba_team") %>%  
   mutate(playoff1 = week20,playoff2 = week21,playoff3 = week22,playoff4 = week23) %>% 
   # regular season schedule 
-  mutate(week1_totals = (fntx_fppg * week1)) %>%
-  mutate(week2_totals = (fntx_fppg * week2)) %>%
-  mutate(week3_totals = (fntx_fppg * week3)) %>%
-  mutate(week4_totals = (fntx_fppg * week4)) %>%
-  mutate(week5_totals = (fntx_fppg * week5)) %>%
-  mutate(week6_totals = (fntx_fppg * week6)) %>%
-  mutate(week7_totals = (fntx_fppg * week7)) %>%
-  mutate(week8_totals = (fntx_fppg * week8)) %>%
-  mutate(week9_totals = (fntx_fppg * week9)) %>% 
-  mutate(week10_totals = (fntx_fppg * week10)) %>%  
-  mutate(week11_totals = (fntx_fppg * week11)) %>%
-  mutate(week12_totals = (fntx_fppg * week12)) %>%
-  mutate(week13_totals = (fntx_fppg * week13)) %>%
-  mutate(week14_totals = (fntx_fppg * week14)) %>%
-  mutate(week15_totals = (fntx_fppg * week15)) %>%
-  mutate(week16_totals = (fntx_fppg * week16)) %>%
-  mutate(week17_totals = (fntx_fppg * week17)) %>%
-  mutate(week18_totals = (fntx_fppg * week18)) %>%
+  mutate(week1_totals = (fntx_fppg * week1)) %>% mutate(week2_totals = (fntx_fppg * week2)) %>%
+  mutate(week3_totals = (fntx_fppg * week3)) %>% mutate(week4_totals = (fntx_fppg * week4)) %>%
+  mutate(week5_totals = (fntx_fppg * week5)) %>% mutate(week6_totals = (fntx_fppg * week6)) %>%
+  mutate(week7_totals = (fntx_fppg * week7)) %>% mutate(week8_totals = (fntx_fppg * week8)) %>%
+  mutate(week9_totals = (fntx_fppg * week9)) %>% mutate(week10_totals = (fntx_fppg * week10)) %>%  
+  mutate(week11_totals = (fntx_fppg * week11)) %>% mutate(week12_totals = (fntx_fppg * week12)) %>%
+  mutate(week13_totals = (fntx_fppg * week13)) %>% mutate(week14_totals = (fntx_fppg * week14)) %>%
+  mutate(week15_totals = (fntx_fppg * week15)) %>% mutate(week16_totals = (fntx_fppg * week16)) %>%
+  mutate(week17_totals = (fntx_fppg * week17)) %>% mutate(week18_totals = (fntx_fppg * week18)) %>%
   mutate(week19_totals = (fntx_fppg * week19)) %>%
   # playoff totals 
-  mutate(playoff1_totals = (fntx_fppg * playoff1)) %>%
-  mutate(playoff2_totals = (fntx_fppg * playoff2)) %>%
-  mutate(playoff3_totals = (fntx_fppg * playoff3)) %>%
-  mutate(playoff4_totals = (fntx_fppg * playoff4)) %>% 
+  mutate(playoff1_totals=(fntx_fppg*playoff1)) %>% mutate(playoff2_totals=(fntx_fppg*playoff2)) %>%
+  mutate(playoff3_totals=(fntx_fppg*playoff3)) %>% mutate(playoff4_totals=(fntx_fppg*playoff4)) %>% 
   filter(player != "Rodions Kurucs" & player != "Jontay Porter" & 
            player != "Chimezie Metu" & player != "Issuf Sanon" &
          player != "Dewan Hernandez" & player != "Ognen Jaramaz" & 
            player != "Marial Shayok" & player != "Justin James" &
          player != "Didi Louzada Silva" &  player != "Alessandro Gentile" ) 
-  
 rm(bballref18, hashtag19, hashalt19, franchise_contracts)
+
+combined_data %>% select(player, fr_team)
 ```
+
+```{r, fig.width=10, fig.height=5}
+# http://r-statistics.co/Linear-Regression.html
+# https://rpubs.com/iabrady/residual-analysis
+
+test_data <- combined_data %>% 
+  drop_na(ld_fppg_bbr, fr_2019) %>% 
+  filter(fr_team != "FA") %>% 
+  select(player, position, age, G, GS, ld_fppg_bbr, fr_team, trade_comp, fr_2019, fr_2020)
+
+fit <- lm(ld_fppg_bbr ~ fr_2019, data=test_data) # fit the model
+test_data$predicted <- predict(fit)   # Save the predicted values
+test_data$residuals <- residuals(fit) # Save the residual values
+ggplot(test_data, aes(x = fr_2019, y = ld_fppg_bbr)) +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +      
+  geom_segment(aes(xend = fr_2019, yend = predicted), alpha = .2) +   
+  geom_point(aes(color = abs(residuals), size = abs(residuals))) +  
+  scale_color_continuous(low = "#386890", high = "orange") +     
+  guides(color = FALSE, size = FALSE) +                             
+  geom_point(aes(y = predicted), shape = 1) +
+  theme_minimal()
+```
+```{r}
+# MUST GO BACK THROUGH THE CLEANING FUNCTION AND FIX THAT (DEVONTE GRAHAM IS GONE)
+# do residuals for actual vs predicted hashtag, bball_ref, hashtag_alt, etc
+# develop new predicted for 2019 based on ML age dependent outputs 
+
+```
+
+```{r}
+### Projected Fantasy Value Over Replacement 
+
+This would create a system for comparing projected fantasy value in trades. The underlying logic is to first calculate projected fantasy value[*] over the extent of the current contract[$]. 
+
+[*] = Baseline model is based on fppg / contract 
+[$] = An additional metric could calculate with extension factored in 
+
+DAaron Fox 
+Bam Adebayo 
+FOR 
+PF/C	Nikola Jokic, DEN	$27,278,125	$29,323,984	UFA
+```
+
+```{r}
+summary(fit)
+```
+```{r}
+test_data %>% 
+  group_by(fr_team) %>% 
+  summarize(residual_totals = sum(residuals)) %>% 
+  arrange(-residual_totals)
+```
+
+
 
 # Glimpse at Overall Stats   
 

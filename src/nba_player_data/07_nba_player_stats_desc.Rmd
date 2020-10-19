@@ -6,25 +6,121 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+for (pkg in c( "tidyverse", "janitor", 
+               "cowplot", "hrbrthemes")) {library(pkg, character.only = TRUE)}
+source("~/Documents/fantasy-basketball/funs/nba_team_abbs.R")
+source("~/Documents/fantasy-basketball/funs/conv_to_points.R")
+nba_player_data_raw <- read_rds("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/nba_stats_19502019.Rds")
+
+# clean the data 
+nba_player_data <- nba_player_data_raw %>% 
+  clean_nba_names(player) %>% 
+  bbrhist_avgs_to_fppg()
+
+# ranking the top ld/franchise seasons ever 
+ld_ranked_seasons <- nba_player_data %>% 
+  arrange(-ld_fppg_bbr) %>% 
+  filter(mp > 500) %>%
+  select(year, player, pos, age, tm, contains("fppg")) %>% 
+  drop_na(ld_fppg_bbr, fr_fppg_bbr, botb_fppg_bbr, gsd2_fppg_bbr)
+ld_ranked_seasons
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r, fig.width=10, fig.height=4}
+ggplot(ld_ranked_seasons, aes(ld_fppg_bbr)) +
+  geom_histogram(binwidth = 0.2) +
+  theme_minimal() +
+  ggtitle("Distribution of Points Per Game for Player with 500+ minutes (1980-2019)") 
+```
+```{r}
+count <- ld_ranked_seasons %>% count()
+df60 <- ld_ranked_seasons %>% 
+  filter(ld_fppg_bbr > 60) %>% count() %>% 
+  mutate(perc_over = n / count$n, threshold = 60)
+df50 <- ld_ranked_seasons %>% 
+  filter(ld_fppg_bbr > 50) %>% count() %>% 
+  mutate(perc_over = n / count$n, threshold = 50)
+df40 <- ld_ranked_seasons %>% 
+  filter(ld_fppg_bbr > 40) %>% count() %>% 
+  mutate(perc_over = n / count$n, threshold = 40)
+df30 <- ld_ranked_seasons %>% 
+  filter(ld_fppg_bbr > 30) %>% count() %>% 
+  mutate(perc_over = n / count$n, threshold = 30)
+df20 <- ld_ranked_seasons %>% 
+  filter(ld_fppg_bbr > 20) %>% count() %>% 
+  mutate(perc_over = n / count$n, threshold = 20)
+over_threshold <- rbind(df60, df50, df40, df30, df20)
+over_threshold <- over_threshold %>% select(threshold, perc_over, n)
+rm(count, df60, df50, df40, df30, df20)
+over_threshold
 ```
 
-## Including Plots
+```{r, fig.width=10, fig.height=4}
+var_by_age <- ggplot(ld_ranked_seasons, aes(age, ld_fppg_bbr)) +
+  geom_point() + 
+  theme_minimal() +
+  ggtitle("Distribution of All Totals by Age")
 
-You can also embed plots, for example:
+mean_by_age <- ld_ranked_seasons %>% 
+  filter(ld_fppg_bbr > 20) %>%
+  select(age, ld_fppg_bbr) %>% 
+  arrange(age) %>% 
+  mutate(age = as.factor(age))
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+mean_by_age <- ggplot(mean_by_age, aes(x=age, y=ld_fppg_bbr)) + 
+  geom_boxplot() +
+  theme_minimal() +
+  ggtitle("Mean & SD by Age")
+
+plot_grid(var_by_age, mean_by_age,  label_size = 12)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+
+
+```{r}
+botb_ranked_seasons <- nba_player_data %>% 
+  arrange(-botb_fppg_bbr) %>% 
+  select(year, player, pos, age, tm, contains("fppg")) %>% 
+  drop_na(ld_fppg_bbr, fr_fppg_bbr, botb_fppg_bbr, gsd2_fppg_bbr)
+botb_ranked_seasons
+```
+
+
+
+
+
+
+
+```{r}
+
+cor(ranked_seasons %>% select(age, ld_fppg_bbr, botb_fppg_bbr))
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

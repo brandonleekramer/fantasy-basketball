@@ -1,16 +1,45 @@
-
 rm(list = ls())
-for (pkg in c( "tidyverse", "janitor", "nbastatR", "naniar")) {library(pkg, character.only = TRUE)}
 
-# pull in the 1950-2017 data 
+library(readxl)
+library(janitor)
+library(tidyverse)
+library(nbastatR)
+source("~/Documents/fantasy-basketball/funs/conv_to_points.R")
+
 setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/")
-bref_19502017 <- read_csv("nba_player_season_by_team.csv") %>% clean_names()
-bref_19502017 <- bref_19502017 %>% 
-  select(-x1, -blanl, -blank2, -x3p_ar) %>% 
-  drop_na(year, player)
+basic_stats <- read_excel("NBA Players - Basic Season Stats (1950-2017).xlsx") %>% clean_names()
+adv_stats <- read_excel("NBA Players - Advanced Season Stats (1978-2016).xlsx")
+
+# join basic_stats and adv_stats 
+basic_stats <- basic_stats %>% 
+  filter(season_start != 2017) %>% 
+  select(-number, -blanl, -blank2) %>% 
+  rename(year = season_start, player = player_name)
+adv_stats <- adv_stats %>% 
+  select(-column_s, -column_x) %>% 
+  rename(orb_pg = orb, drb_pg = drb, trb_pg = trb, 
+         ast_pg = ast, stl_pg = stl, blk_pg = blk, 
+         tov_pg = tov) 
+
+stats_19502016 <- adv_stats %>% 
+  full_join(basic_stats, by = c("player", "year", "tm", "g", "mp", "per", "age", 
+                 "ows", "dws", "ws", "ws_48", "obpm", "dbpm", "bpm", "vorp")) %>% 
+  #arrange(year) %>% 
+  mutate(player = str_replace_all(player, "\\*", "")) %>% 
+  select(year, player, pos, age, tm, g, gs, mp, per, ts_percent, f_tr, 
+       orb_percent, drb_percent, trb_percent, ast_percent, stl_percent, 
+       blk_percent, tov_percent, usg_percent, ows, dws, ws, ws_48, 
+       obpm, dbpm, bpm, vorp, fg, fga, fg_percent, x3p, x3pa, x3p_percent, 
+       x2p, x2pa, x2p_percent, e_fg_percent, ft, fta, ft_percent, 
+       orb, drb, trb, ast, stl, blk, tov, pf, pts) %>% 
+  arrange(year)
+
+
 
 # scrape the rest of the data   
-bref_players_stats(seasons = c(2018, 2019, 2020), tables = c("advanced", "totals"), widen = TRUE, assign_to_environment = TRUE)
+bref_players_stats(seasons = c(2017, 2018, 2019, 2020), 
+                   tables = c("advanced", "totals"), 
+                   widen = TRUE, assign_to_environment = TRUE)
 bref_advanced <- dataBREFPlayerAdvanced
 bref_totals <- dataBREFPlayerTotals
 
@@ -18,7 +47,7 @@ bref_totals <- dataBREFPlayerTotals
 bref_combined <- bref_advanced %>% 
   full_join(bref_totals,  by = c("namePlayer", "slugSeason", "yearSeason", "slugPlayerSeason",
                                  "slugPosition", "agePlayer", "slugTeamBREF", "slugPlayerBREF",
-              "countGames", "isSeasonCurrent", "isHOFPlayer", "slugTeamsBREF", "idPlayerNBA")) %>% 
+  "countGames", "isSeasonCurrent", "isHOFPlayer", "slugTeamsBREF", "idPlayerNBA")) %>% 
   select(-starts_with("url")) 
 
 # reorder and format scraped data to bind 
@@ -43,32 +72,29 @@ bref_20172019 <- bref_combined %>%
          obpm, dbpm, bpm, vorp, fg, fga, fg_percent, x3p, x3pa, x3p_percent, 
          x2p, x2pa, x2p_percent, e_fg_percent, ft, fta, ft_percent, 
          orb, drb, trb, ast, stl, blk, tov, pf, pts, -slugSeason, 
-         -isSeasonCurrent, -isHOFPlayer, -idPlayerNBA, -slugPlayerBREF, -slugPlayerSeason, -slugTeamsBREF) %>% 
-  filter(year != 2017)
- 
-# bind the two datasets together  
-bref_19502019 <- bref_19502017 %>% 
-  bind_rows(bref_20192020) %>% 
-  rename(position = pos, games = g, mins = mp, efg_percent = e_fg_percent) 
+         -isSeasonCurrent, -isHOFPlayer, -idPlayerNBA, -slugPlayerBREF, -slugPlayerSeason, -slugTeamsBREF) 
 
-bref_19702019 <- bref_19502019 %>% filter(year < 1970)
+stats_19502019 <- stats_19502016 %>% 
+  bind_rows(bref_20172019) %>% 
+  rename(games = g)
 
-# missing on full dataset
-pct_complete_case(bref_19502019) # only 4.12335% of all cases have full data 
-pct_complete_var(bref_19502019) # 28.57143 of vars have complete data 
-pct_miss_var(bref_19502019) # 71.42857 are missing data 
-
-
-pct_complete_case(bref_19502019 %>% filter(year < 1970)) # everything after 1970 has data for all cases 
-pct_complete_var(bref_19502019 %>% filter(year < 1970)) 
-pct_miss_var(bref_19502019 %>% filter(year < 1970)) 
-
-write_rds(bref_19502019, "~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/bbref_19502019.Rds")
-write_rds(bref_19702019, "~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/bbref_19702019.Rds")
+write_rds(stats_19502019, "~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/nba_stats_19502019.Rds")
 
 
 
 
+stats_19502019 %>% 
+  rename(games = g) %>% 
+  mutate(ld_fppg_bbr = pts/games + (drb/games *1.5) + (orb/games*2) + (ast/games *2) + (stl/games*2.5) + 
+  (blk/games*2.5) + (tov/games*-1) + x3p/games + (fga/games*-0.5) + (fg/games*0.5) + ft/games + (fta/games*-1)) %>% 
+  mutate(fr_fppg_bbr = pts/games + (drb/games*1.5) + (orb/games*2) + (ast/games*2) + (stl/games*2.5) + 
+           (blk/games*2.5) + (tov/games*-1) + x3p/games + (fga/games*-0.5) + (fg/games*0.5) + ft/games + (fta/games*-1)) %>%
+  mutate(botb_fppg_bbr = pts/games + drb/games + (orb/games*1.25) + (ast/games*1.5) + (stl/games*1.5) + 
+           (blk/games) + (tov/games*-1) + x3p/games + (fga/games*-0.5) + (fg/games*0.5) + ft/games + (fta/games*-0.75)) %>%
+  mutate(gsd2_fppg_bbr = pts/games + drb/games + (orb/games*1.25) + (ast/games*1.5) + (stl/games*1.5) + 
+           (blk/games*2) + (tov/games*-1) + x3p/games + (fga/games*-0.5) + (fg/games*0.5) + ft/games + (fta/games*-0.75)) %>% 
+  arrange(-ld_fppg_bbr) %>% 
+  select(year, player, pos, age, tm, contains("fppg"))
 
 
 

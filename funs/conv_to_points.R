@@ -21,6 +21,23 @@ clean_nba_names <- function(df, player){
 }
 
 
+
+# converts basketball reference averages to fppg in my fantasy leagues 
+bbrhist_avgs_to_fppg <- function(df){
+  df <- df %>%
+    mutate(ld_fppg_bbr = pts/games + (drb/games *1.5) + (orb/games*2) + (ast/games *2) + (stl/games*2.5) + 
+    (blk/games*2.5) + (tov/games*-1) + x3p/games + (fga/games*-0.5) + (fg/games*0.5) + ft/games + (fta/games*-1)) %>% 
+    mutate(fr_fppg_bbr = pts/games + (drb/games*1.5) + (orb/games*2) + (ast/games*2) + (stl/games*2.5) + 
+    (blk/games*2.5) + (tov/games*-1) + x3p/games + (fga/games*-0.5) + (fg/games*0.5) + ft/games + (fta/games*-1)) %>%
+    mutate(botb_fppg_bbr = pts/games + drb/games + (orb/games*1.25) + (ast/games*1.5) + (stl/games*1.5) + 
+    (blk/games) + (tov/games*-1) + x3p/games + (fga/games*-0.5) + (fg/games*0.5) + ft/games + (fta/games*-0.75)) %>%
+    mutate(gsd2_fppg_bbr = pts/games + drb/games + (orb/games*1.25) + (ast/games*1.5) + (stl/games*1.5) + 
+    (blk/games*2) + (tov/games*-1) + x3p/games + (fga/games*-0.5) + (fg/games*0.5) + ft/games + (fta/games*-0.75)) 
+  df
+}
+
+
+
 # converts basketball reference averages to fppg in my fantasy leagues 
 bbr_avgs_to_fppg <- function(df){
   df <- df %>%
