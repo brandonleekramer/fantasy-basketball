@@ -89,15 +89,20 @@ combined_data %>% select(player, fr_team)
 # http://r-statistics.co/Linear-Regression.html
 # https://rpubs.com/iabrady/residual-analysis
 
-test_data <- combined_data %>% 
+prediction_data <- combined_data %>% 
   drop_na(ld_fppg_bbr, fr_2019) %>% 
   filter(fr_team != "FA") %>% 
   select(player, position, age, G, GS, ld_fppg_bbr, fr_team, trade_comp, fr_2019, fr_2020)
 
-fit <- lm(ld_fppg_bbr ~ fr_2019, data=test_data) # fit the model
-test_data$predicted <- predict(fit)   # Save the predicted values
-test_data$residuals <- residuals(fit) # Save the residual values
-ggplot(test_data, aes(x = fr_2019, y = ld_fppg_bbr)) +
+fit <- lm(ld_fppg_bbr ~ fr_2019, data=prediction_data) # fit the model
+prediction_data$predicted <- predict(fit)   # Save the predicted values
+prediction_data$residuals <- residuals(fit) # Save the residual values
+
+prediction_data <- arrange(prediction_data, desc(residuals)) %>%
+  mutate(rank = 1:nrow(prediction_data)) %>% 
+  select(rank, player, position, age, ld_fppg_bbr, residuals, G, GS, everything())
+
+ggplot(prediction_data, aes(x = fr_2019, y = ld_fppg_bbr)) +
   geom_smooth(method = "lm", se = FALSE, color = "black") +      
   geom_segment(aes(xend = fr_2019, yend = predicted), alpha = .2) +   
   geom_point(aes(color = abs(residuals), size = abs(residuals))) +  
@@ -107,6 +112,9 @@ ggplot(test_data, aes(x = fr_2019, y = ld_fppg_bbr)) +
   theme_minimal()
 ```
 ```{r}
+prediction_data %>% 
+  filter(fr_team == "CLE")
+
 # MUST GO BACK THROUGH THE CLEANING FUNCTION AND FIX THAT (DEVONTE GRAHAM IS GONE)
 # do residuals for actual vs predicted hashtag, bball_ref, hashtag_alt, etc
 # develop new predicted for 2019 based on ML age dependent outputs 

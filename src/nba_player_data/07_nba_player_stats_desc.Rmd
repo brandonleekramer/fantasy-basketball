@@ -24,7 +24,11 @@ ld_ranked_seasons <- nba_player_data %>%
   filter(mp > 500) %>%
   select(year, player, pos, age, tm, contains("fppg")) %>% 
   drop_na(ld_fppg_bbr, fr_fppg_bbr, botb_fppg_bbr, gsd2_fppg_bbr)
-ld_ranked_seasons
+
+# remove all the duplicates (when trades happen)
+ld_ranked_seasons %>% 
+  get_dupes(player, age) %>% 
+  filter(tm == "TOT") 
 ```
 
 ```{r, fig.width=10, fig.height=4}
@@ -73,9 +77,51 @@ mean_by_age <- ggplot(mean_by_age, aes(x=age, y=ld_fppg_bbr)) +
   theme_minimal() +
   ggtitle("Mean & SD by Age")
 
-plot_grid(var_by_age, mean_by_age,  label_size = 12)
+plot_grid(var_by_age, mean_by_age, label_size = 12)
 ```
+```{r}
+age19 <- ld_ranked_seasons %>% 
+  filter(age == 19) %>% select(player, ld_fppg_bbr) %>% rename(fppg_at_19 = ld_fppg_bbr)
+age20 <- ld_ranked_seasons %>% 
+  filter(age == 20) %>% select(player, ld_fppg_bbr) %>% rename(fppg_at_20 = ld_fppg_bbr)
+age21 <- ld_ranked_seasons %>% 
+  filter(age == 21) %>% select(player, ld_fppg_bbr) %>% rename(fppg_at_21 = ld_fppg_bbr)
+age22 <- ld_ranked_seasons %>% 
+  filter(age == 22) %>% select(player, ld_fppg_bbr) %>% rename(fppg_at_22 = ld_fppg_bbr)
+rookie_production <- age19 %>% 
+  full_join(age20, by = "player") %>% 
+  full_join(age21, by = "player") %>% 
+  full_join(age22, by = "player") %>% 
+  mutate(diff1922 = fppg_at_22 - fppg_at_19) %>%
+  mutate(diff1920 = fppg_at_20 - fppg_at_19) %>% 
+  mutate(diff2021 = fppg_at_21 - fppg_at_20) %>% 
+  mutate(diff2122 = fppg_at_22 - fppg_at_21) %>%
+  mutate(diff1921 = fppg_at_21 - fppg_at_19) %>%
+  mutate(diff2022 = fppg_at_22 - fppg_at_20) %>% 
+  arrange(-diff1922) %>% 
+  distinct(player, fppg_at_19, fppg_at_20, fppg_at_21, fppg_at_22,
+           diff1922, diff2021, diff2122, diff1921, diff2022)
 
+rookie_production %>% 
+  distinct(player, fppg_at_19) %>% 
+  arrange(-fppg_at_19)
+```
+```{r}
+production_over_time <- rookie_production %>% 
+  filter(fppg_at_19 > 15 & fppg_at_20 > 20 | fppg_at_21 > 30 | fppg_at_22 > 40) %>% 
+  select(-starts_with("diff")) %>%
+  pivot_longer(!player, names_to = "age", values_to = "fppg") %>% 
+  mutate(age = str_replace_all(age, "fppg_at_19", "19"),
+         age = str_replace_all(age, "fppg_at_20", "20"),
+         age = str_replace_all(age, "fppg_at_21", "21"),
+         age = str_replace_all(age, "fppg_at_22", "22"),
+         age = as.numeric(age))
+
+ggplot(data = production_over_time, aes(x = age, y = fppg))+
+  geom_line(aes(color = player), size = 1) + 
+  theme_minimal() +
+  theme(legend.position="none")
+```
 
 
 

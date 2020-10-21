@@ -1,0 +1,59 @@
+---
+title: "Untitled"
+author: "Brandon L. Kramer"
+date: "10/19/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+rm(list = ls())
+for (pkg in c( "tidyverse", "janitor", 
+               "cowplot", "hrbrthemes")) {library(pkg, character.only = TRUE)}
+source("~/Documents/fantasy-basketball/funs/nba_team_abbs.R")
+source("~/Documents/fantasy-basketball/funs/conv_to_points.R")
+nba_player_data_raw <- read_rds("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/nba_stats_19502019.Rds")
+
+# clean the data 
+nba_player_data <- nba_player_data_raw %>% 
+  clean_nba_names(player) %>% 
+  bbrhist_avgs_to_fppg()
+
+# ranking the top ld/franchise seasons ever 
+for_comparisons <- nba_player_data %>% 
+  arrange(-ld_fppg_bbr) %>% 
+  filter(mp > 500) %>%
+  select(year, player, pos, age, games, tm, ld_fppg_bbr,
+         pts, fg, fga, ft, fta, x3p, orb, drb, ast, stl, blk, tov) %>% 
+  drop_na(ld_fppg_bbr)
+```
+
+```{r}
+for_comparisons %>% 
+  mutate(pts = pts / games, 
+         orb = orb / games,
+         drb = drb / games,
+         stl = stl / games,
+         ast = ast / games, 
+         blk = blk / games, 
+         ftp = ft / fta) %>% 
+  filter(age < 21 & pts > 10 & x3p > 100 & grepl("G", pos))
+```
+```{r}
+for_comparisons %>% 
+  mutate(pts = pts / games, 
+         orb = orb / games,
+         drb = drb / games,
+         stl = stl / games,
+         ast = ast / games, 
+         blk = blk / games, 
+         ftp = ft / fta) %>% 
+  filter(player == "Brandon Knight" | player == "Brandon Jennings")
+```
+
+
+
+
+
+
+
+

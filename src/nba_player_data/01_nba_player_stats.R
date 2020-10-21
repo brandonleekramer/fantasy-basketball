@@ -31,7 +31,8 @@ stats_19502016 <- adv_stats %>%
        blk_percent, tov_percent, usg_percent, ows, dws, ws, ws_48, 
        obpm, dbpm, bpm, vorp, fg, fga, fg_percent, x3p, x3pa, x3p_percent, 
        x2p, x2pa, x2p_percent, e_fg_percent, ft, fta, ft_percent, 
-       orb, drb, trb, ast, stl, blk, tov, pf, pts) %>% 
+       orb, drb, trb, ast, stl, blk, tov, pf, pts, player_salary_in) %>% 
+  rename(salary = player_salary_in) %>% 
   arrange(year)
 
 
@@ -72,13 +73,44 @@ bref_20172019 <- bref_combined %>%
          obpm, dbpm, bpm, vorp, fg, fga, fg_percent, x3p, x3pa, x3p_percent, 
          x2p, x2pa, x2p_percent, e_fg_percent, ft, fta, ft_percent, 
          orb, drb, trb, ast, stl, blk, tov, pf, pts, -slugSeason, 
-         -isSeasonCurrent, -isHOFPlayer, -idPlayerNBA, -slugPlayerBREF, -slugPlayerSeason, -slugTeamsBREF) 
+         -isSeasonCurrent, -isHOFPlayer, -idPlayerNBA, 
+         -slugPlayerBREF, -slugPlayerSeason, -slugTeamsBREF) %>% 
+  filter(year != 2016) %>% 
+  clean_nba_names(player)
+
+source("~/Documents/fantasy-basketball/funs/conv_to_points.R")
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_salaries/")
+salary_201718 <- read_csv("NBA_season1718_salary.csv")
+salary_201718 <- salary_201718 %>% 
+  rename(player = Player, salary = season17_18) %>% 
+  select(player, salary)%>% 
+  mutate(year = 2017) %>% 
+  clean_nba_names(player)
+
+# the join worked OK but still need to clean a lot of names for it to be perfect 
+bref_20172019 <- bref_20172019 %>% 
+  full_join(salary_201718, by = c("player", "year"))
+
+check <- bref_20172019  %>% filter(year == 2017)
+
+check <-check %>% filter(is.na(salary))
+
 
 stats_19502019 <- stats_19502016 %>% 
   bind_rows(bref_20172019) %>% 
   rename(games = g)
 
+
 write_rds(stats_19502019, "~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/nba_stats_19502019.Rds")
+
+write_rds(stats_19502019, "~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/nba_stats_19502019.Rds")
+
+
+
+
+
+
+
 
 
 
