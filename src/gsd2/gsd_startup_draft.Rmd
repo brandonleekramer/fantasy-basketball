@@ -1,0 +1,94 @@
+---
+title: "Untitled"
+author: "Brandon L. Kramer"
+date: "10/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE, warning = FALSE}
+rm(list = ls())
+
+library(tidyverse)
+library(janitor)
+source("~/Documents/fantasy-basketball/funs/conv_to_points.R")
+
+nba_data <- read_rds("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/nba_stats_19902019_dedup.Rds")
+gsd2_data <- read_rds("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/gsd2_draft_data.Rds")
+
+gsd2_data <- gsd2_data %>% 
+  bbrhist_avgs_to_fppg() %>% 
+  select(year, player, age, contains("fppg"), everything(), 
+         -ld_fppg_bbr, -botb_fppg_bbr) %>% 
+  arrange(-gsd2_fppg_bbr) %>% 
+  drop_na(salary, gsd2_fppg_bbr)
+```
+
+```{r}
+prediction_data <- gsd2_data
+fit <- lm(gsd2_fppg_bbr ~ salary, data=prediction_data) # fit the model
+prediction_data$predicted <- predict(fit)   # Save the predicted values
+prediction_data$residuals <- residuals(fit) # Save the residual values
+
+prediction_data <- arrange(prediction_data, desc(residuals)) %>%
+  mutate(rank = 1:nrow(prediction_data)) %>% 
+  select(rank, player, position, age, gsd2_fppg_bbr, residuals, games, everything())
+
+ggplot(prediction_data, aes(x = salary, y = gsd2_fppg_bbr)) +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +      
+  geom_segment(aes(xend = salary, yend = predicted), alpha = .2) +   
+  geom_point(aes(color = abs(residuals), size = abs(residuals))) +  
+  scale_color_continuous(low = "#386890", high = "orange") +     
+  guides(color = FALSE, size = FALSE) +                             
+  geom_point(aes(y = predicted), shape = 1) +
+  theme_minimal()
+```
+```{r}
+two_years <- prediction_data %>% filter(games > 5 & gsd2_fppg_bbr > 18)
+mean(two_years$residuals)
+position_count <- two_years %>% 
+  mutate(position = str_replace_all(position, "PF-C", "PF"),
+         position = str_replace_all(position, "SF-PF", "SF"),
+         position = str_replace_all(position, "SF-SG", "SF"),
+         position = str_replace_all(position, "PF-SF", "SF")) %>% 
+  group_by(position) %>%
+  count() %>% 
+  rename(player_count = n) %>% 
+  arrange(-player_count); position_count
+
+two_years %>% 
+  mutate(position = str_replace_all(position, "PF-C", "PF"),
+         position = str_replace_all(position, "SF-PF", "SF"),
+         position = str_replace_all(position, "SF-SG", "SF"),
+         position = str_replace_all(position, "PF-SF", "SF")) %>%  
+  group_by(position) %>%
+  summarize(fppg_by_position = sum(gsd2_fppg_bbr)) %>% 
+  left_join(position_count, by = "position") %>% 
+  mutate(ffpg_normed = fppg_by_position / player_count) %>% 
+  arrange(fppg_by_position)
+```
+
+*next steps* 
+contract data for coming years 
+projections for current nba players based on similar players???
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

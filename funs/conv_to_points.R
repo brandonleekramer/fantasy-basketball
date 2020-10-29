@@ -7,28 +7,21 @@ clean_nba_names <- function(df, player){
     mutate(player = iconv(player, to="ASCII//TRANSLIT")) %>%   
     mutate(player = str_replace_all(player, "\\'", "")) %>%  
     mutate(player = str_replace_all(player, c('Á' = 'A', 'ā' = 'a', 'á' = 'a', 
-                                              'č' = 'c', 'ć' = 'c', 'è' = 'e', 
-                                              'é' = 'e', 'ê' = 'e', 'ić' = 'ic', 
-                                              'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 
-                                              'š' = 's', 'ū' = 'u', 'ý' = 'y', 
-                                              'Ž' = 'Z', 'ž' = 'z', 'Élie' = 'Elie',
-                                              'P.J.'='PJ','C.J.'='CJ', 'R.J.'='RJ', 
-                                              'T.J.'='TJ', 'D.J.'='DJ', 'B.J.'='BJ',
-                                              'J.J.'='JJ', "O.G."="OG", "K.J."="KJ", 
-                                              'A.J.'='AJ', 'J.R.'='JR',
-                                              "Demarre" = "DeMarre", 'Dončić' = 'Doncic',
-                                              'Jaren Jackson' = 'Jaren Jackson Jr.',
-                                              'Kelly Oubre' = 'Kelly Oubre Jr.', 
-                                              'Marvin Bagley' = 'Marvin Bagley III', 
-                                              'Otto Porter' = 'Otto Porter Jr.', 
-                                              'Wendell Carter' = 'Wendell Carter Jr.', 
-                                              'Larry Nance' = 'Larry Nance Jr.',
-                                              'Walt Lemon' = 'Walt Lemon Jr.', 
-                                              'Dennis Schr"oder' = 'Dennis Schroder', 
-                                    'Tim Hardaway' = 'Tim Hardaway Jr.', 
-                                    'Dennis Smith' = 'Dennis Smith Jr.',
-                                    'Taurean Waller-Prince' = 'Taurean Prince',
-                                    "Jr. Jr." = "Jr.", "III III" = "III")))
+           'č' = 'c', 'ć' = 'c', 'è' = 'e', 'é' = 'e', 'ê' = 'e', 'ić' = 'ic', 
+           'ö' = 'o', 'ó' = 'o', 'Š' = 'S', 'š' = 's', 'ū' = 'u', 'ý' = 'y', 
+           'Ž' = 'Z', 'ž' = 'z', 'Élie' = 'Elie', 'P.J.'='PJ','C.J.'='CJ', 'R.J.'='RJ', 
+           'T.J.'='TJ', 'D.J.'='DJ', 'B.J.'='BJ', 'J.J.'='JJ', "O.G."="OG", "K.J."="KJ", 
+           'A.J.'='AJ', 'J.R.'='JR', "Nene" = "Nene Hilario", "Demarre" = "DeMarre", 
+           'Dončić' = 'Doncic', 'Jaren Jackson' = 'Jaren Jackson Jr.',
+           'Kelly Oubre' = 'Kelly Oubre Jr.', 'Marvin Bagley' = 'Marvin Bagley III', 
+           'James Ennis III' = 'James Ennis', 'Otto Porter' = 'Otto Porter Jr.', 
+           'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
+           'Walt Lemon' = 'Walt Lemon Jr.', 'Dennis Schr"oder' = 'Dennis Schroder', 
+           'Tim Hardaway' = 'Tim Hardaway Jr.', 'Dennis Smith' = 'Dennis Smith Jr.',
+           'Wes Iwundu' = 'Wesley Iwundu', 'Marcus Morris Sr.' = 'Marcus Morris',
+           'Frank Mason III' = 'Frank Mason', 'Juan Hernangomez' = 'Juancho Hernangomez',
+           'Taurean Waller-Prince' = 'Taurean Prince', 
+           "Hilario Hilario" = "Hilario", "Jr. Jr." = "Jr.", "III III" = "III")))
   df
 }
 
