@@ -1,0 +1,219 @@
+---
+title: "Using Machine Learning to Examine NBA Fantasy Value"
+tags: ["machine learning","viz","nba"]
+output: html_document
+---
+
+```{r setup, include=FALSE, warning = FALSE}
+rm(list = ls())
+library(tidyverse)
+library(janitor)
+library(reactable)
+source("~/Documents/fantasy-basketball/funs/conv_to_points.R")
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/")
+nba_data_raw <- read_rds("nba_stats_19902019_dedup.Rds")
+gsd2_data <- read_rds("gsd2_draft_data.Rds")
+```
+
+In this project, I evaluate historical trends in fantasy basketball value. In the leagues I usually play, players stats are converted to a one-size-fits-all fantasy points per game (fppg) based on the following criteria: 
+
+Points: 1
+Defensive Rebounds: 1.75
+Offensive Rebounds: 1.75
+Assists: 1.5
+Steals: 2
+Blocks: 2.5
+Turnovers: -1
+Three Pointers Made: 0.75
+Field Goals Made: 0.5
+Field Goals Missed: -0.5
+Free Throws Made: 0.25
+Free Throws Missed: -0.5
+
+In the initial draft of these leagues, my fellow fantasy GMs and I draft players based on their current NBA contracts. While most GMs look for the most points available at any given time, I am more interested in value. I spent a couple years playing fantasy casually and made trades mostly made on gut instinct until last year when I started using my programming skills to fantasy leagues. Last year, I used a very basic value calculator of `ffpg / salary = value` and jumped from the third worst team (due to tanking) to a championship contender. While things may have played out different if COVID did not interrupt the season, I ultimately lost a two-week winner-takes-all tournament. Thus, this project is about trying to improve my approach to determining value and guiding my choices for my upcoming league draft. 
+
+The first step to doing this project was getting historical NBA data that contains all of the categories mentioned above in addition to the salary of the players in any given year. This was a little complicated, but you can see this wrangling on my GitHub account. With that data, the next step was to just a series of models that help me determine value. Below, I start by running linear model for all players from 1990-2019 that have valid data, have scored at least replacement level fppg averages for the season, and have played at least 500 minutes in a season. The reason for establishing these lower threshold cutoffs are I want to remove some of the variance in low-volume players and because players that score below 18 fppg are so plentiful that you can always grab one of the guys off the waiver wire for a minimal cost. 
+
+```{r, fig.width=10}
+nba_data <- nba_data_raw %>% 
+  bbrhist_avgs_to_fppg() %>% 
+  select(year, player, age, contains("fppg"), everything(), 
+         -ld_fppg_bbr, -botb_fppg_bbr) %>%
+  mutate(pos_pg = ifelse(str_detect(position, "\\b(?i)(PG)\\b"), "1", "0"),
+         pos_sg = ifelse(str_detect(position, "\\b(?i)(SG)\\b"), "1", "0"),
+         pos_sf = ifelse(str_detect(position, "\\b(?i)(SF)\\b"), "1", "0"),
+         pos_pf = ifelse(str_detect(position, "\\b(?i)(PF)\\b"), "1", "0"),
+         pos_c = ifelse(str_detect(position, "\\b(?i)(C)\\b"), "1", "0"),
+         fppg  = round(gsd2_fppg_bbr, 2)) %>%
+  filter(mins > 500 & fppg > 18) %>% 
+  arrange(-fppg) %>% 
+  drop_na(salary, fppg)
+nba_data %>% select(year, position, player, age, team, fppg, salary, mins)
+```
+
+Here, we see that the usual fantasy stars are extremely high on the list. James Harden, Michael Jordan, Giannis Antetokounmpo and LeBron James are all in the top-10. Somewhat surpring is the inclusion of David Robinson, but Robinson's 1994 season is one of the greatest advance stats season of all-time. A couple other things that stick out are some variance in age, salary, minutes, and the year the player was in producing at these numbers. Salary and year are going to be closely linked so we need to control for that in our models. But, first, let's just get a baseline look at how fppg and year-adjusted salary fit in a linear model.
+```{r}
+model1_baseline <- lm(gsd2_fppg_bbr ~ salary, data=nba_data) # fit the model
+nba_data$predicted_m1 <- predict(model1_baseline)   # Save the predicted values
+nba_data$residuals_m1 <- residuals(model1_baseline) # Save the residual values
+```
+
+That baseline model shows that salary alone does a pretty terrible job of explaining production. Here, the adjusted R-squared is only 0.2261. 
+
+```{r, fig.width=10, fig.height=5}
+nba_data <- arrange(nba_data, desc(residuals_m1)) %>%
+  mutate(rank = 1:nrow(nba_data)) %>% 
+  select(rank, player, position, age, gsd2_fppg_bbr, residuals_m1, games, everything())
+
+ggplot(nba_data, aes(x = salary, y = gsd2_fppg_bbr)) +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +      
+  geom_segment(aes(xend = salary, yend = predicted_m1), alpha = .2) +   
+  geom_point(aes(color = abs(residuals_m1), size = abs(residuals_m1))) +  
+  scale_color_continuous(low = "#386890", high = "#40E0D0") +     
+  guides(color = FALSE, size = FALSE) +                             
+  geom_point(aes(y = predicted_m1), shape = 1) + 
+  scale_x_continuous(breaks = c(0, 5000000, 10000000, 15000000, 20000000, 25000000, 30000000, 35000000),
+                     labels = c("0M", "5M", "10M", "15M", "20M", "25M", "30M", "35M")) +
+  theme_minimal() + 
+  xlab("Fantasy Points Per Game") + ylab("Annual Salary") +
+  ggtitle("Visualizing Residuals as Fantasy Value (Baseline Model)") + 
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+```{r}
+model2_baseline <- lm(gsd2_fppg_bbr ~ salary + year, data=nba_data) # fit the model
+nba_data$predicted_m2 <- predict(model2_baseline)   # Save the predicted values
+nba_data$residuals_m2 <- residuals(model2_baseline) # Save the residual values
+
+nba_data <- arrange(nba_data, desc(residuals_m2)) %>%
+  mutate(rank = 1:nrow(nba_data)) %>% 
+  select(rank, player, position, age, gsd2_fppg_bbr, residuals_m2, games, everything())
+
+nba_data %>% 
+  select(player, year, gsd2_fppg_bbr, salary, residuals_m1, residuals_m2)
+```
+
+Let's add age, minutes, games, and positions
+
+```{r}
+model3_baseline <- lm(gsd2_fppg_bbr ~ salary + year + mins + games + age +
+                      pos_pg + pos_sg + pos_sf + pos_pf + pos_c, data=nba_data) # fit the model
+nba_data$predicted_m3 <- predict(model3_baseline)   # Save the predicted values
+nba_data$residuals_m3 <- residuals(model3_baseline) # Save the residual values
+summary(model3_baseline)
+```
+```{r}
+nba_data <- arrange(nba_data, desc(residuals_m3)) %>%
+  mutate(rank = 1:nrow(nba_data)) %>% 
+  select(rank, player, position, age, gsd2_fppg_bbr, 
+         residuals_m1, residuals_m2, residuals_m3, games, everything())
+
+nba_data %>% 
+  select(player, year, gsd2_fppg_bbr, salary, residuals_m1, residuals_m2, residuals_m3)
+```
+
+```{r}
+model4_baseline <- lm(gsd2_fppg_bbr ~ salary + year + mins + games + 
+                      pts + orb + drb + ast + stl + blk + ft_percent + fg_percent +
+                      pos_pg + pos_sg + pos_sf + pos_pf + pos_c, data=nba_data) # fit the model
+nba_data$predicted_m4 <- predict(model4_baseline)   # Save the predicted values
+nba_data$residuals_m4 <- residuals(model4_baseline) # Save the residual values
+summary(model4_baseline)
+```
+
+```{r}
+nba_data <- arrange(nba_data, desc(residuals_m4)) %>%
+  mutate(rank = 1:nrow(nba_data)) %>% 
+  mutate(fppg = round(gsd2_fppg_bbr, 2),
+         residuals_m1 = round(residuals_m1, 3),
+         residuals_m2 = round(residuals_m2, 3),
+         residuals_m3 = round(residuals_m3, 3),
+         residuals_m4 = round(residuals_m4, 3)) %>% 
+  select(rank, player, position, age, fppg, 
+         residuals_m1, residuals_m2, residuals_m4, games, everything())
+
+nba_data %>% 
+  select(player, year, age, fppg, salary, residuals_m1, residuals_m3, residuals_m4)
+```
+
+
+
+```{r, fig.width=10, fig.height=5}
+
+
+ggplot(nba_data, aes(x = salary, y = gsd2_fppg_bbr)) +
+  geom_smooth(method = "lm", formula = gsd2_fppg_bbr ~ salary + year, se = FALSE, color = "black") +      
+  geom_segment(aes(xend = salary, yend = predicted_m2), alpha = .2) +   
+  geom_point(aes(color = abs(residuals_m2), size = abs(residuals_m2))) +  
+  scale_color_continuous(low = "#386890", high = "#40E0D0") +     
+  guides(color = FALSE, size = FALSE) +                             
+  geom_point(aes(y = predicted_m2), shape = 1) + 
+  scale_x_continuous(breaks = c(0, 5000000, 10000000, 15000000, 20000000, 25000000, 30000000, 35000000),
+                     labels = c("0M", "5M", "10M", "15M", "20M", "25M", "30M", "35M")) +
+  theme_minimal() + 
+  xlab("Fantasy Points Per Game") + ylab("Annual Salary") +
+  ggtitle("Visualizing Residuals as Fantasy Value (Baseline Model)") + 
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+prediction_data %>% 
+  select(rank, player, position, age, gsd2_fppg_bbr, residuals, salary, year, everything()) %>% 
+  filter(age < 22)
+```
+
+```{r}
+two_years <- prediction_data %>% filter(games > 5 & gsd2_fppg_bbr > 18)
+mean(two_years$residuals)
+position_count <- two_years %>% 
+  group_by(position) %>%
+  count() %>% 
+  rename(player_count = n) %>% 
+  arrange(-player_count); position_count
+
+
+
+position_count %>%  
+  group_by(position) %>%
+  summarize(fppg_by_position = sum(gsd2_fppg_bbr)) %>% 
+  left_join(position_count, by = "position") %>% 
+  mutate(ffpg_normed = fppg_by_position / player_count) %>% 
+  arrange(fppg_by_position)
+```
+
+*next steps* 
+contract data for coming years 
+projections for current nba players based on similar players???
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -37,7 +37,15 @@ bbrhist_avgs_to_fppg <- function(df){
     mutate(botb_fppg_bbr = pts/games + drb/games + (orb/games*1.25) + (ast/games*1.5) + (stl/games*1.5) + 
     (blk/games) + (tov/games*-1) + x3p/games + (fga/games*-0.5) + (fg/games*0.5) + ft/games + (fta/games*-0.75)) %>%
     mutate(gsd2_fppg_bbr = pts/games + drb/games + (orb/games*1.25) + (ast/games*1.5) + (stl/games*1.5) + 
-    (blk/games*2) + (tov/games*-1) + x3p/games + (fga/games*-0.5) + (fg/games*0.5) + ft/games + (fta/games*-0.75)) 
+    (blk/games*2) + (tov/games*-1) + x3p/games + (fga/games*-0.5) + (fg/games*0.5) + ft/games + (fta/games*-0.75)) %>% 
+    mutate(ld_totals = pts + (drb*1.5) + (orb*2) + (ast*2) + (stl*2.5) + 
+             (blk*2.5) + (tov*-1) + x3p + (fga*-0.5) + (fg*0.5) + ft + (fta*-1)) %>% 
+    mutate(fr_totals = pts + (drb*1.5) + (orb*2) + (ast*2) + (stl*2.5) + 
+             (blk*2.5) + (tov*-1) + x3p + (fga*-0.5) + (fg*0.5) + ft + (fta*-1)) %>% 
+    mutate(botb_totals = pts + drb + (orb*1.25) + (ast*1.5) + (stl*1.5) + 
+             (blk*2) + (tov*-1) + x3p+ (fga*-0.5) + (fg*0.5) + ft + (fta*-0.75)) %>% 
+    mutate(gsd2_totals = pts + drb + (orb*1.25) + (ast*1.5) + (stl*1.5) + 
+             (blk*2) + (tov*-1) + x3p+ (fga*-0.5) + (fg*0.5) + ft + (fta*-0.75))
   df
 }
 

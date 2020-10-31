@@ -7,41 +7,83 @@ output: html_document
 
 ```{r setup, include=FALSE, warning = FALSE}
 rm(list = ls())
-
 library(tidyverse)
 library(janitor)
 source("~/Documents/fantasy-basketball/funs/conv_to_points.R")
-
-nba_data <- read_rds("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/nba_stats_19902019_dedup.Rds")
-gsd2_data <- read_rds("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/gsd2_draft_data.Rds")
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/")
+nba_data <- read_rds("nba_stats_19902019_dedup.Rds")
+gsd2_data <- read_rds("gsd2_draft_data.Rds")
+forthcoming_salaries <- read_csv("../nba_player_salaries/nba_salaries_201920.csv")
 
 gsd2_data <- gsd2_data %>% 
   bbrhist_avgs_to_fppg() %>% 
   select(year, player, age, contains("fppg"), everything(), 
-         -ld_fppg_bbr, -botb_fppg_bbr) %>% 
+         -ld_fppg_bbr, -botb_fppg_bbr) %>%
+  #filter(games > 5 & gsd2_fppg_bbr > 18) %>% 
   arrange(-gsd2_fppg_bbr) %>% 
   drop_na(salary, gsd2_fppg_bbr)
 ```
 
-```{r}
-prediction_data <- gsd2_data
+```{r, fig.width=10, fig.height=5}
+prediction_data <- gsd2_data %>% filter(games > 5 & gsd2_fppg_bbr > 18)
 fit <- lm(gsd2_fppg_bbr ~ salary, data=prediction_data) # fit the model
 prediction_data$predicted <- predict(fit)   # Save the predicted values
 prediction_data$residuals <- residuals(fit) # Save the residual values
 
 prediction_data <- arrange(prediction_data, desc(residuals)) %>%
   mutate(rank = 1:nrow(prediction_data)) %>% 
-  select(rank, player, position, age, gsd2_fppg_bbr, residuals, games, everything())
+  select(rank, player, position, age, gsd2_fppg_bbr, residuals, games, everything()) %>% 
+  mutate(player_label = ifelse(residuals > 10 & year > 2018, player, NA))
 
 ggplot(prediction_data, aes(x = salary, y = gsd2_fppg_bbr)) +
   geom_smooth(method = "lm", se = FALSE, color = "black") +      
   geom_segment(aes(xend = salary, yend = predicted), alpha = .2) +   
-  geom_point(aes(color = abs(residuals), size = abs(residuals))) +  
-  scale_color_continuous(low = "#386890", high = "orange") +     
+  geom_point(aes(color = abs(residuals), size = abs(residuals))) + 
+  geom_text(aes(label=player_label), size=3, hjust=0.5, vjust=0) +
+  scale_color_continuous(low = "#386890", high = "#40E0D0") +     
   guides(color = FALSE, size = FALSE) +                             
   geom_point(aes(y = predicted), shape = 1) +
+  scale_x_continuous(breaks = c(0, 5000000, 10000000, 15000000, 20000000, 25000000, 30000000, 35000000),
+                     labels = c("0M", "5M", "10M", "15M", "20M", "25M", "30M", "35M")) +
   theme_minimal()
 ```
+```{r}
+prediction_data %>% 
+  select(rank, player, position, age, gsd2_fppg_bbr, residuals, salary, year, everything()) %>% 
+  filter(age < 22 & games > 5 & gsd2_fppg_bbr > 18)
+```
+```{r}
+salaries <- forthcoming_salaries %>% 
+  rename(player = Player) %>% 
+  clean_nba_names() 
+
+tmp_data <- prediction_data %>% 
+  filter(year == 2019) %>% 
+  select(player, gsd2_fppg_bbr, age, residuals, predicted, team)
+
+tmp_data %>% 
+  left_join(salaries, by = "player") %>% 
+  select(-`Signed Using`, -Rk, -playerID, -Tm, -Guaranteed) %>% 
+  mutate(`y2021-22` = replace_na(`y2021-22`, 0),
+         `y2022-23` = replace_na(`y2022-23`, 0)) %>% 
+  mutate(test20 = ifelse(`y2020-21` != 0, residuals, 0),
+         test21 = ifelse(`y2021-22` != 0, residuals, 0),
+         test22 = ifelse(`y2022-23` != 0, residuals, 0),
+         test23 = ifelse(`y2023-24` != 0, residuals, 0)) %>%
+  mutate(test_all = test20 + test21 + test22 + test23) %>% 
+  select(player, test_all, everything()) %>% 
+  arrange(-test_all)
+
+
+```
+
+
+
+
+
+
+
+
 ```{r}
 two_years <- prediction_data %>% filter(games > 5 & gsd2_fppg_bbr > 18)
 mean(two_years$residuals)
