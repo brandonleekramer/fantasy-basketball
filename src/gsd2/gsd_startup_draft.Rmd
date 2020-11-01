@@ -9,6 +9,7 @@ output: html_document
 rm(list = ls())
 library(tidyverse)
 library(janitor)
+library(tidymodels)
 source("~/Documents/fantasy-basketball/funs/conv_to_points.R")
 setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/")
 nba_data <- read_rds("nba_stats_19902019_dedup.Rds")
@@ -23,6 +24,130 @@ gsd2_data <- gsd2_data %>%
   arrange(-gsd2_fppg_bbr) %>% 
   drop_na(salary, gsd2_fppg_bbr)
 ```
+
+```{r}
+ggplot(gsd2_data, aes(x = gsd2_fppg_bbr)) +
+    geom_histogram(bins = 25) +
+    labs(x = "Fantasy Points Per Game",
+         y = "Number of Players") +
+  theme_minimal()
+```
+
+```{r}
+gsd2_data %>% summarise_all(~ sum(is.na(.)))
+```
+
+```{r}
+gsd2_data <- gsd2_data %>% 
+  mutate_if(is.character, as.factor) %>% 
+  mutate(pos_pg = ifelse(str_detect(position, "\\b(?i)(PG)\\b"), "1", "0"),
+         pos_sg = ifelse(str_detect(position, "\\b(?i)(SG)\\b"), "1", "0"),
+         pos_sf = ifelse(str_detect(position, "\\b(?i)(SF)\\b"), "1", "0"),
+         pos_pf = ifelse(str_detect(position, "\\b(?i)(PF)\\b"), "1", "0"),
+         pos_c = ifelse(str_detect(position, "\\b(?i)(C)\\b"), "1", "0"),
+         pos_pg = as.numeric(pos_pg),
+         pos_sg = as.numeric(pos_sg),
+         pos_sf = as.numeric(pos_sf),
+         pos_pf = as.numeric(pos_pf),
+         pos_c = as.numeric(pos_c)) %>% 
+  select(year, age, games, per, ts_percent, orb_percent, drb_percent, ast_percent, vorp,
+         stl_percent, blk_percent, tov_percent, usg_percent, fg_percent, ft_percent, x3p_percent, 
+         pos_pg, pos_sg, pos_sf, pos_sf, pos_pf, pos_c, gsd2_fppg_bbr) %>% 
+  filter(gsd2_fppg_bbr > 0) 
+
+fit_all <- lm(gsd2_fppg_bbr ~ ., data = gsd2_data)
+summary(fit_all)
+```
+
+```{r}
+set.seed(1234)
+gsd2_split <- gsd2_data %>%
+    initial_split(prop = 0.8)
+
+gsd2_train <- training(gsd2_split)
+gsd2_test <- testing(gsd2_split)
+```
+
+```{r}
+## a linear regression model specification
+lm_mod <- linear_reg() %>%
+    set_engine("lm")
+
+lm_fit <- lm_mod %>%
+    fit(log(gsd2_fppg_bbr) ~ ., data = gsd2_train)
+
+lm_fit
+```
+
+```{r}
+## a random forest model specification
+rf_mod <- rand_forest() %>%
+    set_mode("regression") %>%
+    set_engine("randomForest")
+
+fit_rf <- rf_mod %>%
+    fit(log(gsd2_fppg_bbr) ~ ., data = gsd2_train)
+
+fit_rf
+```
+
+```{r}
+results <- gsd2_train %>%
+    mutate(gsd2_fppg_bbr = log(gsd2_fppg_bbr)) %>%
+    bind_cols(predict(lm_fit, gsd2_train) %>%
+                  rename(.pred_lm = .pred)) %>%
+    bind_cols(predict(fit_rf, gsd2_train) %>%
+                  rename(.pred_rf = .pred))
+
+# Evaluate the performance
+metrics(results, truth = gsd2_fppg_bbr, estimate = .pred_lm)
+metrics(results, truth = gsd2_fppg_bbr, estimate = .pred_rf)
+```
+
+```{r}
+gsd2_boot <- bootstraps(gsd2_train)
+```
+
+```{r}
+lm_res <- lm_mod %>%
+    fit_resamples(
+        log(gsd2_fppg_bbr) ~ .,
+        resamples = gsd2_boot,
+        control = control_resamples(save_pred = TRUE)
+    )
+
+rf_res <- rf_mod %>%
+    fit_resamples(
+        log(gsd2_fppg_bbr) ~ .,
+        resamples = gsd2_boot,
+        control = control_resamples(save_pred = TRUE)
+    )
+
+glimpse(rf_res)
+```
+
+```{r, fig.width=8, fig.height=4}
+results <-  bind_rows(lm_res %>%
+                          collect_predictions() %>%
+                          mutate(model = "lm"),
+                      rf_res %>%
+                          collect_predictions() %>%
+                          mutate(model = "rf"))
+glimpse(results)
+
+results %>%
+    ggplot(aes(`log(gsd2_fppg_bbr)`, .pred)) +
+    geom_abline(lty = 2, color = "gray50") +
+    geom_point(aes(color = id), size = 1.5, alpha = 0.3, show.legend = FALSE) +
+    geom_smooth(method = "lm") +
+    facet_wrap(~ model) +
+  theme_minimal()
+```
+
+
+
+
+
 
 ```{r, fig.width=10, fig.height=5}
 prediction_data <- gsd2_data %>% filter(games > 5 & gsd2_fppg_bbr > 18)
