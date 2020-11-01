@@ -172,11 +172,11 @@ results_test %>%
 Because the random forest did not perform well, we can resample on the training set. We will use crossfold evalations, which partitions the data into 10 folds. We can then train the data on 9 folds and compare against the tenth.
 
 ```{r}
-nba_folds <- vfold_cv(gsd2_train, strata = team)
+nba_folds <- vfold_cv(gsd2_train, repeats = 5, strata = team)
 
-rf_results <- fit_resamples(
+rf_results <- rf_spec %>% 
+  fit_resamples(
   gsd2_fppg_bbr ~ ., 
-  rf_spec, 
   nba_folds, 
   control = control_resamples(save_pred = TRUE))
 
@@ -184,6 +184,11 @@ rf_results <- fit_resamples(
 rf_results %>% 
   collect_metrics()
 ```
+```{r}
+assess_rf_results <- collect_predictions(rf_results)
+assess_rf_results
+```
+
 ```{r}
 # with our older results from the testing data
 results_test %>%

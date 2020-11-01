@@ -1,0 +1,21 @@
+---
+title: "Untitled"
+author: "Brandon L. Kramer"
+date: "11/1/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE, warning = FALSE}
+rm(list = ls())
+library(tidyverse)
+library(janitor)
+library(tidymodels)
+library(cowplot)
+source("~/Documents/fantasy-basketball/funs/conv_to_points.R")
+setwd("~/Documents/fantasy-basketball/data/ncaa_player_data/")
+ncaa_stats <- read_csv("nba_college_stats_2021.csv")
+
+# career totals 
+ncaa_stats 
+
+```
