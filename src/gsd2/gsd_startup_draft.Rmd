@@ -29,6 +29,38 @@ gsd2_data <- gsd2_data %>%
   drop_na(salary, gsd2_fppg_bbr)
 ```
 
+```{r}
+fit <- lm(gsd2_fppg_bbr ~ salary, data=gsd2_data) # fit the model
+gsd2_data$predicted <- predict(fit)   # Save the predicted values
+gsd2_data$residuals <- residuals(fit) # Save the residual values
+
+salaries <- forthcoming_salaries %>% 
+  rename(player = Player) %>% 
+  clean_nba_names() 
+
+tmp_data <- gsd2_data %>% 
+  filter(year == 2019) 
+
+tmp_data <- tmp_data %>% 
+  left_join(salaries, by = "player") %>% 
+  select(-`Signed Using`, -Rk, -playerID, -Tm, -Guaranteed) %>% 
+  mutate(`y2021-22` = replace_na(`y2021-22`, 0),
+         `y2022-23` = replace_na(`y2022-23`, 0),
+         `y2023-24` = replace_na(`y2023-24`, 0),
+         `y2024-25` = replace_na(`y2024-25`, 0)) %>% 
+  mutate(value20 = ifelse(`y2020-21` != 0, residuals, 0),
+         value21 = ifelse(`y2021-22` != 0, residuals, 0),
+         value22 = ifelse(`y2022-23` != 0, residuals, 0),
+         value23 = ifelse(`y2023-24` != 0, residuals, 0),
+         value24 = ifelse(`y2024-25` != 0, residuals, 0)) %>%
+  mutate(cumValue = value20 + value21 + value22 + value23 + value24) %>% 
+  select(player, cumValue, gsd2_fppg_bbr, `y2021-22`, `y2022-23`, `y2023-24`, `y2024-25`, age, everything()) %>% 
+  arrange(-cumValue)
+tmp_data
+
+# THIS IS CURRENTLY WRONG BC THE RESIDUALS ON ROOKIE DEALS WON'T APPLY TO EXTENSIONS, ETC. 
+```
+
 Check for missingness 
 
 ```{r}

@@ -1,0 +1,110 @@
+---
+title: "Untitled"
+author: "Brandon L. Kramer"
+date: "11/1/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE, warning = FALSE}
+rm(list = ls())
+library(tidyverse)
+library(janitor)
+library(fuzzyjoin)
+source("~/Documents/fantasy-basketball/funs/conv_to_points.R")
+setwd("~/Documents/fantasy-basketball/data/ncaa_player_data/")
+ncaa_stats_raw <- read_csv("nba_college_stats_2021.csv")
+ncaa_stats <- ncaa_stats_raw %>% 
+  clean_names() %>% 
+  rename(draft_year = year, 
+         player = name) %>% 
+  filter(draft_year > 2001) %>% 
+  select(player, draft_year, school, everything(), -draft_pick)
+
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_draft_order/")
+nba_draft_order <- read_csv("nba_draft_order.csv")
+nba_draft_order <- nba_draft_order %>% 
+  rename(player = fullName, draft_year = draftYear, 
+         draft_rd = draftRound, draft_pick = draftSelection, 
+         draft_overall = draftOverall, nba_team = tmID, drafted_from = draftFrom) %>% 
+  select(player, draft_year, draft_rd, draft_pick, draft_overall, drafted_from, nba_team) %>% 
+  mutate(draft_year = draft_year + 1) %>% 
+  drop_na(player)
+
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_measurements/")
+nba_measurements <- read_csv("nba_player_measurements.csv") %>% 
+  clean_names() %>% 
+  filter(year_start > 2001) %>% 
+  rename(player = player_full_name) %>% 
+  arrange(year_start) %>% 
+  select(player, year_start, year_end, birth_date, 
+         height_in_cm, wingspan_in_cm, standing_reach_in_cm, hand_length_in_inches, 
+         weight_in_lb, body_fat_percent) %>% 
+  mutate(body_fat_percent = str_replace_all(body_fat_percent, "%", ""),
+         body_fat_percent = as.numeric(body_fat_percent))
+
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/")
+nba_data_raw <- read_rds("nba_stats_19902019_dedup.Rds")
+```
+
+```{r}
+ncaa_stats %>% 
+  left_join(nba_draft_order, by = c("player", "draft_year")) %>% 
+  select(player, draft_year, draft_rd, draft_pick) %>% 
+  filter(is.na(draft_rd))
+```
+
+
+first, let's join the ncaa data and the measurements data 
+
+# note: need to add all years after ben simmons draft 
+
+```{r}
+# career totals 
+ncaa_stats %>% 
+  select(player, year, school)
+
+```
+
+```{r}
+nba_measurements %>% count()
+nba_measurements %>% summarise_all(~ sum(is.na(.)))
+```
+
+second, let's match the ncaa/measurements data to draft pick orders
+
+```{r}
+nba_data_raw %>% 
+  filter(year > 2002) %>% 
+  select(player, year, team, age)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
