@@ -27,6 +27,94 @@ gsd2_data <- gsd2_data %>%
          -ld_fppg_bbr, -botb_fppg_bbr) %>%
   arrange(-gsd2_fppg_bbr) %>% 
   drop_na(salary, gsd2_fppg_bbr)
+
+salaries <- forthcoming_salaries %>% 
+  rename(player = Player) %>% 
+  clean_nba_names()
+```
+
+```{r}
+proj_202122_cap <- 115000000
+proj_202223_cap <- 118000000
+
+gsd2_data %>% 
+  filter(year == 2019) %>% 
+  left_join(salaries, by = "player") %>% 
+  select(-`Signed Using`, -Rk, -playerID, -Tm, -Guaranteed) %>%
+  rename(y2020_21 = `y2020-21`, y2021_22 = `y2021-22`, y2022_23 = `y2022-23`, 
+         y2023_24 = `y2023-24`, y2024_25 = `y2024-25`) %>% 
+  mutate(y2020_21 = ifelse(y2020_21 > 30000001, 30000000, y2020_21),
+         y2021_22 = ifelse(y2021_22 > 30000001, 30000000, y2021_22),
+         y2022_23 = ifelse(y2022_23 > 30000001, 30000000, y2022_23),
+         y2023_24 = ifelse(y2023_24 > 30000001, 30000000, y2023_24),
+         y2024_25 = ifelse(y2024_25 > 30000001, 30000000, y2024_25)) %>% 
+  mutate(y2021_22 = replace_na(y2021_22, 0),
+         y2022_23 = replace_na(y2022_23, 0),
+         y2023_24 = replace_na(y2023_24, 0),
+         y2024_25 = replace_na(y2024_25, 0)) %>% 
+  mutate(proj_fppg = gsd2_fppg_bbr) %>% 
+  # resigns for next year assuming salary cap hike up to 115m and players produce the same 
+  mutate(y2023_24 = ifelse(y2021_22 == 0 & proj_fppg > 49.99, proj_202122_cap*0.275, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 44.99, proj_202122_cap*0.250, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 39.99, proj_202122_cap*0.225, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 34.99, proj_202122_cap*0.200, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 29.99, proj_202122_cap*0.175, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 24.99, proj_202122_cap*0.150, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 19.99, proj_202122_cap*0.100, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 14.99, proj_202122_cap*0.050, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 09.99, proj_202122_cap*0.025, y2023_24)))))))))) %>% 
+  mutate(y2022_23 = ifelse(y2021_22 == 0 & proj_fppg > 49.99, proj_202122_cap*0.275, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 44.99, proj_202122_cap*0.250, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 39.99, proj_202122_cap*0.225, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 34.99, proj_202122_cap*0.200, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 29.99, proj_202122_cap*0.175, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 24.99, proj_202122_cap*0.150, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 19.99, proj_202122_cap*0.100, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 14.99, proj_202122_cap*0.050, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 09.99, proj_202122_cap*0.025, y2022_23)))))))))) %>% 
+  mutate(y2021_22 = ifelse(y2021_22 == 0 & proj_fppg > 49.99, proj_202122_cap*0.275, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 44.99, proj_202122_cap*0.250, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 39.99, proj_202122_cap*0.225, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 34.99, proj_202122_cap*0.200, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 29.99, proj_202122_cap*0.175, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 24.99, proj_202122_cap*0.150, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 19.99, proj_202122_cap*0.100, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 14.99, proj_202122_cap*0.050, 
+                    ifelse(y2021_22 == 0 & proj_fppg > 09.99, proj_202122_cap*0.025, y2021_22)))))))))) %>% 
+  # resigns for next year assuming salary cap hike up to 118m and players produce the same
+  mutate(y2024_25 = ifelse(y2022_23 == 0 & proj_fppg > 49.99, proj_202223_cap*0.275, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 44.99, proj_202223_cap*0.250, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 39.99, proj_202223_cap*0.225, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 34.99, proj_202223_cap*0.200, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 29.99, proj_202223_cap*0.175, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 24.99, proj_202223_cap*0.150, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 19.99, proj_202223_cap*0.100, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 14.99, proj_202223_cap*0.050, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 09.99, proj_202223_cap*0.025, y2024_25)))))))))) %>% 
+  mutate(y2023_24 = ifelse(y2022_23 == 0 & proj_fppg > 49.99, proj_202223_cap*0.275, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 44.99, proj_202223_cap*0.250, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 39.99, proj_202223_cap*0.225, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 34.99, proj_202223_cap*0.200, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 29.99, proj_202223_cap*0.175, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 24.99, proj_202223_cap*0.150, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 19.99, proj_202223_cap*0.100, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 14.99, proj_202223_cap*0.050, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 09.99, proj_202223_cap*0.025, y2023_24)))))))))) %>% 
+  mutate(y2022_23 = ifelse(y2022_23 == 0 & proj_fppg > 49.99, proj_202223_cap*0.275, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 44.99, proj_202223_cap*0.250, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 39.99, proj_202223_cap*0.225, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 34.99, proj_202223_cap*0.200, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 29.99, proj_202223_cap*0.175, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 24.99, proj_202223_cap*0.150, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 19.99, proj_202223_cap*0.100, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 14.99, proj_202223_cap*0.050, 
+                    ifelse(y2022_23 == 0 & proj_fppg > 09.99, proj_202223_cap*0.025, y2022_23)))))))))) %>%
+  mutate(value1yr = (gsd2_fppg_bbr / y2020_21) * 10000, 
+         value2yr = (gsd2_fppg_bbr / y2020_21) + (gsd2_fppg_bbr / y2021_22)  * 10000,
+         value3yr = (gsd2_fppg_bbr / y2020_21) + (gsd2_fppg_bbr / y2021_22) + (gsd2_fppg_bbr / y2022_23) * 10000) %>% 
+  select(player, value1yr, value2yr, value3yr, y2020_21, y2021_22, y2022_23, y2023_24, y2024_25, gsd2_fppg_bbr, everything()) %>% 
+  filter(gsd2_fppg_bbr > 30) %>% arrange(-value1yr) 
+
 ```
 
 ```{r}
@@ -34,12 +122,6 @@ fit <- lm(gsd2_fppg_bbr ~ salary, data=gsd2_data) # fit the model
 gsd2_data$predicted <- predict(fit)   # Save the predicted values
 gsd2_data$residuals <- residuals(fit) # Save the residual values
 
-salaries <- forthcoming_salaries %>% 
-  rename(player = Player) %>% 
-  clean_nba_names() 
-
-tmp_data <- gsd2_data %>% 
-  filter(year == 2019) 
 
 tmp_data <- tmp_data %>% 
   left_join(salaries, by = "player") %>% 
