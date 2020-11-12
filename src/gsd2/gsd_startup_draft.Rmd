@@ -20,7 +20,7 @@ setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/")
 nba_data <- read_rds("nba_stats_19902019_dedup.Rds")
 gsd2_data <- read_rds("gsd2_draft_data.Rds")
 forthcoming_salaries <- read_csv("../nba_player_salaries/nba_salaries_201920.csv")
-selected_players <- read_csv("~/Documents/fantasy-basketball/data/nba_fantasy_data/gsd2_player_rankings - Sheet1.csv") %>% mutate(player = tolower(player)) %>% clean_nba_names()
+selected_players <- read_csv("~/Documents/fantasy-basketball/data/nba_fantasy_data/gsd2_player_rankings - Drafted.csv") %>% mutate(player = tolower(player)) %>% clean_nba_names()
 selected_players <- paste(c("\\b(?i)(zqx", na.omit(selected_players$player), "zqx)\\b"), collapse = "|")
 
 gsd2_data <- gsd2_data %>% 
@@ -64,7 +64,7 @@ gsd2_data_contracts %>%
 proj_202122_cap <- 115000000
 proj_202223_cap <- 118000000
 
-gsd2_data_contracts  %>% 
+model_data <- gsd2_data_contracts  %>% 
   mutate(y2020_21 = replace_na(y2020_21, 0),
          y2021_22 = replace_na(y2021_22, 0),
          y2022_23 = replace_na(y2022_23, 0),
@@ -175,8 +175,50 @@ gsd2_data_contracts  %>%
   arrange(-value1yr, age) %>% 
   mutate(player = tolower(player)) %>% 
   filter(!grepl(selected_players, player) & 
-           y2020_21 < 20000000 & gsd2_fppg_bbr > 22) 
+           y2020_21 < 20000000 & fppg > 16
+         ); model_data
 ```
+```{r}
+model_data <- model_data %>% 
+  #arrange(-gsd2_fppg_bbr) %>% 
+  #rename(fppg = gsd2_fppg_bbr) %>% 
+  select(player, fppg, y2020_21, y2021_22, y2022_23, y2023_24,y2024_25) %>% 
+  mutate(player = tolower(player),
+         y2020_21 = replace_na(y2020_21, 0)) %>% 
+  filter(!grepl(selected_players, player)) 
+
+
+fit <- lm(fppg ~ y2020_21, data=model_data) # fit the model
+model_data$predicted_m1 <- predict(fit)   # Save the predicted values
+model_data$residuals_m1 <- residuals(fit) # Save the residual values
+#summary(fit)
+
+model_data %>% 
+  mutate(player = tolower(player)) %>% 
+  filter(!grepl(selected_players, player)) %>%   
+  ggplot(aes(x = y2020_21, y = fppg)) +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +      
+  geom_segment(aes(xend = y2020_21, yend = predicted_m1), alpha = .2) +   
+  geom_point(aes(color = abs(residuals_m1), size = abs(residuals_m1))) +  
+  scale_color_continuous(low = "#386890", high = "#40E0D0") +     
+  geom_text(aes(label=player), size=3.5, hjust=0.5, 
+            vjust=0, position=position_jitter(width=1, height=1)) +
+  guides(color = FALSE, size = FALSE) +                             
+  geom_point(aes(y = predicted_m1), shape = 1) + 
+  scale_x_continuous(breaks = c(0, 5000000, 10000000, 15000000, 20000000, 25000000, 30000000, 35000000),
+                     labels = c("0M", "5M", "10M", "15M", "20M", "25M", "30M", "35M")) +
+  theme_minimal() + 
+  xlab("Fantasy Points Per Game") + ylab("Annual Salary") +
+  ggtitle("Visualizing Residuals as Fantasy Value (Baseline Model)") + 
+  theme(plot.title = element_text(hjust = 0.5))
+```
+```{r}
+model_data %>% 
+  select(player, fppg, y2020_21, residuals_m1, predicted_m1) %>% 
+  arrange(-residuals_m1) %>% 
+  filter(y2020_21 != 0)
+```
+
 
 ```{r}
 fit <- lm(gsd2_fppg_bbr ~ salary, data=gsd2_data) # fit the model
@@ -185,7 +227,6 @@ gsd2_data$residuals <- residuals(fit) # Save the residual values
 
 
 tmp_data <- tmp_data %>% 
-  left_join(salaries, by = "player") %>% 
   select(-`Signed Using`, -Rk, -playerID, -Tm, -Guaranteed) %>% 
   mutate(`y2021-22` = replace_na(`y2021-22`, 0),
          `y2022-23` = replace_na(`y2022-23`, 0),
