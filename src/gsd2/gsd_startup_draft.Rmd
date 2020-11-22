@@ -22,6 +22,7 @@ gsd2_data <- read_rds("gsd2_draft_data.Rds")
 forthcoming_salaries <- read_csv("../nba_player_salaries/nba_salaries_201920.csv")
 selected_players <- read_csv("~/Documents/fantasy-basketball/data/nba_fantasy_data/gsd2_player_rankings - Drafted.csv") %>% mutate(player = tolower(player)) %>% clean_nba_names()
 selected_players <- paste(c("\\b(?i)(zqx", na.omit(selected_players$player), "zqx)\\b"), collapse = "|")
+fantrax_team_data <- read_csv("~/Documents/fantasy-basketball/data/nba_fantasy_data/Fantrax-Players-Gold Standard II.csv")
 
 gsd2_data <- gsd2_data %>% 
   bbrhist_avgs_to_fppg() %>% 
@@ -174,9 +175,9 @@ model_data <- gsd2_data_contracts  %>%
          y2021_22, y2022_23, y2023_24, y2024_25, everything()) %>% 
   arrange(-value1yr, age) %>% 
   mutate(player = tolower(player)) %>% 
-  filter(!grepl(selected_players, player) & 
-           y2020_21 < 20000000 & fppg > 16
-         ); model_data
+  filter(!grepl(selected_players, player) & y2020_21 < 5000000 & position == "C"
+         ) 
+model_data
 ```
 ```{r}
 model_data <- model_data %>% 
@@ -216,7 +217,28 @@ model_data %>%
 model_data %>% 
   select(player, fppg, y2020_21, residuals_m1, predicted_m1) %>% 
   arrange(-residuals_m1) %>% 
-  filter(y2020_21 != 0)
+  filter(y2020_21 != 0 )
+```
+
+
+#####################
+
+```{r}
+fantrax_team_data %>% 
+  clean_names() %>% 
+  filter(status != "(N/A)" & status != "FA") %>% 
+  group_by(status) %>% 
+  summarize(fp_g = sum(fp_g)) %>% 
+  arrange(-fp_g)
+```
+
+```{r}
+fantrax_team_data %>% 
+  clean_names() %>% 
+  filter(status != "(N/A)" & status != "FA") %>% 
+  group_by(status) %>% 
+  summarize(f_pts = sum(f_pts)) %>% 
+  arrange(-f_pts)
 ```
 
 

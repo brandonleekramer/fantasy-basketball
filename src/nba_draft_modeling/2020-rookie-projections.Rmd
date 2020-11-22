@@ -1,0 +1,58 @@
+---
+title: "NBA Rookie Projections"
+author: "Brandon L. Kramer"
+date: "10/21/2019"
+output: html_document
+---
+
+```{r setup}
+rm(list = ls())
+for (pkg in c( "tidyverse", "plotly", "readxl", "janitor")) {library(pkg, character.only = TRUE)}
+
+# loading and merging all of the data 
+rookies <- read_excel("~/Documents/fantasy-basketball/data/ncaa_player_data/2021_players.xlsx") 
+rookies_cleaned <- rookies %>% clean_names()
+rookies_cleaned
+```
+
+```{r, fig.width=12}
+ggplot(rookies_cleaned, aes(x=trb, y=pts, color=favorites)) +
+  geom_point() + 
+  ggrepel::geom_text_repel(aes(x = trb, y = pts, 
+                      label = rookies_cleaned$name)) + 
+  theme_minimal() 
+```
+```{r, fig.width=12}
+ggplot(rookies_cleaned, aes(x=ast, y=pts, color=favorites)) +
+  geom_point() + 
+  ggrepel::geom_text_repel(aes(x = ast, y = pts, 
+                      label = rookies_cleaned$name)) + 
+  theme_minimal() 
+```
+
+```{r, fig.width=12}
+ggplot(rookies_cleaned, aes(x=ft_percent, y=fg_percent, color=favorites)) +
+  geom_point() + 
+  ggrepel::geom_text_repel(aes(x = ft_percent, y = fg_percent, 
+                      label = rookies_cleaned$name)) +
+  theme_minimal()
+```
+```{r, fig.width=12}
+ggplot(rookies_cleaned, aes(x=blk, y=stl, color=favorites)) +
+  geom_point() + 
+  ggrepel::geom_text_repel(aes(x = blk, y = stl, 
+                      label = rookies_cleaned$name)) +
+  theme_minimal()
+```
+
+```{r, fig.width=12}
+ggplot(rookies_cleaned, aes(x=ast, y=tov, color=favorites)) +
+  geom_point() + 
+  ggrepel::geom_text_repel(aes(x = ast, y = tov, 
+                      label = rookies_cleaned$name)) +
+  theme_minimal()
+```
+
+
+
+
