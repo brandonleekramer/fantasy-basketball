@@ -20,7 +20,10 @@ clean_nba_names <- function(df, player){
            'Tim Hardaway' = 'Tim Hardaway Jr.', 'Dennis Smith' = 'Dennis Smith Jr.',
            'Wes Iwundu' = 'Wesley Iwundu', 'Marcus Morris Sr.' = 'Marcus Morris',
            'Frank Mason III' = 'Frank Mason', 'Juan Hernangomez' = 'Juancho Hernangomez',
-           'Taurean Waller-Prince' = 'Taurean Prince', 
+           'Taurean Waller-Prince' = 'Taurean Prince', 'DeAaron Fox' = "De'Aaron Fox",
+           "DAngelo Russell" = "D'Angelo Russell", "Michael Porter" = "Michael Porter Jr.",
+           "Kevin Porter" = "Kevin Porter Jr.", "Gary Trent" = "Gary Trent Jr.",
+           "Royce ONeale" = "Royce O'Neale", "Kira Lewis" = "Kira Lewis Jr.",
            "Hilario Hilario" = "Hilario", "Jr. Jr." = "Jr.", "III III" = "III")))
   df
 }

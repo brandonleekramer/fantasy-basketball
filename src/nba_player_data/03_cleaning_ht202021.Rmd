@@ -1,0 +1,43 @@
+---
+title: "03_cleaning_ht202021"
+author: "Brandon L. Kramer"
+date: "12/26/2020"
+output: html_document
+---
+
+```{r}
+setwd("~/Documents/fantasy-basketball/data/nba_fantasy_data/")
+hashtag19 <- read_csv("nba_fantasy_data - 2020_hashtag_proj.csv")
+
+new_df <- hashtag19 %>% 
+  mutate(new_col = gsub('([[:upper:]])', ' \\1', LAST)) %>% 
+  separate(new_col, c(NA, 'new_col'), sep=" ", extra = "drop") %>% 
+  unite(player, FIRST, new_col, sep = " ") %>% 
+  mutate(player = ifelse(str_detect(player, "Gilgeous-"), "Shai Gilgeous-Alexander", player)) %>% 
+  mutate(player = ifelse(str_detect(player, "\\b(?i)(Fred Van)\\b"), "Fred VanVleet", player)) %>% 
+  mutate(player = ifelse(str_detect(player, "\\b(?i)(Zach La)\\b"), "Zach LaVine", player)) %>%  
+  mutate(player = ifelse(str_detect(player, "\\b(?i)(DeMar De)\\b"), "DeMar DeRozan", player)) %>% 
+  mutate(player = ifelse(str_detect(player, "\\b(?i)(CJ Mc)\\b"), "CJ McCollum", player)) %>%
+  mutate(player = ifelse(str_detect(player, "\\b(?i)(JaVale Mc)\\b"), "JaVale McGee", player)) %>%
+  mutate(player = ifelse(str_detect(player, "Dorian Finney"), "Dorian Finney-Smith", player)) %>%
+  mutate(player = ifelse(str_detect(player, "\\b(?i)(Caris Le)\\b"), "Caris LeVert", player)) %>%
+  mutate(player = ifelse(str_detect(player, "Michael Carter"), "Michael Carter-Williams", player)) %>%
+  mutate(player = ifelse(str_detect(player, "Willie Cauley"), "Willie Cauley-Stein", player)) %>%
+  mutate(player = ifelse(str_detect(player, "Kentavious Caldwell-"), "Kentavious Caldwell-Pope", player)) %>%
+  mutate(player = ifelse(str_detect(player, "Donte Di"), "Donte DiVincenzo", player)) %>%
+  mutate(player = ifelse(str_detect(player, "Jordan Mc"), "Jordan McLaughlin", player)) %>%
+  mutate(player = ifelse(str_detect(player, "\\b(?i)(Royce O)\\b"), "Royce O'Neale", player)) %>%
+  mutate(player = ifelse(str_detect(player, "\\b(?i)(T.J. Mc)\\b"), "T.J. McConnell", player)) %>%
+  mutate(player = ifelse(str_detect(player, "\\b(?i)(Jalen Mc)\\b"), "Jalen McDaniels", player)) %>%
+  mutate(player = ifelse(str_detect(player, "\\b(?i)(Patrick Mc)\\b"), "Patrick McCaw", player)) %>%
+  mutate(player = ifelse(str_detect(player, "\\b(?i)(Ben Mc)\\b"), "Ben McLemore", player)) %>%
+  mutate(player = ifelse(str_detect(player, "\\b(?i)(Doug Mc)\\b"), "Doug McDermott", player)) %>%
+  mutate(player = ifelse(str_detect(player, "Keita Bates-"), "Keita Bates-Diop", player)) %>%
+  mutate(player = ifelse(str_detect(player, "Nickeil Alexander-"), "Nickeil Alexander-Walker", player)) %>%
+  mutate(player = ifelse(str_detect(player, "Alfonzo Mc"), "Alfonzo McKinnie", player)) %>%
+  mutate(player = ifelse(str_detect(player, "Timothe Luwawu-"), "Timothe Luwawu-Cabarrot", player)) %>%
+  mutate(player = ifelse(str_detect(player, "Rodney Mc"), "Rodney McGruder", player)) %>% 
+  select(-LAST)
+
+write_csv(new_df, "~/Documents/fantasy-basketball/data/nba_fantasy_data/nba_fantasy_data - 2020_hashtag_proj_clean.csv")
+```

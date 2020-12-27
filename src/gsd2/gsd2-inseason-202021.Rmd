@@ -4,24 +4,25 @@ author: "Brandon L. Kramer"
 output: html_document
 ---
 
-
 ```{r}
 
 #install.packages("tidyverse"); install.packages("googlesheets")
 rm(list = ls())
-for (pkg in c( "tidyverse", "plotly", "janitor")) {library(pkg, character.only = TRUE)}
+library("tidyverse")
+library("plotly")
+library("janitor")
 source("../../funs/conv_to_points.R")
 
 setwd("~/Documents/fantasy-basketball/data/nba_fantasy_data/")
 bballref1920 <- read_csv("nba_fantasy_data - bballref1920.csv")
 hashtag20 <- read_csv("nba_fantasy_data - 2020_hashtag_proj_clean.csv")
 hashalt19 <- read_csv("nba_fantasy_data - 2019_hashtag_alt_proj.csv")
-franchise_inseason <- read_csv("Fantrax-Players-FranchiseNBA.csv")
+gsd2_inseason <- read_csv("Fantrax-Players-Gold Standard II.csv")
 nba_schedule <- read_csv("nba_fantasy_data - 2019_nba_schedule.csv")
 franchise_contracts <- read_csv("nba_fantasy_data - franchise_contracts.csv") %>% 
   select(-starts_with("X"), -fr_team, -trade_comp, fr_position)
   
-franchise_inseason <- franchise_inseason %>% mutate(Trade = Status)
+gsd2_inseason <- gsd2_inseason %>% mutate(Trade = Status)
 
 # 2018-19 projections from hashtag 
 hashtag20 <- hashtag20 %>% 
@@ -33,23 +34,21 @@ franchise_contracts <- franchise_contracts %>%
   clean_nba_names(player)
 
 # clean franchise data 
-franchise_inseason <- franchise_inseason %>% 
+gsd2_inseason <- gsd2_inseason %>% 
   rename(fntx_pts = "PTS", fntx_orb = "OREB", fntx_dreb = "DREB", 
          fntx_ast = "AST", fntx_stl = "ST", fntx_blk = "BLK", 
-         fntx_tov = "TO", fntx_threes = "3PTM", fntx_fga = "FGA", 
-         fntx_fgm = "FGM", fntx_ftm = "FTM", fntx_fta = "FTA", 
-         fntx_gms = "GP", fntx_fppg = "FP/G", nba_team = "Team",
+         fntx_tov = "TO", fntx_threes = "3PTM", fntx_fga = "FG-", 
+         fntx_ftm = "FTM", fntx_gms = "GP", fntx_fppg = "FP/G",
          trade_comp = "Trade", 
-         fr_team = "Status", player = "Player", position = "Position") %>%
-  mutate(nba_team = recode(nba_team, PHO = "PHX", SA = "SAS", 
-                           NY = "NYK", NO = "NOP", GS = "GSW")) %>% 
+         nba_team = "Team", fr_team = "Status", player = "Player", position = "Position") %>%
+  mutate(nba_team = recode(nba_team, PHO = "PHX", SA = "SAS", NY = "NYK", NO = "NOP", GS = "GSW")) %>% 
   clean_nba_names(player) 
 
 # join all projections 
 combined_data <- hashtag20 %>% 
   #full_join(hashtag20, by = "player") %>% 
   full_join(franchise_contracts, by = "player") %>% 
-  full_join(franchise_inseason, by = "player") %>% 
+  full_join(gsd2_inseason, by = "player") %>% 
   arrange(-fr_fppg_ht) %>% 
   select(player, fr_fppg_ht, FPts, fntx_fppg, everything(), 
          -ld_fppg_ht, -botb_fppg_ht, -gsd2_fppg_ht, -fr_position) 
@@ -67,7 +66,7 @@ select_data %>% filter(fr_team == "FA")
 ```{r looking at overall projections}
 select_data %>% 
   #filter(player == "Skal Labissiere") %>% # by player
-  filter(fr_team == "CLE") %>% 
+  filter(fr_team == "MEM") %>% 
   #filter(trade_comp == "CLE") %>% 
   #filter(bbr_gms > 50) %>%        # by games played
   #filter(bbr_fr_fpts > 25) %>%    # by 2018 stats
@@ -77,14 +76,15 @@ select_data %>%
   #arrange(-bbr_fr_fpts) %>%       # arrange by 2018 stats
   #arrange(-hta_fr_fpts) %>%       # arrange by hta projections
   arrange(-fntx_fppg) %>%         # arrange by ht projections
-  select(player, fr_fppg_ht, fntx_fppg, fr_2019, fr_2020, fr_2021, fr_rfa, 
+  select(player, fntx_fppg, fr_fppg_ht, fr_2020, fr_2021, fr_rfa, 
           fr_injured, fr_gleague, fr_intl)
 ```
 
-# Value Calculators 
+#### Value Calculators 
 
 ```{r hashtag evaluations in fr}
-bad_teams <- c("MIL", "MIA", "POR", "CHA", "PHI", "DET", "ORL", "IND", "MEM")
+
+bad_teams <- c("ORL", "TOR", "MIA", "SAS", "PHX", "DET", "SAC", "CHI", "BKN", "UTA")
 
 select_data %>% 
   mutate(fntx_value_19 = fr_fppg_ht / fr_2019 * 10000) %>% 
@@ -99,8 +99,8 @@ select_data %>%
   #filter(grepl("SF", position)) %>% 
   arrange(-fntx_value_20) %>% 
   #arrange(-fntx_value_19) %>% 
-  select(player, fr_team, fntx_fppg, fr_fppg_ht, fr_2020, fr_2021, fr_rfa, 
-          fr_injured, fr_gleague, fr_intl)
+  select(player, fntx_fppg, fr_2019, fr_2020, fr_2021, fr_rfa, 
+         fr_fppg_ht, fr_injured, fr_gleague, fr_intl)
 ```
 
 #### Trade Comparison Tool 
@@ -108,33 +108,47 @@ select_data %>%
 ```{r trade_comp, fig.width=12, fig.height=4.5, warning=FALSE}
 source("../../funs/trade_comp.R")
 
-pre_trade_fntx <- pre_trade_calc(df = select_data, league = "franchise",
+pre_trade_fntx <- pre_trade_calc(df = select_data, league = "gsd2",
                                  current_team = fr_team, traded_to = trade_comp, 
                                  fppg_col = fntx_fppg, cap_col = fr_2020)
 pre_trade_fntx; pre_trade_plot(pre_trade_fntx, var = "team_total", 
-                               league = "franchise", plotly = FALSE)
+                               league = "gsd2", plotly = FALSE)
 ```
 ```{r trade_comp, fig.width=12, fig.height=4.5, warning=FALSE}
-post_trade_fntx <- post_trade_calc(df = select_data, league = "franchise",
+post_trade_fntx <- post_trade_calc(df = select_data, league = "gsd2",
                                    current_team = fr_team, traded_to = trade_comp, 
                                    fppg_col = fntx_fppg, cap_col = fr_2020)
 post_trade_fntx; post_trade_plot(post_trade_fntx, var = "team_total", 
-                                 league = "franchise", plotly = FALSE)
+                                 league = "gsd2", plotly = FALSE)
 ```
 ```{r trade_comp, fig.width=12, fig.height=4.5, warning=FALSE}
-pre_trade_fntx <- pre_trade_calc(df = select_data, league = "franchise",
+pre_trade_fntx <- pre_trade_calc(df = select_data, league = "gsd2",
                                  current_team = fr_team, traded_to = trade_comp, 
                                  fppg_col = fntx_fppg, cap_col = fr_2020)
 pre_trade_fntx; pre_trade_plot(pre_trade_fntx, var = "avg_fppg", 
-                               league = "franchise", plotly = FALSE)
+                               league = "gsd2", plotly = FALSE)
 ```
 ```{r trade_comp, fig.width=12, fig.height=4.5, warning=FALSE}
-post_trade_fntx <- post_trade_calc(df = select_data, league = "franchise",
+post_trade_fntx <- post_trade_calc(df = select_data, league = "gsd2",
                                    current_team = fr_team, traded_to = trade_comp, 
                                    fppg_col = fntx_fppg, cap_col = fr_2020)
 post_trade_fntx; post_trade_plot(post_trade_fntx, var = "avg_fppg", 
-                                 league = "franchise", plotly = FALSE)
+                                 league = "gsd2", plotly = FALSE)
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -282,14 +296,16 @@ temp_1 <- select_data %>%
   #filter(fr_injured == "0") %>% 
   #filter(fr_gleague == "0") %>% 
   #filter(fr_intl == "0") %>%  
-  filter(fr_team != "FA") %>% drop_na(fr_team) %>%
+  filter(fr_team != "FA" & fr_team != "W (Sat)" & fr_team != "W (Fri)" & fr_team != "W (Wed)") %>% 
+  drop_na(fr_team) %>%
   group_by(fr_team) %>% top_n(15, wt = fntx_fppg) %>% 
   summarize(avg_fppg = mean(fntx_fppg, na.rm = TRUE)) 
 temp_2 <- select_data %>% 
   #filter(fr_injured == "0") %>% 
   #filter(fr_gleague == "0") %>% 
   #filter(fr_intl == "0") %>% 
-  filter(fr_team != "FA") %>% drop_na(fr_team) %>%
+  filter(fr_team != "FA" & fr_team != "W (Sat)" & fr_team != "W (Fri)" & fr_team != "W (Wed)") %>% 
+  drop_na(fr_team) %>%
   group_by(fr_team) %>% top_n(15, wt = fntx_fppg) %>% 
   summarize(fr_players = n()) %>% filter(fr_team != "NA") %>% 
   full_join(temp_1, temp_2, by = "fr_team")
@@ -297,7 +313,8 @@ temp_3 <- select_data %>%
   #filter(fr_injured == "0") %>% 
   #filter(fr_gleague == "0") %>% 
   #filter(fr_intl == "0") %>% 
-  filter(fr_team != "FA") %>% drop_na(fr_team) %>%
+  filter(fr_team != "FA" & fr_team != "W (Sat)" & fr_team != "W (Fri)" & fr_team != "W (Wed)") %>% 
+  drop_na(fr_team) %>%
   group_by(fr_team) %>% top_n(15, wt = fntx_fppg) %>% 
   summarize(cap_used = sum(fr_2019, na.rm = TRUE)) %>% 
   mutate(cap_left = 109400000 - cap_used)
@@ -310,20 +327,23 @@ temp_1 <- select_data %>%
   #filter(fr_injured == "0") %>% 
   #filter(fr_gleague == "0") %>% 
   #filter(fr_intl == "0") %>%  
-  filter(fr_team != "FA") %>% drop_na(fr_team) %>%
+  filter(fr_team != "FA" & fr_team != "W (Sat)" & fr_team != "W (Fri)" & fr_team != "W (Wed)") %>%
+  drop_na(fr_team) %>%
   group_by(trade_comp) %>% top_n(15, wt = fntx_fppg) %>% summarize(avg_fppg = mean(fntx_fppg, na.rm = TRUE)) 
 temp_2 <- select_data %>% 
   #filter(fr_injured == "0") %>% 
   #filter(fr_gleague == "0") %>% 
   #filter(fr_intl == "0") %>% 
-  filter(fr_team != "FA") %>% drop_na(fr_team) %>%
+  filter(fr_team != "FA" & fr_team != "W (Sat)" & fr_team != "W (Fri)" & fr_team != "W (Wed)") %>% 
+  drop_na(fr_team) %>%
   group_by(trade_comp) %>% top_n(15, wt = fntx_fppg) %>% summarize(fr_players = n()) %>% filter(trade_comp != "NA") %>% 
   full_join(temp_1, temp_2, by = "trade_comp")
 temp_3 <- select_data %>% 
   #filter(fr_injured == "0") %>% 
  # filter(fr_gleague == "0") %>% 
   #filter(fr_intl == "0") %>% 
-  filter(fr_team != "FA") %>% drop_na(fr_team) %>%
+  filter(fr_team != "FA" & fr_team != "W (Sat)" & fr_team != "W (Fri)" & fr_team != "W (Wed)") %>% 
+  drop_na(fr_team) %>%
   group_by(trade_comp) %>% top_n(15, wt = fntx_fppg) %>% 
   summarize(cap_used = sum(fr_2019, na.rm = TRUE)) %>% 
   mutate(cap_left = 109400000 - cap_used)
@@ -767,10 +787,6 @@ ggplot(prediction_data, aes(x = fr_2019, y = ld_fppg_bbr)) +
   guides(color = FALSE, size = FALSE) +                             
   geom_point(aes(y = predicted), shape = 1) +
   theme_minimal()
-
-prediction_data %>% 
-  filter(fr_team == "CLE")
-
 ```
 ```{r}
 prediction_data %>% 

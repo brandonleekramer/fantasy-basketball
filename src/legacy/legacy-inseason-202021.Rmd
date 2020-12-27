@@ -4,6 +4,173 @@ author: "Brandon L. Kramer"
 output: html_document
 ---
 
+```{r}
+
+#install.packages("tidyverse"); install.packages("googlesheets")
+rm(list = ls())
+for (pkg in c( "tidyverse", "plotly", "janitor")) {library(pkg, character.only = TRUE)}
+source("../../funs/conv_to_points.R")
+source("../../funs/trade_comp.R")
+
+setwd("~/Documents/fantasy-basketball/data/nba_fantasy_data/")
+bballref1920 <- read_csv("nba_fantasy_data - bballref1920.csv")
+hashtag20 <- read_csv("nba_fantasy_data - 2020_hashtag_proj_clean.csv")
+hashalt19 <- read_csv("nba_fantasy_data - 2019_hashtag_alt_proj.csv")
+legacy_inseason <- read_csv("Fantrax-Players-Legacy Dynasty 2019_2020.csv")
+nba_schedule <- read_csv("nba_fantasy_data - 2019_nba_schedule.csv")
+legacy_contracts <- read_csv("nba_fantasy_data - legacy_contracts.csv")
+  
+# 2018-19 projections from hashtag 
+hashtag20 <- hashtag20 %>% 
+  clean_nba_names(player) %>% 
+  hashtag_avgs_to_fppg() %>% 
+  select(player, contains("fppg"))
+
+legacy_contracts <- legacy_contracts %>% 
+  clean_nba_names(player)
+
+# clean franchise data 
+legacy_inseason <- legacy_inseason %>% 
+  rename(fntx_pts = "PTS", fntx_orb = "OREB", fntx_dreb = "DREB", 
+         fntx_ast = "AST", fntx_stl = "ST", fntx_blk = "BLK", 
+         fntx_tov = "TO", fntx_threes = "3PTM", fntx_fga = "FGA", 
+         fntx_fgm = "FGM", fntx_ftm = "FTM", fntx_fta = "FTA", 
+         fntx_gms = "GP", fntx_fppg = "FP/G", nba_team = "Team",
+         trade_comp = "Trade", 
+         ld_team = "Status", player = "Player", position = "Position") %>%
+  mutate(nba_team = recode(nba_team, PHO = "PHX", SA = "SAS", 
+                           NY = "NYK", NO = "NOP", GS = "GSW")) %>% 
+  clean_nba_names(player) 
+
+# join all projections 
+combined_data <- hashtag20 %>% 
+  #full_join(hashtag20, by = "player") %>% 
+  full_join(legacy_contracts, by = "player") %>% 
+  full_join(legacy_inseason, by = "player") %>% 
+  arrange(-fr_fppg_ht) %>% 
+  select(player, fr_fppg_ht, FPts, fntx_fppg, everything(), 
+         -ld_fppg_ht, -botb_fppg_ht, -gsd2_fppg_ht, -ld_position)
+ 
+select_data <- combined_data  %>% 
+   mutate(ld_2020 = replace_na(ld_2020, 0),
+          ld_2020 = ifelse(ld_2020 == 0, ld_2019, ld_2020))
+
+select_data
+```
+
+#### Glimpse at Overall Stats   
+
+```{r looking at overall projections}
+select_data %>% 
+  #filter(player == "Skal Labissiere") %>% # by player
+  filter(ld_team == "MIN") %>% 
+  #filter(trade_comp == "CLE") %>% 
+  #filter(bbr_gms > 50) %>%        # by games played
+  #filter(bbr_fr_fpts > 25) %>%    # by 2018 stats
+  #filter(hta_fr_fpts > 25) %>%    # by hta projections 
+  #filter(ht_fr_fpts > 25) %>%     # by ht projections 
+  #filter(age < 25) %>%            # by age 
+  #arrange(-bbr_fr_fpts) %>%       # arrange by 2018 stats
+  #arrange(-hta_fr_fpts) %>%       # arrange by hta projections
+  arrange(-fr_fppg_ht) %>%         # arrange by ht projections
+  select(player, fr_fppg_ht, fntx_fppg, ld_2020, ld_2021, ld_2022, ld_rfa, ld_gleague, ld_intl)
+```
+
+#### Trade Comparison Tool 
+
+```{r trade_comp, fig.width=12, fig.height=4.5, warning=FALSE}
+source("../../funs/trade_comp.R")
+
+pre_trade_fntx <- pre_trade_calc(df = select_data, league = "legacy",
+                                 current_team = ld_team, traded_to = trade_comp, 
+                                 fppg_col = fntx_fppg, cap_col = ld_2020)
+pre_trade_fntx; pre_trade_plot(pre_trade_fntx, var = "team_total", 
+                               league = "legacy", plotly = FALSE)
+```
+```{r trade_comp, fig.width=12, fig.height=4.5, warning=FALSE}
+post_trade_fntx <- post_trade_calc(df = select_data, league = "legacy",
+                                   current_team = ld_team, traded_to = trade_comp, 
+                                   fppg_col = fntx_fppg, cap_col = ld_2020)
+post_trade_fntx; post_trade_plot(post_trade_fntx, var = "team_total", 
+                                 league = "legacy", plotly = FALSE)
+```
+```{r trade_comp, fig.width=12, fig.height=4.5, warning=FALSE}
+pre_trade_fntx <- pre_trade_calc(df = select_data, league = "legacy",
+                                 current_team = ld_team, traded_to = trade_comp, 
+                                 fppg_col = fntx_fppg, cap_col = ld_2020)
+pre_trade_fntx; pre_trade_plot(pre_trade_fntx, var = "avg_fppg", 
+                               league = "legacy", plotly = FALSE)
+```
+```{r trade_comp, fig.width=12, fig.height=4.5, warning=FALSE}
+post_trade_fntx <- post_trade_calc(df = select_data, league = "legacy",
+                                   current_team = ld_team, traded_to = trade_comp, 
+                                   fppg_col = fntx_fppg, cap_col = ld_2020)
+post_trade_fntx; post_trade_plot(post_trade_fntx, var = "avg_fppg", 
+                                 league = "legacy", plotly = FALSE)
+```
+
+
+
+
+
+
+
+
+
+
+
+```{r, fig.width=10, fig.height=5}
+# http://r-statistics.co/Linear-Regression.html
+# https://rpubs.com/iabrady/residual-analysis
+
+prediction_data <- combined_data %>% 
+  drop_na(fr_fppg_ht, fntx_fppg, ld_2020) %>% 
+  filter(ld_team != "FA") %>% 
+  select(player, position,fr_fppg_ht, fntx_fppg, ld_team,ld_2020)
+
+fit_fntx <- lm(fntx_fppg ~ ld_2020, data=prediction_data) # fit the model
+prediction_data$fntx_predicted <- predict(fit_fntx)   # Save the predicted values
+prediction_data$fntx_residuals <- residuals(fit_fntx) # Save the residual values
+
+fit_ht <- lm(fr_fppg_ht ~ ld_2020, data=prediction_data) # fit the model
+prediction_data$ht_predicted <- predict(fit_ht)   # Save the predicted values
+prediction_data$ht_residuals <- residuals(fit_ht) # Save the residual values
+
+prediction_data <- prediction_data %>%
+  mutate(rank = 1:nrow(prediction_data)) %>% 
+  select(player, fr_fppg_ht, fntx_fppg, ht_residuals, fntx_residuals, 
+         position, ld_team, ld_2020, ht_residuals, fntx_predicted, everything()) %>% 
+  arrange(-ht_residuals)
+
+# fntx residuals 
+ggplot(prediction_data, aes(x = ld_2020, y = fntx_fppg)) +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +      
+  geom_segment(aes(xend = ld_2020, yend = fntx_predicted), alpha = .2) +   
+  geom_point(aes(color = abs(fntx_residuals), size = abs(fntx_residuals))) +  
+  scale_color_continuous(low = "#386890", high = "orange") +     
+  guides(color = FALSE, size = FALSE) +                             
+  geom_point(aes(y = fntx_predicted), shape = 1) +
+  theme_minimal()
+
+# ht residuals 
+ggplot(prediction_data, aes(x = ld_2020, y = fr_fppg_ht)) +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +      
+  geom_segment(aes(xend = ld_2020, yend = ht_predicted), alpha = .2) +   
+  geom_point(aes(color = abs(ht_residuals), size = abs(ht_residuals))) +  
+  scale_color_continuous(low = "#386890", high = "orange") +     
+  guides(color = FALSE, size = FALSE) +                             
+  geom_point(aes(y = ht_predicted), shape = 1) +
+  theme_minimal()
+
+hist(prediction_data$fntx_residuals)
+```
+```{r}
+prediction_data %>% 
+  filter(ld_team == "NOP")
+```
+
+
+
 ```{r pull packages and projection data, include=FALSE}
 #install.packages("tidyverse"); install.packages("googlesheets")
 rm(list = ls())
@@ -15,7 +182,7 @@ legacy_contracts <- read_csv("nba_fantasy_data - legacy_contracts.csv")
 bballref18 <- read_csv("nba_fantasy_data - bballref1819.csv")
 hashalt19 <- read_csv("nba_fantasy_data - 2019_hashtag_alt_proj.csv")
 hashtag19 <- read_csv("nba_fantasy_data - 2019_hashtag_proj.csv")
-legacy_inseason <- read_csv("nba_fantasy_data - legacy_end-season.csv")
+legacy_inseason <- read_csv("nba_fantasy_data - legacy_inseason.csv")
 nba_schedule <- read_csv("nba_fantasy_data - 2019_nba_schedule.csv")
 
 bballref18$player <- bballref18$player %>% 
@@ -125,7 +292,7 @@ legacy_inseason$player <- legacy_inseason$Player %>%
 legacy_inseason <- legacy_inseason %>% 
   rename(fntx_pts = "PTS", fntx_orb = "OREB", fntx_dreb = "DREB", fntx_ast = "AST", fntx_stl = "ST", 
          fntx_blk = "BLK", fntx_tov = "TO", fntx_threes = "3PTM", fntx_fga = "FGA",fntx_fgm = "FGM", 
-         #trade_comp = "Trade",
+         trade_comp = "Trade",
          fntx_ftm = "FTM", fntx_fta = "FTA", fntx_gms = "GP", fntx_fppg = "FP/G", ld_team = "Status") %>%
   mutate(fntx_ld_fpts = fntx_pts + (fntx_dreb*1.5) + (fntx_orb*2) + (fntx_ast*2) + (fntx_stl*2.5) + (fntx_blk*2.5) +
          (fntx_tov*-1) + fntx_threes + (fntx_fga*-0.5) + (fntx_fgm*0.5) + fntx_ftm + (fntx_fta*-1)) %>%
@@ -140,7 +307,7 @@ legacy_inseason <- legacy_inseason %>%
   mutate(nba_team = recode(nba_team, PHO = "PHX", SA = "SAS", NY = "NYK", NO = "NOP", GS = "GSW", CLV = "CLE", BRK = "BKN")) %>% 
   select(player, fntx_fppg, fntx_ld_fpts, fntx_ld_fpts, fntx_gsd2_fpts, fntx_botb_fpts, fntx_gms,  
          fntx_pts, fntx_dreb, fntx_orb, fntx_ast, fntx_stl, fntx_blk, 
-         #trade_comp, 
+         trade_comp, 
          fntx_tov, fntx_threes, fntx_fga, fntx_fgm, fntx_ftm, fntx_fta, ld_team, nba_team) 
 
 select_data <- combined_data %>% 
@@ -148,7 +315,7 @@ select_data <- combined_data %>%
   select(player, age, fntx_fppg, bbr_ld_fpts, hta_ld_fpts, ht_ld_fpts, 
          bbr_gms, bbr_mpg, hta_gms, hta_mpg, ht_gms, ht_mpg,
          ld_team, ld_2019, ld_2020, ld_2021, ld_2022, ld_2023, ld_2024, 
-         #trade_comp, ld_injured,
+         trade_comp, #ld_injured,
          ld_rfa, ld_gleague, ld_intl, ld_position, nba_team) %>%   
   inner_join(nba_schedule, by = "nba_team") %>%  
   # regular season schedule 

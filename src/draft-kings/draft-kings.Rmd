@@ -1,0 +1,89 @@
+---
+title: "fantrax"
+author: "Brandon L. Kramer"
+date: "12/21/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(tidymodels)
+library(nbastatR)
+
+dk_salaries <- read_csv("~/Documents/fantasy-basketball/data/nba_fantasy_data/DKSalaries.csv")
+```
+
+Scrape Data from [NBA.com](https://www.nba.com/schedule?pd=false)
+
+```{r}
+preseason_game_ids <- c(0012000001:0012000049)
+
+preseason_box_scores <- box_scores(
+  game_ids = preseason_game_ids, league = "NBA",
+  box_score_types = c("Traditional", "Advanced", "Scoring", "Misc", 
+                      "Usage", "Four Factors", "hustle", "tracking"),
+  result_types = c("player", "team"),
+  join_data = TRUE,
+  assign_to_environment = TRUE,
+  return_message = TRUE
+)
+
+write_csv(dataBoxScorePlayerNBA, "~/Documents/fantasy-basketball/data/nba_fantasy_data/boxscores_202021/preseason_boxscores.csv")
+
+write_csv(dataBoxScoreTeamNBA, "~/Documents/fantasy-basketball/data/nba_fantasy_data/boxscores_202021/preseason_boxscores_teams.csv")
+```
+
+Create [DraftKings](https://www.draftkings.com/help/rules/nba) scoring 
+
+```{r}
+dataBoxScorePlayerNBA %>% 
+  group_by(slugTeam, namePlayer) %>%
+  select(fgm:plusminus) %>% 
+  summarise_if(is.numeric, mean, na.rm = TRUE) %>% 
+  mutate_if(is.numeric, round, 2) %>% 
+  mutate(db_db = if_else(pts >= 10 & treb >= 10 | pts >= 10 & ast >= 10 | 
+                         ast >= 10 & treb >= 10, 1.5, 0),
+         tr_db = if_else(pts >= 10 & treb >= 10 & ast >= 10, 3, 0),
+         dk_pts = pts + (fg3m*0.5) + (treb*1.25) + 
+         (ast*1.5) + (stl*2) + (blk*2) + (tov*-0.5)) %>% 
+  select(slugTeam, namePlayer, dk_pts, everything()) %>% 
+  arrange(slugTeam, -dk_pts) %>% 
+  #filter(grepl("G", slugTeam))
+  filter(grepl("Alexander", namePlayer))
+  
+```
+```{r}
+dataBoxScorePlayerNBA %>% 
+  #group_by(slugTeam, namePlayer) %>%
+  #select(fgm:plusminus) %>% 
+  #filter(grepl("G", slugTeam))
+  filter(grepl("Luka", namePlayer))
+
+```
+
+
+
+```{r}
+dataBoxScoreTeamNBA
+```
+
+TODO 
+
+mutate dates onto the game dates 
+pull the upcoming matchups 
+pull the salaries from fantrax 
+compare the matchups by 
+  - comparing opposing team defensive matchups 
+  - comparing opposing player defensive matchups 
+
+
+
+
+
+
+
+Basketball References Stats 
+http://asbcllc.com/nbastatR/reference/bref_players_stats.html
+http://asbcllc.com/nbastatR/reference/bref_teams_stats.html
