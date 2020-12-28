@@ -13,6 +13,13 @@ clean_nba_names <- function(df, player){
            'T.J.'='TJ', 'D.J.'='DJ', 'B.J.'='BJ', 'J.J.'='JJ', "O.G."="OG", "K.J."="KJ", 
            'A.J.'='AJ', 'J.R.'='JR', "Nene" = "Nene Hilario", "Demarre" = "DeMarre", 
            'Dončić' = 'Doncic', 'Jaren Jackson' = 'Jaren Jackson Jr.',
+           'Steph Curry' = 'Stephen Curry', 'DeAndre Ayton' = 'Deandre Ayton',
+           'Vernon Carey Jr' = 'Vernon Carey', 'Maximilian Kleber' = 'Maxi Kleber',
+           'Facundo Campaazo' = 'Facundo Campazzo', 'Bruce Brown Jr' = 'Bruce Brown',
+           'Royce ONeal' = "Royce O'Neale", 'Danuel House Jr' = 'Danuel House',
+           'Nic Batum' = 'Nicolas Batum', 'Lonnie Walker IV' = 'Lonnie Walker',
+           'Sviatoslav Mykhailiuk'= 'Svi Mykhailiuk', "Royce O'Nealee" = "Royce O'Neale",
+           'Chandler Hutchinson'='Chandler Hutchison','Derrick Jones Jr.'='Derrick Jones',
            'Kelly Oubre' = 'Kelly Oubre Jr.', 'Marvin Bagley' = 'Marvin Bagley III', 
            'James Ennis III' = 'James Ennis', 'Otto Porter' = 'Otto Porter Jr.', 
            'Wendell Carter' = 'Wendell Carter Jr.', 'Larry Nance' = 'Larry Nance Jr.',
@@ -24,7 +31,8 @@ clean_nba_names <- function(df, player){
            "DAngelo Russell" = "D'Angelo Russell", "Michael Porter" = "Michael Porter Jr.",
            "Kevin Porter" = "Kevin Porter Jr.", "Gary Trent" = "Gary Trent Jr.",
            "Royce ONeale" = "Royce O'Neale", "Kira Lewis" = "Kira Lewis Jr.",
-           "Hilario Hilario" = "Hilario", "Jr. Jr." = "Jr.", "III III" = "III")))
+           "Hilario Hilario" = "Hilario", "Jr. Jr." = "Jr.", "Jr. Jr" = "Jr.",
+           "III Jr" = "III", "III III" = "III")))
   df
 }
 

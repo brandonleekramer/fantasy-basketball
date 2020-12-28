@@ -77,7 +77,7 @@ select_data %>%
   #filter(age < 25) %>%            # by age 
   #arrange(-bbr_fr_fpts) %>%       # arrange by 2018 stats
   #arrange(-hta_fr_fpts) %>%       # arrange by hta projections
-  arrange(-fr_fppg_ht) %>%         # arrange by ht projections
+  arrange(-fntx_fppg) %>%         # arrange by ht projections
   select(player, fr_fppg_ht, fntx_fppg, ld_2020, ld_2021, ld_2022, gleague2021)
 ```
 
@@ -87,9 +87,10 @@ select_data %>%
 bad_teams <- c("CLV", "DAL", "HOU", "BKN", "BOS", "SAC", "MEM", "ORL")
 
 select_data %>% 
-  mutate(value20 = fr_fppg_ht / ld_2020 * 10000) %>%
-  mutate(value21 = fr_fppg_ht / ld_2021 * 10000) %>%
-  mutate(value20 = round(value20, 3)) %>% 
+  mutate(raw_val_20 = fntx_fppg / ld_2020 * 10000) %>%
+  mutate(raw_val_21 = fntx_fppg / ld_2021 * 10000) %>%
+  mutate(raw_val_20 = round(raw_val_20, 3),
+         raw_val_21 = round(raw_val_21, 3)) %>% 
   #mutate(diff = fntx_fppg - fr_fppg_ht) %>%
   filter(fr_fppg_ht > 24) %>% 
   #filter(fr_2019 < 17000000) %>% 
@@ -97,9 +98,9 @@ select_data %>%
   #filter(fr_team == "CLE") %>% 
   #filter(age < 25) %>% 
   #filter(grepl("SF", position)) %>% 
-  arrange(-value20) %>% 
+  arrange(-raw_val_20) %>% 
   #arrange(-fntx_value_19) %>% 
-  select(player, value20, fntx_fppg, fr_fppg_ht, ld_2020, ld_2021)
+  select(player, raw_val_20, fntx_fppg, fr_fppg_ht, ld_2020, ld_2021)
 ```
 
 #### Trade Comparison Tool 
@@ -138,8 +139,8 @@ post_trade_fntx; post_trade_plot(post_trade_fntx, var = "avg_fppg",
 ##### Advanced Value By Player 
 
 ```{r, fig.width=10, fig.height=5}
+source("../../funs/adv_value_calc.R")
 prediction_data <- adv_value_calc(combined_data, 
-                                  league = "legacy", 
                                   teams = "ld_team", 
                                   pts = "fntx_fppg",
                                   salaries = "ld_2020")
@@ -150,10 +151,28 @@ ggplot(prediction_data, aes(x = salaries, y = fppg)) +
   geom_smooth(method = "lm", se = FALSE, color = "black") +      
   geom_segment(aes(xend = salaries, yend = lm_pred), alpha = .2) +   
   geom_point(aes(color = abs(lm_value), size = abs(lm_value))) +  
-  scale_color_continuous(low = "#386890", high = "orange") +     
+  scale_color_continuous(low = "#386890", high = "red") +     
   guides(color = FALSE, size = FALSE) +                             
   geom_point(aes(y = lm_pred), shape = 1) +
+  scale_x_continuous(breaks=c(0,5000000,10000000,15000000,20000000,25000000,30000000), 
+                     labels=c("$0","$5M","$10M","$15M","$20M","$25M","$30M")) +
+  ggtitle("Value Determined by Linear Model") +
   theme_minimal()
+```
+
+```{r}
+prediction_data %>% 
+  filter(fppg > 20) %>% 
+  mutate(cost_cats = if_else(salaries < 5000000, 1, 0),
+         cost_cats = if_else(salaries > 5000000 & salaries < 10000000, 2, cost_cats),
+         cost_cats = if_else(salaries > 10000000 & salaries < 15000000, 3, cost_cats),
+         cost_cats = if_else(salaries > 15000000 & salaries < 20000000, 4, cost_cats),
+         cost_cats = if_else(salaries > 20000000 & salaries < 25000000, 5, cost_cats),
+         cost_cats = if_else(salaries > 25000000, 6, cost_cats)) %>% 
+  group_by(cost_cats) %>% 
+  summarize(value = sum(lm_norm)) %>% 
+  mutate(cost_cats = recode(cost_cats,`0`="UFA",`1`="$<5M",`2`="$5-$9.9M",`3`="$10-14.9M",
+                            `4`="$15-19.9+M", `5`="$20-24.9+M", `6`="$25+M"))
 ```
 
 ##### Advanced Value By Team 
@@ -161,7 +180,7 @@ ggplot(prediction_data, aes(x = salaries, y = fppg)) +
 ```{r, fig.width=10}
 value_by_teams <- team_value_structure(input_data = prediction_data,
                                          teams_col = teams, 
-                                         value_col = lm_norm,
+                                         value_col = rf_norm,
                                          fppg_col = fppg)
 value_by_teams
 
@@ -174,11 +193,15 @@ value_by_players_graph <- value_by_teams %>%
   scale_color_manual(values=nba_team_colors) +
   theme() + theme_minimal(); ggplotly()
 ```
+
 ```{r}
 prediction_data %>% 
-  filter(teams == "MIN")
+  filter(teams == "NOP")
 ```
-
+```{r}
+prediction_data %>% 
+  filter(teams == "PHX")
+```
 
 
 

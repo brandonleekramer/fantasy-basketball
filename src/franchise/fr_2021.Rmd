@@ -20,19 +20,16 @@ hashtag20 <- read_csv("nba_fantasy_data - 2020_hashtag_proj_clean.csv")
 hashalt19 <- read_csv("nba_fantasy_data - 2019_hashtag_alt_proj.csv")
 franchise_inseason <- read_csv("Fantrax-Players-FranchiseNBA.csv")
 nba_schedule <- read_csv("nba_fantasy_data - 2019_nba_schedule.csv")
-franchise_contracts <- read_csv("nba_fantasy_data - franchise_contracts.csv") %>% 
-  select(-starts_with("X"), -fr_team, -trade_comp, fr_position)
+franchise_contracts <- read_csv("nba_fantasy_data - franchise_contracts_202021.csv") %>% 
+  clean_nba_names(player) 
   
-franchise_inseason <- franchise_inseason %>% mutate(Trade = Status)
+#franchise_inseason <- franchise_inseason %>% mutate(Trade = Status)
 
 # 2018-19 projections from hashtag 
 hashtag20 <- hashtag20 %>% 
   clean_nba_names(player) %>% 
   hashtag_avgs_to_fppg() %>% 
   select(player, contains("fppg"))
-
-franchise_contracts <- franchise_contracts %>% 
-  clean_nba_names(player)
 
 # clean franchise data 
 franchise_inseason <- franchise_inseason %>% 
@@ -53,15 +50,15 @@ combined_data <- hashtag20 %>%
   full_join(franchise_contracts, by = "player") %>% 
   full_join(franchise_inseason, by = "player") %>% 
   arrange(-fr_fppg_ht) %>% 
-  select(player, fr_fppg_ht, FPts, fntx_fppg, everything(), 
+  select(player, fr_team, fr_fppg_ht, FPts, fntx_fppg, everything(), 
          -ld_fppg_ht, -botb_fppg_ht, -gsd2_fppg_ht, -fr_position) 
  
-select_data <- combined_data  %>% 
-   mutate(fr_2020 = replace_na(fr_2020, 0),
-          fr_2020 = ifelse(fr_2020 == 0, fr_2019, fr_2020))
+select_data <- combined_data  
 
 # Best FA available 
-select_data %>% filter(fr_team == "FA")
+select_data %>% 
+  filter(fr_team == "FA" | is.na(fr_team) | fr_team == "(N/A)") %>% 
+  arrange(-fntx_fppg)
 ```
 
 # Glimpse at Overall Stats   
@@ -79,8 +76,7 @@ select_data %>%
   #arrange(-bbr_fr_fpts) %>%       # arrange by 2018 stats
   #arrange(-hta_fr_fpts) %>%       # arrange by hta projections
   arrange(-fntx_fppg) %>%         # arrange by ht projections
-  select(player, fr_fppg_ht, fntx_fppg, fr_2019, fr_2020, fr_2021, fr_rfa, 
-          fr_injured, fr_gleague, fr_intl)
+  select(player, fr_fppg_ht, fntx_fppg, fr_2020, fr_2021, gleague)
 ```
 
 # Value Calculators 
@@ -89,7 +85,6 @@ select_data %>%
 bad_teams <- c("MIL", "MIA", "POR", "CHA", "PHI", "DET", "ORL", "IND", "MEM")
 
 select_data %>% 
-  mutate(fntx_value_19 = fr_fppg_ht / fr_2019 * 10000) %>% 
   mutate(fntx_value_20 = fr_fppg_ht / fr_2020 * 10000) %>%
   mutate(fntx_value_21 = fr_fppg_ht / fr_2021 * 10000) %>%
   #mutate(diff = fntx_fppg - fr_fppg_ht) %>%
@@ -101,8 +96,7 @@ select_data %>%
   #filter(grepl("SF", position)) %>% 
   arrange(-fntx_value_20) %>% 
   #arrange(-fntx_value_19) %>% 
-  select(player, fr_team, fntx_fppg, fr_fppg_ht, fr_2020, fr_2021, fr_rfa, 
-          fr_injured, fr_gleague, fr_intl)
+  select(player, fr_team, fntx_fppg, fr_fppg_ht, fr_2020, fr_2021)
 ```
 
 #### Trade Comparison Tool 
@@ -110,7 +104,8 @@ select_data %>%
 ```{r trade_comp, fig.width=12, fig.height=4.5, warning=FALSE}
 source("../../funs/trade_comp.R")
 
-pre_trade_fntx <- pre_trade_calc(df = select_data, league = "franchise",
+pre_trade_fntx <- pre_trade_calc(df = select_data, 
+                                 league = "franchise",
                                  current_team = fr_team, traded_to = trade_comp, 
                                  fppg_col = fntx_fppg, cap_col = fr_2020)
 pre_trade_fntx; pre_trade_plot(pre_trade_fntx, var = "team_total", 
@@ -144,7 +139,6 @@ post_trade_fntx; post_trade_plot(post_trade_fntx, var = "avg_fppg",
 
 ```{r, fig.width=10, fig.height=5}
 prediction_data <- adv_value_calc(select_data, 
-                                  league = "franchise", 
                                   teams = "fr_team", 
                                   pts = "fntx_fppg",
                                   salaries = "fr_2020")
@@ -155,10 +149,25 @@ ggplot(prediction_data, aes(x = salaries, y = fppg)) +
   geom_smooth(method = "lm", se = FALSE, color = "black") +      
   geom_segment(aes(xend = salaries, yend = lm_pred), alpha = .2) +   
   geom_point(aes(color = abs(lm_value), size = abs(lm_value))) +  
-  scale_color_continuous(low = "#386890", high = "orange") +     
+  scale_color_continuous(low = "#386890", high = "red") +     
   guides(color = FALSE, size = FALSE) +                             
   geom_point(aes(y = lm_pred), shape = 1) +
   theme_minimal()
+```
+
+```{r}
+prediction_data %>% 
+  filter(fppg > 20) %>% 
+  mutate(cost_cats = if_else(salaries < 5000000, 1, 0),
+         cost_cats = if_else(salaries > 5000000 & salaries < 10000000, 2, cost_cats),
+         cost_cats = if_else(salaries > 10000000 & salaries < 15000000, 3, cost_cats),
+         cost_cats = if_else(salaries > 15000000 & salaries < 20000000, 4, cost_cats),
+         cost_cats = if_else(salaries > 20000000 & salaries < 25000000, 5, cost_cats),
+         cost_cats = if_else(salaries > 25000000, 6, cost_cats)) %>% 
+  group_by(cost_cats) %>% 
+  summarize(value = sum(lm_norm)) %>% 
+  mutate(cost_cats = recode(cost_cats,`0`="UFA",`1`="$<5M",`2`="$5-$9.9M",`3`="$10-14.9M",
+                            `4`="$15-19.9+M", `5`="$20-24.9+M", `6`="$25+M"))
 ```
 
 ##### Advanced Value By Team 
@@ -183,6 +192,13 @@ value_by_players_graph <- value_by_teams %>%
 prediction_data %>% 
   filter(teams == "CLE")
 ```
+```{r}
+prediction_data %>% 
+  select(player, teams, salaries, everything()) %>% 
+  filter(teams == "NOP")
+```
+
+
 ```{r}
 bad_teams <- c("MIL", "MIA", "POR", "CHA", "PHI", "DET", "ORL", "IND", "MEM", "NOP")
 

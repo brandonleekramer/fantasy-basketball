@@ -1,6 +1,6 @@
 
 
-adv_value_calc <- function(df, league, teams, pts, salaries){
+adv_value_calc <- function(df,  teams, pts, salaries){
   
   library("tidyverse")
   library("tidymodels")
@@ -8,8 +8,6 @@ adv_value_calc <- function(df, league, teams, pts, salaries){
   teams <- enquo(teams)
   pts <- enquo(pts)
   salaries <- enquo(salaries)
-  
-  if(league == "legacy"){
   
   prediction_data <- df %>% 
     drop_na(!!(pts), !!(salaries)) %>% 
@@ -52,56 +50,7 @@ adv_value_calc <- function(df, league, teams, pts, salaries){
     select(player, teams, fppg, lm_pred, lm_value, lm_norm,
            rf_pred, rf_value, rf_norm, position, salaries, fppg)
   
-  }
-  
-  if(league == "franchise"){
-    
-    prediction_data <- df %>% 
-      drop_na(!!(pts), !!(salaries)) %>% 
-      filter(!!(teams) != "FA") %>% 
-      rename(teams = !!(teams),
-             fppg = !!(pts),
-             salaries = !!(salaries)) %>% 
-      select(player, teams, position, salaries, fppg)
-    
-    fit_lm <- lm(fppg ~ salaries, data = prediction_data) 
-    prediction_data$lm_pred <- predict(fit_lm)   
-    prediction_data$lm_value <- residuals(fit_lm) 
-    
-    fit_rf <- rand_forest() %>%
-      set_mode("regression") %>% 
-      set_engine("randomForest") %>% 
-      fit(fppg ~ salaries, data = prediction_data)
-    fit_rf_df <- as_tibble(
-      fit_rf %>% 
-        predict(new_data = prediction_data) %>% 
-        rename("rf_predicted" = .pred)) 
-    prediction_data$rf_pred <- fit_rf_df$rf_predicted 
-    
-    prediction_data %>% 
-      mutate(# calculate rf residual 
-        rf_value = fppg - rf_pred,
-        # round values 
-        lm_pred = round(lm_pred, 3),
-        lm_value = round(lm_value, 3),
-        rf_pred = round(rf_pred, 3),
-        rf_value = round(rf_value, 3),
-        # normalize value columns  
-        #lm_norm = (lm_value - min(lm_value)) / (max(lm_value) - min(lm_value)),
-        #rf_norm = (rf_value - min(rf_value)) / (max(rf_value) - min(rf_value)),
-        lm_norm = (lm_value - mean(lm_value)) / sd(lm_value),
-        rf_norm = (rf_value - mean(rf_value)) / sd(rf_value),
-        lm_norm = round(lm_norm, 3),
-        rf_norm = round(rf_norm, 3)) %>% 
-      arrange(-lm_value) %>% 
-      select(player, teams, fppg, lm_pred, lm_value, lm_norm,
-             rf_pred, rf_value, rf_norm, position, salaries, fppg)
-    
-  }
-  
-  
-  
-  
+
   
 }
 
