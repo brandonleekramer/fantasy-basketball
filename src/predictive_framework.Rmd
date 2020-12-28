@@ -69,8 +69,10 @@ gsd2_data <- gsd2_data %>%
          pos_sf = as.numeric(pos_sf),
          pos_pf = as.numeric(pos_pf),
          pos_c = as.numeric(pos_c)) %>% 
-  select(year, age, games, team, per, ts_percent, orb_percent, drb_percent, ast_percent, vorp,
-         stl_percent, blk_percent, tov_percent, usg_percent, fg_percent, ft_percent, x3p_percent, 
+  select(year, age, games, team, per, ts_percent, orb_percent, 
+         drb_percent, ast_percent, vorp,
+         stl_percent, blk_percent, tov_percent, usg_percent, fg_percent,
+         ft_percent, x3p_percent, 
          pos_pg, pos_sg, pos_sf, pos_sf, pos_pf, pos_c, gsd2_fppg_bbr) %>% 
   filter(gsd2_fppg_bbr > 0) %>% 
   mutate(team = as.factor(team), 
@@ -319,7 +321,74 @@ projections for current nba players based on similar players???
 
 
 
+```{r}
+# create prediction data 
+prediction_data <- combined_data %>% 
+  drop_na(fr_fppg_ht, fntx_fppg, ld_2020) %>% 
+  filter(ld_team != "FA") %>% 
+  mutate(fppg_ht_sqrt = sqrt(fr_fppg_ht),
+         fntx_fppg_sqrt = sqrt(fntx_fppg)) %>% 
+  select(player, team, fntx_fppg, fppg_ht_sqrt, fr_fppg_ht, 
+         fntx_fppg_sqrt, ld_team, ld_2020, position)
 
+# split the data 
+split_df <- prediction_data %>% 
+  initial_split(prop = 0.8)
+train_df <- training(split_df)
+test_df <- testing(split_df)
+
+# run a lm 
+lm_fit <- linear_reg() %>%
+  set_engine("lm") %>% 
+  fit(fppg_ht_sqrt ~ ld_2020, data = train_df)
+#tidy(lm_fit) %>% arrange(-estimate)
+#broom::glance(lm_fit)
+
+## run a random forest
+fit_rf <- rand_forest() %>%
+    set_mode("regression") %>%
+    set_engine("randomForest") %>% 
+    fit(fppg_ht_sqrt ~ ld_2020, data = train_df)
+#fit_rf
+
+# combine the models 
+results_train <- lm_fit %>%
+  predict(new_data = train_df) %>%
+  mutate(truth = train_df$fppg_ht_sqrt, model = "lm") %>%
+  bind_rows(fit_rf %>%
+              predict(new_data = train_df) %>%
+              mutate(truth = train_df$fppg_ht_sqrt, model = "rf"))
+results_train %>% mutate(.pred = .pred^2, truth = truth^2)
+
+results_test <- lm_fit %>%
+  predict(new_data = test_df) %>%
+  mutate(truth = test_df$fppg_ht_sqrt, model = "lm") %>%
+  bind_rows(fit_rf %>%
+    predict(new_data = test_df) %>%
+    mutate(truth = test_df$fppg_ht_sqrt, model = "rf"))
+#results_test %>% mutate(.pred = .pred^2, truth = truth^2)
+
+results_train %>%
+  group_by(model) %>%
+  rmse(truth = truth, estimate = .pred)
+
+results_test %>%
+  group_by(model) %>%
+  rmse(truth = truth, estimate = .pred)
+```
+
+```{r, fig.height=4, fig.width=10}
+results_test %>%
+  mutate(train = "testing") %>%
+  bind_rows(results_train %>%
+    mutate(train = "training")) %>%
+  ggplot(aes(truth, .pred, color = model)) +
+  geom_abline(lty = 2, color = "gray80", size = 1.5) +
+  geom_point(alpha = 0.5) +
+  facet_wrap(~train) +
+  labs(x = "Truth", y = "Predicted attendance",
+       color = "Type of model") + theme_minimal()
+```
 
 
 
