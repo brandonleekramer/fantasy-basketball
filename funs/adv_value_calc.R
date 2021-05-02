@@ -1,6 +1,6 @@
 
 
-adv_value_calc <- function(df,  teams, pts, salaries){
+adv_value_calc <- function(df, teams, pts, salaries){
   
   library("tidyverse")
   library("tidymodels")

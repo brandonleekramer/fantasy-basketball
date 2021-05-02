@@ -11,11 +11,52 @@ library(tidyverse)
 library(janitor)
 library(tidymodels)
 library(cowplot)
+library(naniar)
 source("~/Documents/fantasy-basketball/funs/conv_to_points.R")
-setwd("~/Documents/fantasy-basketball/data/ncaa_player_data/")
-ncaa_stats <- read_csv("nba_college_stats_2021.csv")
-
-# career totals 
-ncaa_stats 
-
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/")
+nba_data_raw <- read_rds("nba_stats_19902019_dedup.Rds")
 ```
+
+```{r}
+# totals each year 
+nba_data_raw %>% 
+  group_by(year) %>% 
+  count()
+
+chk = nba_data_raw %>% 
+  select(player:pts) 
+  
+pct_complete_case(chk) # 55.9
+pct_complete_var(chk) # 78.3
+
+n_var_complete(chk) # 18 variables complete
+n_var_miss(chk) # 5 have missingness
+miss_var_summary(chk)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

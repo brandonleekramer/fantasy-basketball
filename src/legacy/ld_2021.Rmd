@@ -17,12 +17,12 @@ setwd("~/Documents/fantasy-basketball/data/nba_fantasy_data/")
 bballref1920 <- read_csv("nba_fantasy_data - bballref1920.csv")
 hashtag20 <- read_csv("nba_fantasy_data - 2020_hashtag_proj_clean.csv")
 hashalt19 <- read_csv("nba_fantasy_data - 2019_hashtag_alt_proj.csv")
-legacy_inseason <- read_csv("Fantrax-Players-Legacy Dynasty 2019_2020.csv")
+legacy_inseason <- read_csv("Fantrax-Players-Legacy Dynasty 20_21.csv")
 nba_schedule <- read_csv("nba_fantasy_data - 2019_nba_schedule.csv")
 #legacy_contracts <- read_csv("nba_fantasy_data - legacy_contracts.csv")
 legacy_contracts <- read_csv("nba_fantasy_data - ld_contracts_202021.csv")
   
-legacy_inseason <- legacy_inseason %>% mutate(Trade = Status)
+#legacy_inseason <- legacy_inseason %>% mutate(Trade = Status)
 
 # 2018-19 projections from hashtag 
 hashtag20 <- hashtag20 %>% 
@@ -43,7 +43,7 @@ legacy_inseason <- legacy_inseason %>%
          fntx_tov = "TO", fntx_threes = "3PTM", fntx_fga = "FGA", 
          fntx_fgm = "FGM", fntx_ftm = "FTM", fntx_fta = "FTA", 
          fntx_gms = "GP", fntx_fppg = "FP/G", nba_team = "Team",
-         trade_comp = "Trade", 
+         trade_comp = "ORLMILSAS", 
          ld_team = "Status", player = "Player", position = "Position") %>%
   mutate(nba_team = recode(nba_team, PHO = "PHX", SA = "SAS", CLV = "CLE",
                            NY = "NYK", NO = "NOP", GS = "GSW")) %>% 
@@ -57,7 +57,13 @@ combined_data <- hashtag20 %>%
   arrange(-fr_fppg_ht) %>% 
   select(player, fr_fppg_ht, FPts, fntx_fppg, everything(), 
          -ld_fppg_ht, -botb_fppg_ht, -gsd2_fppg_ht)
- 
+
+prediction_data <- adv_value_calc(combined_data, 
+                                  teams = "trade_comp", # or ld_team
+                                  pts = "fntx_fppg",
+                                  salaries = "ld_2020") %>% 
+  rowid_to_column("rank")
+
 select_data <- combined_data 
 
 select_data %>% filter(ld_team == "FA") %>% arrange(-fntx_fppg)
@@ -68,8 +74,8 @@ select_data %>% filter(ld_team == "FA") %>% arrange(-fntx_fppg)
 ```{r looking at overall projections}
 select_data %>% 
   #filter(player == "Skal Labissiere") %>% # by player
-  filter(ld_team == "MIN") %>% 
-  #filter(trade_comp == "CLE") %>% 
+  #filter(ld_team == "MIN") %>% 
+  filter(trade_comp == "NOP") %>% 
   #filter(bbr_gms > 50) %>%        # by games played
   #filter(bbr_fr_fpts > 25) %>%    # by 2018 stats
   #filter(hta_fr_fpts > 25) %>%    # by hta projections 
@@ -81,52 +87,30 @@ select_data %>%
   select(player, fr_fppg_ht, fntx_fppg, ld_2020, ld_2021, ld_2022, gleague2021)
 ```
 
-# Value Calculators 
-
-```{r hashtag evaluations in fr}
-bad_teams <- c("CLV", "DAL", "HOU", "BKN", "BOS", "SAC", "MEM", "ORL")
-
-select_data %>% 
-  mutate(raw_val_20 = fntx_fppg / ld_2020 * 10000) %>%
-  mutate(raw_val_21 = fntx_fppg / ld_2021 * 10000) %>%
-  mutate(raw_val_20 = round(raw_val_20, 3),
-         raw_val_21 = round(raw_val_21, 3)) %>% 
-  #mutate(diff = fntx_fppg - fr_fppg_ht) %>%
-  filter(fr_fppg_ht > 24) %>% 
-  #filter(fr_2019 < 17000000) %>% 
-  #filter(ld_2019 %in% bad_teams) %>%
-  #filter(fr_team == "CLE") %>% 
-  #filter(age < 25) %>% 
-  #filter(grepl("SF", position)) %>% 
-  arrange(-raw_val_20) %>% 
-  #arrange(-fntx_value_19) %>% 
-  select(player, raw_val_20, fntx_fppg, fr_fppg_ht, ld_2020, ld_2021)
-```
-
 #### Trade Comparison Tool 
 
-```{r trade_comp, fig.width=12, fig.height=4.5, warning=FALSE}
+```{r trade_comp_pre_ttls, fig.width=12, fig.height=4.5, warning=FALSE}
 pre_trade_fntx <- pre_trade_calc(df = select_data, league = "legacy",
                                  current_team = ld_team, traded_to = trade_comp, 
                                  fppg_col = fntx_fppg, cap_col = ld_2020)
 pre_trade_fntx; pre_trade_plot(pre_trade_fntx, var = "team_total", 
                                league = "legacy", plotly = FALSE)
 ```
-```{r trade_comp, fig.width=12, fig.height=4.5, warning=FALSE}
+```{r trade_comp_post_ttls, fig.width=12, fig.height=4.5, warning=FALSE}
 post_trade_fntx <- post_trade_calc(df = select_data, league = "legacy",
                                    current_team = ld_team, traded_to = trade_comp, 
                                    fppg_col = fntx_fppg, cap_col = ld_2020)
 post_trade_fntx; post_trade_plot(post_trade_fntx, var = "team_total", 
                                  league = "legacy", plotly = FALSE)
 ```
-```{r trade_comp, fig.width=12, fig.height=4.5, warning=FALSE}
+```{r trade_comp_pre_avgs, fig.width=12, fig.height=4.5, warning=FALSE}
 pre_trade_fntx <- pre_trade_calc(df = select_data, league = "legacy",
                                  current_team = ld_team, traded_to = trade_comp, 
                                  fppg_col = fntx_fppg, cap_col = ld_2020)
 pre_trade_fntx; pre_trade_plot(pre_trade_fntx, var = "avg_fppg", 
                                league = "legacy", plotly = FALSE)
 ```
-```{r trade_comp, fig.width=12, fig.height=4.5, warning=FALSE}
+```{r trade_comp_post_avgs, fig.width=12, fig.height=4.5, warning=FALSE}
 post_trade_fntx <- post_trade_calc(df = select_data, league = "legacy",
                                    current_team = ld_team, traded_to = trade_comp, 
                                    fppg_col = fntx_fppg, cap_col = ld_2020)
@@ -139,19 +123,12 @@ post_trade_fntx; post_trade_plot(post_trade_fntx, var = "avg_fppg",
 ##### Advanced Value By Player 
 
 ```{r, fig.width=10, fig.height=5}
-source("../../funs/adv_value_calc.R")
-prediction_data <- adv_value_calc(combined_data, 
-                                  teams = "ld_team", 
-                                  pts = "fntx_fppg",
-                                  salaries = "ld_2020")
-prediction_data
-
 # fntx residuals 
 ggplot(prediction_data, aes(x = salaries, y = fppg)) +
   geom_smooth(method = "lm", se = FALSE, color = "black") +      
   geom_segment(aes(xend = salaries, yend = lm_pred), alpha = .2) +   
   geom_point(aes(color = abs(lm_value), size = abs(lm_value))) +  
-  scale_color_continuous(low = "#386890", high = "red") +     
+  scale_color_continuous(low = "#78BE20", high = "#0C2340") +     
   guides(color = FALSE, size = FALSE) +                             
   geom_point(aes(y = lm_pred), shape = 1) +
   scale_x_continuous(breaks=c(0,5000000,10000000,15000000,20000000,25000000,30000000), 
@@ -159,7 +136,9 @@ ggplot(prediction_data, aes(x = salaries, y = fppg)) +
   ggtitle("Value Determined by Linear Model") +
   theme_minimal()
 ```
-
+```{r}
+prediction_data %>% arrange(-lm_value) %>% select(rank, player, salaries, everything())
+```
 ```{r}
 prediction_data %>% 
   filter(fppg > 20) %>% 
@@ -171,7 +150,8 @@ prediction_data %>%
          cost_cats = if_else(salaries > 25000000, 6, cost_cats)) %>% 
   group_by(cost_cats) %>% 
   summarize(value = sum(lm_norm)) %>% 
-  mutate(cost_cats = recode(cost_cats,`0`="UFA",`1`="$<5M",`2`="$5-$9.9M",`3`="$10-14.9M",
+  mutate(cost_cats = recode(cost_cats,`0`="UFA",`1`="$<5M",
+                            `2`="$5-$9.9M",`3`="$10-14.9M",
                             `4`="$15-19.9+M", `5`="$20-24.9+M", `6`="$25+M"))
 ```
 
@@ -196,14 +176,34 @@ value_by_players_graph <- value_by_teams %>%
 
 ```{r}
 prediction_data %>% 
-  filter(teams == "NOP")
+  filter(teams == "MIN")
 ```
 ```{r}
 prediction_data %>% 
-  filter(teams == "PHX")
+  filter(teams == "MIL")
 ```
+```{r}
+bad_teams <- c("DAL", "CLV", "SAC", "HOU", "DEN", "ORL", "NYK", "PHX",
+               "BOS", "SAS", "BRK", "OKC", "LAC", "GSW", "CHA", "NOP",
+                "WAS", "LAL", "CHA")
+#bad_teams <- c("LAL", "SAS", "DAL")
 
+prediction_data %>% 
+  select(rank, position, player, teams, salaries, everything()) %>% 
+  filter(#teams %in% bad_teams 
+         #& salaries < 2796500 & fppg > 20
+           grepl("Gordon", player)
+         ) 
 
+#mean(prediction_data$fppg)
+```
+```{r}
+# cap     goga    okeke   muscala  vassell  fultz
+cap_left_1 = 2957520+3121080+1000000+12288697; cap_left_1 # +4033440
+#          roby     # conley
+cap_left_2 = cap_left_1 - 1000000 ; cap_left_2
+# vassell, goga, 
+```
 
 
 

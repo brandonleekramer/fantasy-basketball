@@ -1,0 +1,104 @@
+---
+title: "Untitled"
+author: "Brandon L. Kramer"
+date: "5/2/2021"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(janitor)
+
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_draft_order/")
+df_drafts <- read_csv("bbr_nba_draft_order_0020.csv")
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/")
+player_data <- read_csv("bbr_nba_player_data_0020.csv")
+
+draft_data <- df_drafts %>% 
+  rename(idPlayerNBA = idPlayer) %>% 
+  inner_join(player_data, by = c("namePlayer", "idPlayerNBA"))
+draft_data
+
+setwd("~/Documents/fantasy-basketball/data/ncaa_player_data/")
+ncaa_stats <- read_csv("nba_college_stats_2021.csv") 
+ncaa_stats <- ncaa_stats%>% 
+  rename(namePlayer = Name, nameOrganizationFrom = School) %>% 
+  select(-starts_with("NBA"), -Draft_Pick, -Year_1) %>% 
+  rename_at(vars( G:Age ), list( ~paste0("ncaa", .))) %>% 
+  rename(ncaaFGP = `ncaaFG%`, ncaa2PP = `ncaa2P%`, ncaa3PP = `ncaa3P%`, ncaaFTP = `ncaaFT%`)
+ncaa_stats
+
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_measurements/")
+nba_measurements <- read_csv("nba_player_measurements.csv") %>% 
+  clean_names() %>% 
+  filter(year_start > 1999) %>% 
+  arrange(year_start) %>% 
+  select(player, year_start, year_end, -birth_date, 
+         height_in_cm, wingspan_in_cm, standing_reach_in_cm, hand_length_in_inches, 
+         weight_in_lb, body_fat_percent) %>% 
+  mutate(body_fat_percent = body_fat_percent * 100)
+
+joined_data <- ncaa_stats %>% 
+  left_join(nba_measurements, by = c("namePlayer"="player", "Year"="year_start")) %>% 
+  rename(draftAge = ncaaAge) %>% 
+  select(namePlayer, Year, nameOrganizationFrom, draftAge, everything(), -ncaaPos)
+
+joined_data <- draft_data %>% 
+  left_join(joined_data, by = c("namePlayer", "nameOrganizationFrom")) %>% 
+  filter(yearDraft > 2001)
+
+joined_data
+
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/")
+write_csv(joined_data, "draft_data_joined_raw_0020.csv")
+```
+
+```{r}
+cleaned_data <- joined_data %>% 
+  select(
+    # player background 
+    namePlayer, yearDraft, numberPickOverall, nameOrganizationFrom, slugTeam, 
+    # player's college data 
+    draftAge, starts_with("ncaa"), 
+    # yearly nba season data 
+    yearSeason, agePlayer, slugPosition, slugTeamsBREF, countGames,  
+    minutes:ratioVORP, pctFG:ptsTotals, countTeamsPlayerSeason, countGamesStarted, 
+    # player draft information 
+    typeOrganizationFrom, slugOrganizationTypeFrom, locationOrganizationFrom, 
+    height_in_cm:body_fat_percent, idPlayerNBA, slugPlayerBREF, slugPlayerSeason
+    ) %>% 
+  arrange(yearDraft, numberPickOverall)
+cleaned_data
+```
+
+```{r}
+missing_data = cleaned_data %>% filter(is.na(draftAge) & typeOrganizationFrom == "College/University")
+missing_data
+
+# left off here - there is just a whole bunch of college data that is not included here 
+# lots of nba players etc that need to be included 
+
+```
+
+```{r}
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/")
+write_csv(cleaned_data, "draft_data_cleaned_0020.csv")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

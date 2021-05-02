@@ -1,0 +1,44 @@
+---
+title: "Draft Modeling - Data Collection"
+author: "Brandon L. Kramer"
+date: "5/2/2021"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(nbastatR)
+df_drafts <- drafts(draft_years = 2000:2020, nest_data = FALSE, return_message = TRUE)
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_draft_order/")
+write_csv(df_drafts, "bbr_nba_draft_order_0020.csv")
+```
+
+```{r}
+library(tidyverse)
+library(nbastatR)
+player_data = bref_players_stats(seasons = 2000:2020,  tables = c("advanced", "totals"))
+setwd("~/Documents/fantasy-basketball/data/nba_player_data/nba_player_season/")
+write_csv(player_data, "bbr_nba_player_data_0020.csv")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
